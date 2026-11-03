@@ -1,0 +1,26 @@
+{
+  "purpose": "Implementation smoke verification; not final comparative evidence",
+  "dataset_sha256": "c92918faeb82b4d5c9f702e0629fe5e8d48bcc1a1286c0b21d514a9021973968",
+  "methods": [
+    "greedy",
+    "hc",
+    "sa",
+    "ga"
+  ],
+  "seeds": [
+    42,
+    43
+  ],
+  "budget": 12,
+  "runs": 8,
+  "independent_reaudit_passed": 8,
+  "pyodide": "314.0.7",
+  "code_snapshot": [
+    "input_validation.py",
+    "solution_validator.py",
+    "lab_core.py",
+    "algorithms.py",
+    "runner.py"
+  ],
+  "web": "https://micosz.github.io/course-timetabling-lab/"
+}
