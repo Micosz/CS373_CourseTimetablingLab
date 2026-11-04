@@ -36,7 +36,7 @@ Dataset JSON SHA-256: `c92918faeb82b4d5c9f702e0629fe5e8d48bcc1a1286c0b21d514a902
 
 ## วิธีแทนคำตอบและวิธีค้นหา
 
-ทั้งสี่วิธีใช้ **indirect encoding และ constructive decoder เดียวกัน**: คำตอบค้นหาเป็นลำดับความสำคัญของคลาสและ preferred source time option ของแต่ละคลาส Decoder ทดลองตัวเลือกวัน/เวลาที่ต้นฉบับอนุญาต เลือก recurring day/time/duration ชุดเดียวตลอดภาค แต่เปลี่ยนห้องได้ตามสัปดาห์
+ทั้งสี่วิธีใช้ **indirect encoding และ constructive decoder เดียวกัน**: คำตอบค้นหาเป็นลำดับความสำคัญของคลาสและ preferred source time option ของแต่ละคลาส Decoder ทดลองตัวเลือกวัน/เวลาที่ต้นฉบับอนุญาต เลือก recurring day/time/duration ชุดเดียวตลอดภาค แต่เปลี่ยนห้องได้ตามสัปดาห์ (โหมด `weekly` ค่าเริ่มต้น; โหมด `fixed` ดูหัวข้อถัดไป)
 
 Decoder รักษาข้อห้ามระหว่างจัด หากไม่มีตำแหน่งที่ผ่าน จะเว้น weekly session นั้นและคิดเป็น unassigned คำตอบจึงอาจเป็น **feasible partial timetable**: ไม่มีข้อห้ามที่ละเมิด แต่ยังมีคาบตกค้าง ไม่ควรเรียกว่าจัดได้ครบจนกว่า unassigned=0
 
@@ -48,6 +48,19 @@ Decoder รักษาข้อห้ามระหว่างจัด ห�
 ค่าเริ่มต้น: HC patience=20; SA initial acceptance=.8, cooling=.97; GA population=12, tournament=3, elites=1, crossover=.9, mutation=.3
 
 นี่คือการเปรียบเทียบวิธีค้นหาบน representation และ decoder นี้ ไม่ใช่การพิสูจน์ว่า implementation นี้แทนทุกวิธีแก้ course timetabling หรือค้นหาตารางทุกแบบได้ Neighborhood เปลี่ยน priority/time preference ไม่ได้ย้ายห้องรายสัปดาห์โดยตรง จึงมีข้อจำกัดของ search space
+
+## โหมดจัดห้อง: รายสัปดาห์ (weekly) กับ ห้องคงที่ (fixed)
+
+เพื่อวัดว่าการเปลี่ยนห้องตามกิจกรรมรายสัปดาห์ประหยัด Lab จริงหรือไม่ มีโหมดเปรียบเทียบที่ใช้ genome, decoder, ตัวตรวจ และ metric ชุดเดียวกัน ต่างกันเฉพาะกติกาเลือกห้อง
+
+- **`weekly` (ค่าเริ่มต้น):** วันเวลาคงที่ทั้งเทอม ห้องเปลี่ยนได้รายสัปดาห์ จึงใช้ Lab เฉพาะสัปดาห์ที่ต้องใช้ได้
+- **`fixed`:** แต่ละ recurring session จองห้องเดียวทุกสัปดาห์ที่จัดได้ ถ้ามีสัปดาห์ใดต้องใช้ Lab ห้องนั้นต้องเป็น Computer Lab ทั้งเทอม Decoder เลือกห้องที่จัดได้มากสัปดาห์ที่สุดก่อน ถ้าห้องนั้นไม่ว่างบางสัปดาห์ สัปดาห์นั้นนับเป็น unassigned แทนการย้ายห้อง
+- ตัวตรวจอิสระรับโหมดจาก config ของรัน (ไม่เชื่อค่าที่คำตอบประกาศเอง) ในโหมด `fixed` จะเพิ่มข้อห้าม `FIXED_ROOM_CHANGED` (คาบเดียวกันใช้มากกว่าหนึ่งห้อง) และ `FIXED_ROOM_NOT_LAB` (คาบที่มีสัปดาห์ Lab แต่จองห้องที่ไม่ใช่ Lab) และ `ROOM_MODE` เมื่อโหมดที่คำตอบประกาศไม่ตรงกับที่ตรวจ
+- รายงาน metric เดียวกันทั้งสองโหมด: คาบที่ยังจัดไม่ได้ / ชั่วโมง Lab ที่ไม่จำเป็น / จำนวนครั้งเปลี่ยนห้อง (โหมด fixed เป็น 0 เสมอ) ทุกรันบันทึก `room_mode`
+- เว็บ: เลือก **โหมดจัดห้อง** ในขั้น "กำหนดการรัน" หนึ่งการทดลองใช้หนึ่งโหมด รันอีกครั้งด้วย seed เดิมเพื่อเทียบ ไฟล์ JSON จาก CLI ที่มีทั้งสองโหมดนำเข้าเว็บได้และแยกแถวสรุปตามโหมด
+- CLI: `--room-modes weekly fixed` รันทั้งสองโหมดบน seed ชุดเดียวกันใน batch เดียว แล้วใช้ `python3 python/compare_modes.py <experiment.json>` สร้างตารางเทียบแบบจับคู่ (fixed − weekly ต่อ seed)
+
+ผลดิบและตารางสรุปอยู่ใน [experiments/fixed-room](experiments/fixed-room/README.md)
 
 ## ข้อห้ามและเป้าหมายร่วม
 
@@ -112,6 +125,7 @@ Native Python 3.9+ ใช้ engine เดียวกัน ไม่ต้อ�
 
 ```sh
 python3 python/cli.py --budget 50 --seconds 60 --seed 42 --repeats 3 --output results
+python3 python/cli.py --room-modes weekly fixed --budget 50 --seconds 600 --seed 1001 --repeats 30 --output results
 python3 -m unittest discover -s tests -v
 ```
 
@@ -135,6 +149,8 @@ python3 dataset_tools/rebuild.py --output results/rebuilt-dataset
 - `python/lab_core.py`, `algorithms.py`: shared decoder/search methods
 - `python/input_validation.py`, `solution_validator.py`: input และ output checks คนละหน้าที่
 - `python/runner.py`, `cli.py`: reproducible runner และ native command line
+- `python/compare_modes.py`: ตารางเทียบ weekly / fixed แบบจับคู่จาก JSON ผลดิบ
+- `experiments/`: ผลดิบที่ commit ไว้เป็นหลักฐาน (JSON.gz + CSV)
 - `data/`: compressed adapted input, assumptions และ provenance
 - `tests/`: meaningful contract/regression checks รวมตัวอย่าง source ID ซ้ำ
 

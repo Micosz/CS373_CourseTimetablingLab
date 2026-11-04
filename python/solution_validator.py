@@ -1,9 +1,17 @@
-"""Audit returned schedules from raw input records, independently of search caches."""
+"""Audit returned schedules from raw input records, independently of search caches.
+
+``room_mode`` comes from the run configuration, not from the solution. In
+``fixed`` mode every assigned week of a recurring session must use the same
+room, and a session with any Lab week must hold a computer Lab.
+"""
 from collections import defaultdict
 from itertools import combinations
 
 
-def audit_solution(data, solution):
+ROOM_MODES = ('weekly', 'fixed')
+
+
+def audit_solution(data, solution, room_mode='weekly'):
     violations = []
     seen_errors = set()
 
@@ -22,6 +30,10 @@ def audit_solution(data, solution):
     rooms = {r['id']:r for r in data['rooms']}
     choices = solution.get('class_time_options', {})
     rows = solution.get('weekly_room_assignments', [])
+    if room_mode not in ROOM_MODES:
+        error('ROOM_MODE', f'Unknown room mode {room_mode!r}')
+    if 'room_mode' in solution and solution['room_mode'] != room_mode:
+        error('ROOM_MODE', f"Solution declares {solution['room_mode']!r} but was audited as {room_mode!r}")
     if solution.get('dataset_id') != data['dataset_id']:
         error('DATASET_ID', 'Solution belongs to a different dataset')
     if not isinstance(choices, dict) or not isinstance(rows, list):
@@ -138,14 +150,22 @@ def audit_solution(data, solution):
     changes = 0
     for sid, session in sessions.items():
         previous = None
+        used = set()
         for week in sorted(session['active_weeks']):
             room = assigned.get((sid, week))
             if room is None:
                 continue
             changes += int(previous is not None and room != previous)
             previous = room
+            used.add(room)
+        if room_mode == 'fixed':
+            used = sorted(used)
+            if len(used) > 1:
+                error('FIXED_ROOM_CHANGED', {'session': sid, 'rooms': used})
+            if session['lab_weeks'] and any(rooms[rid]['kind'] != 'computer_lab' for rid in used):
+                error('FIXED_ROOM_NOT_LAB', {'session': sid, 'rooms': used})
     total = sum(len(s['active_weeks']) for s in sessions.values())
-    metrics = {'unassigned_weekly_sessions':total-len(assigned),
+    metrics = {'room_mode':room_mode,'unassigned_weekly_sessions':total-len(assigned),
                'assigned_weekly_sessions':len(assigned), 'total_weekly_sessions':total,
                'unnecessary_lab_minutes':lab_minutes,'unnecessary_lab_hours':lab_minutes/60,
                'room_changes':changes,'hard_violations':len(seen_errors)}

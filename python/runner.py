@@ -9,7 +9,7 @@ import traceback
 from pathlib import Path
 
 import algorithms
-from lab_core import VERSION, Problem, SearchContext, SearchStopped, Candidate
+from lab_core import VERSION, ROOM_MODES, Problem, SearchContext, SearchStopped, Candidate
 from solution_validator import audit_solution
 from input_validation import validate as validate_input
 
@@ -35,6 +35,8 @@ def check_configuration(config):
         raise ValueError('Evaluation budget must be an integer from 1 to 100000')
     if not isinstance(seconds,(int,float)) or not 1 <= seconds <= 3600:
         raise ValueError('Time limit must be 1..3600 seconds per run')
+    if config.get('room_mode','weekly') not in ROOM_MODES:
+        raise ValueError('Room mode must be weekly or fixed')
     params = config.get('parameters',{})
     hc, sa, ga = params.get('hc',{}), params.get('sa',{}), params.get('ga',{})
     if not 1 <= int(hc.get('restart_patience',20)) <= 10000:
@@ -61,7 +63,8 @@ def run_one(problem, config, method, seed, dataset_meta=None, custom_source='', 
     code_hash = hashlib.sha256(algorithm_source.encode()).hexdigest()
     # Snapshot before an editable plugin sees the model; its result is audited against this copy.
     protected_data = json.loads(json.dumps(problem.data)) if method=='custom' else problem.data
-    context = SearchContext(problem, seed, config.get('budget',100), config.get('seconds',60), progress)
+    room_mode = config.get('room_mode','weekly')
+    context = SearchContext(problem, seed, config.get('budget',100), config.get('seconds',60), progress, room_mode)
     status, returned, failure = 'completed', None, None
     started = time.perf_counter()
     try:
@@ -88,7 +91,7 @@ def run_one(problem, config, method, seed, dataset_meta=None, custom_source='', 
     else:
         solution = context.best.solution if context.best is not None else None
     validation_start = time.perf_counter()
-    checked = audit_solution(protected_data,solution)
+    checked = audit_solution(protected_data,solution,room_mode)
     validation_seconds = time.perf_counter()-validation_start
     if status!='error' and not checked['valid']:
         status = 'invalid_solution'
@@ -99,7 +102,7 @@ def run_one(problem, config, method, seed, dataset_meta=None, custom_source='', 
             status = 'error'
             failure = {'message':'Search score disagrees with independent solution validator'}
     return {
-        'algorithm':method,'seed':seed,'status':status,'valid':checked['valid'] and status!='error',
+        'algorithm':method,'room_mode':room_mode,'seed':seed,'status':status,'valid':checked['valid'] and status!='error',
         'metrics':checked['metrics'],'validation':checked,'solution':solution,
         'evaluations':context.evaluations,'attempted_evaluations':context.attempted_evaluations,
         'budget':context.budget,'time_limit_seconds':config.get('seconds',60),
