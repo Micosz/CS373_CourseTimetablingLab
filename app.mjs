@@ -274,6 +274,8 @@ async function applyPreset(name){
   for(const id of PRESET_INPUTS){if(values[id]!==undefined&&values[id]!==null)$(id).value=String(values[id]);}
   document.querySelectorAll('input[name=algorithm]').forEach(x=>{x.checked=true;});$('include-custom').checked=false;
   document.querySelectorAll('[data-preset]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.preset===name)));
-  queueSummary();note.textContent=message;
+  queueSummary();
+  const invalid=PRESET_INPUTS.filter(id=>!$(id).checkValidity());
+  note.textContent=invalid.length?`ชุดค่านี้มีช่องที่ไม่ผ่านเกณฑ์ของฟอร์ม: ${invalid.join(', ')}`:message;
 }
 document.querySelectorAll('[data-preset]').forEach(b=>{b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>applyPreset(b.dataset.preset));});
