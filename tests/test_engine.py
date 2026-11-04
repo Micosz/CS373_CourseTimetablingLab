@@ -13,6 +13,7 @@ from lab_core import Problem
 from runner import prepare, run_one, check_configuration
 from solution_validator import audit_solution
 from algorithms import ordered_crossover
+from compare_modes import summarize
 
 
 def fixture():
@@ -75,6 +76,62 @@ class IndependentValidatorTests(unittest.TestCase):
         self.assertIn('SAME_TIME',self.codes())
 
 
+def one_class_fixture():
+    """Known answer: one 60-minute session, weeks 1-4, Lab only in week 2.
+
+    weekly: R1, L, R1, R1 -> 0 unnecessary Lab minutes, 2 room changes.
+    fixed:  L, L, L, L    -> 3 x 60 = 180 unnecessary Lab minutes, 0 changes.
+    """
+    data=fixture()
+    data['classes']=data['classes'][:1];data['recurring_sessions']=data['recurring_sessions'][:1]
+    data['recurring_sessions'][0].update({'active_weeks':[1,2,3,4],'lab_weeks':[2]})
+    return data
+
+
+class FixedRoomModeTests(unittest.TestCase):
+    def test_known_answer_fixed_room_holds_lab_longer(self):
+        data=one_class_fixture();problem=Problem(data);genome=problem.initial_genome()
+        weekly=problem.decode(genome,room_mode='weekly');fixed=problem.decode(genome,room_mode='fixed')
+        self.assertEqual(weekly.objectives,(0,0,2));self.assertEqual(fixed.objectives,(0,180,0))
+        self.assertEqual([r['room_id'] for r in fixed.solution['weekly_room_assignments']],['L']*4)
+        for mode,candidate in [('weekly',weekly),('fixed',fixed)]:
+            report=audit_solution(data,candidate.solution,mode)
+            self.assertTrue(report['valid'],report['violations'])
+            self.assertEqual((report['metrics']['unassigned_weekly_sessions'],report['metrics']['unnecessary_lab_minutes'],
+                              report['metrics']['room_changes']),candidate.objectives)
+        self.assertGreater(fixed.objectives[1],weekly.objectives[1])
+    def test_fixed_mode_leaves_weeks_unassigned_instead_of_moving_room(self):
+        data=one_class_fixture()
+        data['external_classes']=[{'id':'E','active_weeks':[3],'room_ids':['L'],'instructor_ids':[],'student_group_ids':[],
+                                   'meetings':[{'day':0,'start_minute':540,'duration_minutes':60}]}]
+        problem=Problem(data);fixed=problem.decode(problem.initial_genome(),room_mode='fixed')
+        self.assertEqual(fixed.objectives,(1,120,0))
+        self.assertTrue(audit_solution(data,fixed.solution,'fixed')['valid'])
+    def test_validator_rejects_room_changes_and_non_lab_in_fixed_mode(self):
+        data=fixture();weekly=schedule(data)
+        self.assertTrue(audit_solution(data,weekly,'weekly')['valid'])
+        codes={v['code'] for v in audit_solution(data,weekly,'fixed')['violations']}
+        self.assertIn('FIXED_ROOM_CHANGED',codes)
+        lecture_only={**weekly,'weekly_room_assignments':[r for r in weekly['weekly_room_assignments'] if r['week']==1]}
+        codes={v['code'] for v in audit_solution(data,lecture_only,'fixed')['violations']}
+        self.assertEqual(codes,{'FIXED_ROOM_NOT_LAB'})
+    def test_paired_summary_reports_fixed_minus_weekly(self):
+        m=lambda u,lab,c:{'unassigned_weekly_sessions':u,'unnecessary_lab_minutes':lab,'unnecessary_lab_hours':lab/60,'room_changes':c}
+        batch={'results':[{'algorithm':'greedy','seed':1,'room_mode':'weekly','valid':True,'metrics':m(0,0,2)},
+                          {'algorithm':'greedy','seed':1,'room_mode':'fixed','valid':True,'metrics':m(1,180,0)},
+                          {'algorithm':'greedy','seed':2,'room_mode':'fixed','valid':False,'metrics':None}]}
+        text=summarize(batch)
+        self.assertIn('| greedy | fixed | 1 / 2 | 1.0 (1.0) | 3.0 (3.0) | 0.0 (0.0) |',text)
+        self.assertIn('| greedy | 1 | 1.0 | 3.0 | -2.0 | 1 / 1 |',text)
+    def test_validator_rejects_mode_mismatch_and_unknown_mode(self):
+        data=one_class_fixture();problem=Problem(data)
+        fixed=problem.decode(problem.initial_genome(),room_mode='fixed').solution
+        self.assertIn('ROOM_MODE',{v['code'] for v in audit_solution(data,fixed,'weekly')['violations']})
+        self.assertFalse(audit_solution(data,schedule(data),'monthly')['valid'])
+        with self.assertRaises(ValueError):problem.decode(problem.initial_genome(),room_mode='monthly')
+        with self.assertRaises(ValueError):check_configuration({'room_mode':'monthly'})
+
+
 class RealDatasetEngineTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -91,6 +148,19 @@ class RealDatasetEngineTests(unittest.TestCase):
                 objectives=[tuple(p['objectives']) for p in r['trace']]
                 self.assertTrue(all(b<=a for a,b in zip(objectives,objectives[1:])))
                 self.assertEqual(r['dataset_sha256'],self.meta['dataset_sha256'])
+    def test_fixed_mode_all_methods_pass_audit_and_hold_more_lab(self):
+        weekly=run_one(self.problem,self.config,'greedy',42,self.meta)
+        self.assertEqual(weekly['room_mode'],'weekly')
+        for method in ['greedy','hc','sa','ga']:
+            with self.subTest(method=method):
+                r=run_one(self.problem,{**self.config,'room_mode':'fixed'},method,42,self.meta)
+                self.assertTrue(r['valid'],r['validation']['violations'][:2])
+                self.assertEqual(r['room_mode'],'fixed');self.assertEqual(r['metrics']['room_changes'],0)
+                rooms={}
+                for row in r['solution']['weekly_room_assignments']:
+                    rooms.setdefault(row['session_id'],set()).add(row['room_id'])
+                self.assertTrue(all(len(v)==1 for v in rooms.values()))
+                self.assertGreater(r['metrics']['unnecessary_lab_minutes'],weekly['metrics']['unnecessary_lab_minutes'])
     def test_seeded_reproduction(self):
         for method in ['hc','sa','ga']:
             a=run_one(self.problem,self.config,method,17,self.meta)

@@ -14,4 +14,11 @@ Checked 2026-10-27. These are implementation checks, not final comparative resea
 - Dataset converter rebuild matches the exact pinned adapted dataset SHA-256.
 - Native CLI smoke: four methods × seed 42, budget 4; JSON and CSV written successfully.
 
+## Fixed-room mode (issue #3), checked 2026-11-04
+
+- 18 automated Python tests pass (adds known-answer fixed vs weekly fixture: 0 vs 180 unnecessary Lab minutes; fixed mode leaves a blocked week unassigned instead of moving room; validator rejects `FIXED_ROOM_CHANGED`, `FIXED_ROOM_NOT_LAB`, `ROOM_MODE` mismatch; all four methods in fixed mode on the real dataset pass audit with 0 room changes; paired summary script).
+- Weekly mode is unchanged: Greedy on the real dataset still gives 20 unassigned / 124 Lab hours / 838 room changes.
+- Native CLI `--room-modes weekly fixed` runs and writes `room_mode` per run in JSON and CSV.
+- Headless Chromium (local HTTP server): the room-mode selector renders on desktop and stacks at 390 px with no horizontal scroll; importing a CLI batch that contains both modes shows separate summary rows, run labels, and chart legend entries per mode with no page errors. Pyodide could not be downloaded in that environment, so a fixed-mode search was not executed inside the browser worker; the worker passes the same `config.room_mode` that the native runner tests cover.
+
 Automated CI reruns the Python contract/regression suite. This record does not claim every browser/version or all custom Python programs have been tested. Imported bundles are not re-executed or independently authenticated merely by importing them.

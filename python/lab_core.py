@@ -3,6 +3,12 @@
 The searched genome is a class priority permutation plus preferred class time
 options. Every algorithm uses this same decoder; final solutions are audited
 independently in solution_validator.py. Standard library only.
+
+Two room policies share the decoder, genome and scoring:
+- ``weekly`` (default): a recurring session keeps its day/time all term but may
+  use a different room each week, so Lab rooms are taken only in Lab weeks.
+- ``fixed``: a recurring session books one room for every assigned week. A
+  session with any Lab week must book a computer Lab for the whole term.
 """
 import random
 import time
@@ -11,6 +17,7 @@ from dataclasses import dataclass
 
 VERSION = '1.0.0'
 SLOTS_PER_WEEK = 7 * 288
+ROOM_MODES = ('weekly', 'fixed')
 
 
 def time_mask(meeting, week):
@@ -108,6 +115,7 @@ class Problem:
                 self.same_times[cid].update(ts - {cid})
                 fixed_same[cid].extend(self.external[eid]['meetings'][0] for eid in ids & set(self.external))
         for cid, c in self.classes.items():
+            lab_rooms = set(c['lab_room_ids'])
             compiled = []
             for option in c['time_options']:
                 first = option['meetings'][0]
@@ -124,8 +132,19 @@ class Problem:
                         people_ok = relation_ok and not (self.fixed_people[cid] & mask)
                         placements.append((s['id'], week, mask, allowed if people_ok else (),
                                            s['duration_minutes'], need_lab))
+                by_session = []
+                for m in option['meetings']:
+                    sid = m['session_id']
+                    rows = tuple(x for x in placements if x[0] == sid)
+                    needs_lab = any(x[5] for x in rows)
+                    seen = []
+                    for x in rows:
+                        for rid in x[3]:
+                            if rid not in seen and (not needs_lab or rid in lab_rooms):
+                                seen.append(rid)
+                    by_session.append((sid, rows, tuple(seen)))
                 compiled.append({'id': option['id'], 'first': first, 'relation_ok': relation_ok,
-                                 'placements': tuple(placements),
+                                 'placements': tuple(placements), 'by_session': tuple(by_session),
                                  'static_possible': sum(bool(x[3]) for x in placements)})
             self.options[cid] = tuple(compiled)
 
@@ -149,7 +168,35 @@ class Problem:
             preferences[cid] = rng.randrange(len(self.options[cid]))
         return {'order': tuple(order), 'time_preferences': preferences}
 
-    def decode(self, genome, deadline=None):
+    def _fixed_records(self, option, people_busy, room_busy):
+        """One room per recurring session for all of its assignable weeks."""
+        records, local_lab = [], 0
+        for sid, rows, rooms in option['by_session']:
+            best = None
+            for rid in rooms:
+                busy = room_busy[rid]
+                is_lab = self.rooms[rid]['kind'] == 'computer_lab'
+                weeks, lab = [], 0
+                for _, week, mask, allowed, duration, need_lab in rows:
+                    if people_busy & mask or busy & mask or rid not in allowed:
+                        continue
+                    weeks.append((week, mask))
+                    lab += duration * int(is_lab and not need_lab)
+                if not weeks:
+                    continue
+                key = (-len(weeks), lab, self.rooms[rid]['capacity'], rid)
+                if best is None or key < best[0]:
+                    best = (key, rid, weeks)
+            if best is not None:
+                key, rid, weeks = best
+                local_lab += key[1]
+                records.extend((sid, week, rid, mask) for week, mask in weeks)
+        return records, local_lab
+
+    def decode(self, genome, deadline=None, room_mode='weekly'):
+        if room_mode not in ROOM_MODES:
+            raise ValueError('room_mode must be one of ' + ', '.join(ROOM_MODES))
+        fixed = room_mode == 'fixed'
         order = tuple(genome['order'])
         if len(order) != len(self.class_ids) or set(order) != set(self.class_ids):
             raise ValueError('Genome order must be a permutation of all target class IDs')
@@ -185,7 +232,11 @@ class Problem:
                 local_lab = 0
                 local_changes = 0
                 previous = {}
-                for sid, week, mask, allowed, duration, need_lab in option['placements']:
+                if fixed:
+                    records, local_lab = self._fixed_records(option, people_busy, room_busy)
+                    for record in records:
+                        used_mask |= record[3]
+                for sid, week, mask, allowed, duration, need_lab in (() if fixed else option['placements']):
                     if people_busy & mask:
                         continue
                     choices = [rid for rid in allowed if not (room_busy[rid] & mask)]
@@ -217,7 +268,7 @@ class Problem:
             changes += key[2]
         objectives = (self.total_weekly - assigned, lab_minutes, changes)
         energy = objectives[0] * self.unassigned_weight + objectives[1] * self.minute_weight + objectives[2]
-        solution = {'dataset_id': self.data['dataset_id'],
+        solution = {'dataset_id': self.data['dataset_id'], 'room_mode': room_mode,
                     'class_time_options': {cid: selected[cid]['id'] if selected.get(cid) else None for cid in self.class_ids},
                     'weekly_room_assignments': assignments}
         saved_genome = {'order': tuple(order), 'time_preferences': dict(preferences)}
@@ -225,8 +276,11 @@ class Problem:
 
 
 class SearchContext:
-    def __init__(self, problem, seed, budget, seconds, emit=None):
+    def __init__(self, problem, seed, budget, seconds, emit=None, room_mode='weekly'):
+        if room_mode not in ROOM_MODES:
+            raise ValueError('room_mode must be one of ' + ', '.join(ROOM_MODES))
         self.problem = problem
+        self.room_mode = room_mode
         self.seed = seed
         self.rng = random.Random(seed)
         self.budget = int(budget)
@@ -250,7 +304,7 @@ class SearchContext:
     def evaluate(self, genome):
         self.check()
         self.attempted_evaluations += 1
-        candidate = self.problem.decode(genome, self.deadline if self.best is not None else None)
+        candidate = self.problem.decode(genome, self.deadline if self.best is not None else None, self.room_mode)
         self.evaluations += 1
         improved = self.best is None or candidate.objectives < self.best.objectives
         if improved:
