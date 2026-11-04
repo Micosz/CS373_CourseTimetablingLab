@@ -5,6 +5,7 @@
 Reads one or more experiment files (``.json`` or ``.json.gz`` from cli.py,
 batch.py or the web), and writes:
 
+- ``runs.csv``: one row per run with room_changes next to room_change_lower_bound (#10)
 - ``summary.csv`` / ``summary.json``: mean / median / std / best / worst of every
   metric and the success rate per (room mode, method)
 - ``stats.json``: Friedman test, Holm-adjusted paired Wilcoxon tests, weekly vs
@@ -759,6 +760,23 @@ def analyze(paths, output):
                 writer.writerow([r['room_mode'], r['algorithm'], r['runs'], r['valid_runs'], r['time_limited_runs'],
                                  r['success_rate'], key, d['mean'], d['median'], d['std'], d['best'], d['worst'],
                                  d['q1'], d['q3']])
+    bound = room_change_bound(dataset)[0] if dataset else None
+    with (output / 'runs.csv').open('w', newline='', encoding='utf-8-sig') as handle:
+        writer = csv.writer(handle)
+        writer.writerow(['config_id', 'room_mode', 'algorithm', 'seed', 'budget', 'status', 'valid',
+                         'unassigned_weekly_sessions', 'unnecessary_lab_hours', 'room_changes',
+                         'room_change_lower_bound', 'room_changes_to_lower_bound', 'room_kind_switches', 'energy',
+                         'search_seconds'])
+        for r in sorted(results, key=lambda r: (r['room_mode'] != 'weekly', METHODS.index(r['algorithm'])
+                                                if r['algorithm'] in METHODS else 9, r['seed'])):
+            good = ok(r)
+            m = r.get('metrics') or {}
+            kind = run_kind_switches(r, dataset) if good and dataset and r.get('solution') else None
+            writer.writerow([r.get('config_id', 'main'), r['room_mode'], r['algorithm'], r['seed'], r.get('budget'),
+                             r['status'], r.get('valid'), m.get('unassigned_weekly_sessions'),
+                             m.get('unnecessary_lab_hours'), m.get('room_changes'), bound,
+                             round(m['room_changes'] / bound, 4) if good and bound else None, kind,
+                             energy(r) if good else None, round(r['search_seconds'], 3)])
     (output / 'summary.json').write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding='utf-8')
     (output / 'stats.json').write_text(json.dumps({'methods': tests, 'weekly_vs_fixed': modes, 'room_changes': changes},
                                                   ensure_ascii=False, indent=2), encoding='utf-8')
