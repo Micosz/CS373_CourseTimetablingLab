@@ -40,12 +40,21 @@ class StatisticsTests(unittest.TestCase):
         self.assertEqual(analyze.friedman([[1.5, 1.5]] * 4)['p_value'], 1.0)
 
     def test_wilcoxon_by_hand(self):
-        # d = 1, 2, 3, -4, 5 -> W+ = 11, n = 5, mean 7.5, var 13.75, z = (3.5 - 0.5) / sqrt(13.75).
+        # d = 1, 2, 3, -4, 5 -> W+ = 11, W- = 4, n = 5, mean 7.5, var 13.75, z = (3.5 - 0.5) / sqrt(13.75).
         result = analyze.wilcoxon([11, 12, 13, 6, 15], [10, 10, 10, 10, 10])
         self.assertEqual((result['n_nonzero'], result['w_plus'], result['w_minus']), (5, 11, 4))
-        z = 3 / math.sqrt(13.75)
-        self.assertAlmostEqual(result['z'], z)
-        self.assertAlmostEqual(result['p_value'], math.erfc(z / math.sqrt(2)))
+        self.assertAlmostEqual(result['z'], 3 / math.sqrt(13.75))
+        # Exact: subsets of {1..5} with sum <= 4 are {}, {1}, {2}, {3}, {1,2}, {4}, {1,3} -> 7 of 32; p = 2 * 7/32.
+        self.assertEqual(result['method'], 'exact')
+        self.assertAlmostEqual(result['p_value'], 14 / 32)
+        # All 10 differences positive: p = 2 / 2^10.
+        self.assertAlmostEqual(analyze.wilcoxon(list(range(2, 12)), [0] * 10)['p_value'], 2 / 1024)
+        # Tied |d| fall back to the normal approximation: d = 1, 1, 2, -3 -> ranks 1.5, 1.5, 3, 4.
+        tied = analyze.wilcoxon([1, 1, 2, -3], [0, 0, 0, 0])
+        self.assertEqual((tied['method'], tied['w_plus'], tied['w_minus']), ('normal', 6, 4))
+        var = 4 * 5 * 9 / 24 - 6 / 48
+        z = (6 - 5 - 0.5) / math.sqrt(var)
+        self.assertAlmostEqual(tied['p_value'], math.erfc(z / math.sqrt(2)))
         self.assertEqual(analyze.wilcoxon([1, 2], [1, 2])['p_value'], 1.0)
 
     def test_holm_by_hand(self):

@@ -158,24 +158,43 @@ def friedman(blocks):
 def wilcoxon(x, y):
     """Two-sided paired Wilcoxon signed-rank test on x - y.
 
-    Zero differences are dropped, tied |d| get average ranks, and the p-value
-    uses the normal approximation with tie and continuity correction.
+    Zero differences are dropped and tied |d| get average ranks. With at most
+    ``EXACT_MAX_N`` non-zero pairs and no tied |d|, the p-value is exact (the
+    null distribution of W+ over all 2^n sign patterns); otherwise it uses the
+    normal approximation with tie and continuity correction. ``method`` says which.
     """
     d = [a - b for a, b in zip(x, y) if a != b]
     n = len(d)
     if n == 0:
-        return {'n_nonzero': 0, 'w_plus': 0.0, 'w_minus': 0.0, 'z': 0.0, 'p_value': 1.0}
+        return {'n_nonzero': 0, 'w_plus': 0.0, 'w_minus': 0.0, 'z': 0.0, 'p_value': 1.0, 'method': 'none'}
     ranks = average_ranks([abs(v) for v in d])
     w_plus = sum(r for r, v in zip(ranks, d) if v > 0)
     w_minus = sum(r for r, v in zip(ranks, d) if v < 0)
     mean = n * (n + 1) / 4
     ties = sum(t ** 3 - t for t in Counter(abs(v) for v in d).values())
     var = n * (n + 1) * (2 * n + 1) / 24 - ties / 48
-    if var <= 0:
-        return {'n_nonzero': n, 'w_plus': w_plus, 'w_minus': w_minus, 'z': 0.0, 'p_value': 1.0}
     diff = w_plus - mean
-    z = (diff - math.copysign(0.5, diff)) / math.sqrt(var) if diff else 0.0
-    return {'n_nonzero': n, 'w_plus': w_plus, 'w_minus': w_minus, 'z': z, 'p_value': math.erfc(abs(z) / math.sqrt(2))}
+    z = (diff - math.copysign(0.5, diff)) / math.sqrt(var) if diff and var > 0 else 0.0
+    if n <= EXACT_MAX_N and ties == 0:
+        return {'n_nonzero': n, 'w_plus': w_plus, 'w_minus': w_minus, 'z': z,
+                'p_value': exact_signed_rank_p(n, min(w_plus, w_minus)), 'method': 'exact'}
+    if var <= 0:
+        return {'n_nonzero': n, 'w_plus': w_plus, 'w_minus': w_minus, 'z': 0.0, 'p_value': 1.0, 'method': 'normal'}
+    return {'n_nonzero': n, 'w_plus': w_plus, 'w_minus': w_minus, 'z': z,
+            'p_value': math.erfc(abs(z) / math.sqrt(2)), 'method': 'normal'}
+
+
+EXACT_MAX_N = 25
+
+
+def exact_signed_rank_p(n, w_small):
+    """Two-sided exact p = 2 * P(W+ <= w_small) for ranks 1..n without ties."""
+    counts = [1] + [0] * (n * (n + 1) // 2)
+    for rank in range(1, n + 1):
+        for total in range(len(counts) - 1, rank - 1, -1):
+            counts[total] += counts[total - rank]
+    tail = sum(counts[:int(w_small) + 1])
+    return min(1.0, 2 * tail / 2 ** n)
 
 
 def holm(p_values):

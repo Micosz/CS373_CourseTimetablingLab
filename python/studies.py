@@ -91,13 +91,15 @@ def budget_study(final, output, workers):
              'สร้างโดย `python/studies.py budget` · seed 1001–1010 · weekly · พารามิเตอร์ที่จูนแล้ว · '
              'จุด 500 มาจากการทดลองสุดท้าย', '',
              f'รันที่ล้มเหลว (ไม่ผ่านตัวตรวจหรือโดนตัดเวลา): {len(bad)}', '',
+             'คอลัมน์วินาที/รันวัดตอนรันหลาย process พร้อมกันคนละชุด (งบ 500 รัน 18 process, งบอื่น 9 process พร้อมกับการทดลองอื่น) '
+             'จึงใช้เทียบเวลาข้ามงบไม่ได้ ใช้ดูขนาดคร่าว ๆ เท่านั้น', '',
              '| วิธี | งบ | คาบที่ยังจัดไม่ได้ (เฉลี่ย) | จัดครบทุกคาบ | Lab ไม่จำเป็น (ชม., เฉลี่ย) | มัธยฐาน | เปลี่ยนห้อง | วินาที/รัน |',
              '|---|---:|---:|---:|---:|---:|---:|---:|']
     for r in rows:
         lines.append(f"| {analyze.LONG[r['algorithm']]} | {r['budget']} | {r['mean_unassigned']:.2f} | {r['success_rate']:.0%} | "
                      f"{r['mean_lab_hours']:.1f} | {r['median_lab_hours']:.1f} | {r['mean_room_changes']:.1f} | "
                      f"{r['mean_search_seconds']:.0f} |")
-    lines += ['', 'เพิ่มงบแล้วดีขึ้นไหม (จับคู่ seed, Wilcoxon บน energy, ปรับ Holm ทั้ง 9 คู่):', '',
+    lines += ['', 'เพิ่มงบแล้วดีขึ้นไหม (จับคู่ seed, Wilcoxon signed-rank บน energy แบบ exact เมื่อไม่มีค่าซ้ำ เพราะ n = 10, ปรับ Holm ทั้ง 9 คู่):', '',
               '| วิธี | งบ | seed ที่ดีขึ้น / แย่ลง | Δ Lab ไม่จำเป็น เฉลี่ย (ชม.) | p (Holm) |', '|---|---|---:|---:|---:|']
     for s in steps:
         lines.append(f"| {analyze.LONG[s['algorithm']]} | {s['from']} → {s['to']} | {s['improved']} / {s['worse']} | "
@@ -108,8 +110,11 @@ def budget_study(final, output, workers):
         last_sig = max((s['to'] for s in ms if s['significant']), default=None)
         top = [r for r in rows if r['algorithm'] == method]
         gain = top[-1]['mean_lab_hours'] - next(r for r in top if r['budget'] == 500)['mean_lab_hours']
+        sig = [s for s in ms if s['significant']]
         if last_sig is None:
             text = 'ไม่มีขั้นไหนที่ดีขึ้นอย่างมีนัยสำคัญ'
+        elif len(sig) == len(ms):
+            text = f'ยังดีขึ้นอย่างมีนัยสำคัญทุกขั้นจนถึงงบ {last_sig} (ยังไม่หยุดดีขึ้นในช่วงที่ลอง)'
         else:
             text = f'ดีขึ้นอย่างมีนัยสำคัญจนถึงงบ {last_sig}'
         lines.append(f"- {analyze.LONG[method]}: {text}; จาก 500 → 1000 Lab ไม่จำเป็นเปลี่ยนเฉลี่ย {gain:+.1f} ชม.")
