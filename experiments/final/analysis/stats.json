@@ -1,0 +1,823 @@
+{
+  "methods": {
+    "room_mode": "weekly",
+    "seeds": [
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012,
+      1013,
+      1014,
+      1015,
+      1016,
+      1017,
+      1018,
+      1019,
+      1020,
+      1021,
+      1022,
+      1023,
+      1024,
+      1025,
+      1026,
+      1027,
+      1028,
+      1029,
+      1030
+    ],
+    "alpha": 0.05,
+    "friedman": {
+      "statistic": 63.120000000000005,
+      "df": 3,
+      "p_value": 1.2659415334113498e-13,
+      "mean_ranks": [
+        4.0,
+        1.9333333333333333,
+        2.533333333333333,
+        1.5333333333333334
+      ],
+      "n": 30,
+      "methods": [
+        "greedy",
+        "hc",
+        "sa",
+        "ga"
+      ],
+      "significant": true
+    },
+    "pairwise": [
+      {
+        "a": "greedy",
+        "b": "hc",
+        "n": 30,
+        "a_better": 0,
+        "ties": 0,
+        "b_better": 30,
+        "median_difference_a_minus_b": {
+          "unassigned_weekly_sessions": 20.0,
+          "unnecessary_lab_hours": 55.5,
+          "room_changes": 9.0,
+          "search_seconds": -217.4768105500043
+        },
+        "n_nonzero": 30,
+        "w_plus": 465.0,
+        "w_minus": 0,
+        "z": 4.771854730335432,
+        "p_value": 1.825371456361214e-06,
+        "p_holm": 1.0952228738167284e-05,
+        "significant": true
+      },
+      {
+        "a": "greedy",
+        "b": "sa",
+        "n": 30,
+        "a_better": 0,
+        "ties": 0,
+        "b_better": 30,
+        "median_difference_a_minus_b": {
+          "unassigned_weekly_sessions": 20.0,
+          "unnecessary_lab_hours": 50.0,
+          "room_changes": 5.0,
+          "search_seconds": -217.99232015000598
+        },
+        "n_nonzero": 30,
+        "w_plus": 465.0,
+        "w_minus": 0,
+        "z": 4.771854730335432,
+        "p_value": 1.825371456361214e-06,
+        "p_holm": 1.0952228738167284e-05,
+        "significant": true
+      },
+      {
+        "a": "greedy",
+        "b": "ga",
+        "n": 30,
+        "a_better": 0,
+        "ties": 0,
+        "b_better": 30,
+        "median_difference_a_minus_b": {
+          "unassigned_weekly_sessions": 20.0,
+          "unnecessary_lab_hours": 67.5,
+          "room_changes": 9.5,
+          "search_seconds": -212.86280770000303
+        },
+        "n_nonzero": 30,
+        "w_plus": 465.0,
+        "w_minus": 0,
+        "z": 4.771854730335432,
+        "p_value": 1.825371456361214e-06,
+        "p_holm": 1.0952228738167284e-05,
+        "significant": true
+      },
+      {
+        "a": "hc",
+        "b": "sa",
+        "n": 30,
+        "a_better": 20,
+        "ties": 0,
+        "b_better": 10,
+        "median_difference_a_minus_b": {
+          "unassigned_weekly_sessions": 0.0,
+          "unnecessary_lab_hours": -13.5,
+          "room_changes": -4.5,
+          "search_seconds": -1.5728701000007277
+        },
+        "n_nonzero": 30,
+        "w_plus": 149.0,
+        "w_minus": 316.0,
+        "z": -1.7071721664562107,
+        "p_value": 0.08779005677677625,
+        "p_holm": 0.1755801135535525,
+        "significant": false
+      },
+      {
+        "a": "hc",
+        "b": "ga",
+        "n": 30,
+        "a_better": 12,
+        "ties": 0,
+        "b_better": 18,
+        "median_difference_a_minus_b": {
+          "unassigned_weekly_sessions": 0.0,
+          "unnecessary_lab_hours": 11.5,
+          "room_changes": 1.0,
+          "search_seconds": 0.34486560000368627
+        },
+        "n_nonzero": 30,
+        "w_plus": 297.0,
+        "w_minus": 168.0,
+        "z": 1.3163737187132227,
+        "p_value": 0.18804863896861662,
+        "p_holm": 0.18804863896861662,
+        "significant": false
+      },
+      {
+        "a": "sa",
+        "b": "ga",
+        "n": 30,
+        "a_better": 4,
+        "ties": 0,
+        "b_better": 26,
+        "median_difference_a_minus_b": {
+          "unassigned_weekly_sessions": 0.0,
+          "unnecessary_lab_hours": 13.5,
+          "room_changes": 11.0,
+          "search_seconds": 2.178088349999598
+        },
+        "n_nonzero": 30,
+        "w_plus": 414.0,
+        "w_minus": 51.0,
+        "z": 3.722869423235833,
+        "p_value": 0.00019697140276322527,
+        "p_holm": 0.0005909142082896758,
+        "significant": true
+      }
+    ]
+  },
+  "weekly_vs_fixed": [
+    {
+      "metric": "unnecessary_lab_hours",
+      "algorithm": "greedy",
+      "n": 30,
+      "fixed_higher": 30,
+      "equal": 0,
+      "mean_fixed_minus_weekly": 1801.0,
+      "median_fixed_minus_weekly": 1801.0,
+      "n_nonzero": 30,
+      "w_plus": 465.0,
+      "w_minus": 0,
+      "z": 5.465446595320367,
+      "p_value": 4.617427956906448e-08,
+      "p_holm": 1.8469711827625792e-07,
+      "significant": true
+    },
+    {
+      "metric": "unnecessary_lab_hours",
+      "algorithm": "hc",
+      "n": 30,
+      "fixed_higher": 30,
+      "equal": 0,
+      "mean_fixed_minus_weekly": 1925.7,
+      "median_fixed_minus_weekly": 1920.75,
+      "n_nonzero": 30,
+      "w_plus": 465.0,
+      "w_minus": 0,
+      "z": 4.771854730335432,
+      "p_value": 1.825371456361214e-06,
+      "p_holm": 5.469255420652345e-06,
+      "significant": true
+    },
+    {
+      "metric": "unnecessary_lab_hours",
+      "algorithm": "sa",
+      "n": 30,
+      "fixed_higher": 30,
+      "equal": 0,
+      "mean_fixed_minus_weekly": 1949.45,
+      "median_fixed_minus_weekly": 1940.0,
+      "n_nonzero": 30,
+      "w_plus": 465.0,
+      "w_minus": 0,
+      "z": 4.7721070959241185,
+      "p_value": 1.8230851402174482e-06,
+      "p_holm": 5.469255420652345e-06,
+      "significant": true
+    },
+    {
+      "metric": "unnecessary_lab_hours",
+      "algorithm": "ga",
+      "n": 30,
+      "fixed_higher": 30,
+      "equal": 0,
+      "mean_fixed_minus_weekly": 1948.6666666666667,
+      "median_fixed_minus_weekly": 1949.25,
+      "n_nonzero": 30,
+      "w_plus": 465.0,
+      "w_minus": 0,
+      "z": 4.7721070959241185,
+      "p_value": 1.8230851402174482e-06,
+      "p_holm": 5.469255420652345e-06,
+      "significant": true
+    },
+    {
+      "metric": "unassigned_weekly_sessions",
+      "algorithm": "greedy",
+      "n": 30,
+      "fixed_higher": 30,
+      "equal": 0,
+      "mean_fixed_minus_weekly": 370.0,
+      "median_fixed_minus_weekly": 370.0,
+      "n_nonzero": 30,
+      "w_plus": 465.0,
+      "w_minus": 0,
+      "z": 5.465446595320367,
+      "p_value": 4.617427956906448e-08,
+      "p_holm": 1.8469711827625792e-07,
+      "significant": true
+    },
+    {
+      "metric": "unassigned_weekly_sessions",
+      "algorithm": "hc",
+      "n": 30,
+      "fixed_higher": 30,
+      "equal": 0,
+      "mean_fixed_minus_weekly": 191.0,
+      "median_fixed_minus_weekly": 195.0,
+      "n_nonzero": 30,
+      "w_plus": 465.0,
+      "w_minus": 0,
+      "z": 4.795497425346511,
+      "p_value": 1.6227165423137669e-06,
+      "p_holm": 4.726830432011388e-06,
+      "significant": true
+    },
+    {
+      "metric": "unassigned_weekly_sessions",
+      "algorithm": "sa",
+      "n": 30,
+      "fixed_higher": 30,
+      "equal": 0,
+      "mean_fixed_minus_weekly": 151.5,
+      "median_fixed_minus_weekly": 150.0,
+      "n_nonzero": 30,
+      "w_plus": 465.0,
+      "w_minus": 0,
+      "z": 4.787832391795377,
+      "p_value": 1.685923573944942e-06,
+      "p_holm": 4.726830432011388e-06,
+      "significant": true
+    },
+    {
+      "metric": "unassigned_weekly_sessions",
+      "algorithm": "ga",
+      "n": 30,
+      "fixed_higher": 30,
+      "equal": 0,
+      "mean_fixed_minus_weekly": 162.5,
+      "median_fixed_minus_weekly": 165.0,
+      "n_nonzero": 30,
+      "w_plus": 465.0,
+      "w_minus": 0,
+      "z": 4.801398946656201,
+      "p_value": 1.5756101440037961e-06,
+      "p_holm": 4.726830432011388e-06,
+      "significant": true
+    }
+  ],
+  "room_changes": {
+    "dataset_lower_bound": 783,
+    "lower_bound_class_buckets": {
+      "0": 61,
+      "1–2": 0,
+      "3–4": 20,
+      "5–8": 76,
+      "มากกว่า 8": 17
+    },
+    "methods": {
+      "weekly:greedy": {
+        "room_mode": "weekly",
+        "algorithm": "greedy",
+        "runs": 30,
+        "room_changes": {
+          "n": 30,
+          "mean": 838.0,
+          "median": 838.0,
+          "std": 0.0,
+          "best": 838,
+          "worst": 838,
+          "q1": 838.0,
+          "q3": 838.0
+        },
+        "kind_switches": {
+          "n": 30,
+          "mean": 801.0,
+          "median": 801.0,
+          "std": 0.0,
+          "best": 801,
+          "worst": 801,
+          "q1": 801.0,
+          "q3": 801.0
+        },
+        "ratio_to_dataset_bound": {
+          "n": 30,
+          "mean": 1.070242656449553,
+          "median": 1.070242656449553,
+          "std": 0.0,
+          "best": 1.070242656449553,
+          "worst": 1.070242656449553,
+          "q1": 1.070242656449553,
+          "q3": 1.070242656449553
+        },
+        "changes_above_own_kind_switches": {
+          "n": 30,
+          "mean": 37.0,
+          "median": 37.0,
+          "std": 0.0,
+          "best": 37,
+          "worst": 37,
+          "q1": 37.0,
+          "q3": 37.0
+        },
+        "unnecessary_lab_hours": {
+          "n": 30,
+          "mean": 124.0,
+          "median": 124.0,
+          "std": 0.0,
+          "best": 124.0,
+          "worst": 124.0,
+          "q1": 124.0,
+          "q3": 124.0
+        },
+        "mean_class_buckets": {
+          "0": 57.0,
+          "1–2": 4.0,
+          "3–4": 20.0,
+          "5–8": 72.0,
+          "มากกว่า 8": 21.0
+        }
+      },
+      "weekly:hc": {
+        "room_mode": "weekly",
+        "algorithm": "hc",
+        "runs": 30,
+        "room_changes": {
+          "n": 30,
+          "mean": 830.7666666666667,
+          "median": 829.0,
+          "std": 17.837742499298066,
+          "best": 794,
+          "worst": 868,
+          "q1": 820.5,
+          "q3": 839.75
+        },
+        "kind_switches": {
+          "n": 30,
+          "mean": 805.4333333333333,
+          "median": 804.0,
+          "std": 14.5760392267663,
+          "best": 773,
+          "worst": 837,
+          "q1": 797.5,
+          "q3": 814.25
+        },
+        "ratio_to_dataset_bound": {
+          "n": 30,
+          "mean": 1.0610046828437634,
+          "median": 1.0587484035759898,
+          "std": 0.022781280331159733,
+          "best": 1.0140485312899106,
+          "worst": 1.1085568326947637,
+          "q1": 1.0478927203065136,
+          "q3": 1.0724776500638569
+        },
+        "changes_above_own_kind_switches": {
+          "n": 30,
+          "mean": 25.333333333333332,
+          "median": 25.5,
+          "std": 5.725522613299357,
+          "best": 9,
+          "worst": 37,
+          "q1": 21.0,
+          "q3": 28.0
+        },
+        "unnecessary_lab_hours": {
+          "n": 30,
+          "mean": 64.88333333333334,
+          "median": 68.5,
+          "std": 22.24072194519949,
+          "best": 14.0,
+          "worst": 103.0,
+          "q1": 52.0,
+          "q3": 77.75
+        },
+        "mean_class_buckets": {
+          "0": 58.36666666666667,
+          "1–2": 1.8,
+          "3–4": 19.6,
+          "5–8": 74.93333333333334,
+          "มากกว่า 8": 19.3
+        }
+      },
+      "weekly:sa": {
+        "room_mode": "weekly",
+        "algorithm": "sa",
+        "runs": 30,
+        "room_changes": {
+          "n": 30,
+          "mean": 835.4,
+          "median": 833.0,
+          "std": 13.66747965061591,
+          "best": 813,
+          "worst": 858,
+          "q1": 822.5,
+          "q3": 846.5
+        },
+        "kind_switches": {
+          "n": 30,
+          "mean": 809.2666666666667,
+          "median": 808.0,
+          "std": 10.808468370021126,
+          "best": 786,
+          "worst": 829,
+          "q1": 803.5,
+          "q3": 818.0
+        },
+        "ratio_to_dataset_bound": {
+          "n": 30,
+          "mean": 1.0669220945083013,
+          "median": 1.0638569604086845,
+          "std": 0.01745527413871763,
+          "best": 1.0383141762452108,
+          "worst": 1.0957854406130267,
+          "q1": 1.0504469987228608,
+          "q3": 1.0810983397190295
+        },
+        "changes_above_own_kind_switches": {
+          "n": 30,
+          "mean": 26.133333333333333,
+          "median": 25.5,
+          "std": 6.174102382523719,
+          "best": 15,
+          "worst": 39,
+          "q1": 21.25,
+          "q3": 30.75
+        },
+        "unnecessary_lab_hours": {
+          "n": 30,
+          "mean": 76.23333333333333,
+          "median": 74.0,
+          "std": 20.81889614704894,
+          "best": 37.0,
+          "worst": 115.0,
+          "q1": 60.0,
+          "q3": 91.25
+        },
+        "mean_class_buckets": {
+          "0": 59.06666666666667,
+          "1–2": 1.7,
+          "3–4": 19.7,
+          "5–8": 74.7,
+          "มากกว่า 8": 18.833333333333332
+        }
+      },
+      "weekly:ga": {
+        "room_mode": "weekly",
+        "algorithm": "ga",
+        "runs": 30,
+        "room_changes": {
+          "n": 30,
+          "mean": 831.3,
+          "median": 828.5,
+          "std": 17.950410618682525,
+          "best": 800,
+          "worst": 884,
+          "q1": 820.25,
+          "q3": 837.75
+        },
+        "kind_switches": {
+          "n": 30,
+          "mean": 806.6,
+          "median": 805.0,
+          "std": 14.979526257413875,
+          "best": 776,
+          "worst": 845,
+          "q1": 800.25,
+          "q3": 815.25
+        },
+        "ratio_to_dataset_bound": {
+          "n": 30,
+          "mean": 1.0616858237547893,
+          "median": 1.058109833971903,
+          "std": 0.02292517320393681,
+          "best": 1.0217113665389528,
+          "worst": 1.1289910600255428,
+          "q1": 1.0475734355044701,
+          "q3": 1.0699233716475096
+        },
+        "changes_above_own_kind_switches": {
+          "n": 30,
+          "mean": 24.7,
+          "median": 24.0,
+          "std": 5.577973924593793,
+          "best": 16,
+          "worst": 39,
+          "q1": 20.25,
+          "q3": 28.5
+        },
+        "unnecessary_lab_hours": {
+          "n": 30,
+          "mean": 57.733333333333334,
+          "median": 56.5,
+          "std": 19.849317426522518,
+          "best": 17.0,
+          "worst": 102.0,
+          "q1": 46.25,
+          "q3": 72.5
+        },
+        "mean_class_buckets": {
+          "0": 58.03333333333333,
+          "1–2": 1.8,
+          "3–4": 19.2,
+          "5–8": 75.1,
+          "มากกว่า 8": 19.866666666666667
+        }
+      },
+      "fixed:greedy": {
+        "room_mode": "fixed",
+        "algorithm": "greedy",
+        "runs": 30,
+        "room_changes": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "kind_switches": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "ratio_to_dataset_bound": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0.0,
+          "worst": 0.0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "changes_above_own_kind_switches": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "unnecessary_lab_hours": {
+          "n": 30,
+          "mean": 1925.0,
+          "median": 1925.0,
+          "std": 0.0,
+          "best": 1925.0,
+          "worst": 1925.0,
+          "q1": 1925.0,
+          "q3": 1925.0
+        },
+        "mean_class_buckets": {
+          "0": 174.0,
+          "1–2": 0.0,
+          "3–4": 0.0,
+          "5–8": 0.0,
+          "มากกว่า 8": 0.0
+        }
+      },
+      "fixed:hc": {
+        "room_mode": "fixed",
+        "algorithm": "hc",
+        "runs": 30,
+        "room_changes": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "kind_switches": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "ratio_to_dataset_bound": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0.0,
+          "worst": 0.0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "changes_above_own_kind_switches": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "unnecessary_lab_hours": {
+          "n": 30,
+          "mean": 1990.5833333333333,
+          "median": 1990.25,
+          "std": 42.65056157073258,
+          "best": 1914.0,
+          "worst": 2073.5,
+          "q1": 1960.75,
+          "q3": 2021.25
+        },
+        "mean_class_buckets": {
+          "0": 174.0,
+          "1–2": 0.0,
+          "3–4": 0.0,
+          "5–8": 0.0,
+          "มากกว่า 8": 0.0
+        }
+      },
+      "fixed:sa": {
+        "room_mode": "fixed",
+        "algorithm": "sa",
+        "runs": 30,
+        "room_changes": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "kind_switches": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "ratio_to_dataset_bound": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0.0,
+          "worst": 0.0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "changes_above_own_kind_switches": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "unnecessary_lab_hours": {
+          "n": 30,
+          "mean": 2025.6833333333334,
+          "median": 2024.0,
+          "std": 29.747061093125836,
+          "best": 1980.0,
+          "worst": 2090.0,
+          "q1": 2004.75,
+          "q3": 2044.625
+        },
+        "mean_class_buckets": {
+          "0": 174.0,
+          "1–2": 0.0,
+          "3–4": 0.0,
+          "5–8": 0.0,
+          "มากกว่า 8": 0.0
+        }
+      },
+      "fixed:ga": {
+        "room_mode": "fixed",
+        "algorithm": "ga",
+        "runs": 30,
+        "room_changes": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "kind_switches": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "ratio_to_dataset_bound": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0.0,
+          "worst": 0.0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "changes_above_own_kind_switches": {
+          "n": 30,
+          "mean": 0.0,
+          "median": 0.0,
+          "std": 0.0,
+          "best": 0,
+          "worst": 0,
+          "q1": 0.0,
+          "q3": 0.0
+        },
+        "unnecessary_lab_hours": {
+          "n": 30,
+          "mean": 2006.4,
+          "median": 2007.5,
+          "std": 31.226480804731676,
+          "best": 1947.0,
+          "worst": 2068.0,
+          "q1": 1982.75,
+          "q3": 2022.625
+        },
+        "mean_class_buckets": {
+          "0": 174.0,
+          "1–2": 0.0,
+          "3–4": 0.0,
+          "5–8": 0.0,
+          "มากกว่า 8": 0.0
+        }
+      }
+    }
+  }
+}

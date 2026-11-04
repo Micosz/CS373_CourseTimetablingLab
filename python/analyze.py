@@ -494,13 +494,20 @@ def convergence_svg(results, mode='weekly'):
     width, height = 980, 440
     body = []
     for col, (idx, title, _) in enumerate(panels):
-        values = [v for (m, i), pts in series.items() if i == idx for p in pts for v in p[1:]]
-        p = Panel(70 + col * 480, 70, 360, 290, min(0, min(values)), max(values), 0, budget)
+        # Zoom the x axis when every search method has settled (upper quartile flat) well before the budget.
+        span = budget
+        settled = [max((e for e, lo, med, hi in pts if hi != pts[-1][3]), default=0)
+                   for (m, i), pts in series.items() if i == idx and m != 'greedy']
+        if settled and max(settled) * 4 < budget:
+            span = int(max(20, nice_ticks(0, max(settled) * 2, 4)[-1]))
+        values = [v for (m, i), pts in series.items() if i == idx for q in pts if q[0] <= span for v in q[1:]]
+        p = Panel(70 + col * 480, 70, 360, 290, min(0, min(values)), max(values), 0, span)
         labels = []
-        xt = [(t, fmt_num(t)) for t in nice_ticks(0, budget, 5) if t <= budget]
-        body.append(p.frame(title, 'จำนวน evaluations', xt))
+        xt = [(t, fmt_num(t)) for t in nice_ticks(0, span, 5) if t <= span]
+        x_title = 'จำนวน evaluations' + (f' ({span} ครั้งแรกจาก {budget})' if span < budget else '')
+        body.append(p.frame(title, x_title, xt))
         for method in METHODS:
-            pts = series.get((method, idx))
+            pts = [q for q in series.get((method, idx)) or [] if q[0] <= span]
             if not pts:
                 continue
             if method != 'greedy':
@@ -533,7 +540,7 @@ def boxplot_svg(results, key='unnecessary_lab_hours', mode='weekly', title='Lab 
         return None
     allv = [x for _, v in groups for x in v]
     width, height = 720, 420
-    p = Panel(80, 60, 600, 290, min(allv), max(allv), -0.5, len(groups) - 0.5)
+    p = Panel(80, 60, 600, 290, min(allv), max(allv) + (max(allv) - min(allv)) * 0.08, -0.5, len(groups) - 0.5)
     body = [p.frame(f'{title} · โหมด {mode}', None, [(i, LONG[m]) for i, (m, _) in enumerate(groups)])]
     for i, (m, v) in enumerate(groups):
         d = describe(v)
