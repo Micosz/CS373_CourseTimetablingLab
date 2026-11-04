@@ -18,3 +18,4 @@
 ดาวน์โหลด repository แล้วเปิด presentation/index.html ได้โดยตรง หรือรัน HTTP server ที่ root และเข้า /presentation/
 ลูกศรซ้าย/ขวา: ย้อน/เดินหน้าทีละจังหวะ; F: เต็มจอ
 บทพูดอยู่ใน speaker-notes.md ไม่มีปุ่มบทพูดบนเว็บ
+สไลด์ Final อยู่ที่ presentation/index.html ส่วนสไลด์ความคืบหน้า (4 พ.ย.) อยู่ที่ presentation/progress/ (บน Vercel: /progress/)
