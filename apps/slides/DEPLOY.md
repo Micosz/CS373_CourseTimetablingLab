@@ -4,10 +4,13 @@
 
 ## Vercel (โดเมน cs373presentation.vercel.app)
 
-1. ใน Vercel project cs373presentation เปิด Settings → Git ตรวจว่า Connected Git Repository เป็น Micosz/course-timetabling-lab
-2. Settings → Build and Deployment ตั้ง Root Directory เป็น `apps/slides` (เดิมคือ `presentation`; ต้องเปลี่ยนเองหลัง merge การจัดโครงสร้างใหม่ ไม่อย่างนั้น deploy จะหาโฟลเดอร์ไม่เจอ)
+1. ใน Vercel project cs373presentation เปิด Settings → Git ตรวจว่า Connected Git Repository เป็น Micosz/CS373_CourseTimetablingLab
+2. Settings → Build and Deployment ตั้ง Root Directory เป็น `apps/slides` แล้วกด Save (เดิมคือ `presentation`; ค่านี้อยู่ใน Vercel จึงต้องแก้แยกจากโค้ด)
 3. Framework Preset: Other; ไม่ต้องมี Install Command หรือ Build Command; Output Directory ใช้ . (โฟลเดอร์ปัจจุบัน)
-4. Deploy commit บน main หลังเปลี่ยนการตั้งค่า ตรวจว่าโดเมนเดิมแสดงสไลด์ และ /progress/ ยังเปิดได้
+4. หลังเปลี่ยนการตั้งค่า ให้ Redeploy deployment ของ branch `restructure-layout` หรือ push commit ใหม่บน branch นี้เพื่อทดสอบ Preview ของ PR #22 การกด Save อย่างเดียวไม่รัน deployment ที่ล้มไปแล้วซ้ำ
+5. ตรวจว่า Vercel Preview สำเร็จและเปิดทั้ง `/` กับ `/progress/` ได้ ก่อนรวม PR เข้า main แล้วตรวจ Production ที่โดเมนเดิมอีกครั้ง
+
+ระหว่างย้ายโครงสร้าง main รุ่นเดิมยังไม่มี `apps/slides/` จึงต้องใช้ commit จาก PR #22 สำหรับ Preview หลังเปลี่ยน Root Directory
 
 การย้ายไฟล์ใน repo ไม่ได้เปลี่ยนการตั้งค่า Vercel โดยอัตโนมัติ
 
