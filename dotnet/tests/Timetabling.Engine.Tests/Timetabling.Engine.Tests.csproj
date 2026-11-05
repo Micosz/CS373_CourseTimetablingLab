@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Timetabling.Engine\Timetabling.Engine.csproj" />
+    <ProjectReference Include="..\..\src\Timetabling.Cli\Timetabling.Cli.csproj" />
   </ItemGroup>
 
 </Project>
