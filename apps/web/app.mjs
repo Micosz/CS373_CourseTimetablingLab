@@ -2,7 +2,10 @@ import * as storage from './storage.mjs';
 
 const $=id=>document.getElementById(id);
 const LABELS={greedy:'Greedy',hc:'Hill Climbing',sa:'Simulated Annealing',ga:'Genetic Algorithm',custom:'Custom Python'};
-const COLORS={greedy:'#64748b',hc:'#3970db',sa:'#c77c22',ga:'#8a59c4',custom:'#0f907d'};
+const COLORS={greedy:'#34495E',hc:'#2E86C1',sa:'#C0472A',ga:'#1E8C86',custom:'#9A7400'};
+const SHAPES={greedy:'square',hc:'triangle',sa:'diamond',ga:'circle',custom:'star'};
+function markerShape(method,cx,cy,r,fill){const s=SHAPES[method]||'circle',c=fill||COLORS[method]||'#34495E';if(s==='square')return`<rect x="${cx-r*.85}" y="${cy-r*.85}" width="${r*1.7}" height="${r*1.7}" rx="${r*.25}" fill="${c}"/>`;if(s==='triangle')return`<path d="M${cx},${cy-r*1.1}L${cx+r},${cy+r*.75}L${cx-r},${cy+r*.75}Z" fill="${c}"/>`;if(s==='diamond')return`<path d="M${cx},${cy-r*1.15}L${cx+r*1.05},${cy}L${cx},${cy+r*1.15}L${cx-r*1.05},${cy}Z" fill="${c}"/>`;if(s==='star'){let d='';for(let i=0;i<10;i++){const a=Math.PI/5*i-Math.PI/2,q=i%2?r*.5:r*1.15;d+=`${i?'L':'M'}${(cx+q*Math.cos(a)).toFixed(2)},${(cy+q*Math.sin(a)).toFixed(2)}`;}return`<path d="${d}Z" fill="${c}"/>`;}return`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${c}"/>`;}
+const methodMark=(method,dashed=false)=>`<svg class="method-mark" width="${dashed?28:12}" height="12" viewBox="0 0 ${dashed?28:12} 12" aria-hidden="true">${dashed?`<path d="M0,6H28" stroke="${COLORS[method]||'#34495E'}" stroke-width="2.4" stroke-dasharray="5 3"/>`:''}${markerShape(method,dashed?14:6,6,4.6)}</svg>`;
 const ROOM_MODE={weekly:'ห้องรายสัปดาห์ (weekly)',fixed:'ห้องคงที่ (fixed)'};
 function runMode(run,batch=state.batch){return run?.room_mode||batch?.config?.room_mode||'weekly';}
 function batchModes(batch=state.batch){const modes=[...new Set((batch?.results||[]).map(r=>runMode(r,batch)))];return modes.length?modes:[batch?.config?.room_mode||'weekly'];}
@@ -124,7 +127,15 @@ async function startExperiment(){
     $('run-status').textContent=state.cancelled?'หยุดและเก็บผลที่มีแล้ว':state.batch.status==='error'?'การทดลองหยุดด้วยข้อผิดพลาด':state.storageFailed?'เสร็จแล้ว · กรุณาดาวน์โหลดผล':'เสร็จและบันทึกผลแล้ว';
     $('progress-detail').textContent=`ได้ผล ${state.batch.results.length} จาก ${jobs.length} รัน · ดาวน์โหลด CSV หรือชุดผล JSON ได้`;
     renderResults();if(state.batch.results.length)view('results');
+    if(state.batch.status==='completed'&&state.batch.results.some(r=>r.valid))celebrate();
   }
+}
+function celebrate(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const layer=document.createElement('div'),colors=['#FFD23F','#2BA8A2','#EF6C4A','#5DADE2','#3CC4BD','#FFE47A'];layer.className='confetti';layer.setAttribute('aria-hidden','true');
+  for(let i=0;i<36;i++){const piece=document.createElement('i'),angle=Math.random()*Math.PI*2,dist=120+Math.random()*220;
+    piece.style.cssText=`left:50%;top:38%;background:${colors[i%colors.length]};--dx:${(Math.cos(angle)*dist).toFixed(0)}px;--dy:${(Math.sin(angle)*dist+60).toFixed(0)}px;--rot:${(Math.random()*540-270).toFixed(0)}deg;animation-delay:${(Math.random()*60).toFixed(0)}ms`;layer.append(piece);}
+  document.body.append(layer);setTimeout(()=>layer.remove(),700);
 }
 $('run-button').addEventListener('click',startExperiment);
 $('stop-button').addEventListener('click',()=>{state.cancelled=true;disposeWorker();$('run-status').textContent='กำลังหยุดและบันทึกผลที่มี';});
@@ -132,7 +143,7 @@ $('stop-button').addEventListener('click',()=>{state.cancelled=true;disposeWorke
 function mean(values){return values.length?values.reduce((a,b)=>a+b,0)/values.length:NaN;}
 function median(values){if(!values.length)return NaN;const sorted=values.slice().sort((a,b)=>a-b);const m=Math.floor(sorted.length/2);return sorted.length%2?sorted[m]:(sorted[m-1]+sorted[m])/2;}
 function sd(values){if(values.length<2)return values.length?0:NaN;const avg=mean(values);return Math.sqrt(values.reduce((n,v)=>n+(v-avg)**2,0)/(values.length-1));}
-function methodLabel(method){return `<span class="method-label"><i class="color-dot" style="background:${COLORS[method]||'#64748b'}"></i>${esc(LABELS[method]||method)}</span>`;}
+function methodLabel(method){return `<span class="method-label">${methodMark(method)}${esc(LABELS[method]||method)}</span>`;}
 function statusLabel(run){const failed=!run.valid;const partial=run.valid&&run.metrics?.unassigned_weekly_sessions>0;return `<span class="status ${failed?'failed':partial?'partial':''}">${esc(STATUS[run.status]||run.status)}${partial?' · ตารางบางส่วน':''}</span>`;}
 function renderResults(){
   const batch=state.batch,results=batch?.results||[];$('result-count').textContent=results.length;
@@ -144,7 +155,10 @@ function renderResults(){
   const groups=[...new Set(results.map(r=>`${r.algorithm}\u0000${runMode(r,batch)}`))];
   const summaries=groups.map(group=>{const [algorithm,mode]=group.split('\u0000'),rows=results.filter(r=>r.algorithm===algorithm&&runMode(r,batch)===mode),valid=rows.filter(r=>r.valid&&r.metrics);return{algorithm,mode,rows,valid,key:[median(valid.map(r=>r.metrics.unassigned_weekly_sessions)),median(valid.map(r=>r.metrics.unnecessary_lab_minutes)),median(valid.map(r=>r.metrics.room_changes))]};});
   summaries.sort((a,b)=>{for(let i=0;i<3;i++){const x=Number.isFinite(a.key[i])?a.key[i]:Infinity,y=Number.isFinite(b.key[i])?b.key[i]:Infinity;if(x!==y)return x-y;}return 0;});
-  $('summary-body').innerHTML=summaries.map(s=>{const hours=s.valid.map(r=>r.metrics.unnecessary_lab_hours);return`<tr><td>${methodLabel(s.algorithm)}${esc(modeSuffix(s.rows[0]))}</td><td class="number">${s.valid.length} / ${s.rows.length}</td><td class="number">${num(s.key[0],1)}</td><td class="number">${num(mean(hours),2)} ± ${num(sd(hours),2)}</td><td class="number">${num(s.key[2],1)}</td><td class="number">${num(mean(s.rows.filter(r=>Number.isFinite(r.search_seconds)).map(r=>r.search_seconds)),3)}</td></tr>`;}).join('');
+  const rankKey=s=>s.key.map(v=>Number.isFinite(v)?v:Infinity).join('|');let rank=0,lastKey=null;
+  summaries.forEach((s,i)=>{if(!s.valid.length){s.rank=null;return;}const k=rankKey(s);if(k!==lastKey){rank=i+1;lastKey=k;}s.rank=rank;});
+  const rankBadge=r=>r?`<span class="rank-badge r${Math.min(r,4)}" title="อันดับ ${r}"><span class="sr-only">อันดับ </span>${r}</span>`:`<span class="rank-badge none" title="ไม่มีคำตอบที่ตรวจผ่าน">–</span>`;
+  $('summary-body').innerHTML=summaries.map(s=>{const hours=s.valid.map(r=>r.metrics.unnecessary_lab_hours);return`<tr${s.rank===1?' class="best"':''}><td>${rankBadge(s.rank)}${methodLabel(s.algorithm)}${esc(modeSuffix(s.rows[0]))}</td><td class="number">${s.valid.length} / ${s.rows.length}</td><td class="number">${num(s.key[0],1)}</td><td class="number">${num(mean(hours),2)} ± ${num(sd(hours),2)}</td><td class="number">${num(s.key[2],1)}</td><td class="number">${num(mean(s.rows.filter(r=>Number.isFinite(r.search_seconds)).map(r=>r.search_seconds)),3)}</td></tr>`;}).join('');
   $('runs-body').innerHTML=results.map(r=>`<tr><td>${methodLabel(r.algorithm)}<br><span class="micro mono">seed ${esc(r.seed)}${esc(modeSuffix(r))}</span></td><td>${statusLabel(r)}${r.error?`<p class="error-text">${esc(r.error.message).slice(0,500)}</p>`:''}</td><td class="number">${num(r.metrics?.unassigned_weekly_sessions)}</td><td class="number">${num(r.metrics?.unnecessary_lab_hours,2)}</td><td class="number">${num(r.metrics?.room_changes)}</td><td class="number">${num(r.evaluations)}</td><td class="number">${num(r.search_seconds,3)}</td><td class="number">${num(r.validation?.violation_count)}</td></tr>`).join('');
   const oldSeed=$('chart-seed').value,seeds=[...new Set(results.map(r=>r.seed))];$('chart-seed').replaceChildren(...seeds.map(seed=>new Option(String(seed),String(seed))));if(seeds.includes(Number(oldSeed)))$('chart-seed').value=oldSeed;
   const oldRun=$('schedule-run').value;$('schedule-run').replaceChildren(...results.map((r,i)=>new Option(`${LABELS[r.algorithm]||r.algorithm} · ${r.seed}${modeSuffix(r)}${r.valid?'':' · ไม่ผ่าน'}`,String(i))));if(Number(oldRun)<results.length)$('schedule-run').value=oldRun||'0';
@@ -157,11 +171,11 @@ function renderChart(){
   if(!traces.length){$('convergence-chart').textContent='ยังไม่มี trace ที่ตรวจผ่านสำหรับ seed นี้';$('chart-legend').textContent='';return;}
   const width=1000,height=280,left=65,right=20,top=20,bottom=40,maxX=Math.max(1,state.batch.config.budget),maxY=Math.max(1,...traces.flatMap(t=>t.points.map(p=>p[1])))*1.1;
   const x=n=>left+n/maxX*(width-left-right),y=n=>height-bottom-n/maxY*(height-top-bottom);
-  let svg=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="คำตอบดีที่สุดเทียบจำนวนครั้งประเมิน"><rect width="1000" height="280" fill="white"/>`;
-  for(let i=0;i<=4;i++){const v=maxY*i/4;svg+=`<line x1="${left}" x2="${width-right}" y1="${y(v)}" y2="${y(v)}" stroke="#edf0f5"/><text x="${left-10}" y="${y(v)+4}" text-anchor="end" font-size="10" fill="#8a94aa">${num(v,metric===1?1:0)}</text>`;}
-  for(const v of [0,Math.round(maxX/2),maxX])svg+=`<text x="${x(v)}" y="${height-20}" text-anchor="middle" font-size="10" fill="#8a94aa">${v}</text>`;
-  for(const trace of traces){const path=trace.points.map((p,i)=>`${i?'L':'M'}${x(p[0])},${y(p[1])}`).join(' ');svg+=`<path d="${path}" fill="none" stroke="${COLORS[trace.method]||'#64748b'}" stroke-width="2.2"${trace.dashed?' stroke-dasharray="6 4"':''}/>`;for(const p of [trace.points[0],trace.points.at(-1)])svg+=`<circle cx="${x(p[0])}" cy="${y(p[1])}" r="3" fill="${COLORS[trace.method]||'#64748b'}"/>`;}
-  svg+=`<text x="${width/2}" y="${height-3}" text-anchor="middle" font-size="9" fill="#8a94aa">จำนวนครั้งประเมินคำตอบ</text></svg>`;$('convergence-chart').innerHTML=svg;$('chart-legend').innerHTML=traces.map(t=>`<span><i class="color-dot" style="background:${COLORS[t.method]||'#64748b'}"></i>${esc((LABELS[t.method]||t.method)+t.suffix)}</span>`).join('');
+  let svg=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="คำตอบดีที่สุดเทียบจำนวนครั้งประเมิน"><rect width="1000" height="280" fill="#FFFFFF"/>`;
+  for(let i=0;i<=4;i++){const v=maxY*i/4;svg+=`<line x1="${left}" x2="${width-right}" y1="${y(v)}" y2="${y(v)}" stroke="#DDEDEB" stroke-dasharray="${i?'4 4':'0'}"/><text x="${left-10}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#5B6B7A">${num(v,metric===1?1:0)}</text>`;}
+  for(const v of [0,Math.round(maxX/2),maxX])svg+=`<text x="${x(v)}" y="${height-20}" text-anchor="middle" font-size="11" fill="#5B6B7A">${v}</text>`;
+  for(const trace of traces){const path=trace.points.map((p,i)=>`${i?'L':'M'}${x(p[0])},${y(p[1])}`).join(' ');svg+=`<path d="${path}" fill="none" stroke="${COLORS[trace.method]||'#34495E'}" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"${trace.dashed?' stroke-dasharray="7 5"':''}/>`;for(const p of [trace.points[0],trace.points.at(-1)])svg+=`<g stroke="#FFFFFF" stroke-width="1.5">${markerShape(trace.method,x(p[0]),y(p[1]),5)}</g>`;}
+  svg+=`<text x="${width/2}" y="${height-3}" text-anchor="middle" font-size="11" fill="#5B6B7A">จำนวนครั้งประเมินคำตอบ</text></svg>`;$('convergence-chart').innerHTML=svg;$('chart-legend').innerHTML=traces.map(t=>`<span>${methodMark(t.method,t.dashed)}${esc((LABELS[t.method]||t.method)+t.suffix)}</span>`).join('');
 }
 const clock=minute=>`${String(Math.floor(minute/60)).padStart(2,'0')}:${String(minute%60).padStart(2,'0')}`;
 const hrs=minutes=>{const h=minutes/60;return num(h,Number.isInteger(h)?0:Number.isInteger(h*10)?1:2);};
