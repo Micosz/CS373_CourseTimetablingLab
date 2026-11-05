@@ -2,7 +2,7 @@
 
 เว็บทดลอง **Greedy, random-restart Hill Climbing, Simulated Annealing และ Genetic Algorithm** บน Fall CS ที่ดัดแปลงให้มีความต้องการ Computer Lab รายสัปดาห์ มีตัวตรวจคำตอบร่วมกัน เก็บผลรายรันและตารางเรียนจริง พร้อมส่งออกหลักฐานสำหรับรายงาน
 
-**เปิดใช้งาน:** https://micosz.github.io/course-timetabling-lab/
+**เปิดใช้งาน:** https://micosz.github.io/course-timetabling-lab/ เเละที่ https://cs373presentation.vercel.app/
 
 ## เริ่มใช้เว็บ
 
