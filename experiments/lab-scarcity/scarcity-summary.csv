@@ -1,0 +1,7 @@
+﻿labs,room_mode,algorithm,runs,valid_runs,mean_unassigned,median_unassigned,q1_unassigned,q3_unassigned,min_unassigned,max_unassigned,success_rate,mean_lab_hours,mean_room_changes
+4,weekly,ga,10,10,0.0,0.0,0.0,0.0,0,0,1.0,56.7,834.2
+4,fixed,ga,10,10,159.0,157.5,150.0,165.0,135,195,0.0,2010.25,0.0
+3,weekly,ga,10,10,0.0,0.0,0.0,0.0,0,0,1.0,95.25,841.9
+3,fixed,ga,10,10,481.5,480.0,468.75,495.0,465,495,0.0,1558.15,0.0
+2,weekly,ga,10,10,17.7,17.0,15.0,21.5,11,24,0.0,110.9,847.3
+2,fixed,ga,10,10,895.5,885.0,885.0,900.0,870,930,0.0,1061.5,0.0
