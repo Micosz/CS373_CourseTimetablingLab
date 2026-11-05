@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <!-- Engine sources ship inside the assembly so Runner can hash them at runtime (code_sha256, EngineSha256). -->
+    <EmbeddedResource Include="*.cs" LogicalName="engine-src/%(Filename)%(Extension)" />
+    <InternalsVisibleTo Include="Timetabling.Engine.Tests" />
+  </ItemGroup>
+
 </Project>

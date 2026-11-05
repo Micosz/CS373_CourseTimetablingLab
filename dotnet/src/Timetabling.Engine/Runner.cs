@@ -1,11 +1,23 @@
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 
 namespace Timetabling.Engine;
 
 // CONTRACT for the runner session. RunResult serializes (Dataset.Json options) to the same keys as one
 // result record of engine/runner.py run_one, so engine/analyze.py and the web app can read C# output.
 
-public sealed record RunConfig(int Budget = 100, double Seconds = 60, string RoomMode = RoomModes.Weekly, MethodParameters? Parameters = null);
+public sealed record RunConfig(int Budget = 100, double Seconds = 60, string RoomMode = RoomModes.Weekly, MethodParameters? Parameters = null)
+{
+    /// <summary>
+    /// The "parameters" object exactly as the user gave it, when known. Python records
+    /// config['parameters'].get(method, {}) in each result, so RunOne copies that object from here; without
+    /// it RunOne writes the method's typed parameters (defaults included).
+    /// </summary>
+    [JsonIgnore] public JsonObject? ParametersJson { get; init; }
+
+    /// <summary>Reads a run configuration the way runner.py does: config.get(key, default), int() of integer parameters.</summary>
+    public static RunConfig FromJson(JsonObject config) => RunConfigReader.Read(config);
+}
 
 public sealed record EnergyWeights(long Unassigned, long LabMinute, long RoomChange);
 
@@ -58,14 +70,14 @@ public sealed class RunResult
 /// <summary>Port of engine/runner.py.</summary>
 public static partial class Runner
 {
-    public static Prepared Prepare(string datasetText) => throw new NotImplementedException("runner session");
+    public static Prepared Prepare(string datasetText) => PrepareCore(datasetText);
 
-    public static void CheckConfiguration(RunConfig config) => throw new NotImplementedException("runner session");
+    public static void CheckConfiguration(RunConfig config) => CheckCore(config);
 
     public static RunResult RunOne(Prepared prepared, RunConfig config, string method, ulong seed,
                                    Action<ProgressEvent>? progress = null, CancellationToken cancellation = default) =>
-        throw new NotImplementedException("runner session");
+        RunCore(prepared, config, method, seed, progress, cancellation);
 
     /// <summary>SHA-256 identifying the C# engine sources (counterpart of batch.engine_snapshot).</summary>
-    public static string EngineSha256 => throw new NotImplementedException("runner session");
+    public static string EngineSha256 => engineSha.Value;
 }
