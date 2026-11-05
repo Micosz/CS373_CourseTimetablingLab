@@ -221,20 +221,27 @@ public sealed class Problem
 
     readonly record struct Record(int Session, int Week, int Room, SlotRange Mask);
 
-    List<Record> FixedRecords(CompiledOption option, SlotSet peopleBusy, SlotSet[] roomBusy, out long localLab)
+    /// <summary>Scratch buffers reused across the options of one decode (allocation only; results unchanged).</summary>
+    sealed class Scratch
     {
-        var records = new List<Record>();
+        public List<(int Week, SlotRange Mask)> Weeks = [], BestWeeks = [];
+        public List<Record> Records = [], BestRecords = [];
+    }
+
+    void FixedRecords(CompiledOption option, SlotSet peopleBusy, SlotSet[] roomBusy, Scratch scratch, List<Record> records, out long localLab)
+    {
+        records.Clear();
         localLab = 0;
         foreach (var plan in option.BySession)
         {
             (int Weeks, long Lab, int Capacity, int Rank)? bestKey = null;
             int bestRoom = -1;
-            List<(int Week, SlotRange Mask)>? bestWeeks = null;
             foreach (var r in plan.Rooms)
             {
                 var busy = roomBusy[r];
                 var isLab = Rooms[r].IsLab;
-                var weeks = new List<(int, SlotRange)>();
+                var weeks = scratch.Weeks;
+                weeks.Clear();
                 long lab = 0;
                 foreach (var row in plan.Rows)
                 {
@@ -246,16 +253,16 @@ public sealed class Problem
                 var key = (-weeks.Count, lab, Rooms[r].Capacity, roomRank[r]);
                 if (bestKey is null || key.CompareTo(bestKey.Value) < 0)
                 {
-                    bestKey = key; bestRoom = r; bestWeeks = weeks;
+                    bestKey = key; bestRoom = r;
+                    (scratch.Weeks, scratch.BestWeeks) = (scratch.BestWeeks, weeks);
                 }
             }
             if (bestKey is not null)
             {
                 localLab += bestKey.Value.Lab;
-                foreach (var (week, mask) in bestWeeks!) records.Add(new Record(plan.Session, week, bestRoom, mask));
+                foreach (var (week, mask) in scratch.BestWeeks) records.Add(new Record(plan.Session, week, bestRoom, mask));
             }
         }
-        return records;
     }
 
     /// <summary>Port of Problem.decode. <paramref name="deadline"/> is a Stopwatch timestamp or null.</summary>
@@ -265,7 +272,15 @@ public sealed class Problem
         var fixedMode = roomMode == RoomModes.Fixed;
         int n = ClassIds.Length;
         var order = genome.Order;
-        if (order.Length != n || order.Distinct().Count() != n || order.Any(c => c < 0 || c >= n))
+        var seenClass = new bool[n];
+        var permutation = order.Length == n;
+        if (permutation)
+            foreach (var c in order)
+            {
+                if (c < 0 || c >= n || seenClass[c]) { permutation = false; break; }
+                seenClass[c] = true;
+            }
+        if (!permutation)
             throw new ArgumentException("Genome order must be a permutation of all target class IDs");
         var preferences = genome.TimePreferences;
         if (preferences.Length != n) throw new ArgumentException("time_preferences must contain every target class");
@@ -274,22 +289,31 @@ public sealed class Problem
                 throw new ArgumentException("Invalid time preference for " + ClassIds[c]);
 
         var roomBusy = Rooms.Select(_ => NewSet()).ToArray();
-        var classBusy = new SlotSet?[n];
+        // A decided class's busy slots, kept as its chosen records' ranges: few ranges, so the per-class
+        // people mask is rebuilt by adding ranges rather than OR-ing whole term bitsets.
+        var classBusy = new SlotRange[]?[n];
         var selected = new CompiledOption?[n];
         var decided = new bool[n];
         var assignments = new List<Assignment>();
         long assigned = 0, labMinutes = 0, changes = 0;
         var peopleBusy = NewSet();
-        var previous = new Dictionary<int, int>();
+        var scratch = new Scratch();
+        // Previous room per session within one option: an entry counts only when its stamp is the current option's.
+        var previousRoom = new int[SessionIds.Length];
+        var previousStamp = new int[SessionIds.Length];
+        var stamp = 0;
         foreach (var c in order)
         {
             if (deadline is long d && Stopwatch.GetTimestamp() >= d) throw new SearchStoppedException("time_limit");
             peopleBusy.Clear();
             foreach (var other in conflicts[c])
-                if (classBusy[other] is { } busy) peopleBusy.UnionWith(busy);
+                if (classBusy[other] is { } busy)
+                    foreach (var range in busy) peopleBusy.Add(range);
             (long Records, long Lab, long Changes)? bestKey = null;
             CompiledOption? bestOption = null;
-            List<Record>? bestRecords = null;
+            var scratchRecords = scratch.Records;
+            var bestRecords = scratch.BestRecords;
+            bestRecords.Clear();
             var options = Options[c];
             var start = preferences[c];
             for (var offset = 0; offset < options.Length; offset++)
@@ -300,16 +324,16 @@ public sealed class Problem
                 foreach (var other in sameTimes[c])
                     if (decided[other] && selected[other] is { } o && !ContainedTime(option.First, o.First)) { sameTimeBroken = true; break; }
                 if (sameTimeBroken) continue;
-                List<Record> records;
+                var records = scratchRecords;
                 long localLab = 0, localChanges = 0;
                 if (fixedMode)
                 {
-                    records = FixedRecords(option, peopleBusy, roomBusy, out localLab);
+                    FixedRecords(option, peopleBusy, roomBusy, scratch, records, out localLab);
                 }
                 else
                 {
-                    records = [];
-                    previous.Clear();
+                    records.Clear();
+                    stamp++;
                     foreach (var p in option.Placements)
                     {
                         if (peopleBusy.Intersects(p.Mask)) continue;
@@ -319,32 +343,36 @@ public sealed class Problem
                         {
                             if (roomBusy[r].Intersects(p.Mask)) continue;
                             var key = (!p.NeedLab && Rooms[r].IsLab ? 1 : 0,
-                                       previous.TryGetValue(p.Session, out var prev) && prev != r ? 1 : 0,
+                                       previousStamp[p.Session] == stamp && previousRoom[p.Session] != r ? 1 : 0,
                                        Rooms[r].Capacity, roomRank[r]);
                             if (best < 0 || key.CompareTo(bestRoomKey) < 0) { best = r; bestRoomKey = key; }
                         }
                         if (best < 0) continue;
                         localLab += p.Duration * bestRoomKey.Lab;
                         localChanges += bestRoomKey.Changed;
-                        previous[p.Session] = best;
+                        previousRoom[p.Session] = best;
+                        previousStamp[p.Session] = stamp;
                         records.Add(new Record(p.Session, p.Week, best, p.Mask));
                     }
                 }
                 var candidateKey = ((long)-records.Count, localLab, localChanges);
                 if (bestKey is null || candidateKey.CompareTo(bestKey.Value) < 0)
                 {
-                    bestKey = candidateKey; bestOption = option; bestRecords = records;
+                    bestKey = candidateKey; bestOption = option;
+                    (scratchRecords, bestRecords) = (bestRecords, records);
                 }
             }
+            (scratch.Records, scratch.BestRecords) = (scratchRecords, bestRecords);
             decided[c] = true;
-            if (bestKey is null || bestRecords!.Count == 0) { selected[c] = null; continue; }
+            if (bestKey is null || bestRecords.Count == 0) { selected[c] = null; continue; }
             selected[c] = bestOption;
             // used_mask in Python is the union of the chosen records' masks.
-            var used = NewSet();
+            var used = new SlotRange[bestRecords.Count];
             classBusy[c] = used;
-            foreach (var rec in bestRecords)
+            for (var i = 0; i < used.Length; i++)
             {
-                used.Add(rec.Mask);
+                var rec = bestRecords[i];
+                used[i] = rec.Mask;
                 roomBusy[rec.Room].Add(rec.Mask);
                 assignments.Add(new Assignment(SessionIds[rec.Session], rec.Week, Rooms[rec.Room].Id));
             }

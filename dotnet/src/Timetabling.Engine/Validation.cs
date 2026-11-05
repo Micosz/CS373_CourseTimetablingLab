@@ -1,4 +1,5 @@
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 
 namespace Timetabling.Engine;
 
@@ -28,7 +29,7 @@ public sealed record AuditResult(
 public static partial class SolutionValidator
 {
     public static AuditResult Audit(Dataset data, Solution? solution, string roomMode = RoomModes.Weekly) =>
-        throw new NotImplementedException("validators session");
+        Run(data, solution, roomMode);
 }
 
 public sealed record InputReport(
@@ -36,11 +37,12 @@ public sealed record InputReport(
     List<string> Errors,
     List<JsonObject> Warnings,
     JsonObject Summary,
-    JsonObject? LabRequiredMeetingsPerWeek = null,
-    JsonObject? LocalFeasibility = null);
+    // Python leaves both keys out of a failed report, so null is not written.
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] JsonObject? LabRequiredMeetingsPerWeek = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] JsonObject? LocalFeasibility = null);
 
 /// <summary>Port of engine/input_validation.py.</summary>
 public static partial class InputValidator
 {
-    public static InputReport Validate(Dataset data) => throw new NotImplementedException("validators session");
+    public static InputReport Validate(Dataset data) => Run(data);
 }
