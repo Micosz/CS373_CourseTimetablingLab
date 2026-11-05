@@ -1,0 +1,402 @@
+[
+  {
+    "room_mode": "weekly",
+    "algorithm": "greedy",
+    "runs": 30,
+    "valid_runs": 30,
+    "failed_runs": 0,
+    "time_limited_runs": 0,
+    "success_rate": 0.0,
+    "mean_evaluations": 1.0,
+    "unassigned_weekly_sessions": {
+      "n": 30,
+      "mean": 20.0,
+      "median": 20.0,
+      "std": 0.0,
+      "best": 20,
+      "worst": 20,
+      "q1": 20.0,
+      "q3": 20.0
+    },
+    "unnecessary_lab_hours": {
+      "n": 30,
+      "mean": 124.0,
+      "median": 124.0,
+      "std": 0.0,
+      "best": 124.0,
+      "worst": 124.0,
+      "q1": 124.0,
+      "q3": 124.0
+    },
+    "room_changes": {
+      "n": 30,
+      "mean": 838.0,
+      "median": 838.0,
+      "std": 0.0,
+      "best": 838,
+      "worst": 838,
+      "q1": 838.0,
+      "q3": 838.0
+    },
+    "search_seconds": {
+      "n": 30,
+      "mean": 0.37210149666619446,
+      "median": 0.3648072500000126,
+      "std": 0.11009749445827555,
+      "best": 0.17811100000108127,
+      "worst": 0.5619587000037427,
+      "q1": 0.3406185500043648,
+      "q3": 0.44891927499702433
+    }
+  },
+  {
+    "room_mode": "weekly",
+    "algorithm": "hc",
+    "runs": 30,
+    "valid_runs": 30,
+    "failed_runs": 0,
+    "time_limited_runs": 0,
+    "success_rate": 1.0,
+    "mean_evaluations": 500.0,
+    "unassigned_weekly_sessions": {
+      "n": 30,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0,
+      "best": 0,
+      "worst": 0,
+      "q1": 0.0,
+      "q3": 0.0
+    },
+    "unnecessary_lab_hours": {
+      "n": 30,
+      "mean": 64.88333333333334,
+      "median": 68.5,
+      "std": 22.24072194519949,
+      "best": 14.0,
+      "worst": 103.0,
+      "q1": 52.0,
+      "q3": 77.75
+    },
+    "room_changes": {
+      "n": 30,
+      "mean": 830.7666666666667,
+      "median": 829.0,
+      "std": 17.837742499298066,
+      "best": 794,
+      "worst": 868,
+      "q1": 820.5,
+      "q3": 839.75
+    },
+    "search_seconds": {
+      "n": 30,
+      "mean": 214.84297904000024,
+      "median": 217.6678208000012,
+      "std": 22.47437354008062,
+      "best": 179.6381615000064,
+      "worst": 245.71793369999796,
+      "q1": 197.5888397000017,
+      "q3": 236.2469872499987
+    }
+  },
+  {
+    "room_mode": "weekly",
+    "algorithm": "sa",
+    "runs": 30,
+    "valid_runs": 30,
+    "failed_runs": 0,
+    "time_limited_runs": 0,
+    "success_rate": 1.0,
+    "mean_evaluations": 500.0,
+    "unassigned_weekly_sessions": {
+      "n": 30,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0,
+      "best": 0,
+      "worst": 0,
+      "q1": 0.0,
+      "q3": 0.0
+    },
+    "unnecessary_lab_hours": {
+      "n": 30,
+      "mean": 76.23333333333333,
+      "median": 74.0,
+      "std": 20.81889614704894,
+      "best": 37.0,
+      "worst": 115.0,
+      "q1": 60.0,
+      "q3": 91.25
+    },
+    "room_changes": {
+      "n": 30,
+      "mean": 835.4,
+      "median": 833.0,
+      "std": 13.66747965061591,
+      "best": 813,
+      "worst": 858,
+      "q1": 822.5,
+      "q3": 846.5
+    },
+    "search_seconds": {
+      "n": 30,
+      "mean": 215.54981241999994,
+      "median": 218.19493830000283,
+      "std": 22.88224925520821,
+      "best": 177.57237110000278,
+      "worst": 245.60659449999366,
+      "q1": 198.83957545000158,
+      "q3": 237.0535185000026
+    }
+  },
+  {
+    "room_mode": "weekly",
+    "algorithm": "ga",
+    "runs": 30,
+    "valid_runs": 30,
+    "failed_runs": 0,
+    "time_limited_runs": 0,
+    "success_rate": 1.0,
+    "mean_evaluations": 500.0,
+    "unassigned_weekly_sessions": {
+      "n": 30,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0,
+      "best": 0,
+      "worst": 0,
+      "q1": 0.0,
+      "q3": 0.0
+    },
+    "unnecessary_lab_hours": {
+      "n": 30,
+      "mean": 57.733333333333334,
+      "median": 56.5,
+      "std": 19.849317426522518,
+      "best": 17.0,
+      "worst": 102.0,
+      "q1": 46.25,
+      "q3": 72.5
+    },
+    "room_changes": {
+      "n": 30,
+      "mean": 831.3,
+      "median": 828.5,
+      "std": 17.950410618682525,
+      "best": 800,
+      "worst": 884,
+      "q1": 820.25,
+      "q3": 837.75
+    },
+    "search_seconds": {
+      "n": 30,
+      "mean": 213.62236532333313,
+      "median": 213.04978950000077,
+      "std": 22.827004572561844,
+      "best": 177.44453090000025,
+      "worst": 251.66692299999704,
+      "q1": 196.57537894999587,
+      "q3": 233.4108698750042
+    }
+  },
+  {
+    "room_mode": "fixed",
+    "algorithm": "greedy",
+    "runs": 30,
+    "valid_runs": 30,
+    "failed_runs": 0,
+    "time_limited_runs": 0,
+    "success_rate": 0.0,
+    "mean_evaluations": 1.0,
+    "unassigned_weekly_sessions": {
+      "n": 30,
+      "mean": 390.0,
+      "median": 390.0,
+      "std": 0.0,
+      "best": 390,
+      "worst": 390,
+      "q1": 390.0,
+      "q3": 390.0
+    },
+    "unnecessary_lab_hours": {
+      "n": 30,
+      "mean": 1925.0,
+      "median": 1925.0,
+      "std": 0.0,
+      "best": 1925.0,
+      "worst": 1925.0,
+      "q1": 1925.0,
+      "q3": 1925.0
+    },
+    "room_changes": {
+      "n": 30,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0,
+      "best": 0,
+      "worst": 0,
+      "q1": 0.0,
+      "q3": 0.0
+    },
+    "search_seconds": {
+      "n": 30,
+      "mean": 0.3217770900002506,
+      "median": 0.3212971499997366,
+      "std": 0.08649106475888176,
+      "best": 0.19527689999813447,
+      "worst": 0.4946004000012181,
+      "q1": 0.24034280000159924,
+      "q3": 0.3634844750031334
+    }
+  },
+  {
+    "room_mode": "fixed",
+    "algorithm": "hc",
+    "runs": 30,
+    "valid_runs": 30,
+    "failed_runs": 0,
+    "time_limited_runs": 0,
+    "success_rate": 0.0,
+    "mean_evaluations": 500.0,
+    "unassigned_weekly_sessions": {
+      "n": 30,
+      "mean": 191.0,
+      "median": 195.0,
+      "std": 22.946714887711728,
+      "best": 150,
+      "worst": 225,
+      "q1": 168.75,
+      "q3": 210.0
+    },
+    "unnecessary_lab_hours": {
+      "n": 30,
+      "mean": 1990.5833333333333,
+      "median": 1990.25,
+      "std": 42.65056157073258,
+      "best": 1914.0,
+      "worst": 2073.5,
+      "q1": 1960.75,
+      "q3": 2021.25
+    },
+    "room_changes": {
+      "n": 30,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0,
+      "best": 0,
+      "worst": 0,
+      "q1": 0.0,
+      "q3": 0.0
+    },
+    "search_seconds": {
+      "n": 30,
+      "mean": 143.94188587000002,
+      "median": 128.29366719999962,
+      "std": 30.424121530726694,
+      "best": 103.0590263999984,
+      "worst": 184.0528067999985,
+      "q1": 117.05846497499988,
+      "q3": 178.13916244999746
+    }
+  },
+  {
+    "room_mode": "fixed",
+    "algorithm": "sa",
+    "runs": 30,
+    "valid_runs": 30,
+    "failed_runs": 0,
+    "time_limited_runs": 0,
+    "success_rate": 0.0,
+    "mean_evaluations": 500.0,
+    "unassigned_weekly_sessions": {
+      "n": 30,
+      "mean": 151.5,
+      "median": 150.0,
+      "std": 28.22782926169822,
+      "best": 90,
+      "worst": 210,
+      "q1": 135.0,
+      "q3": 165.0
+    },
+    "unnecessary_lab_hours": {
+      "n": 30,
+      "mean": 2025.6833333333334,
+      "median": 2024.0,
+      "std": 29.747061093125836,
+      "best": 1980.0,
+      "worst": 2090.0,
+      "q1": 2004.75,
+      "q3": 2044.625
+    },
+    "room_changes": {
+      "n": 30,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0,
+      "best": 0,
+      "worst": 0,
+      "q1": 0.0,
+      "q3": 0.0
+    },
+    "search_seconds": {
+      "n": 30,
+      "mean": 144.47486449333348,
+      "median": 128.03253495000536,
+      "std": 30.737765992474397,
+      "best": 104.23331760000292,
+      "worst": 187.06372479999845,
+      "q1": 118.87324455000453,
+      "q3": 178.8221131249975
+    }
+  },
+  {
+    "room_mode": "fixed",
+    "algorithm": "ga",
+    "runs": 30,
+    "valid_runs": 30,
+    "failed_runs": 0,
+    "time_limited_runs": 0,
+    "success_rate": 0.0,
+    "mean_evaluations": 500.0,
+    "unassigned_weekly_sessions": {
+      "n": 30,
+      "mean": 162.5,
+      "median": 165.0,
+      "std": 21.961957704332658,
+      "best": 105,
+      "worst": 210,
+      "q1": 150.0,
+      "q3": 180.0
+    },
+    "unnecessary_lab_hours": {
+      "n": 30,
+      "mean": 2006.4,
+      "median": 2007.5,
+      "std": 31.226480804731676,
+      "best": 1947.0,
+      "worst": 2068.0,
+      "q1": 1982.75,
+      "q3": 2022.625
+    },
+    "room_changes": {
+      "n": 30,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0,
+      "best": 0,
+      "worst": 0,
+      "q1": 0.0,
+      "q3": 0.0
+    },
+    "search_seconds": {
+      "n": 30,
+      "mean": 142.61589537000037,
+      "median": 125.77204205000089,
+      "std": 29.960889390909152,
+      "best": 102.06572859999869,
+      "worst": 183.00620610000624,
+      "q1": 117.16031895000197,
+      "q3": 175.60846647499966
+    }
+  }
+]

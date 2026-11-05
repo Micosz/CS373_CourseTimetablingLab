@@ -1,0 +1,22 @@
+{
+  "name": "Lab scarcity: 2 Labs, ga (seeds 1001-1010)",
+  "created_at": "2026-11-04T18:41:39.484438+00:00",
+  "sessions": [
+    {
+      "started_at": "2026-11-04T18:41:39.484456+00:00",
+      "runs": 20,
+      "workers": 9,
+      "finished_at": "2026-11-04T18:46:04.180532+00:00",
+      "wall_seconds": 264.6960920999991,
+      "failures": []
+    }
+  ],
+  "dataset": "data/variants/fall-cs-labs2.json.gz",
+  "dataset_sha256": "7c91f0a122fb1d013d25c43adc279f3eade4b035460c2b8c4558bde0a9892b17",
+  "engine_sha256": "222ae5d0adbbaf4cc0229a880ef57c50ae2c0df4959f96087b82d76e37c61134",
+  "python": "3.13.14",
+  "platform": "win32",
+  "cpu_count": 28,
+  "total_runs": 20,
+  "wall_seconds_total": 264.6960920999991
+}

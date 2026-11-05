@@ -7,3 +7,22 @@
 h1{font-size:44px;line-height:1.45;letter-spacing:0;margin:28px 0 30px}.objectives{margin-top:55px}.objectives article{min-height:310px}.objectives p{font-size:23px;line-height:1.9}.dataset-stats{gap:35px;padding-bottom:22px}.dataset-stats strong{font-size:56px}.dataset-stats span{font-size:20px;line-height:1.6}.data-cards article{padding:20px}.data-cards h3{font-size:24px}.data-cards p{font-size:20px;line-height:1.8}.process-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.process-grid article{padding:18px 24px}.process-grid h3{font-size:25px;margin:6px 0}.process-grid p{font-size:21px;line-height:1.65;margin:6px 0}.algorithms article{min-height:210px;padding:20px 24px}.algorithms p{font-size:22px;line-height:1.7}.plan p{font-size:21px;line-height:1.85}.plan article{padding:22px}.results p{font-size:23px;line-height:1.7}.progress-cards li{font-size:22px;line-height:1.8}.band{font-size:22px;line-height:1.7}.refs span{font-size:19px}
 
 .preliminary .lead{font-size:23px;margin:5px 0 12px}.preliminary table{font-size:21px}.preliminary td,.preliminary th{padding:10px 18px}.preliminary .band{font-size:20px;line-height:1.55;margin-top:14px;padding:12px 20px}.preliminary .caption{font-size:15px;margin-top:10px}
+
+/* Final deck · charts carry their own background; force light so embedded SVGs stay light */
+:root{color-scheme:light}
+.cover-only h1 .sub{display:block;margin-top:34px;font-size:26px;line-height:1.5;font-weight:500;color:#ac682d}
+figure.chart{margin:0}.chart img{display:block;width:100%;height:auto;border:1px solid #d2d9cf;background:#fcfcfb;color-scheme:light}.chart figcaption{font-size:14px;color:#5a6f66;margin-top:8px;line-height:1.5}
+.split{display:grid;grid-template-columns:720px 1fr;gap:34px;align-items:start}.split .side{display:flex;flex-direction:column;gap:14px}.split .side article{padding:14px 22px}.split .side h3{font-size:25px;margin:4px 0}.split .side p{font-size:20px;line-height:1.55;margin:4px 0}.split .side .num{font-size:16px}
+.wide{width:860px;margin:0 auto}.wide+.band,.wide+.cols{margin-top:16px}
+.bars{list-style:none;padding:0;margin:8px 0 0}.bars li{display:flex;justify-content:space-between;font-size:22px;margin:4px 0;border-bottom:1px dashed #c8d4cb}.bars li span{font-variant-numeric:tabular-nums}
+.ranks{font-size:21px}
+.method-flow{margin-top:10px}.method-flow article{min-height:200px}.method-flow p{font-size:19px;line-height:1.6}
+.algo-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}.algo-row div{background:#e9dcc3;padding:14px 16px;font-size:18px;line-height:1.5}.algo-row b{display:block;font-size:20px;margin-bottom:4px}
+.tune td,.tune th{padding:14px 20px;font-size:21px}.tune td:first-child{width:26%}.tune td:last-child{width:28%}.tune small{font-size:15px}
+.mini{font-size:20px}.mini td,.mini th{padding:10px 14px}.mini td:first-child{width:28%}.mini small{font-size:14px;letter-spacing:0}
+.budget-notes{gap:18px}.budget-notes .band{margin-top:0;font-size:18px;line-height:1.6;padding:12px 18px}
+.tool{grid-template-columns:640px 1fr;gap:36px;align-items:start}.tool img{width:640px;height:auto;object-fit:contain}.tool article{padding:14px 22px;margin-bottom:12px}.tool p{font-size:19px;line-height:1.55;margin:4px 0}.tool .num{font-size:16px}.tool .button{font-size:18px;margin-top:4px}
+.limits article{min-height:0}.limits p{font-size:20px}
+.conclude article{padding:20px 24px}.conclude h3{font-size:25px}.conclude p{font-size:20px;line-height:1.65}
+.refs a{padding:16px 20px}.refs span{font-size:17px}
+.split.wl{grid-template-columns:860px 1fr;gap:28px}.split.wl .side p{font-size:19px}

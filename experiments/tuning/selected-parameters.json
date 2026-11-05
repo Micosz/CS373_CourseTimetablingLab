@@ -1,0 +1,39 @@
+{
+  "hc": {
+    "restart_patience": 50
+  },
+  "sa": {
+    "initial_acceptance": 0.2,
+    "cooling_rate": 0.9
+  },
+  "ga": {
+    "population_size": 35,
+    "mutation_rate": 0.66,
+    "crossover_rate": 0.64,
+    "tournament_size": 5,
+    "elites": 3
+  },
+  "_selection": {
+    "protocol": "docs/protocol.md section 5",
+    "tuning_seeds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "budget": 500,
+    "room_mode": "weekly",
+    "criterion": "lexicographic order of mean (unassigned, unnecessary Lab minutes, room changes); ties keep the default",
+    "chosen_config_ids": {
+      "hc": "hc-p50",
+      "sa": "sa-a0.2-c0.9",
+      "ga": "ga-11"
+    }
+  }
+}

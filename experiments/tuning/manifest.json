@@ -1,0 +1,22 @@
+{
+  "name": "Parameter tuning (seeds 1-10)",
+  "created_at": "2026-11-04T16:25:50.114402+00:00",
+  "sessions": [
+    {
+      "started_at": "2026-11-04T16:25:50.114427+00:00",
+      "runs": 470,
+      "workers": 18,
+      "finished_at": "2026-11-04T18:05:06.485819+00:00",
+      "wall_seconds": 5956.371445999997,
+      "failures": []
+    }
+  ],
+  "dataset": "data/fall-cs.json.gz",
+  "dataset_sha256": "c92918faeb82b4d5c9f702e0629fe5e8d48bcc1a1286c0b21d514a9021973968",
+  "engine_sha256": "222ae5d0adbbaf4cc0229a880ef57c50ae2c0df4959f96087b82d76e37c61134",
+  "python": "3.13.14",
+  "platform": "win32",
+  "cpu_count": 28,
+  "total_runs": 470,
+  "wall_seconds_total": 5956.371445999997
+}
