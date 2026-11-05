@@ -1,0 +1,14 @@
+<Project Sdk="Godot.NET.Sdk/4.7.2">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+    <RootNamespace>RoomMap</RootNamespace>
+    <AssemblyName>TimetablingRoomMap</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- The engine is referenced, never copied: the app decodes and searches with the same code as the CLI. -->
+    <ProjectReference Include="../../dotnet/src/Timetabling.Engine/Timetabling.Engine.csproj" />
+  </ItemGroup>
+</Project>
