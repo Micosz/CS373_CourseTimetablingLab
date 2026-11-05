@@ -4,8 +4,11 @@ Engine ตัวเดียวกับ `engine/` (Python) เขียนใ�
 
 | | Python (`engine/batch.py`) | C# (`timetabling batch run`) |
 |---|---|---|
-| การทดลองสุดท้าย 240 รัน | 1,812 วินาที (18 process) | 76 วินาที (28 thread) |
+| การทดลองสุดท้าย 240 รัน | 1,812 วินาที (18 process) | 20.5 วินาที (26 thread) |
+| รันทีละรัน (1 worker, 9 รัน) | 991.7 วินาที | 9.97 วินาที (≈ 99 เท่า) |
 | ผลลัพธ์ | ต้นฉบับ | ตรงกันทุกรัน (ทดสอบใน `FullParityTests`) |
+
+ตัวเลขเวลาและไฟล์หลักฐานอยู่ใน [`experiments/engine-speed/`](../experiments/engine-speed/README.md)
 
 Python ยังเป็น **ต้นฉบับอ้างอิง** และเป็น runtime ของเว็บ (Pyodide รองรับโหมดเขียนอัลกอริทึมเอง) ส่วน C# ใช้กับงานรันชุดใหญ่และแอป Godot (`apps/godot/`)
 

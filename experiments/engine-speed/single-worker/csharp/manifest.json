@@ -1,0 +1,23 @@
+{
+  "name": "Native batch experiment (C#)",
+  "created_at": "2026-11-05T15:18:42.661355+00:00",
+  "sessions": [
+    {
+      "started_at": "2026-11-05T15:18:42.664166+00:00",
+      "runs": 9,
+      "workers": 1,
+      "finished_at": "2026-11-05T15:18:53.038160+00:00",
+      "wall_seconds": 10.3739928,
+      "failures": []
+    }
+  ],
+  "dataset": "data/fall-cs.json.gz",
+  "dataset_sha256": "c92918faeb82b4d5c9f702e0629fe5e8d48bcc1a1286c0b21d514a9021973968",
+  "engine": "dotnet",
+  "engine_sha256": "e9222d735e2332c6220122760a91fc730e5aa89874a246a4b24ebaa5194c7db1",
+  "dotnet": "8.0.31",
+  "platform": "win32",
+  "cpu_count": 28,
+  "total_runs": 9,
+  "wall_seconds_total": 10.3739928
+}

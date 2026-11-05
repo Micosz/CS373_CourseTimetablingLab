@@ -1,60 +1,75 @@
 # CS373 Final Presentation · ผลงานขั้นสุดท้าย
 
-เว็บสไลด์ภาษาไทย 16 หน้า (ปก + 14 หน้าเนื้อหา + เอกสารอ้างอิง) ประมาณ 12–15 นาที พร้อมบทพูดทุกหน้า
-ใช้ engine และสไตล์เดียวกับสไลด์ความคืบหน้า ไม่มี dependency หรือขั้นตอน build
+เว็บสไลด์ภาษาไทย 17 หน้า ประมาณ 12–15 นาที พร้อมบทพูดทุกหน้า ไม่มี dependency หรือขั้นตอน build
+
+หน้าตาออกแบบใน Claude Design ก่อน (ร่าง: https://claude.ai/artifact/BJz1B7PSfyayMF1YzGFWRE) แล้วนำ HTML ของแต่ละหน้ามาใช้ตรง ๆ แต่ละหน้าเป็นผืน 1920×1080 ที่จัดวางด้วย inline style และย่อขยายให้พอดีหน้าต่าง
+ภาษาภาพ: พื้นขาว ตัวอักษร `#171717` น้ำเงิน `#0a72ef` และแดง `#d92d20`/`#ff5b4f` (ใช้สีทึบ แยกกันด้วยความสว่างและป้ายกำกับ ไม่ใช้สีอ่อน) ฟอนต์ Geist, Geist Mono และ IBM Plex Sans Thai จาก Google Fonts
+กราฟทุกอันวาดใหม่จากไฟล์ผลจริง ไม่มีภาพหน้าจอแอป
 
 | หน้า | เนื้อหา | ที่มาของตัวเลข |
 |---|---|---|
 | 1 | ปก | – |
-| 2 | ปัญหาการจอง Lab ทั้งภาค และคำถามของโครงงาน (ตัวอย่างสมมติ) | – |
-| 3 | ข้อมูล: 174 คลาส, 3,345 คาบรายสัปดาห์, Lab จำลอง 4 ห้อง, 804 ชม. Lab ที่จำเป็น | `README.md` ของ repository หัวข้อข้อมูลและขอบเขต |
-| 4 | genome + decoder ร่วม, ตัวตรวจอิสระ, 4 อัลกอริทึม | `README.md` ของ repository |
-| 5 | กติกา: seed จูน 1–10 / ทดสอบ 1001–1030, งบ 500, Friedman + Wilcoxon-Holm, 240/240 รันผ่านตัวตรวจ | `docs/protocol.md`, `experiments/final/README.md` |
-| 6 | ผลจูน: 47 ชุดค่า × 10 seeds, ค่าที่เลือก, SA อยู่ขอบช่วง | `experiments/tuning/README.md`, `summary.md` |
-| 7 | ผลหลัก: HC/SA/GA จัดครบ 30/30, Lab ไม่จำเป็น GA 57.7 · HC 64.9 · SA 76.2 · Greedy 124.0 ชม. | `experiments/final/analysis/report.md` + `lab-hours-boxplot.svg` |
-| 8 | สถิติ: Friedman χ² = 63.12, GA ดีกว่า SA (26/30), GA กับ HC แยกไม่ได้ (p = 0.188) | `report.md` + `convergence.svg` |
-| 9 | weekly เทียบ fixed: fixed จัดครบ 0%, Lab ไม่จำเป็นเพิ่ม 1,801–1,949 ชม. | `report.md` + `weekly-vs-fixed.svg` |
-| 10 | เปลี่ยนห้อง ราว 831 ครั้ง = 1.06× lower bound 783 | `report.md` + `room-changes.svg` |
-| 11 | Lab ขาดแคลน: weekly จัดครบที่ 3 ห้อง, fixed ขาด 159 คาบตั้งแต่ 4 ห้อง | `experiments/lab-scarcity/README.md`, `summary.md` + `scarcity.svg` |
-| 12 | งบ 50/200/500/1000: ยังดีขึ้นถึง 1000, 500 พอสำหรับเทียบวิธี | `experiments/budget/README.md`, `summary.md` + `budget.svg` |
-| 13 | เครื่องมือบนเว็บ: ชุดค่าสำเร็จรูป, heatmap/ห้องของแต่ละคลาส, CSV/JSON | `docs/quick-start.md` และภาพ `docs/img/quick-start-2.jpg` (commit 7b560a4, #12), commit 55caeba (#9) |
-| 14 | ข้อจำกัด | README ของ tuning, budget, lab-scarcity |
-| 15 | สรุป | ตัวเลขจากหน้า 7–12 |
-| 16 | เอกสารอ้างอิง | – |
+| 2 | ห้องคงที่ทำให้ Lab ถูกจองทั้งเทอม (ตัวอย่างสมมติ) | – |
+| 3 | สิ่งที่ทำเพิ่มจากข้อเสนอแนะ: 4 วิธี, 240 รัน, C# ~75 เท่า | `experiments/final/`, `experiments/engine-speed/` |
+| 4 | ข้อมูล: 174 คลาส, 3,345 คาบรายสัปดาห์, Lab จำลอง 4 ห้อง | `README.md` ของ repository |
+| 5 | ตัวแทนคำตอบร่วม + 4 อัลกอริทึม | `README.md` ของ repository |
+| 6 | กติกาการทดลอง: seed จูน/ทดสอบ, งบ 500, สถิติ, 240/240 | `docs/protocol.md`, `experiments/final/README.md` |
+| 7 | ผลการจูน | `experiments/tuning/README.md`, `summary.md` |
+| 8 | ผลหลัก (dot plot 30 seed): GA 57.7 · HC 64.9 · SA 76.2 · Greedy 124.0 ชม. | `experiments/final/experiment.csv`, `analysis/report.md` |
+| 9 | สถิติ: Friedman χ² = 63.12, GA ดีกว่า SA 26/30, GA กับ HC p = 0.188 | `experiments/final/analysis/report.md` |
+| 10 | ตัวอย่าง A, B, C: ห้องคงที่ล็อก Lab ทั้งเทอม | ตัวอย่างสมมติ (บทพูดอ้าง 804 / 2,211 ชม. จาก `data/fall-cs.json.gz` และ 11 วิชาที่ไม่ได้ห้องจาก GA seed 1001 ใน `experiments/final/experiment.json.gz`) |
+| 11 | เปลี่ยนห้อง: LB 783 ครั้ง, GA/HC 831, SA 835 | `experiments/final/analysis/report.md` |
+| 12 | Lab ขาดแคลน 4/3/2 ห้อง: คาบที่ไม่มีห้อง 0/0/17.7 เทียบ 159/482/896 | `experiments/lab-scarcity/scarcity-summary.csv` |
+| 13 | งบ 50/200/500/1000 | `experiments/budget/budget-summary.csv` |
+| 14 | Engine C#: 30 นาที → 20 วินาที, ผลตรงกัน 240/240 | `experiments/final/manifest.json`, `experiments/engine-speed/` |
+| 15 | ข้อจำกัด | README ของ tuning, budget, lab-scarcity |
+| 16 | สรุป | ตัวเลขจากหน้า 8–14 |
+| 17 | เอกสารอ้างอิง | – |
+
+## ไฟล์
+
+- `slides.json`: เนื้อหาทุกหน้า (`id`, `title`, `style` ของผืนสไลด์, `html`, `note` = บทพูด)
+- `deck.js`: บรรทัดแรกคือ array `slides` ชุดเดียวกับ `slides.json` (หน้าเว็บอ่านจากตัวนี้ จึงเปิดไฟล์ตรง ๆ ได้โดยไม่ต้องมี server) ที่เหลือคือตัวควบคุมสไลด์
+- `speaker-notes.md`: บทพูดชุดเดียวกับฟิลด์ `note`
+- `style.css`: ค่าเริ่มต้นของผืนสไลด์ (div = flex column, ระยะขอบข้อความ 0) และแถบควบคุม
+- `progress/`: สไลด์ความคืบหน้า 4 พ.ย. เก็บไว้เป็นประวัติ ไม่แก้
+
+- `port_design.py`: สร้าง 3 ไฟล์ข้างบนจากร่างใน Claude Design (ไฟล์ `project/deck.json` และ `project/slides/*.html` ที่ดาวน์โหลดมา) พร้อมแปะ class สำหรับอนิเมชัน: `python apps/slides/port_design.py <โฟลเดอร์ project ของร่าง> apps/slides`
+
+ทั้ง 3 ที่ (`slides.json`, บรรทัดแรกของ `deck.js`, `speaker-notes.md`) ต้องตรงกัน ทางที่ปลอดภัยคือแก้ในร่าง Claude Design แล้วรัน `port_design.py` ใหม่
+
+## อนิเมชัน
+
+- เปลี่ยนหน้า: หน้าเดิมจางออก หน้าใหม่เลื่อนขึ้นเล็กน้อย (ย้อนกลับเลื่อนลง)
+- หน้า 11 → 12: ซูมเข้าจุดเล็ก ๆ ที่ป้าย "LB" ซึ่งกลายเป็นหน้า 12 (ตั้งค่าใน `ZOOMS` ของ `deck.js`)
+- กราฟ: แท่งพุ่งขึ้น (หน้า 11, 12) แท่งยืดออก (หน้า 9, 14) จุดเด้งขึ้นทีละจุด (หน้า 8) กราฟเส้นวาดจากซ้ายไปขวา (หน้า 13) ช่องตารางสัปดาห์ทยอยขึ้น (หน้า 2, 10) เล่นใหม่ทุกครั้งที่เข้าหน้า
+- เครื่องที่ตั้ง "ลดการเคลื่อนไหว" (prefers-reduced-motion) จะไม่มีอนิเมชันเลย
 
 ## เปิดใช้งาน
 
-เปิด `index.html` ได้โดยตรง หรือรัน server ในโฟลเดอร์นี้:
-`python -m http.server 8811` (Windows `py -m http.server 8811`) แล้วเปิด http://localhost:8811/
+เปิด `index.html` ได้โดยตรง หรือรัน server ที่ root ของ repo: `python -m http.server 8766` แล้วเปิด http://localhost:8766/apps/slides/
 
-- ลูกศรขวา / Space: เปิดรายละเอียดก่อนเปลี่ยนหน้า · ลูกศรซ้าย: ย้อนตามจังหวะ
-- F: เต็มจอ · สารบัญเลือกหน้า · Home/End: หน้าแรก/สุดท้าย
-- บทพูดอยู่ใน `speaker-notes.md` (เนื้อหาเดียวกับ `note` ของแต่ละสไลด์ใน `deck.js` / `slides.json`)
+- ลูกศรขวา / Space: หน้าถัดไป · ลูกศรซ้าย: ย้อน · Home/End: หน้าแรก/สุดท้าย
+- F: เต็มจอ · สารบัญเลือกหน้า · ลิงก์ `#N` เปิดหน้าที่ N
+- ฟอนต์โหลดจาก Google Fonts ถ้าออฟไลน์จะใช้ฟอนต์สำรองของเครื่อง (Tahoma/Arial)
 
 ### สไลด์ความคืบหน้า (4 พ.ย. 2026)
 
-ย้ายไปอยู่ที่ `progress/` โดยไม่แก้เนื้อหา เปิด `progress/index.html` หรือ http://localhost:8811/progress/
-บน Vercel คือ `/progress/` (`vercel.json` ตั้ง `trailingSlash: true` เพื่อให้ `/progress` redirect ไป `/progress/` และ path สัมพัทธ์ของ CSS/JS ถูกต้อง)
-บันทึก QA เดิมอยู่ใน `progress/QA.md`
+อยู่ที่ `progress/` เปิด `progress/index.html` หรือ http://localhost:8766/apps/slides/progress/ บน Vercel คือ `/progress/`
 
 ## Evidence and scope
 
-- ตัวเลขผลทดลองทุกตัวคัดจากไฟล์ใน repository ไม่ได้รันการทดลองใหม่เพื่อทำสไลด์:
-  - [`experiments/final/`](../../experiments/final/README.md) และ [`analysis/report.md`](../../experiments/final/analysis/report.md): 4 วิธี × seed 1001–1030 × weekly/fixed, งบ 500, พารามิเตอร์ที่จูนแล้ว
-  - [`experiments/tuning/`](../../experiments/tuning/README.md): 47 ชุดค่า × seed 1–10, `selected-parameters.json`
-  - [`experiments/budget/`](../../experiments/budget/README.md): งบ 50/200/500/1000 บน seed 1001–1010
-  - [`experiments/lab-scarcity/`](../../experiments/lab-scarcity/README.md): Lab 4/3/2 ห้อง (GA, seed 1001–1010)
+- ตัวเลขผลทดลองทุกตัวคัดจากไฟล์ใน repository:
+  - [`experiments/final/`](../../experiments/final/README.md) และ [`analysis/report.md`](../../experiments/final/analysis/report.md)
+  - [`experiments/tuning/`](../../experiments/tuning/README.md), [`experiments/budget/`](../../experiments/budget/README.md), [`experiments/lab-scarcity/`](../../experiments/lab-scarcity/README.md)
+  - [`experiments/engine-speed/`](../../experiments/engine-speed/README.md): เวลา C# เทียบ Python
   - กติกาการทดลอง: [`docs/protocol.md`](../../docs/protocol.md)
-- กราฟใน `assets/final/*.svg` คัดลอกจากโฟลเดอร์ผลข้างต้นแบบไม่แก้ไข (byte-identical) กราฟมีสีพื้นของตัวเอง และ `style.css` ตั้ง `color-scheme: light` ให้กราฟแสดงแบบสว่างแม้เครื่องใช้ dark mode
-- `assets/final/web-presets.jpg` คือ `docs/img/quick-start-2.jpg` จาก commit 7b560a4 (branch issue-12-presets) ฟีเจอร์ชุดค่าสำเร็จรูป (#12) และ heatmap/ห้องของแต่ละคลาส/CSV (#9) อยู่ในงานของ issue นั้น ๆ
-- ขอบเขต: ผลทั้งหมดมาจากชุดข้อมูลดัดแปลงชุดเดียว (Fall CS · Weekly Labs v1, adapted synthetic benchmark) และงบ 500 ที่ยังไม่อิ่มตัว ผลจากเว็บ (Pyodide) เป็นการสาธิต หลักฐานหลักมาจาก native CPython ตาม protocol
+- ขอบเขต: ผลทั้งหมดมาจากชุดข้อมูลดัดแปลงชุดเดียว (Fall CS · Weekly Labs v1) และงบ 500 ที่ยังไม่อิ่มตัว
 
 ## ตรวจสอบ (5 พ.ย. 2026)
 
-- เปิดผ่าน `python -m http.server 8811` ที่ viewport 1280×720 เดินหน้า 43 จังหวะจนถึงหน้าสุดท้าย และย้อนกลับครบ ไม่มี console error
-- ทุกหน้าไม่มีเนื้อหาทับ footer หรือล้นขอบขวา รูปทั้ง 7 โหลดได้ ตรวจกราฟซ้ำในโหมด dark ของเบราว์เซอร์แล้วกราฟยังเป็นพื้นสว่าง
-- `progress/` เปิดได้ CSS และ `assets/preliminary-comparison.csv` โหลดได้ เดินครบ 13 หน้า ไม่มี console error
-- ยังไม่ได้ตรวจบน Vercel จริง และใช้ฟอนต์ Google Fonts ตามที่โหลดได้ในเครื่องที่ตรวจ
+- เปิดผ่าน `python -m http.server 8766` ที่ viewport 1600×960 เดินครบ 17 หน้า ไม่มี console error ทุกหน้าแสดงตรงกับร่างใน Claude Design
+- ยังไม่ได้ตรวจบน Vercel จริง
 
 ## เอกสารอ้างอิง
 
@@ -67,5 +82,4 @@
 
 ## Deploy
 
-ดู `DEPLOY.md` (Vercel Root Directory = `presentation`, ไม่มี build command)
-Source workbench: https://github.com/Micosz/course-timetabling-lab
+ดู `DEPLOY.md` (Vercel Root Directory = `apps/slides`, ไม่มี build command)
