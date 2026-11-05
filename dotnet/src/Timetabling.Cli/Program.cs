@@ -141,8 +141,7 @@ static class Cli
                     foreach (var method in methods)
                     {
                         cancel.ThrowIfCancellationRequested();
-                        var result = Runner.RunOne(prepared, new RunConfig(budget, seconds, mode, typed), method, s, null, cancel);
-                        result.Parameters = parameters[method] is JsonObject p ? (JsonObject)p.DeepClone() : [];
+                        var result = Runner.RunOne(prepared, new RunConfig(budget, seconds, mode, typed) { ParametersJson = parameters }, method, s, null, cancel);
                         result.RunIndex = results.Count;
                         results.Add(JsonSerializer.SerializeToNode(result, Dataset.Json));
                         Save();

@@ -111,10 +111,9 @@ public static class Batch
             try
             {
                 var (job, target, fingerprint) = item;
-                var config = new RunConfig(job.Budget, job.Seconds, job.RoomMode, ParseParameters(job.Parameters));
+                var config = new RunConfig(job.Budget, job.Seconds, job.RoomMode, ParseParameters(job.Parameters)) { ParametersJson = job.Parameters };
                 var started = PyCompat.NowIso();
                 var result = Runner.RunOne(prepared, config, job.Algorithm, job.Seed, null, cancellation);
-                result.Parameters = job.MethodParameters;
                 result.ConfigId = job.ConfigId;
                 result.Fingerprint = fingerprint;
                 result.StartedAt = started;
@@ -261,17 +260,11 @@ public static class Batch
         return target;
     }
 
-    /// <summary>The engine's own .cs sources embedded in the engine assembly (code_snapshot for provenance).</summary>
+    /// <summary>The engine's own .cs sources (code_snapshot for provenance; hashed into engine_sha256).</summary>
     public static JsonObject EngineSources()
     {
-        var assembly = typeof(Problem).Assembly;
         var sources = new JsonObject();
-        foreach (var resource in assembly.GetManifestResourceNames().Where(n => n.EndsWith(".cs", StringComparison.Ordinal)).Order(StringComparer.Ordinal))
-        {
-            using var stream = assembly.GetManifestResourceStream(resource)!;
-            using var reader = new StreamReader(stream, Utf8);
-            sources[resource] = reader.ReadToEnd();
-        }
+        foreach (var (name, text) in Runner.EngineSources) sources[name] = text;
         return sources;
     }
 
