@@ -4,7 +4,7 @@
 
 ```sh
 python3 dataset_tools/make_lab_variants.py          # สร้าง data/variants/fall-cs-labs3.json.gz และ labs2
-python3 python/studies.py scarcity --method ga --workers 9
+python3 engine/studies.py scarcity --method ga --workers 9
 ```
 
 | | |

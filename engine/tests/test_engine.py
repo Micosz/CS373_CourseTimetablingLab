@@ -7,8 +7,8 @@ import sys
 import unittest
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'python'))
+ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT / 'engine'))
 from lab_core import Problem
 from runner import prepare, run_one, check_configuration
 from solution_validator import audit_solution

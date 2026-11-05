@@ -1,7 +1,7 @@
 """Follow-up studies on the test-seed subset 1001-1010 (docs/protocol.md section 1). Standard library only.
 
-    python python/studies.py budget   --final experiments/final/experiment.json.gz
-    python python/studies.py scarcity --final experiments/final/experiment.json.gz --method sa
+    python engine/studies.py budget   --final experiments/final/experiment.json.gz
+    python engine/studies.py scarcity --final experiments/final/experiment.json.gz --method sa
 
 ``budget`` (#8): HC, SA and GA at 50, 200 and 1000 evaluations with the tuned
 parameters; the final experiment supplies the 500 point.
@@ -88,7 +88,7 @@ def budget_study(final, output, workers):
                                                          indent=2), encoding='utf-8')
     (output / 'budget.svg').write_text(budget_svg(rows, levels), encoding='utf-8')
     lines = ['# งบ 50 / 200 / 500 / 1000 evaluations (#8)', '',
-             'สร้างโดย `python/studies.py budget` · seed 1001–1010 · weekly · พารามิเตอร์ที่จูนแล้ว · '
+             'สร้างโดย `engine/studies.py budget` · seed 1001–1010 · weekly · พารามิเตอร์ที่จูนแล้ว · '
              'จุด 500 มาจากการทดลองสุดท้าย', '',
              f'รันที่ล้มเหลว (ไม่ผ่านตัวตรวจหรือโดนตัดเวลา): {len(bad)}', '',
              'คอลัมน์วินาที/รันวัดตอนรันหลาย process พร้อมกันคนละชุด (งบ 500 รัน 18 process, งบอื่น 9 process พร้อมกับการทดลองอื่น) '
@@ -182,7 +182,7 @@ def scarcity_study(final, output, method, workers):
     write_csv(output / 'scarcity-summary.csv', rows)
     (output / 'scarcity.svg').write_text(scarcity_svg(rows, method), encoding='utf-8')
     lines = [f'# Lab ขาดแคลน: 4 / 3 / 2 ห้อง (#13)', '',
-             f'สร้างโดย `python/studies.py scarcity` · {analyze.LONG[method]} (วิธีที่ดีที่สุดจากการทดลองสุดท้าย) · '
+             f'สร้างโดย `engine/studies.py scarcity` · {analyze.LONG[method]} (วิธีที่ดีที่สุดจากการทดลองสุดท้าย) · '
              f'seed 1001–1010 · งบ {budget} · พารามิเตอร์ที่จูนแล้ว · 4 ห้องมาจากการทดลองสุดท้าย · '
              'ชุดข้อมูล 3/2 ห้องสร้างด้วย `dataset_tools/make_lab_variants.py` (ตัด Lab ที่เล็กที่สุดออก ที่เหลือเหมือนเดิม)', '',
              '| Lab | โหมด | ผ่านตัวตรวจ | คาบที่ยังจัดไม่ได้ เฉลี่ย (ต่ำสุด–สูงสุด) | จัดครบทุกคาบ | Lab ไม่จำเป็น (ชม.) | เปลี่ยนห้อง |',

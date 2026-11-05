@@ -40,11 +40,11 @@
 ## Evidence and scope
 
 - ตัวเลขผลทดลองทุกตัวคัดจากไฟล์ใน repository ไม่ได้รันการทดลองใหม่เพื่อทำสไลด์:
-  - [`experiments/final/`](../experiments/final/README.md) และ [`analysis/report.md`](../experiments/final/analysis/report.md): 4 วิธี × seed 1001–1030 × weekly/fixed, งบ 500, พารามิเตอร์ที่จูนแล้ว
-  - [`experiments/tuning/`](../experiments/tuning/README.md): 47 ชุดค่า × seed 1–10, `selected-parameters.json`
-  - [`experiments/budget/`](../experiments/budget/README.md): งบ 50/200/500/1000 บน seed 1001–1010
-  - [`experiments/lab-scarcity/`](../experiments/lab-scarcity/README.md): Lab 4/3/2 ห้อง (GA, seed 1001–1010)
-  - กติกาการทดลอง: [`docs/protocol.md`](../docs/protocol.md)
+  - [`experiments/final/`](../../experiments/final/README.md) และ [`analysis/report.md`](../../experiments/final/analysis/report.md): 4 วิธี × seed 1001–1030 × weekly/fixed, งบ 500, พารามิเตอร์ที่จูนแล้ว
+  - [`experiments/tuning/`](../../experiments/tuning/README.md): 47 ชุดค่า × seed 1–10, `selected-parameters.json`
+  - [`experiments/budget/`](../../experiments/budget/README.md): งบ 50/200/500/1000 บน seed 1001–1010
+  - [`experiments/lab-scarcity/`](../../experiments/lab-scarcity/README.md): Lab 4/3/2 ห้อง (GA, seed 1001–1010)
+  - กติกาการทดลอง: [`docs/protocol.md`](../../docs/protocol.md)
 - กราฟใน `assets/final/*.svg` คัดลอกจากโฟลเดอร์ผลข้างต้นแบบไม่แก้ไข (byte-identical) กราฟมีสีพื้นของตัวเอง และ `style.css` ตั้ง `color-scheme: light` ให้กราฟแสดงแบบสว่างแม้เครื่องใช้ dark mode
 - `assets/final/web-presets.jpg` คือ `docs/img/quick-start-2.jpg` จาก commit 7b560a4 (branch issue-12-presets) ฟีเจอร์ชุดค่าสำเร็จรูป (#12) และ heatmap/ห้องของแต่ละคลาส/CSV (#9) อยู่ในงานของ issue นั้น ๆ
 - ขอบเขต: ผลทั้งหมดมาจากชุดข้อมูลดัดแปลงชุดเดียว (Fall CS · Weekly Labs v1, adapted synthetic benchmark) และงบ 500 ที่ยังไม่อิ่มตัว ผลจากเว็บ (Pyodide) เป็นการสาธิต หลักฐานหลักมาจาก native CPython ตาม protocol

@@ -56,7 +56,7 @@ async function setDataset(text,label,{keepBatch=false}={}){
 }
 function storageWarning(error){if(!state.storageFailed)banner('บันทึกประวัติอัตโนมัติไม่สำเร็จ กรุณาดาวน์โหลดชุดผล JSON เก็บไว้: '+error.message);state.storageFailed=true;}
 async function persist(){if(!state.batch)return;try{await storage.saveExperiment(state.batch);}catch(error){storageWarning(error);}}
-async function defaultDataset(){const response=await fetch('./data/fall-cs.json.gz');if(!response.ok)throw new Error('โหลด Fall CS ไม่สำเร็จ');const text=await unpack(await response.arrayBuffer());const metadata=await (await fetch('./data/provenance.json')).json();if(await sha(text)!==metadata.dataset_sha256)throw new Error('ไฟล์ Fall CS ไม่ตรงกับ checksum ที่บันทึกไว้');await setDataset(text,'Fall CS · Weekly Labs v1');}
+async function defaultDataset(){const response=await fetch('../../data/fall-cs.json.gz');if(!response.ok)throw new Error('โหลด Fall CS ไม่สำเร็จ');const text=await unpack(await response.arrayBuffer());const metadata=await (await fetch('../../data/provenance.json')).json();if(await sha(text)!==metadata.dataset_sha256)throw new Error('ไฟล์ Fall CS ไม่ตรงกับ checksum ที่บันทึกไว้');await setDataset(text,'Fall CS · Weekly Labs v1');}
 $('dataset-upload').addEventListener('change',async event=>{try{const file=event.target.files[0];if(!file)return;if(file.size>12*1024*1024)throw new Error('ไฟล์อัปโหลดใหญ่เกิน 12 MB');const text=file.name.endsWith('.gz')?await unpack(await file.arrayBuffer()):await file.text();hideBanner();await setDataset(text,file.name);}catch(error){banner(error.message);}finally{event.target.value='';}});
 $('reset-dataset').addEventListener('click',()=>defaultDataset().catch(error=>banner(error.message)));
 $('download-dataset').addEventListener('click',()=>{if(state.dataset)download(safeFilename(state.dataset.dataset_id)+'.json',state.datasetText);});
@@ -172,7 +172,7 @@ const currentRun=()=>state.batch?.results?.[Number($('schedule-run').value)];
 const sortedClasses=()=>state.dataset.classes.slice().sort((a,b)=>byId(a.id,b.id));
 const classSessions=c=>state.dataset.recurring_sessions.filter(s=>s.class_id===c.id).sort((a,b)=>(a.ordinal??0)-(b.ordinal??0)||byId(a.id,b.id));
 const viewCache=new WeakMap();
-// Counts exactly like python/solution_validator.py: a row counts once per (session, week), only in an active week of a session whose class has a chosen time.
+// Counts exactly like engine/solution_validator.py: a row counts once per (session, week), only in an active week of a session whose class has a chosen time.
 // Unnecessary Lab = session duration_minutes in a computer_lab during a week outside lab_weeks. A room change = a different room from the previous assigned active week.
 function runView(run){
   if(!run?.solution||!state.dataset)return null;const cached=viewCache.get(run);if(cached?.dataset===state.dataset)return cached;
@@ -260,7 +260,7 @@ queueSummary();defaultDataset().catch(error=>{banner(error.message);$('dataset-n
 const PRESET_INPUTS=['experiment-name','room-mode','budget','time-limit','start-seed','repeats','hc-patience','sa-acceptance','sa-cooling','ga-population','ga-tournament','ga-elites','ga-crossover','ga-mutation'];
 const PRESET_DEFAULTS=Object.fromEntries(PRESET_INPUTS.map(id=>[id,$(id).tagName==='SELECT'?[...$(id).options].find(o=>o.defaultSelected)?.value:$(id).defaultValue]));
 let tunedCache=null;
-async function tunedParameters(){if(!tunedCache)tunedCache=fetch('./experiments/tuning/selected-parameters.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).catch(()=>null);return tunedCache;}
+async function tunedParameters(){if(!tunedCache)tunedCache=fetch('../../experiments/tuning/selected-parameters.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).catch(()=>null);return tunedCache;}
 function presetValues(tuned){const p=tuned||{},hc=p.hc||{},sa=p.sa||{},ga=p.ga||{};return{'hc-patience':hc.restart_patience,'sa-acceptance':sa.initial_acceptance,'sa-cooling':sa.cooling_rate,'ga-population':ga.population_size,'ga-tournament':ga.tournament_size,'ga-elites':ga.elites,'ga-crossover':ga.crossover_rate,'ga-mutation':ga.mutation_rate};}
 async function applyPreset(name){
   const note=$('preset-note');let values={...PRESET_DEFAULTS},message='กลับเป็นค่าเริ่มต้นของเว็บ (พารามิเตอร์ยังไม่จูน)';
@@ -269,7 +269,7 @@ async function applyPreset(name){
     if(!tuned){note.textContent='โหลดไฟล์พารามิเตอร์ที่จูนแล้วไม่ได้ (experiments/tuning/selected-parameters.json) จึงไม่เปลี่ยนค่า';return;}
     Object.assign(values,presetValues(tuned),{'room-mode':'weekly','start-seed':'1001'});
     if(name==='quick'){Object.assign(values,{'experiment-name':'Fall CS · ลองเร็ว (พารามิเตอร์ที่จูนแล้ว)',budget:'30','time-limit':'120',repeats:'1'});message='ลองเร็ว: 4 วิธี × 1 seed (1001) งบ 30 พารามิเตอร์ที่จูนแล้ว ใช้เวลาราว 1 นาทีหลังโหลด Python เสร็จ';}
-    else{Object.assign(values,{'experiment-name':'Fall CS · Final experiment (docs/protocol.md)',budget:'500','time-limit':'3600',repeats:'30'});message='ตามการทดลองสุดท้าย: 4 วิธี × seed 1001–1030 งบ 500 พารามิเตอร์ที่จูนแล้ว · ในเบราว์เซอร์ใช้เวลาหลายชั่วโมง ถ้าจะทำซ้ำทั้งชุดแนะนำคำสั่ง python3 python/batch.py ใน README';}
+    else{Object.assign(values,{'experiment-name':'Fall CS · Final experiment (docs/protocol.md)',budget:'500','time-limit':'3600',repeats:'30'});message='ตามการทดลองสุดท้าย: 4 วิธี × seed 1001–1030 งบ 500 พารามิเตอร์ที่จูนแล้ว · ในเบราว์เซอร์ใช้เวลาหลายชั่วโมง ถ้าจะทำซ้ำทั้งชุดแนะนำคำสั่ง python3 engine/batch.py ใน README';}
   }
   for(const id of PRESET_INPUTS){if(values[id]!==undefined&&values[id]!==null)$(id).value=String(values[id]);}
   document.querySelectorAll('input[name=algorithm]').forEach(x=>{x.checked=true;});$('include-custom').checked=false;

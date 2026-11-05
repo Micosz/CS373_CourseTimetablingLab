@@ -5,9 +5,9 @@ import sys
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'dataset_tools'))
-sys.path.insert(0, str(ROOT / 'python'))
+sys.path.insert(0, str(ROOT / 'engine'))
 import make_lab_variants  # noqa: E402
 from input_validation import validate  # noqa: E402
 

@@ -1,6 +1,6 @@
 """Tune HC / SA / GA on the tuning seeds only (docs/protocol.md section 5). Standard library only.
 
-    python python/tune.py --output experiments/tuning --workers 18
+    python engine/tune.py --output experiments/tuning --workers 18
 
 Runs every candidate setting on seeds 1-10 in weekly mode with the protocol
 budget, picks the best setting per method by the lexicographic order of the
@@ -98,7 +98,7 @@ def write_outputs(output, rows, chosen):
         for r in sorted(rows, key=lambda r: (r['method'], rank_key(r))):
             writer.writerow({**r, 'parameters': json.dumps(r['parameters'], sort_keys=True)})
     lines = ['# ผลการจูน (seed 1–10, weekly, งบ 500)', '',
-             'สร้างโดย `python/tune.py` ห้ามแก้มือ ตัวเลขเป็นค่าเฉลี่ยบน 10 seed จูน', '',
+             'สร้างโดย `engine/tune.py` ห้ามแก้มือ ตัวเลขเป็นค่าเฉลี่ยบน 10 seed จูน', '',
              '## ค่าเริ่มต้นเทียบกับค่าที่เลือก', '',
              '| วิธี | ชุดค่า | พารามิเตอร์ | คาบที่ยังจัดไม่ได้ | Lab ไม่จำเป็น (ชม.) | เปลี่ยนห้อง | จัดครบทุกคาบ |',
              '|---|---|---|---:|---:|---:|---:|']

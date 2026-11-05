@@ -16,10 +16,10 @@
 ## รันซ้ำ
 
 ```sh
-python3 python/batch.py run --methods greedy hc sa ga --room-modes weekly fixed --seeds 1001-1030 \
+python3 engine/batch.py run --methods greedy hc sa ga --room-modes weekly fixed --seeds 1001-1030 \
   --budget 500 --seconds 3600 --parameters experiments/tuning/selected-parameters.json \
   --output experiments/final --workers 18 --name "Final experiment (docs/protocol.md)"
-python3 python/analyze.py experiments/final/experiment.json.gz --output experiments/final/analysis
+python3 engine/analyze.py experiments/final/experiment.json.gz --output experiments/final/analysis
 ```
 
 ถ้าหยุดกลางทาง รันคำสั่งแรกซ้ำจะทำต่อโดยข้ามรันที่เสร็จแล้ว ผลจะตรงกันเมื่อใช้ dataset, โค้ด engine, พารามิเตอร์ และเวอร์ชัน Python เดียวกัน บนเครื่องที่มี core น้อยกว่าให้ลด `--workers` (รันเดี่ยวราว 75 วินาทีต่อรันของ HC/SA/GA; 180 รันที่ไม่ใช่ Greedy ≈ 3–4 ชม. บน core เดียว)

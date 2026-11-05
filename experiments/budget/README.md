@@ -3,7 +3,7 @@
 รันเมื่อ 2026-11-05 ตาม [docs/protocol.md](../../docs/protocol.md) ข้อ 1 หลังล็อกพารามิเตอร์แล้ว
 
 ```sh
-python3 python/studies.py budget --workers 9
+python3 engine/studies.py budget --workers 9
 ```
 
 | | |

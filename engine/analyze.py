@@ -1,6 +1,6 @@
 """Tables, statistics and SVG charts from raw experiment results (docs/protocol.md). Standard library only.
 
-    python python/analyze.py experiments/final/experiment.json.gz --output experiments/final/analysis
+    python engine/analyze.py experiments/final/experiment.json.gz --output experiments/final/analysis
 
 Reads one or more experiment files (``.json`` or ``.json.gz`` from cli.py,
 batch.py or the web), and writes:
@@ -661,7 +661,7 @@ def p_text(p):
 
 def report(rows, tests, modes, changes, charts):
     lines = ['# ผลวิเคราะห์การทดลอง', '',
-             'สร้างโดย `python/analyze.py` จากผลดิบ ห้ามแก้ตัวเลขด้วยมือ กติกาอยู่ใน [docs/protocol.md](../../../docs/protocol.md)', '']
+             'สร้างโดย `engine/analyze.py` จากผลดิบ ห้ามแก้ตัวเลขด้วยมือ กติกาอยู่ใน [docs/protocol.md](../../../docs/protocol.md)', '']
     lines += ['## ตารางสรุปต่อวิธี', '',
               'ค่าเฉลี่ย ± ส่วนเบี่ยงเบนมาตรฐาน · มัธยฐาน · ดีสุด–แย่สุด จากรันที่ผ่านตัวตรวจ', '',
               '| โหมด | วิธี | ผ่านตัวตรวจ | จัดครบทุกคาบ | ' + ' | '.join(label for _, label, _ in METRICS) + ' |',

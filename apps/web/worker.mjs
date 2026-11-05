@@ -17,7 +17,7 @@ async function initialize() {
   py.setStderr({batched:line => self.postMessage({type:'stderr',line:String(line).slice(0,2000)})});
   const names = ['input_validation.py','solution_validator.py','lab_core.py','algorithms.py','runner.py'];
   for (const name of names) {
-    const response = await fetch(new URL(`./python/${name}`,import.meta.url),{cache:'no-cache'});
+    const response = await fetch(new URL(`../../engine/${name}`,import.meta.url),{cache:'no-cache'});
     if (!response.ok) throw new Error(`โหลด ${name} ไม่สำเร็จ (${response.status})`);
     sourceSnapshot[name]=await response.text();
     py.FS.writeFile(`/home/pyodide/${name}`,sourceSnapshot[name],{encoding:'utf8'});

@@ -5,8 +5,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'python'))
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / 'engine'))
 import analyze  # noqa: E402
 
 WEIGHTS = {'unassigned': 10 ** 9, 'lab_minute': 10 ** 4, 'room_change': 1}

@@ -28,6 +28,6 @@ Checked 2026-10-27. These are implementation checks, not final comparative resea
 - For every run, rendering each of the 174 classes and counting the highlighted room-change weeks sums to `metrics.room_changes` (weekly 806–906, fixed 0).
 - Reopening an imported batch from the history page shows all three views. Both schedule CSVs start with the UTF-8 BOM (EF BB BF) and contain Thai day/status text; by room = 3,325 rows for a run with 20 unassigned, by class = 3,345 rows (all weekly sessions). Not opened in Excel itself.
 - Tabs work with arrow keys, Home and End; Tab reaches the class search and the class select. At 1280×720 the 15-week heatmap fits without scrolling. At 390 px wide the page does not scroll sideways (the heatmap scrolls inside its own box, with the room column fixed in place). No console errors.
-- `python -m unittest discover -s tests`: 18 tests pass.
+- `python -m unittest discover -s engine/tests`: 18 tests pass.
 
 Automated CI reruns the Python contract/regression suite. This record does not claim every browser/version or all custom Python programs have been tested. Imported bundles are not re-executed or independently authenticated merely by importing them.

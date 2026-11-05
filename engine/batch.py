@@ -7,7 +7,7 @@ engine code and configuration. ``merge`` then writes one web-importable
 experiment JSON (gzipped) and a CSV.
 
 Example (final experiment, see docs/protocol.md):
-    python python/batch.py run --methods greedy hc sa ga --room-modes weekly fixed \
+    python engine/batch.py run --methods greedy hc sa ga --room-modes weekly fixed \
         --seeds 1001-1030 --budget 500 --seconds 3600 \
         --parameters experiments/tuning/selected-parameters.json \
         --output experiments/final --workers 18
