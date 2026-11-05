@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Engine sources ship inside the assembly so Runner can hash them at runtime (code_sha256, EngineSha256). -->
+    <EmbeddedResource Include="*.cs" LogicalName="engine-src/%(Filename)%(Extension)" />
+    <InternalsVisibleTo Include="Timetabling.Engine.Tests" />
+  </ItemGroup>
+
+</Project>

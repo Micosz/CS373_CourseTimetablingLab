@@ -163,8 +163,10 @@ python3 dataset_tools/rebuild.py --output results/rebuilt-dataset
 ```
 apps/web/        เว็บห้องทดลอง (index.html, app.mjs, worker.mjs, storage.mjs, styles.css)
 apps/slides/     สไลด์นำเสนอ Final (+ progress/ สไลด์ความคืบหน้า) deploy บน Vercel
-engine/          Python engine, CLI, batch runner, การวิเคราะห์
+apps/godot/      แอปเดสก์ท็อป Godot (C#): แผนที่ห้องรายสัปดาห์, รันสด, เทียบ weekly/fixed
+engine/          Python engine (ต้นฉบับอ้างอิงและ runtime ของเว็บ), CLI, batch runner, การวิเคราะห์
 engine/tests/    contract/regression tests
+dotnet/          C# engine ที่ให้ผลตรงกับ Python ทุกบิต + CLI "timetabling" (เร็วกว่าราว 24 เท่า) + parity tests
 data/            ชุดข้อมูลดัดแปลง, assumptions, provenance, variants/
 dataset_tools/   converter และ config ที่ใช้สร้าง data/ ซ้ำ
 experiments/     ผลดิบที่ commit ไว้เป็นหลักฐาน (JSON.gz + CSV + summary)
@@ -176,6 +178,7 @@ index.html       redirect ไป apps/web/ เพื่อให้ URL ขอ�
 - `engine/input_validation.py`, `solution_validator.py`: input และ output checks คนละหน้าที่
 - `engine/runner.py`, `cli.py`: reproducible runner และ native command line
 - `engine/compare_modes.py`: ตารางเทียบ weekly / fixed แบบจับคู่จาก JSON ผลดิบ
+- `dotnet/`: engine เดียวกันใน C# รายละเอียดและคำสั่งอยู่ใน [dotnet/README.md](dotnet/README.md); แอป Godot อยู่ใน [apps/godot/README.md](apps/godot/README.md)
 
 `dataset_tools/` อยู่ที่ root ตั้งใจ: `config.json` อ้าง XML ต้นทางแบบ path สัมพัทธ์ และ config นี้ถูกบันทึกลงในชุดข้อมูล การย้ายจะทำให้ SHA-256 ของชุดข้อมูลที่สร้างซ้ำไม่ตรงกับ `data/provenance.json`
 

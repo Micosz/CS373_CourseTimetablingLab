@@ -1,9 +1,17 @@
 name: Engine checks
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      full_parity:
+        description: Also replay all 240 runs of experiments/final with the C# engine
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
-  test:
+  python:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -11,3 +19,23 @@ jobs:
         with:
           python-version: '3.14'
       - run: python -m unittest discover -s engine/tests -v
+
+  dotnet:
+    # The C# engine must reproduce the Python engine exactly; the parity tests compare
+    # against CPython vectors and the committed experiment results. Linux and Windows
+    # use different C math libraries, so both run.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Fast tests (RNG, decoder, validators, runner, CLI, spot parity)
+        run: dotnet test dotnet/Timetabling.sln --filter "Category!=Slow"
+      - name: Full 240-run parity
+        if: github.event_name == 'workflow_dispatch' && inputs.full_parity
+        run: dotnet test dotnet/Timetabling.sln --filter "Category=Slow"

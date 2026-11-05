@@ -18,12 +18,14 @@
 |---|---|
 | [`apps/web/`](../apps/web/) | เว็บห้องทดลอง: `index.html` (หน้า UI), `app.mjs` (UI, plots, export, history), `worker.mjs` (Pyodide loader และ Python bridge), `storage.mjs` (IndexedDB), `styles.css` |
 | [`apps/slides/`](../apps/slides/README.md) | สไลด์ Final (`index.html`, `deck.js`, `slides.json`, `speaker-notes.md`), `progress/` คือสไลด์ความคืบหน้า 4 พ.ย. และ [DEPLOY.md](../apps/slides/DEPLOY.md) คือวิธีตั้งค่า Vercel |
-| [`engine/`](../engine/) | Python engine ที่ใช้ร่วมกันทั้งเว็บและ CLI (ดูตารางด้านล่าง) |
+| [`apps/godot/`](../apps/godot/README.md) | แอปเดสก์ท็อป Godot 4.7 (C#): แผนที่ห้องรายสัปดาห์, รันการค้นหาสด, เทียบ weekly/fixed ใช้ engine C# ตัวเดียวกับ CLI |
+| [`engine/`](../engine/) | Python engine ต้นฉบับอ้างอิง ใช้ทั้งเว็บและ CLI (ดูตารางด้านล่าง) |
 | [`engine/tests/`](../engine/tests/) | contract/regression tests (`python -m unittest discover -s engine/tests`) |
+| [`dotnet/`](../dotnet/README.md) | engine เดียวกันใน C# ให้ผลตรงกับ Python ทุกบิต, CLI `timetabling` (run / batch) และ parity tests |
 | [`data/`](../data/) | `fall-cs.json.gz` (ชุดข้อมูลหลัก), `provenance.json` (SHA-256), `assumptions.json`, `conversion_audit.json`, `FORMAT.txt`, `variants/` (ชุดข้อมูลที่มี Lab 3 และ 2 ห้อง) |
 | [`dataset_tools/`](../dataset_tools/) | converter และ config ที่ใช้สร้าง `data/` ซ้ำ รวมถึง `make_lab_variants.py` |
 | [`experiments/`](../experiments/INDEX.md) | ผลดิบและสรุปของทุกการทดลอง |
-| [`docs/`](.) | เอกสารในหน้านี้, `QA.md` (บันทึกการตรวจ), `img/` (ภาพประกอบคู่มือ) |
+| [`docs/`](.) | เอกสารในหน้านี้, `QA.md` (บันทึกการตรวจ), `img/` (ภาพประกอบคู่มือ และ `img/redesign/` ภาพก่อน/หลังปรับหน้าตา) |
 | `index.html` (root) | redirect ไป `apps/web/` เพื่อให้ URL ของ GitHub Pages เดิมใช้ได้ |
 
 ## ไฟล์ใน `engine/`
