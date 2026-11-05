@@ -133,6 +133,13 @@ python3 -m unittest discover -s tests -v
 
 CLI เก็บ JSON หลังทุกรันและ CSV ตอนจบ JSON นำเข้ากลับเว็บได้ Seed เดียวกันจะทำซ้ำได้เมื่อใช้ dataset/code/parameters/runtime เดียวกันและไม่ถูกตัดด้วยเวลาระหว่างทาง การเปลี่ยน Python เวอร์ชันอาจทำให้ลำดับสุ่มต่างกัน
 
+การทดลองชุดใหญ่ใช้ `python/batch.py` ซึ่งรันหลาย process พร้อมกัน เก็บผลทีละรันใน `<output>/runs/` และถ้าหยุดกลางทาง ให้รันคำสั่งเดิมซ้ำเพื่อทำต่อโดยข้ามรันที่เสร็จแล้ว (ไม่ยอมใช้ผลเก่าถ้า dataset, โค้ด engine หรือการตั้งค่าไม่ตรงกัน) เมื่อครบจะรวมเป็น `experiment.json.gz` (gunzip แล้วนำเข้าเว็บได้) กับ `experiment.csv` กติกาการทดลองสุดท้าย (seed จูน/ทดสอบ งบ และสถิติ) อยู่ใน [docs/protocol.md](docs/protocol.md)
+
+```sh
+python3 python/batch.py run --methods greedy hc sa ga --room-modes weekly --seeds 1001-1030 \
+  --budget 500 --seconds 3600 --output results/final --workers 8
+```
+
 ## สร้าง adapted dataset ซ้ำ
 
 มี converter และ config เดิมใน `dataset_tools/` สร้างลงโฟลเดอร์ใหม่และตรวจ SHA-256 ให้ตรงกับไฟล์ที่เว็บใช้:
