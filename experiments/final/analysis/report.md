@@ -1,6 +1,6 @@
 # ผลวิเคราะห์การทดลอง
 
-สร้างโดย `python/analyze.py` จากผลดิบ ห้ามแก้ตัวเลขด้วยมือ กติกาอยู่ใน [docs/protocol.md](../../../docs/protocol.md)
+สร้างโดย `engine/analyze.py` จากผลดิบ ห้ามแก้ตัวเลขด้วยมือ กติกาอยู่ใน [docs/protocol.md](../../../docs/protocol.md)
 
 ## ตารางสรุปต่อวิธี
 

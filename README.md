@@ -15,7 +15,7 @@
    - **ตารางรายสัปดาห์**: ทุกคาบของสัปดาห์ที่เลือก และรายการคาบที่ยังจัดไม่ได้
    - **Heatmap การใช้ Lab**: แถวเป็นห้อง Lab คอลัมน์เป็นสัปดาห์ ตัวเลขคือชั่วโมงจำเป็น `+ไม่จำเป็น` ผลรวมชั่วโมงไม่จำเป็นต้องเท่ากับ `unnecessary_lab_hours` ของรันนั้น (หน้าเว็บแสดง ✓ เมื่อตรง)
    - **ห้องของแต่ละคลาส**: ค้นหา/เลือกคลาส เห็นห้องของทั้ง 15 สัปดาห์ต่อคาบประจำ เน้นสัปดาห์ที่เปลี่ยนห้อง สัปดาห์ที่ต้องใช้ Lab และการใช้ Lab โดยไม่จำเป็น ผลรวมการเปลี่ยนห้องของทุกคลาสเท่ากับ `room_changes`
-   - นับแบบเดียวกับ `python/solution_validator.py`: ชั่วโมง Lab ไม่จำเป็น = `duration_minutes` ของคาบที่อยู่ใน Computer Lab ในสัปดาห์ที่ไม่อยู่ใน `lab_weeks`; เปลี่ยนห้อง = ห้องต่างจากสัปดาห์ก่อนหน้าที่จัดได้ของคาบเดียวกัน
+   - นับแบบเดียวกับ `engine/solution_validator.py`: ชั่วโมง Lab ไม่จำเป็น = `duration_minutes` ของคาบที่อยู่ใน Computer Lab ในสัปดาห์ที่ไม่อยู่ใน `lab_weeks`; เปลี่ยนห้อง = ห้องต่างจากสัปดาห์ก่อนหน้าที่จัดได้ของคาบเดียวกัน
 5. ดาวน์โหลด **CSV** สำหรับวิเคราะห์ (ผลแต่ละรัน, ตาราง **ตามห้อง** หรือ **ตามคลาส** ซึ่งรวมสัปดาห์ที่ยังจัดไม่ได้ด้วย; ทุกไฟล์เป็น UTF-8 มี BOM จึงเปิดภาษาไทยใน Excel ได้) และ **ชุดผล JSON** สำหรับสำรอง/ย้ายเครื่อง/นำเข้ากลับเว็บ JSON รวมข้อมูล โค้ดที่ใช้จริง พารามิเตอร์ trace คำตอบ และผลตรวจ การนำเข้ารับทั้ง `.json` และ `.json.gz` (เช่นไฟล์ใน `experiments/`) โดยไม่ต้องรัน Python
 
 ค่าเริ่มต้น 50 evaluations × 3 seeds เป็นค่าเริ่มใช้งาน ไม่ใช่งบสุดท้ายที่ผ่านการปรับแต่งแล้ว เมื่อต้องการเก็บผลจริง ให้กำหนดงบและพารามิเตอร์ก่อน แล้วใช้ repeated seeds ชุดเดียวกันทุกวิธี เช่น 30 seeds หากเครื่องและเวลารองรับ ไม่ควรสรุปผู้ชนะจากรันเดียวหรือจากผลตรวจระบบ
@@ -66,7 +66,7 @@ Decoder รักษาข้อห้ามระหว่างจัด ห�
 - ตัวตรวจอิสระรับโหมดจาก config ของรัน (ไม่เชื่อค่าที่คำตอบประกาศเอง) ในโหมด `fixed` จะเพิ่มข้อห้าม `FIXED_ROOM_CHANGED` (คาบเดียวกันใช้มากกว่าหนึ่งห้อง) และ `FIXED_ROOM_NOT_LAB` (คาบที่มีสัปดาห์ Lab แต่จองห้องที่ไม่ใช่ Lab) และ `ROOM_MODE` เมื่อโหมดที่คำตอบประกาศไม่ตรงกับที่ตรวจ
 - รายงาน metric เดียวกันทั้งสองโหมด: คาบที่ยังจัดไม่ได้ / ชั่วโมง Lab ที่ไม่จำเป็น / จำนวนครั้งเปลี่ยนห้อง (โหมด fixed เป็น 0 เสมอ) ทุกรันบันทึก `room_mode`
 - เว็บ: เลือก **โหมดจัดห้อง** ในขั้น "กำหนดการรัน" หนึ่งการทดลองใช้หนึ่งโหมด รันอีกครั้งด้วย seed เดิมเพื่อเทียบ ไฟล์ JSON จาก CLI ที่มีทั้งสองโหมดนำเข้าเว็บได้และแยกแถวสรุปตามโหมด
-- CLI: `--room-modes weekly fixed` รันทั้งสองโหมดบน seed ชุดเดียวกันใน batch เดียว แล้วใช้ `python3 python/compare_modes.py <experiment.json>` สร้างตารางเทียบแบบจับคู่ (fixed − weekly ต่อ seed)
+- CLI: `--room-modes weekly fixed` รันทั้งสองโหมดบน seed ชุดเดียวกันใน batch เดียว แล้วใช้ `python3 engine/compare_modes.py <experiment.json>` สร้างตารางเทียบแบบจับคู่ (fixed − weekly ต่อ seed)
 
 ผลดิบและตารางสรุปอยู่ใน [experiments/fixed-room](experiments/fixed-room/README.md)
 
@@ -127,22 +127,22 @@ def solve(problem, context, parameters):
 python3 -m http.server 8766 --bind 127.0.0.1
 ```
 
-เปิด `http://127.0.0.1:8766` จากโฟลเดอร์โครงการ อย่าเปิด `index.html` แบบ file:// เพราะ worker/fetch ต้องใช้ HTTP(S) ต้องใช้อินเทอร์เน็ตโหลด [Pyodide 314.0.7](https://pyodide.org/en/stable/usage/webworker.html) ผ่าน jsDelivr; ไม่มี service worker หรือการรับประกัน offline
+รันจาก root ของโครงการ แล้วเปิด `http://127.0.0.1:8766/apps/web/` (หน้า root จะ redirect ไปให้เอง) เว็บโหลด `data/`, `engine/` และ `experiments/` ด้วย path สัมพัทธ์ จึงต้องเสิร์ฟจาก root ไม่ใช่จาก `apps/web/` อย่าเปิด `index.html` แบบ file:// เพราะ worker/fetch ต้องใช้ HTTP(S) ต้องใช้อินเทอร์เน็ตโหลด [Pyodide 314.0.7](https://pyodide.org/en/stable/usage/webworker.html) ผ่าน jsDelivr; ไม่มี service worker หรือการรับประกัน offline
 
 Native Python 3.9+ ใช้ engine เดียวกัน ไม่ต้องลง package เพิ่ม:
 
 ```sh
-python3 python/cli.py --budget 50 --seconds 60 --seed 42 --repeats 3 --output results
-python3 python/cli.py --room-modes weekly fixed --budget 50 --seconds 600 --seed 1001 --repeats 30 --output results
-python3 -m unittest discover -s tests -v
+python3 engine/cli.py --budget 50 --seconds 60 --seed 42 --repeats 3 --output results
+python3 engine/cli.py --room-modes weekly fixed --budget 50 --seconds 600 --seed 1001 --repeats 30 --output results
+python3 -m unittest discover -s engine/tests -v
 ```
 
 CLI เก็บ JSON หลังทุกรันและ CSV ตอนจบ JSON นำเข้ากลับเว็บได้ Seed เดียวกันจะทำซ้ำได้เมื่อใช้ dataset/code/parameters/runtime เดียวกันและไม่ถูกตัดด้วยเวลาระหว่างทาง การเปลี่ยน Python เวอร์ชันอาจทำให้ลำดับสุ่มต่างกัน
 
-การทดลองชุดใหญ่ใช้ `python/batch.py` ซึ่งรันหลาย process พร้อมกัน เก็บผลทีละรันใน `<output>/runs/` และถ้าหยุดกลางทาง ให้รันคำสั่งเดิมซ้ำเพื่อทำต่อโดยข้ามรันที่เสร็จแล้ว (ไม่ยอมใช้ผลเก่าถ้า dataset, โค้ด engine หรือการตั้งค่าไม่ตรงกัน) เมื่อครบจะรวมเป็น `experiment.json.gz` (gunzip แล้วนำเข้าเว็บได้) กับ `experiment.csv` กติกาการทดลองสุดท้าย (seed จูน/ทดสอบ งบ และสถิติ) อยู่ใน [docs/protocol.md](docs/protocol.md)
+การทดลองชุดใหญ่ใช้ `engine/batch.py` ซึ่งรันหลาย process พร้อมกัน เก็บผลทีละรันใน `<output>/runs/` และถ้าหยุดกลางทาง ให้รันคำสั่งเดิมซ้ำเพื่อทำต่อโดยข้ามรันที่เสร็จแล้ว (ไม่ยอมใช้ผลเก่าถ้า dataset, โค้ด engine หรือการตั้งค่าไม่ตรงกัน) เมื่อครบจะรวมเป็น `experiment.json.gz` (gunzip แล้วนำเข้าเว็บได้) กับ `experiment.csv` กติกาการทดลองสุดท้าย (seed จูน/ทดสอบ งบ และสถิติ) อยู่ใน [docs/protocol.md](docs/protocol.md)
 
 ```sh
-python3 python/batch.py run --methods greedy hc sa ga --room-modes weekly --seeds 1001-1030 \
+python3 engine/batch.py run --methods greedy hc sa ga --room-modes weekly --seeds 1001-1030 \
   --budget 500 --seconds 3600 --output results/final --workers 8
 ```
 
@@ -158,17 +158,30 @@ python3 dataset_tools/rebuild.py --output results/rebuilt-dataset
 
 ## โครงสร้างและการเผยแพร่
 
-- `index.html`, `styles.css`, `app.mjs`: UI, plots, export และ result history
-- `storage.mjs`: IndexedDB
-- `worker.mjs`: pinned Pyodide loader และ Python bridge
-- `python/lab_core.py`, `algorithms.py`: shared decoder/search methods
-- `python/input_validation.py`, `solution_validator.py`: input และ output checks คนละหน้าที่
-- `python/runner.py`, `cli.py`: reproducible runner และ native command line
-- `python/compare_modes.py`: ตารางเทียบ weekly / fixed แบบจับคู่จาก JSON ผลดิบ
-- `experiments/`: ผลดิบที่ commit ไว้เป็นหลักฐาน (JSON.gz + CSV)
-- `data/`: compressed adapted input, assumptions และ provenance
-- `tests/`: meaningful contract/regression checks รวมตัวอย่าง source ID ซ้ำ
+แผนที่ไฟล์ทั้งหมดอยู่ใน [docs/INDEX.md](docs/INDEX.md) และผลทดลองทุกชุดสรุปไว้ใน [experiments/INDEX.md](experiments/INDEX.md)
 
-Deploy GitHub Pages จาก `main` ที่ `/ (root)` ได้โดยตรง มี `.nojekyll` ไม่ต้องเปิดเผย credentials หรือใช้ server เว็บเป็น local research workbench ไม่ใช่ระบบจัดตารางใช้งานจริงของสถาบัน
+```
+apps/web/        เว็บห้องทดลอง (index.html, app.mjs, worker.mjs, storage.mjs, styles.css)
+apps/slides/     สไลด์นำเสนอ Final (+ progress/ สไลด์ความคืบหน้า) deploy บน Vercel
+apps/godot/      แอปเดสก์ท็อป Godot (C#): แผนที่ห้องรายสัปดาห์, รันสด, เทียบ weekly/fixed
+engine/          Python engine (ต้นฉบับอ้างอิงและ runtime ของเว็บ), CLI, batch runner, การวิเคราะห์
+engine/tests/    contract/regression tests
+dotnet/          C# engine ที่ให้ผลตรงกับ Python ทุกบิต + CLI "timetabling" (เร็วกว่าราว 24 เท่า) + parity tests
+data/            ชุดข้อมูลดัดแปลง, assumptions, provenance, variants/
+dataset_tools/   converter และ config ที่ใช้สร้าง data/ ซ้ำ
+experiments/     ผลดิบที่ commit ไว้เป็นหลักฐาน (JSON.gz + CSV + summary)
+docs/            คู่มือ, protocol, research comparison, QA
+index.html       redirect ไป apps/web/ เพื่อให้ URL ของ GitHub Pages เดิมใช้ได้
+```
+
+- `engine/lab_core.py`, `algorithms.py`: shared decoder/search methods
+- `engine/input_validation.py`, `solution_validator.py`: input และ output checks คนละหน้าที่
+- `engine/runner.py`, `cli.py`: reproducible runner และ native command line
+- `engine/compare_modes.py`: ตารางเทียบ weekly / fixed แบบจับคู่จาก JSON ผลดิบ
+- `dotnet/`: engine เดียวกันใน C# รายละเอียดและคำสั่งอยู่ใน [dotnet/README.md](dotnet/README.md); แอป Godot อยู่ใน [apps/godot/README.md](apps/godot/README.md)
+
+`dataset_tools/` อยู่ที่ root ตั้งใจ: `config.json` อ้าง XML ต้นทางแบบ path สัมพัทธ์ และ config นี้ถูกบันทึกลงในชุดข้อมูล การย้ายจะทำให้ SHA-256 ของชุดข้อมูลที่สร้างซ้ำไม่ตรงกับ `data/provenance.json`
+
+Deploy GitHub Pages จาก `main` ที่ `/ (root)` ได้โดยตรง (root `index.html` redirect ไป `apps/web/`) มี `.nojekyll` ไม่ต้องเปิดเผย credentials หรือใช้ server เว็บเป็น local research workbench ไม่ใช่ระบบจัดตารางใช้งานจริงของสถาบัน
 
 ดู [NOTICE](NOTICE) สำหรับสิทธิ์แยกระหว่างโค้ดกับข้อมูลต้นทาง

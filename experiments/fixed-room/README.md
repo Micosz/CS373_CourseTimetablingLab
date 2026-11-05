@@ -18,10 +18,10 @@
 
 | ไฟล์ | โหมด | Seeds |
 |---|---|---|
-| `experiment-ed7004bd-….json.gz` / `.csv` | weekly | 1001–1015 |
-| `experiment-ebd8f5bc-….json.gz` / `.csv` | weekly | 1016–1030 |
-| `experiment-8489e104-….json.gz` / `.csv` | fixed | 1001–1015 |
-| `experiment-906667ff-….json.gz` / `.csv` | fixed | 1016–1030 |
+| `weekly-seeds-1001-1015.json.gz` / `.csv` | weekly | 1001–1015 |
+| `weekly-seeds-1016-1030.json.gz` / `.csv` | weekly | 1016–1030 |
+| `fixed-seeds-1001-1015.json.gz` / `.csv` | fixed | 1001–1015 |
+| `fixed-seeds-1016-1030.json.gz` / `.csv` | fixed | 1016–1030 |
 | `summary.md` | ตารางสรุปจาก `compare_modes.py` | |
 
 JSON แต่ละไฟล์มีข้อมูลนำเข้า โค้ด พารามิเตอร์ trace คำตอบเต็ม และผลตรวจของทุกรัน ถูก gzip ไว้เพื่อลดขนาด (ราว 28 MB → 0.9 MB) นำเข้าเว็บได้โดยเลือกไฟล์ `.json.gz` ตรง ๆ (หรือ `gunzip -k` แล้วเลือกไฟล์ `.json`)
@@ -60,9 +60,9 @@ JSON แต่ละไฟล์มีข้อมูลนำเข้า โ�
 ## รันซ้ำ
 
 ```sh
-python3 python/cli.py --room-modes weekly fixed --methods greedy hc sa ga \
+python3 engine/cli.py --room-modes weekly fixed --methods greedy hc sa ga \
   --budget 50 --seconds 600 --seed 1001 --repeats 30 --output results/fixed-room
-python3 python/compare_modes.py results/fixed-room/experiment-*.json
+python3 engine/compare_modes.py results/fixed-room/experiment-*.json
 ```
 
 คำสั่งแรกรันทั้งสองโหมดใน process เดียว (ราว 40–45 นาที) ผลชุดนี้แบ่งเป็น 4 process ตามโหมดและครึ่งของ seed (`--room-modes weekly --seed 1001 --repeats 15` เป็นต้น) แล้วรวมด้วย `compare_modes.py` ซึ่งรับหลายไฟล์และไม่ยอมรับรันซ้ำ (algorithm, mode, seed) ผลจะตรงกันเมื่อใช้ dataset/code/parameters/Python เดียวกันและไม่มีรันโดน time cap

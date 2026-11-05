@@ -1,0 +1,4858 @@
+[
+ {
+  "name": "fall-cs.json.gz",
+  "dataset": "data/fall-cs.json.gz",
+  "edits": [],
+  "expected": {
+   "status": "passed_with_warnings",
+   "errors": [],
+   "warnings": [
+    {
+     "code": "SYNTHETIC_ROOM_TYPES_AND_LABS",
+     "meaning": "Source candidate rooms are modeled as lecture rooms; independent synthetic labs are added."
+    },
+    {
+     "code": "MISSING_SOURCE_INSTRUCTORS",
+     "classes": 143,
+     "meaning": "Unique synthetic instructors add no unknown shared-teacher conflicts."
+    },
+    {
+     "code": "SYNTHETIC_CALENDAR",
+     "meaning": "All target and external classes repeat for the synthetic calendar; source dates masks are provenance only."
+    },
+    {
+     "code": "ADAPTED_STUDENT_RULE",
+     "external_student_overlap_is_hard": false,
+     "meaning": "Known student groups cannot overlap among CS targets; external-student conflicts are hard only in the strict variant. Original student-conflict score and re-sectioning are not reproduced."
+    },
+    {
+     "code": "GLOBAL_FEASIBILITY_NOT_PROVEN",
+     "meaning": "Local checks do not jointly assign target classes or certify a complete timetable."
+    }
+   ],
+   "summary": {
+    "target_classes": 174,
+    "source_course_offerings": 44,
+    "recurring_sessions": 223,
+    "weeks": 15,
+    "weekly_sessions": 3345,
+    "lab_required_weekly_sessions": 536,
+    "lab_required_minutes": 48240,
+    "mixed_recurring_sessions": 134,
+    "lecture_only_recurring_sessions": 89,
+    "source_schedulable_lecture_rooms": 13,
+    "synthetic_computer_labs": 4,
+    "background_only_room_records": 84,
+    "committed_classes": 810,
+    "synthetic_instructor_classes": 143,
+    "student_roster_groups": 1918,
+    "known_students_in_target_rosters": 2002,
+    "classes_without_known_enrollment": 15,
+    "classes_without_locally_complete_time_option": 0,
+    "weekly_sessions_without_any_local_placement": 0
+   },
+   "lab_required_meetings_per_week": {
+    "1": 37,
+    "2": 31,
+    "3": 38,
+    "4": 40,
+    "5": 30,
+    "6": 30,
+    "7": 45,
+    "8": 36,
+    "9": 39,
+    "10": 32,
+    "11": 28,
+    "12": 40,
+    "13": 33,
+    "14": 37,
+    "15": 40
+   },
+   "local_feasibility": {
+    "scope": "Against external room/instructor reservations, conditional external student rule, room windows, capacity/type and fixed SAME_TIME only; other targets not jointly scheduled.",
+    "complete_time_option_counts": {
+     "C1417": 20,
+     "C1418": 20,
+     "C1419": 20,
+     "C1420": 20,
+     "C1421": 20,
+     "C1422": 20,
+     "C1423": 20,
+     "C1424": 20,
+     "C1425": 20,
+     "C1426": 20,
+     "C1427": 20,
+     "C1428": 20,
+     "C1429": 20,
+     "C1430": 20,
+     "C1431": 20,
+     "C1432": 20,
+     "C1433": 20,
+     "C1434": 20,
+     "C1435": 20,
+     "C1436": 20,
+     "C1437": 20,
+     "C1438": 20,
+     "C1439": 20,
+     "C1440": 20,
+     "C1441": 20,
+     "C1442": 20,
+     "C1443": 38,
+     "C1444": 20,
+     "C1445": 20,
+     "C1446": 20,
+     "C1447": 20,
+     "C1448": 20,
+     "C1449": 20,
+     "C1450": 20,
+     "C1451": 20,
+     "C1452": 20,
+     "C1453": 20,
+     "C1454": 20,
+     "C1455": 20,
+     "C1456": 20,
+     "C1457": 20,
+     "C1458": 20,
+     "C1459": 20,
+     "C1460": 20,
+     "C1461": 20,
+     "C1462": 20,
+     "C1463": 20,
+     "C1464": 9,
+     "C1465": 9,
+     "C1466": 9,
+     "C1467": 19,
+     "C1468": 19,
+     "C1469": 19,
+     "C1470": 19,
+     "C1471": 19,
+     "C1472": 15,
+     "C1473": 15,
+     "C1474": 15,
+     "C1475": 20,
+     "C1476": 20,
+     "C1477": 20,
+     "C1478": 20,
+     "C1479": 9,
+     "C1480": 9,
+     "C1481": 9,
+     "C1482": 9,
+     "C1483": 9,
+     "C1484": 15,
+     "C1485": 15,
+     "C1486": 15,
+     "C1487": 15,
+     "C1488": 15,
+     "C1489": 15,
+     "C1490": 15,
+     "C1491": 15,
+     "C1492": 15,
+     "C1493": 7,
+     "C1494": 20,
+     "C1495": 20,
+     "C1496": 43,
+     "C1497": 8,
+     "C1498": 8,
+     "C1499": 8,
+     "C1500": 8,
+     "C1501": 8,
+     "C1502": 8,
+     "C1503": 8,
+     "C1504": 8,
+     "C1505": 8,
+     "C1506": 8,
+     "C1507": 8,
+     "C1508": 8,
+     "C1509": 8,
+     "C1510": 8,
+     "C1511": 8,
+     "C1512": 8,
+     "C1513": 18,
+     "C1514": 18,
+     "C1515": 18,
+     "C1516": 18,
+     "C1517": 18,
+     "C1518": 18,
+     "C1519": 18,
+     "C1520": 18,
+     "C1521": 18,
+     "C1522": 18,
+     "C1523": 18,
+     "C1524": 18,
+     "C1525": 18,
+     "C1526": 18,
+     "C1527": 18,
+     "C1528": 18,
+     "C1529": 18,
+     "C1530": 18,
+     "C1531": 18,
+     "C1532": 18,
+     "C1533": 18,
+     "C1534": 18,
+     "C1535": 29,
+     "C1536": 8,
+     "C1537": 8,
+     "C1538": 6,
+     "C1539": 16,
+     "C1540": 16,
+     "C1541": 16,
+     "C1542": 20,
+     "C1543": 20,
+     "C1544": 20,
+     "C1545": 32,
+     "C1546": 7,
+     "C1547": 7,
+     "C1548": 7,
+     "C1549": 6,
+     "C1550": 20,
+     "C1551": 20,
+     "C1552": 17,
+     "C1553": 17,
+     "C1554": 17,
+     "C1555": 17,
+     "C1556": 9,
+     "C1557": 20,
+     "C1558": 20,
+     "C1559": 7,
+     "C1560": 7,
+     "C1561": 43,
+     "C1562": 7,
+     "C1563": 20,
+     "C1564": 20,
+     "C1565": 20,
+     "C1566": 7,
+     "C1567": 20,
+     "C1568": 20,
+     "C1569": 7,
+     "C1570": 45,
+     "C1571": 43,
+     "C1572": 15,
+     "C1573": 7,
+     "C1574": 7,
+     "C1575": 6,
+     "C1576": 7,
+     "C1577": 6,
+     "C1578": 7,
+     "C1579": 20,
+     "C1580": 20,
+     "C1581": 7,
+     "C1582": 7,
+     "C1583": 7,
+     "C1584": 7,
+     "C1585": 7,
+     "C1586": 7,
+     "C1587": 7,
+     "C1588": 7,
+     "C1589": 7,
+     "C1590": 23
+    },
+    "classes_without_complete_time_option": [],
+    "weekly_sessions_without_any_placement": []
+   }
+  }
+ },
+ {
+  "name": "fall-cs-labs2.json.gz",
+  "dataset": "data/variants/fall-cs-labs2.json.gz",
+  "edits": [],
+  "expected": {
+   "status": "passed_with_warnings",
+   "errors": [],
+   "warnings": [
+    {
+     "code": "SYNTHETIC_ROOM_TYPES_AND_LABS",
+     "meaning": "Source candidate rooms are modeled as lecture rooms; independent synthetic labs are added."
+    },
+    {
+     "code": "MISSING_SOURCE_INSTRUCTORS",
+     "classes": 143,
+     "meaning": "Unique synthetic instructors add no unknown shared-teacher conflicts."
+    },
+    {
+     "code": "SYNTHETIC_CALENDAR",
+     "meaning": "All target and external classes repeat for the synthetic calendar; source dates masks are provenance only."
+    },
+    {
+     "code": "ADAPTED_STUDENT_RULE",
+     "external_student_overlap_is_hard": false,
+     "meaning": "Known student groups cannot overlap among CS targets; external-student conflicts are hard only in the strict variant. Original student-conflict score and re-sectioning are not reproduced."
+    },
+    {
+     "code": "GLOBAL_FEASIBILITY_NOT_PROVEN",
+     "meaning": "Local checks do not jointly assign target classes or certify a complete timetable."
+    }
+   ],
+   "summary": {
+    "target_classes": 174,
+    "source_course_offerings": 44,
+    "recurring_sessions": 223,
+    "weeks": 15,
+    "weekly_sessions": 3345,
+    "lab_required_weekly_sessions": 536,
+    "lab_required_minutes": 48240,
+    "mixed_recurring_sessions": 134,
+    "lecture_only_recurring_sessions": 89,
+    "source_schedulable_lecture_rooms": 13,
+    "synthetic_computer_labs": 2,
+    "background_only_room_records": 84,
+    "committed_classes": 810,
+    "synthetic_instructor_classes": 143,
+    "student_roster_groups": 1918,
+    "known_students_in_target_rosters": 2002,
+    "classes_without_known_enrollment": 15,
+    "classes_without_locally_complete_time_option": 0,
+    "weekly_sessions_without_any_local_placement": 0
+   },
+   "lab_required_meetings_per_week": {
+    "1": 37,
+    "2": 31,
+    "3": 38,
+    "4": 40,
+    "5": 30,
+    "6": 30,
+    "7": 45,
+    "8": 36,
+    "9": 39,
+    "10": 32,
+    "11": 28,
+    "12": 40,
+    "13": 33,
+    "14": 37,
+    "15": 40
+   },
+   "local_feasibility": {
+    "scope": "Against external room/instructor reservations, conditional external student rule, room windows, capacity/type and fixed SAME_TIME only; other targets not jointly scheduled.",
+    "complete_time_option_counts": {
+     "C1417": 20,
+     "C1418": 20,
+     "C1419": 20,
+     "C1420": 20,
+     "C1421": 20,
+     "C1422": 20,
+     "C1423": 20,
+     "C1424": 20,
+     "C1425": 20,
+     "C1426": 20,
+     "C1427": 20,
+     "C1428": 20,
+     "C1429": 20,
+     "C1430": 20,
+     "C1431": 20,
+     "C1432": 20,
+     "C1433": 20,
+     "C1434": 20,
+     "C1435": 20,
+     "C1436": 20,
+     "C1437": 20,
+     "C1438": 20,
+     "C1439": 20,
+     "C1440": 20,
+     "C1441": 20,
+     "C1442": 20,
+     "C1443": 38,
+     "C1444": 20,
+     "C1445": 20,
+     "C1446": 20,
+     "C1447": 20,
+     "C1448": 20,
+     "C1449": 20,
+     "C1450": 20,
+     "C1451": 20,
+     "C1452": 20,
+     "C1453": 20,
+     "C1454": 20,
+     "C1455": 20,
+     "C1456": 20,
+     "C1457": 20,
+     "C1458": 20,
+     "C1459": 20,
+     "C1460": 20,
+     "C1461": 20,
+     "C1462": 20,
+     "C1463": 20,
+     "C1464": 9,
+     "C1465": 9,
+     "C1466": 9,
+     "C1467": 19,
+     "C1468": 19,
+     "C1469": 19,
+     "C1470": 19,
+     "C1471": 19,
+     "C1472": 15,
+     "C1473": 15,
+     "C1474": 15,
+     "C1475": 20,
+     "C1476": 20,
+     "C1477": 20,
+     "C1478": 20,
+     "C1479": 9,
+     "C1480": 9,
+     "C1481": 9,
+     "C1482": 9,
+     "C1483": 9,
+     "C1484": 15,
+     "C1485": 15,
+     "C1486": 15,
+     "C1487": 15,
+     "C1488": 15,
+     "C1489": 15,
+     "C1490": 15,
+     "C1491": 15,
+     "C1492": 15,
+     "C1493": 7,
+     "C1494": 20,
+     "C1495": 20,
+     "C1496": 43,
+     "C1497": 8,
+     "C1498": 8,
+     "C1499": 8,
+     "C1500": 8,
+     "C1501": 8,
+     "C1502": 8,
+     "C1503": 8,
+     "C1504": 8,
+     "C1505": 8,
+     "C1506": 8,
+     "C1507": 8,
+     "C1508": 8,
+     "C1509": 8,
+     "C1510": 8,
+     "C1511": 8,
+     "C1512": 8,
+     "C1513": 18,
+     "C1514": 18,
+     "C1515": 18,
+     "C1516": 18,
+     "C1517": 18,
+     "C1518": 18,
+     "C1519": 18,
+     "C1520": 18,
+     "C1521": 18,
+     "C1522": 18,
+     "C1523": 18,
+     "C1524": 18,
+     "C1525": 18,
+     "C1526": 18,
+     "C1527": 18,
+     "C1528": 18,
+     "C1529": 18,
+     "C1530": 18,
+     "C1531": 18,
+     "C1532": 18,
+     "C1533": 18,
+     "C1534": 18,
+     "C1535": 29,
+     "C1536": 8,
+     "C1537": 8,
+     "C1538": 6,
+     "C1539": 16,
+     "C1540": 16,
+     "C1541": 16,
+     "C1542": 20,
+     "C1543": 20,
+     "C1544": 20,
+     "C1545": 32,
+     "C1546": 7,
+     "C1547": 7,
+     "C1548": 7,
+     "C1549": 6,
+     "C1550": 20,
+     "C1551": 20,
+     "C1552": 17,
+     "C1553": 17,
+     "C1554": 17,
+     "C1555": 17,
+     "C1556": 9,
+     "C1557": 20,
+     "C1558": 20,
+     "C1559": 7,
+     "C1560": 7,
+     "C1561": 43,
+     "C1562": 7,
+     "C1563": 20,
+     "C1564": 20,
+     "C1565": 20,
+     "C1566": 7,
+     "C1567": 20,
+     "C1568": 20,
+     "C1569": 7,
+     "C1570": 45,
+     "C1571": 43,
+     "C1572": 15,
+     "C1573": 7,
+     "C1574": 7,
+     "C1575": 6,
+     "C1576": 7,
+     "C1577": 6,
+     "C1578": 7,
+     "C1579": 20,
+     "C1580": 20,
+     "C1581": 7,
+     "C1582": 7,
+     "C1583": 7,
+     "C1584": 7,
+     "C1585": 7,
+     "C1586": 7,
+     "C1587": 7,
+     "C1588": 7,
+     "C1589": 7,
+     "C1590": 23
+    },
+    "classes_without_complete_time_option": [],
+    "weekly_sessions_without_any_placement": []
+   }
+  }
+ },
+ {
+  "name": "fall-cs-labs3.json.gz",
+  "dataset": "data/variants/fall-cs-labs3.json.gz",
+  "edits": [],
+  "expected": {
+   "status": "passed_with_warnings",
+   "errors": [],
+   "warnings": [
+    {
+     "code": "SYNTHETIC_ROOM_TYPES_AND_LABS",
+     "meaning": "Source candidate rooms are modeled as lecture rooms; independent synthetic labs are added."
+    },
+    {
+     "code": "MISSING_SOURCE_INSTRUCTORS",
+     "classes": 143,
+     "meaning": "Unique synthetic instructors add no unknown shared-teacher conflicts."
+    },
+    {
+     "code": "SYNTHETIC_CALENDAR",
+     "meaning": "All target and external classes repeat for the synthetic calendar; source dates masks are provenance only."
+    },
+    {
+     "code": "ADAPTED_STUDENT_RULE",
+     "external_student_overlap_is_hard": false,
+     "meaning": "Known student groups cannot overlap among CS targets; external-student conflicts are hard only in the strict variant. Original student-conflict score and re-sectioning are not reproduced."
+    },
+    {
+     "code": "GLOBAL_FEASIBILITY_NOT_PROVEN",
+     "meaning": "Local checks do not jointly assign target classes or certify a complete timetable."
+    }
+   ],
+   "summary": {
+    "target_classes": 174,
+    "source_course_offerings": 44,
+    "recurring_sessions": 223,
+    "weeks": 15,
+    "weekly_sessions": 3345,
+    "lab_required_weekly_sessions": 536,
+    "lab_required_minutes": 48240,
+    "mixed_recurring_sessions": 134,
+    "lecture_only_recurring_sessions": 89,
+    "source_schedulable_lecture_rooms": 13,
+    "synthetic_computer_labs": 3,
+    "background_only_room_records": 84,
+    "committed_classes": 810,
+    "synthetic_instructor_classes": 143,
+    "student_roster_groups": 1918,
+    "known_students_in_target_rosters": 2002,
+    "classes_without_known_enrollment": 15,
+    "classes_without_locally_complete_time_option": 0,
+    "weekly_sessions_without_any_local_placement": 0
+   },
+   "lab_required_meetings_per_week": {
+    "1": 37,
+    "2": 31,
+    "3": 38,
+    "4": 40,
+    "5": 30,
+    "6": 30,
+    "7": 45,
+    "8": 36,
+    "9": 39,
+    "10": 32,
+    "11": 28,
+    "12": 40,
+    "13": 33,
+    "14": 37,
+    "15": 40
+   },
+   "local_feasibility": {
+    "scope": "Against external room/instructor reservations, conditional external student rule, room windows, capacity/type and fixed SAME_TIME only; other targets not jointly scheduled.",
+    "complete_time_option_counts": {
+     "C1417": 20,
+     "C1418": 20,
+     "C1419": 20,
+     "C1420": 20,
+     "C1421": 20,
+     "C1422": 20,
+     "C1423": 20,
+     "C1424": 20,
+     "C1425": 20,
+     "C1426": 20,
+     "C1427": 20,
+     "C1428": 20,
+     "C1429": 20,
+     "C1430": 20,
+     "C1431": 20,
+     "C1432": 20,
+     "C1433": 20,
+     "C1434": 20,
+     "C1435": 20,
+     "C1436": 20,
+     "C1437": 20,
+     "C1438": 20,
+     "C1439": 20,
+     "C1440": 20,
+     "C1441": 20,
+     "C1442": 20,
+     "C1443": 38,
+     "C1444": 20,
+     "C1445": 20,
+     "C1446": 20,
+     "C1447": 20,
+     "C1448": 20,
+     "C1449": 20,
+     "C1450": 20,
+     "C1451": 20,
+     "C1452": 20,
+     "C1453": 20,
+     "C1454": 20,
+     "C1455": 20,
+     "C1456": 20,
+     "C1457": 20,
+     "C1458": 20,
+     "C1459": 20,
+     "C1460": 20,
+     "C1461": 20,
+     "C1462": 20,
+     "C1463": 20,
+     "C1464": 9,
+     "C1465": 9,
+     "C1466": 9,
+     "C1467": 19,
+     "C1468": 19,
+     "C1469": 19,
+     "C1470": 19,
+     "C1471": 19,
+     "C1472": 15,
+     "C1473": 15,
+     "C1474": 15,
+     "C1475": 20,
+     "C1476": 20,
+     "C1477": 20,
+     "C1478": 20,
+     "C1479": 9,
+     "C1480": 9,
+     "C1481": 9,
+     "C1482": 9,
+     "C1483": 9,
+     "C1484": 15,
+     "C1485": 15,
+     "C1486": 15,
+     "C1487": 15,
+     "C1488": 15,
+     "C1489": 15,
+     "C1490": 15,
+     "C1491": 15,
+     "C1492": 15,
+     "C1493": 7,
+     "C1494": 20,
+     "C1495": 20,
+     "C1496": 43,
+     "C1497": 8,
+     "C1498": 8,
+     "C1499": 8,
+     "C1500": 8,
+     "C1501": 8,
+     "C1502": 8,
+     "C1503": 8,
+     "C1504": 8,
+     "C1505": 8,
+     "C1506": 8,
+     "C1507": 8,
+     "C1508": 8,
+     "C1509": 8,
+     "C1510": 8,
+     "C1511": 8,
+     "C1512": 8,
+     "C1513": 18,
+     "C1514": 18,
+     "C1515": 18,
+     "C1516": 18,
+     "C1517": 18,
+     "C1518": 18,
+     "C1519": 18,
+     "C1520": 18,
+     "C1521": 18,
+     "C1522": 18,
+     "C1523": 18,
+     "C1524": 18,
+     "C1525": 18,
+     "C1526": 18,
+     "C1527": 18,
+     "C1528": 18,
+     "C1529": 18,
+     "C1530": 18,
+     "C1531": 18,
+     "C1532": 18,
+     "C1533": 18,
+     "C1534": 18,
+     "C1535": 29,
+     "C1536": 8,
+     "C1537": 8,
+     "C1538": 6,
+     "C1539": 16,
+     "C1540": 16,
+     "C1541": 16,
+     "C1542": 20,
+     "C1543": 20,
+     "C1544": 20,
+     "C1545": 32,
+     "C1546": 7,
+     "C1547": 7,
+     "C1548": 7,
+     "C1549": 6,
+     "C1550": 20,
+     "C1551": 20,
+     "C1552": 17,
+     "C1553": 17,
+     "C1554": 17,
+     "C1555": 17,
+     "C1556": 9,
+     "C1557": 20,
+     "C1558": 20,
+     "C1559": 7,
+     "C1560": 7,
+     "C1561": 43,
+     "C1562": 7,
+     "C1563": 20,
+     "C1564": 20,
+     "C1565": 20,
+     "C1566": 7,
+     "C1567": 20,
+     "C1568": 20,
+     "C1569": 7,
+     "C1570": 45,
+     "C1571": 43,
+     "C1572": 15,
+     "C1573": 7,
+     "C1574": 7,
+     "C1575": 6,
+     "C1576": 7,
+     "C1577": 6,
+     "C1578": 7,
+     "C1579": 20,
+     "C1580": 20,
+     "C1581": 7,
+     "C1582": 7,
+     "C1583": 7,
+     "C1584": 7,
+     "C1585": 7,
+     "C1586": 7,
+     "C1587": 7,
+     "C1588": 7,
+     "C1589": 7,
+     "C1590": 23
+    },
+    "classes_without_complete_time_option": [],
+    "weekly_sessions_without_any_placement": []
+   }
+  }
+ },
+ {
+  "name": "missing_top_level_fields",
+  "dataset": "data/fall-cs.json.gz",
+  "edits": [
+   {
+    "path": [
+     "objectives"
+    ],
+    "delete": true
+   },
+   {
+    "path": [
+     "calendar"
+    ],
+    "delete": true
+   }
+  ],
+  "expected": {
+   "status": "failed",
+   "errors": [
+    "Missing top-level field: calendar",
+    "Missing top-level field: objectives"
+   ],
+   "warnings": [],
+   "summary": {}
+  }
+ },
+ {
+  "name": "schema_and_rooms",
+  "dataset": "data/fall-cs.json.gz",
+  "edits": [
+   {
+    "path": [
+     "schema_version"
+    ],
+    "value": "2.0"
+   },
+   {
+    "path": [
+     "rooms",
+     0,
+     "capacity"
+    ],
+    "value": -1
+   },
+   {
+    "path": [
+     "rooms",
+     1,
+     "kind"
+    ],
+    "value": "auditorium"
+   },
+   {
+    "path": [
+     "rooms",
+     2,
+     "availability",
+     0,
+     "end_minute"
+    ],
+    "value": 2000
+   }
+  ],
+  "expected": {
+   "status": "failed",
+   "errors": [
+    "Unsupported schema version",
+    "Invalid capacity: R1",
+    "Unknown room kind: R2",
+    "Invalid availability interval: R3"
+   ],
+   "warnings": [],
+   "summary": {}
+  }
+ },
+ {
+  "name": "classes_and_sessions",
+  "dataset": "data/fall-cs.json.gz",
+  "edits": [
+   {
+    "path": [
+     "classes",
+     0,
+     "instructor_ids"
+    ],
+    "value": []
+   },
+   {
+    "path": [
+     "classes",
+     1,
+     "student_count"
+    ],
+    "value": 0
+   },
+   {
+    "path": [
+     "classes",
+     2,
+     "lab_room_ids"
+    ],
+    "value": []
+   },
+   {
+    "path": [
+     "classes",
+     3,
+     "time_options",
+     0,
+     "meetings",
+     0,
+     "start_minute"
+    ],
+    "value": 481
+   },
+   {
+    "path": [
+     "recurring_sessions",
+     0,
+     "lab_weeks"
+    ],
+    "value": [
+     13,
+     6,
+     5,
+     4
+    ]
+   },
+   {
+    "path": [
+     "external_classes",
+     0,
+     "meetings"
+    ],
+    "value": []
+   },
+   {
+    "path": [
+     "objectives",
+     "ordered_metrics"
+    ],
+    "value": [
+     "room_changes",
+     "unnecessary_lab_minutes",
+     "unassigned_weekly_sessions"
+    ]
+   }
+  ],
+  "expected": {
+   "status": "failed",
+   "errors": [
+    "Invalid instructor reference: C1417",
+    "Invalid student demand: C1418",
+    "Known enrollment exceeds seat demand: C1418",
+    "Empty capacity-compatible lab_room_ids: C1419",
+    "Invalid source time units: C1420-T000",
+    "Invalid lab weeks: C1417-M1",
+    "Invalid fixed calendar: C2",
+    "Objective priority changed"
+   ],
+   "warnings": [],
+   "summary": {}
+  }
+ },
+ {
+  "name": "duplicate_ids",
+  "dataset": "data/fall-cs.json.gz",
+  "edits": [
+   {
+    "path": [
+     "classes",
+     1,
+     "id"
+    ],
+    "value": "C1417"
+   },
+   {
+    "path": [
+     "calendar",
+     "week_ids"
+    ],
+    "value": [
+     1,
+     2,
+     4
+    ]
+   }
+  ],
+  "expected": {
+   "status": "failed",
+   "errors": [
+    "Duplicate IDs in classes",
+    "Weeks must be contiguous positive IDs",
+    "Unknown class in group: G0007",
+    "Unknown class in group: G0195",
+    "Unknown class in group: G0202",
+    "Unknown class in group: G0259",
+    "Unknown class in group: G0263",
+    "Unknown class in group: G0279",
+    "Unknown class in group: G0326",
+    "Unknown class in group: G0336",
+    "Unknown class in group: G0341",
+    "Unknown class in group: G0359",
+    "Unknown class in group: G0401",
+    "Unknown class in group: G0417",
+    "Unknown class in group: G0427",
+    "Unknown class in group: G1556",
+    "Unknown class in group: G1559",
+    "Unknown class in group: G1583",
+    "Unknown class in group: G1592",
+    "Unknown class in group: G1594",
+    "Unknown class in group: G1819",
+    "Unknown class in group: G1871",
+    "Unknown class in group: G1914",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Group membership not reciprocal: C1417",
+    "Recurring session references are missing or duplicated",
+    "Invalid active weeks: C1417-M1",
+    "Session references unknown class: C1418-M1",
+    "Invalid active weeks: C1418-M1",
+    "Invalid active weeks: C1419-M1",
+    "Invalid active weeks: C1420-M1",
+    "Invalid active weeks: C1421-M1",
+    "Invalid active weeks: C1422-M1",
+    "Invalid active weeks: C1423-M1",
+    "Invalid active weeks: C1424-M1",
+    "Invalid active weeks: C1425-M1",
+    "Invalid active weeks: C1426-M1",
+    "Invalid active weeks: C1427-M1",
+    "Invalid active weeks: C1428-M1",
+    "Invalid active weeks: C1429-M1",
+    "Invalid active weeks: C1430-M1",
+    "Invalid active weeks: C1431-M1",
+    "Invalid active weeks: C1432-M1",
+    "Invalid active weeks: C1433-M1",
+    "Invalid active weeks: C1434-M1",
+    "Invalid active weeks: C1435-M1",
+    "Invalid active weeks: C1436-M1",
+    "Invalid active weeks: C1437-M1",
+    "Invalid active weeks: C1438-M1",
+    "Invalid active weeks: C1439-M1",
+    "Invalid active weeks: C1440-M1",
+    "Invalid active weeks: C1441-M1",
+    "Invalid active weeks: C1442-M1",
+    "Invalid active weeks: C1443-M1",
+    "Invalid active weeks: C1443-M2",
+    "Invalid active weeks: C1444-M1",
+    "Invalid active weeks: C1445-M1",
+    "Invalid active weeks: C1446-M1",
+    "Invalid active weeks: C1447-M1",
+    "Invalid active weeks: C1448-M1",
+    "Invalid active weeks: C1449-M1",
+    "Invalid active weeks: C1450-M1",
+    "Invalid active weeks: C1451-M1",
+    "Invalid active weeks: C1452-M1",
+    "Invalid active weeks: C1453-M1",
+    "Invalid active weeks: C1454-M1",
+    "Invalid active weeks: C1455-M1",
+    "Invalid active weeks: C1456-M1",
+    "Invalid active weeks: C1457-M1",
+    "Invalid active weeks: C1458-M1",
+    "Invalid active weeks: C1459-M1",
+    "Invalid active weeks: C1460-M1",
+    "Invalid active weeks: C1461-M1",
+    "Invalid active weeks: C1462-M1",
+    "Invalid active weeks: C1463-M1",
+    "Invalid active weeks: C1464-M1",
+    "Invalid active weeks: C1465-M1",
+    "Invalid active weeks: C1466-M1",
+    "Invalid active weeks: C1467-M1",
+    "Invalid active weeks: C1468-M1",
+    "Invalid active weeks: C1469-M1",
+    "Invalid active weeks: C1470-M1",
+    "Invalid active weeks: C1471-M1",
+    "Invalid active weeks: C1472-M1",
+    "Invalid active weeks: C1473-M1",
+    "Invalid active weeks: C1474-M1",
+    "Invalid active weeks: C1475-M1",
+    "Invalid active weeks: C1476-M1",
+    "Invalid active weeks: C1477-M1",
+    "Invalid active weeks: C1478-M1",
+    "Invalid active weeks: C1479-M1",
+    "Invalid active weeks: C1480-M1",
+    "Invalid active weeks: C1481-M1",
+    "Invalid active weeks: C1482-M1",
+    "Invalid active weeks: C1483-M1",
+    "Invalid active weeks: C1484-M1",
+    "Invalid active weeks: C1485-M1",
+    "Invalid active weeks: C1486-M1",
+    "Invalid active weeks: C1487-M1",
+    "Invalid active weeks: C1488-M1",
+    "Invalid active weeks: C1489-M1",
+    "Invalid active weeks: C1490-M1",
+    "Invalid active weeks: C1491-M1",
+    "Invalid active weeks: C1492-M1",
+    "Invalid active weeks: C1493-M1",
+    "Invalid active weeks: C1493-M2",
+    "Invalid active weeks: C1493-M3",
+    "Invalid active weeks: C1494-M1",
+    "Invalid active weeks: C1495-M1",
+    "Invalid active weeks: C1496-M1",
+    "Invalid active weeks: C1497-M1",
+    "Invalid active weeks: C1498-M1",
+    "Invalid active weeks: C1499-M1",
+    "Invalid active weeks: C1500-M1",
+    "Invalid active weeks: C1501-M1",
+    "Invalid active weeks: C1502-M1",
+    "Invalid active weeks: C1503-M1",
+    "Invalid active weeks: C1504-M1",
+    "Invalid active weeks: C1505-M1",
+    "Invalid active weeks: C1506-M1",
+    "Invalid active weeks: C1507-M1",
+    "Invalid active weeks: C1508-M1",
+    "Invalid active weeks: C1509-M1",
+    "Invalid active weeks: C1510-M1",
+    "Invalid active weeks: C1511-M1",
+    "Invalid active weeks: C1512-M1",
+    "Invalid active weeks: C1513-M1",
+    "Invalid active weeks: C1514-M1",
+    "Invalid active weeks: C1515-M1",
+    "Invalid active weeks: C1516-M1",
+    "Invalid active weeks: C1517-M1",
+    "Invalid active weeks: C1518-M1",
+    "Invalid active weeks: C1519-M1",
+    "Invalid active weeks: C1520-M1",
+    "Invalid active weeks: C1521-M1",
+    "Invalid active weeks: C1522-M1",
+    "Invalid active weeks: C1523-M1",
+    "Invalid active weeks: C1524-M1",
+    "Invalid active weeks: C1525-M1",
+    "Invalid active weeks: C1526-M1",
+    "Invalid active weeks: C1527-M1",
+    "Invalid active weeks: C1528-M1",
+    "Invalid active weeks: C1529-M1",
+    "Invalid active weeks: C1530-M1",
+    "Invalid active weeks: C1531-M1",
+    "Invalid active weeks: C1532-M1",
+    "Invalid active weeks: C1533-M1",
+    "Invalid active weeks: C1534-M1",
+    "Invalid active weeks: C1535-M1",
+    "Invalid active weeks: C1535-M2",
+    "Invalid active weeks: C1536-M1",
+    "Invalid active weeks: C1537-M1",
+    "Invalid active weeks: C1538-M1",
+    "Invalid active weeks: C1538-M2",
+    "Invalid active weeks: C1538-M3",
+    "Invalid active weeks: C1539-M1",
+    "Invalid active weeks: C1540-M1",
+    "Invalid active weeks: C1541-M1",
+    "Invalid active weeks: C1542-M1",
+    "Invalid active weeks: C1543-M1",
+    "Invalid active weeks: C1544-M1",
+    "Invalid active weeks: C1545-M1",
+    "Invalid active weeks: C1545-M2",
+    "Invalid active weeks: C1546-M1",
+    "Invalid active weeks: C1547-M1",
+    "Invalid active weeks: C1548-M1",
+    "Invalid active weeks: C1549-M1",
+    "Invalid active weeks: C1549-M2",
+    "Invalid active weeks: C1550-M1",
+    "Invalid active weeks: C1551-M1",
+    "Invalid active weeks: C1552-M1",
+    "Invalid active weeks: C1553-M1",
+    "Invalid active weeks: C1554-M1",
+    "Invalid active weeks: C1555-M1",
+    "Invalid active weeks: C1556-M1",
+    "Invalid active weeks: C1556-M2",
+    "Invalid active weeks: C1556-M3",
+    "Invalid active weeks: C1557-M1",
+    "Invalid active weeks: C1558-M1",
+    "Invalid active weeks: C1559-M1",
+    "Invalid active weeks: C1559-M2",
+    "Invalid active weeks: C1559-M3",
+    "Invalid active weeks: C1560-M1",
+    "Invalid active weeks: C1560-M2",
+    "Invalid active weeks: C1560-M3",
+    "Invalid active weeks: C1561-M1",
+    "Invalid active weeks: C1562-M1",
+    "Invalid active weeks: C1562-M2",
+    "Invalid active weeks: C1562-M3",
+    "Invalid active weeks: C1563-M1",
+    "Invalid active weeks: C1564-M1",
+    "Invalid active weeks: C1565-M1",
+    "Invalid active weeks: C1566-M1",
+    "Invalid active weeks: C1566-M2",
+    "Invalid active weeks: C1566-M3",
+    "Invalid active weeks: C1567-M1",
+    "Invalid active weeks: C1568-M1",
+    "Invalid active weeks: C1569-M1",
+    "Invalid active weeks: C1569-M2",
+    "Invalid active weeks: C1569-M3",
+    "Invalid active weeks: C1570-M1",
+    "Invalid active weeks: C1571-M1",
+    "Invalid active weeks: C1572-M1",
+    "Invalid active weeks: C1572-M2",
+    "Invalid active weeks: C1573-M1",
+    "Invalid active weeks: C1573-M2",
+    "Invalid active weeks: C1573-M3",
+    "Invalid active weeks: C1574-M1",
+    "Invalid active weeks: C1574-M2",
+    "Invalid active weeks: C1574-M3",
+    "Invalid active weeks: C1575-M1",
+    "Invalid active weeks: C1575-M2",
+    "Invalid active weeks: C1576-M1",
+    "Invalid active weeks: C1576-M2",
+    "Invalid active weeks: C1576-M3",
+    "Invalid active weeks: C1577-M1",
+    "Invalid active weeks: C1577-M2",
+    "Invalid active weeks: C1578-M1",
+    "Invalid active weeks: C1578-M2",
+    "Invalid active weeks: C1578-M3",
+    "Invalid active weeks: C1579-M1",
+    "Invalid active weeks: C1580-M1",
+    "Invalid active weeks: C1581-M1",
+    "Invalid active weeks: C1581-M2",
+    "Invalid active weeks: C1581-M3",
+    "Invalid active weeks: C1582-M1",
+    "Invalid active weeks: C1582-M2",
+    "Invalid active weeks: C1582-M3",
+    "Invalid active weeks: C1583-M1",
+    "Invalid active weeks: C1583-M2",
+    "Invalid active weeks: C1583-M3",
+    "Invalid active weeks: C1584-M1",
+    "Invalid active weeks: C1584-M2",
+    "Invalid active weeks: C1584-M3",
+    "Invalid active weeks: C1585-M1",
+    "Invalid active weeks: C1585-M2",
+    "Invalid active weeks: C1585-M3",
+    "Invalid active weeks: C1586-M1",
+    "Invalid active weeks: C1586-M2",
+    "Invalid active weeks: C1586-M3",
+    "Invalid active weeks: C1587-M1",
+    "Invalid active weeks: C1587-M2",
+    "Invalid active weeks: C1587-M3",
+    "Invalid active weeks: C1588-M1",
+    "Invalid active weeks: C1588-M2",
+    "Invalid active weeks: C1588-M3",
+    "Invalid active weeks: C1589-M1",
+    "Invalid active weeks: C1589-M2",
+    "Invalid active weeks: C1590-M1",
+    "Invalid active weeks: C1590-M2",
+    "Invalid fixed calendar: C2",
+    "Invalid fixed calendar: C3",
+    "Invalid fixed calendar: C4",
+    "Invalid fixed calendar: C12",
+    "Invalid fixed calendar: C14",
+    "Invalid fixed calendar: C15",
+    "Invalid fixed calendar: C17",
+    "Invalid fixed calendar: C18",
+    "Invalid fixed calendar: C21",
+    "Invalid fixed calendar: C22",
+    "Invalid fixed calendar: C23",
+    "Invalid fixed calendar: C24",
+    "Invalid fixed calendar: C25",
+    "Invalid fixed calendar: C27",
+    "Invalid fixed calendar: C28",
+    "Invalid fixed calendar: C29",
+    "Invalid fixed calendar: C31",
+    "Invalid fixed calendar: C32",
+    "Invalid fixed calendar: C34",
+    "Invalid fixed calendar: C36",
+    "Invalid fixed calendar: C37",
+    "Invalid fixed calendar: C39",
+    "Invalid fixed calendar: C40",
+    "Invalid fixed calendar: C41",
+    "Invalid fixed calendar: C45",
+    "Invalid fixed calendar: C46",
+    "Invalid fixed calendar: C50",
+    "Invalid fixed calendar: C55",
+    "Invalid fixed calendar: C56",
+    "Invalid fixed calendar: C60",
+    "Invalid fixed calendar: C61",
+    "Invalid fixed calendar: C62",
+    "Invalid fixed calendar: C63",
+    "Invalid fixed calendar: C66",
+    "Invalid fixed calendar: C67",
+    "Invalid fixed calendar: C68",
+    "Invalid fixed calendar: C70",
+    "Invalid fixed calendar: C72",
+    "Invalid fixed calendar: C73",
+    "Invalid fixed calendar: C74",
+    "Invalid fixed calendar: C77",
+    "Invalid fixed calendar: C89",
+    "Invalid fixed calendar: C90",
+    "Invalid fixed calendar: C91",
+    "Invalid fixed calendar: C92",
+    "Invalid fixed calendar: C93",
+    "Invalid fixed calendar: C94",
+    "Invalid fixed calendar: C95",
+    "Invalid fixed calendar: C96",
+    "Invalid fixed calendar: C97",
+    "Invalid fixed calendar: C102",
+    "Invalid fixed calendar: C103",
+    "Invalid fixed calendar: C104",
+    "Invalid fixed calendar: C105",
+    "Invalid fixed calendar: C108",
+    "Invalid fixed calendar: C109",
+    "Invalid fixed calendar: C110",
+    "Invalid fixed calendar: C111",
+    "Invalid fixed calendar: C112",
+    "Invalid fixed calendar: C113",
+    "Invalid fixed calendar: C114",
+    "Invalid fixed calendar: C115",
+    "Invalid fixed calendar: C116",
+    "Invalid fixed calendar: C118",
+    "Invalid fixed calendar: C119",
+    "Invalid fixed calendar: C120",
+    "Invalid fixed calendar: C121",
+    "Invalid fixed calendar: C122",
+    "Invalid fixed calendar: C124",
+    "Invalid fixed calendar: C125",
+    "Invalid fixed calendar: C126",
+    "Invalid fixed calendar: C127",
+    "Invalid fixed calendar: C128",
+    "Invalid fixed calendar: C129",
+    "Invalid fixed calendar: C130",
+    "Invalid fixed calendar: C131",
+    "Invalid fixed calendar: C134",
+    "Invalid fixed calendar: C152",
+    "Invalid fixed calendar: C154",
+    "Invalid fixed calendar: C155",
+    "Invalid fixed calendar: C157",
+    "Invalid fixed calendar: C158",
+    "Invalid fixed calendar: C159",
+    "Invalid fixed calendar: C160",
+    "Invalid fixed calendar: C161",
+    "Invalid fixed calendar: C162",
+    "Invalid fixed calendar: C163",
+    "Invalid fixed calendar: C164",
+    "Invalid fixed calendar: C166",
+    "Invalid fixed calendar: C168",
+    "Invalid fixed calendar: C172",
+    "Invalid fixed calendar: C173",
+    "Invalid fixed calendar: C176",
+    "Invalid fixed calendar: C182",
+    "Invalid fixed calendar: C183",
+    "Invalid fixed calendar: C184",
+    "Invalid fixed calendar: C185",
+    "Invalid fixed calendar: C186",
+    "Invalid fixed calendar: C187",
+    "Invalid fixed calendar: C188",
+    "Invalid fixed calendar: C189",
+    "Invalid fixed calendar: C190",
+    "Invalid fixed calendar: C196",
+    "Invalid fixed calendar: C199",
+    "Invalid fixed calendar: C209",
+    "Invalid fixed calendar: C210",
+    "Invalid fixed calendar: C211",
+    "Invalid fixed calendar: C213",
+    "Invalid fixed calendar: C215",
+    "Invalid fixed calendar: C218",
+    "Invalid fixed calendar: C219",
+    "Invalid fixed calendar: C220",
+    "Invalid fixed calendar: C222",
+    "Invalid fixed calendar: C223",
+    "Invalid fixed calendar: C224",
+    "Invalid fixed calendar: C225",
+    "Invalid fixed calendar: C226",
+    "Invalid fixed calendar: C227",
+    "Invalid fixed calendar: C228",
+    "Invalid fixed calendar: C229",
+    "Invalid fixed calendar: C231",
+    "Invalid fixed calendar: C232",
+    "Invalid fixed calendar: C234",
+    "Invalid fixed calendar: C235",
+    "Invalid fixed calendar: C246",
+    "Invalid fixed calendar: C247",
+    "Invalid fixed calendar: C248",
+    "Invalid fixed calendar: C249",
+    "Invalid fixed calendar: C250",
+    "Invalid fixed calendar: C251",
+    "Invalid fixed calendar: C252",
+    "Invalid fixed calendar: C253",
+    "Invalid fixed calendar: C254",
+    "Invalid fixed calendar: C256",
+    "Invalid fixed calendar: C257",
+    "Invalid fixed calendar: C262",
+    "Invalid fixed calendar: C263",
+    "Invalid fixed calendar: C264",
+    "Invalid fixed calendar: C265",
+    "Invalid fixed calendar: C266",
+    "Invalid fixed calendar: C267",
+    "Invalid fixed calendar: C268",
+    "Invalid fixed calendar: C269",
+    "Invalid fixed calendar: C270",
+    "Invalid fixed calendar: C272",
+    "Invalid fixed calendar: C273",
+    "Invalid fixed calendar: C275",
+    "Invalid fixed calendar: C277",
+    "Invalid fixed calendar: C285",
+    "Invalid fixed calendar: C286",
+    "Invalid fixed calendar: C287",
+    "Invalid fixed calendar: C291",
+    "Invalid fixed calendar: C292",
+    "Invalid fixed calendar: C293",
+    "Invalid fixed calendar: C294",
+    "Invalid fixed calendar: C296",
+    "Invalid fixed calendar: C298",
+    "Invalid fixed calendar: C303",
+    "Invalid fixed calendar: C304",
+    "Invalid fixed calendar: C305",
+    "Invalid fixed calendar: C306",
+    "Invalid fixed calendar: C307",
+    "Invalid fixed calendar: C308",
+    "Invalid fixed calendar: C309",
+    "Invalid fixed calendar: C310",
+    "Invalid fixed calendar: C312",
+    "Invalid fixed calendar: C314",
+    "Invalid fixed calendar: C318",
+    "Invalid fixed calendar: C322",
+    "Invalid fixed calendar: C323",
+    "Invalid fixed calendar: C324",
+    "Invalid fixed calendar: C325",
+    "Invalid fixed calendar: C326",
+    "Invalid fixed calendar: C327",
+    "Invalid fixed calendar: C328",
+    "Invalid fixed calendar: C329",
+    "Invalid fixed calendar: C330",
+    "Invalid fixed calendar: C331",
+    "Invalid fixed calendar: C336",
+    "Invalid fixed calendar: C337",
+    "Invalid fixed calendar: C338",
+    "Invalid fixed calendar: C339",
+    "Invalid fixed calendar: C340",
+    "Invalid fixed calendar: C342",
+    "Invalid fixed calendar: C343",
+    "Invalid fixed calendar: C344",
+    "Invalid fixed calendar: C347",
+    "Invalid fixed calendar: C348",
+    "Invalid fixed calendar: C354",
+    "Invalid fixed calendar: C355",
+    "Invalid fixed calendar: C362",
+    "Invalid fixed calendar: C374",
+    "Invalid fixed calendar: C375",
+    "Invalid fixed calendar: C376",
+    "Invalid fixed calendar: C377",
+    "Invalid fixed calendar: C378",
+    "Invalid fixed calendar: C379",
+    "Invalid fixed calendar: C380",
+    "Invalid fixed calendar: C382",
+    "Invalid fixed calendar: C387",
+    "Invalid fixed calendar: C390",
+    "Invalid fixed calendar: C393",
+    "Invalid fixed calendar: C397",
+    "Invalid fixed calendar: C398",
+    "Invalid fixed calendar: C399",
+    "Invalid fixed calendar: C400",
+    "Invalid fixed calendar: C401",
+    "Invalid fixed calendar: C402",
+    "Invalid fixed calendar: C403",
+    "Invalid fixed calendar: C404",
+    "Invalid fixed calendar: C405",
+    "Invalid fixed calendar: C406",
+    "Invalid fixed calendar: C407",
+    "Invalid fixed calendar: C408",
+    "Invalid fixed calendar: C409",
+    "Invalid fixed calendar: C411",
+    "Invalid fixed calendar: C416",
+    "Invalid fixed calendar: C417",
+    "Invalid fixed calendar: C418",
+    "Invalid fixed calendar: C421",
+    "Invalid fixed calendar: C422",
+    "Invalid fixed calendar: C423",
+    "Invalid fixed calendar: C424",
+    "Invalid fixed calendar: C425",
+    "Invalid fixed calendar: C426",
+    "Invalid fixed calendar: C427",
+    "Invalid fixed calendar: C428",
+    "Invalid fixed calendar: C432",
+    "Invalid fixed calendar: C436",
+    "Invalid fixed calendar: C439",
+    "Invalid fixed calendar: C440",
+    "Invalid fixed calendar: C449",
+    "Invalid fixed calendar: C450",
+    "Invalid fixed calendar: C453",
+    "Invalid fixed calendar: C457",
+    "Invalid fixed calendar: C458",
+    "Invalid fixed calendar: C459",
+    "Invalid fixed calendar: C460",
+    "Invalid fixed calendar: C461",
+    "Invalid fixed calendar: C462",
+    "Invalid fixed calendar: C463",
+    "Invalid fixed calendar: C464",
+    "Invalid fixed calendar: C465",
+    "Invalid fixed calendar: C466",
+    "Invalid fixed calendar: C468",
+    "Invalid fixed calendar: C470",
+    "Invalid fixed calendar: C471",
+    "Invalid fixed calendar: C472",
+    "Invalid fixed calendar: C474",
+    "Invalid fixed calendar: C476",
+    "Invalid fixed calendar: C477",
+    "Invalid fixed calendar: C482",
+    "Invalid fixed calendar: C483",
+    "Invalid fixed calendar: C485",
+    "Invalid fixed calendar: C498",
+    "Invalid fixed calendar: C499",
+    "Invalid fixed calendar: C500",
+    "Invalid fixed calendar: C501",
+    "Invalid fixed calendar: C502",
+    "Invalid fixed calendar: C504",
+    "Invalid fixed calendar: C505",
+    "Invalid fixed calendar: C507",
+    "Invalid fixed calendar: C508",
+    "Invalid fixed calendar: C509",
+    "Invalid fixed calendar: C510",
+    "Invalid fixed calendar: C511",
+    "Invalid fixed calendar: C512",
+    "Invalid fixed calendar: C514",
+    "Invalid fixed calendar: C515",
+    "Invalid fixed calendar: C520",
+    "Invalid fixed calendar: C521",
+    "Invalid fixed calendar: C527",
+    "Invalid fixed calendar: C528",
+    "Invalid fixed calendar: C538",
+    "Invalid fixed calendar: C549",
+    "Invalid fixed calendar: C551",
+    "Invalid fixed calendar: C552",
+    "Invalid fixed calendar: C553",
+    "Invalid fixed calendar: C554",
+    "Invalid fixed calendar: C555",
+    "Invalid fixed calendar: C556",
+    "Invalid fixed calendar: C558",
+    "Invalid fixed calendar: C561",
+    "Invalid fixed calendar: C570",
+    "Invalid fixed calendar: C571",
+    "Invalid fixed calendar: C572",
+    "Invalid fixed calendar: C573",
+    "Invalid fixed calendar: C574",
+    "Invalid fixed calendar: C575",
+    "Invalid fixed calendar: C577",
+    "Invalid fixed calendar: C578",
+    "Invalid fixed calendar: C579",
+    "Invalid fixed calendar: C580",
+    "Invalid fixed calendar: C582",
+    "Invalid fixed calendar: C593",
+    "Invalid fixed calendar: C596",
+    "Invalid fixed calendar: C603",
+    "Invalid fixed calendar: C604",
+    "Invalid fixed calendar: C605",
+    "Invalid fixed calendar: C606",
+    "Invalid fixed calendar: C607",
+    "Invalid fixed calendar: C608",
+    "Invalid fixed calendar: C609",
+    "Invalid fixed calendar: C610",
+    "Invalid fixed calendar: C611",
+    "Invalid fixed calendar: C612",
+    "Invalid fixed calendar: C613",
+    "Invalid fixed calendar: C614",
+    "Invalid fixed calendar: C615",
+    "Invalid fixed calendar: C616",
+    "Invalid fixed calendar: C617",
+    "Invalid fixed calendar: C618",
+    "Invalid fixed calendar: C619",
+    "Invalid fixed calendar: C620",
+    "Invalid fixed calendar: C621",
+    "Invalid fixed calendar: C622",
+    "Invalid fixed calendar: C623",
+    "Invalid fixed calendar: C624",
+    "Invalid fixed calendar: C625",
+    "Invalid fixed calendar: C626",
+    "Invalid fixed calendar: C627",
+    "Invalid fixed calendar: C628",
+    "Invalid fixed calendar: C630",
+    "Invalid fixed calendar: C633",
+    "Invalid fixed calendar: C634",
+    "Invalid fixed calendar: C644",
+    "Invalid fixed calendar: C648",
+    "Invalid fixed calendar: C649",
+    "Invalid fixed calendar: C650",
+    "Invalid fixed calendar: C651",
+    "Invalid fixed calendar: C652",
+    "Invalid fixed calendar: C653",
+    "Invalid fixed calendar: C654",
+    "Invalid fixed calendar: C655",
+    "Invalid fixed calendar: C656",
+    "Invalid fixed calendar: C658",
+    "Invalid fixed calendar: C660",
+    "Invalid fixed calendar: C661",
+    "Invalid fixed calendar: C662",
+    "Invalid fixed calendar: C667",
+    "Invalid fixed calendar: C668",
+    "Invalid fixed calendar: C669",
+    "Invalid fixed calendar: C670",
+    "Invalid fixed calendar: C671",
+    "Invalid fixed calendar: C673",
+    "Invalid fixed calendar: C674",
+    "Invalid fixed calendar: C675",
+    "Invalid fixed calendar: C677",
+    "Invalid fixed calendar: C679",
+    "Invalid fixed calendar: C703",
+    "Invalid fixed calendar: C704",
+    "Invalid fixed calendar: C705",
+    "Invalid fixed calendar: C708",
+    "Invalid fixed calendar: C712",
+    "Invalid fixed calendar: C713",
+    "Invalid fixed calendar: C714",
+    "Invalid fixed calendar: C715",
+    "Invalid fixed calendar: C716",
+    "Invalid fixed calendar: C717",
+    "Invalid fixed calendar: C718",
+    "Invalid fixed calendar: C719",
+    "Invalid fixed calendar: C720",
+    "Invalid fixed calendar: C724",
+    "Invalid fixed calendar: C725",
+    "Invalid fixed calendar: C726",
+    "Invalid fixed calendar: C727",
+    "Invalid fixed calendar: C729",
+    "Invalid fixed calendar: C730",
+    "Invalid fixed calendar: C731",
+    "Invalid fixed calendar: C745",
+    "Invalid fixed calendar: C747",
+    "Invalid fixed calendar: C749",
+    "Invalid fixed calendar: C751",
+    "Invalid fixed calendar: C752",
+    "Invalid fixed calendar: C753",
+    "Invalid fixed calendar: C754",
+    "Invalid fixed calendar: C755",
+    "Invalid fixed calendar: C756",
+    "Invalid fixed calendar: C759",
+    "Invalid fixed calendar: C760",
+    "Invalid fixed calendar: C761",
+    "Invalid fixed calendar: C762",
+    "Invalid fixed calendar: C763",
+    "Invalid fixed calendar: C764",
+    "Invalid fixed calendar: C765",
+    "Invalid fixed calendar: C766",
+    "Invalid fixed calendar: C767",
+    "Invalid fixed calendar: C768",
+    "Invalid fixed calendar: C769",
+    "Invalid fixed calendar: C770",
+    "Invalid fixed calendar: C771",
+    "Invalid fixed calendar: C772",
+    "Invalid fixed calendar: C773",
+    "Invalid fixed calendar: C779",
+    "Invalid fixed calendar: C780",
+    "Invalid fixed calendar: C781",
+    "Invalid fixed calendar: C783",
+    "Invalid fixed calendar: C784",
+    "Invalid fixed calendar: C785",
+    "Invalid fixed calendar: C786",
+    "Invalid fixed calendar: C787",
+    "Invalid fixed calendar: C789",
+    "Invalid fixed calendar: C790",
+    "Invalid fixed calendar: C792",
+    "Invalid fixed calendar: C797",
+    "Invalid fixed calendar: C798",
+    "Invalid fixed calendar: C799",
+    "Invalid fixed calendar: C800",
+    "Invalid fixed calendar: C801",
+    "Invalid fixed calendar: C802",
+    "Invalid fixed calendar: C803",
+    "Invalid fixed calendar: C806",
+    "Invalid fixed calendar: C808",
+    "Invalid fixed calendar: C809",
+    "Invalid fixed calendar: C810",
+    "Invalid fixed calendar: C811",
+    "Invalid fixed calendar: C812",
+    "Invalid fixed calendar: C814",
+    "Invalid fixed calendar: C815",
+    "Invalid fixed calendar: C816",
+    "Invalid fixed calendar: C817",
+    "Invalid fixed calendar: C820",
+    "Invalid fixed calendar: C821",
+    "Invalid fixed calendar: C822",
+    "Invalid fixed calendar: C823",
+    "Invalid fixed calendar: C824",
+    "Invalid fixed calendar: C825",
+    "Invalid fixed calendar: C834",
+    "Invalid fixed calendar: C835",
+    "Invalid fixed calendar: C836",
+    "Invalid fixed calendar: C837",
+    "Invalid fixed calendar: C838",
+    "Invalid fixed calendar: C839",
+    "Invalid fixed calendar: C840",
+    "Invalid fixed calendar: C841",
+    "Invalid fixed calendar: C842",
+    "Invalid fixed calendar: C843",
+    "Invalid fixed calendar: C845",
+    "Invalid fixed calendar: C846",
+    "Invalid fixed calendar: C847",
+    "Invalid fixed calendar: C849",
+    "Invalid fixed calendar: C850",
+    "Invalid fixed calendar: C860",
+    "Invalid fixed calendar: C862",
+    "Invalid fixed calendar: C866",
+    "Invalid fixed calendar: C867",
+    "Invalid fixed calendar: C870",
+    "Invalid fixed calendar: C871",
+    "Invalid fixed calendar: C872",
+    "Invalid fixed calendar: C892",
+    "Invalid fixed calendar: C893",
+    "Invalid fixed calendar: C894",
+    "Invalid fixed calendar: C895",
+    "Invalid fixed calendar: C897",
+    "Invalid fixed calendar: C898",
+    "Invalid fixed calendar: C911",
+    "Invalid fixed calendar: C913",
+    "Invalid fixed calendar: C914",
+    "Invalid fixed calendar: C915",
+    "Invalid fixed calendar: C917",
+    "Invalid fixed calendar: C922",
+    "Invalid fixed calendar: C924",
+    "Invalid fixed calendar: C926",
+    "Invalid fixed calendar: C928",
+    "Invalid fixed calendar: C929",
+    "Invalid fixed calendar: C930",
+    "Invalid fixed calendar: C931",
+    "Invalid fixed calendar: C932",
+    "Invalid fixed calendar: C933",
+    "Invalid fixed calendar: C934",
+    "Invalid fixed calendar: C935",
+    "Invalid fixed calendar: C936",
+    "Invalid fixed calendar: C937",
+    "Invalid fixed calendar: C938",
+    "Invalid fixed calendar: C939",
+    "Invalid fixed calendar: C940",
+    "Invalid fixed calendar: C941",
+    "Invalid fixed calendar: C942",
+    "Invalid fixed calendar: C943",
+    "Invalid fixed calendar: C944",
+    "Invalid fixed calendar: C945",
+    "Invalid fixed calendar: C946",
+    "Invalid fixed calendar: C947",
+    "Invalid fixed calendar: C948",
+    "Invalid fixed calendar: C949",
+    "Invalid fixed calendar: C950",
+    "Invalid fixed calendar: C951",
+    "Invalid fixed calendar: C952",
+    "Invalid fixed calendar: C953",
+    "Invalid fixed calendar: C954",
+    "Invalid fixed calendar: C955",
+    "Invalid fixed calendar: C956",
+    "Invalid fixed calendar: C957",
+    "Invalid fixed calendar: C958",
+    "Invalid fixed calendar: C959",
+    "Invalid fixed calendar: C960",
+    "Invalid fixed calendar: C961",
+    "Invalid fixed calendar: C962",
+    "Invalid fixed calendar: C963",
+    "Invalid fixed calendar: C964",
+    "Invalid fixed calendar: C965",
+    "Invalid fixed calendar: C966",
+    "Invalid fixed calendar: C967",
+    "Invalid fixed calendar: C968",
+    "Invalid fixed calendar: C969",
+    "Invalid fixed calendar: C970",
+    "Invalid fixed calendar: C971",
+    "Invalid fixed calendar: C972",
+    "Invalid fixed calendar: C973",
+    "Invalid fixed calendar: C974",
+    "Invalid fixed calendar: C975",
+    "Invalid fixed calendar: C976",
+    "Invalid fixed calendar: C977",
+    "Invalid fixed calendar: C978",
+    "Invalid fixed calendar: C979",
+    "Invalid fixed calendar: C980",
+    "Invalid fixed calendar: C981",
+    "Invalid fixed calendar: C982",
+    "Invalid fixed calendar: C983",
+    "Invalid fixed calendar: C984",
+    "Invalid fixed calendar: C985",
+    "Invalid fixed calendar: C986",
+    "Invalid fixed calendar: C987",
+    "Invalid fixed calendar: C988",
+    "Invalid fixed calendar: C989",
+    "Invalid fixed calendar: C990",
+    "Invalid fixed calendar: C991",
+    "Invalid fixed calendar: C992",
+    "Invalid fixed calendar: C993",
+    "Invalid fixed calendar: C994",
+    "Invalid fixed calendar: C995",
+    "Invalid fixed calendar: C996",
+    "Invalid fixed calendar: C997",
+    "Invalid fixed calendar: C998",
+    "Invalid fixed calendar: C999",
+    "Invalid fixed calendar: C1000",
+    "Invalid fixed calendar: C1001",
+    "Invalid fixed calendar: C1002",
+    "Invalid fixed calendar: C1003",
+    "Invalid fixed calendar: C1004",
+    "Invalid fixed calendar: C1006",
+    "Invalid fixed calendar: C1007",
+    "Invalid fixed calendar: C1008",
+    "Invalid fixed calendar: C1010",
+    "Invalid fixed calendar: C1011",
+    "Invalid fixed calendar: C1012",
+    "Invalid fixed calendar: C1013",
+    "Invalid fixed calendar: C1014",
+    "Invalid fixed calendar: C1015",
+    "Invalid fixed calendar: C1016",
+    "Invalid fixed calendar: C1017",
+    "Invalid fixed calendar: C1018",
+    "Invalid fixed calendar: C1019",
+    "Invalid fixed calendar: C1020",
+    "Invalid fixed calendar: C1021",
+    "Invalid fixed calendar: C1022",
+    "Invalid fixed calendar: C1023",
+    "Invalid fixed calendar: C1024",
+    "Invalid fixed calendar: C1025",
+    "Invalid fixed calendar: C1026",
+    "Invalid fixed calendar: C1027",
+    "Invalid fixed calendar: C1028",
+    "Invalid fixed calendar: C1029",
+    "Invalid fixed calendar: C1030",
+    "Invalid fixed calendar: C1031",
+    "Invalid fixed calendar: C1032",
+    "Invalid fixed calendar: C1033",
+    "Invalid fixed calendar: C1034",
+    "Invalid fixed calendar: C1035",
+    "Invalid fixed calendar: C1036",
+    "Invalid fixed calendar: C1037",
+    "Invalid fixed calendar: C1038",
+    "Invalid fixed calendar: C1039",
+    "Invalid fixed calendar: C1040",
+    "Invalid fixed calendar: C1041",
+    "Invalid fixed calendar: C1042",
+    "Invalid fixed calendar: C1043",
+    "Invalid fixed calendar: C1044",
+    "Invalid fixed calendar: C1045",
+    "Invalid fixed calendar: C1046",
+    "Invalid fixed calendar: C1047",
+    "Invalid fixed calendar: C1048",
+    "Invalid fixed calendar: C1049",
+    "Invalid fixed calendar: C1050",
+    "Invalid fixed calendar: C1051",
+    "Invalid fixed calendar: C1056",
+    "Invalid fixed calendar: C1057",
+    "Invalid fixed calendar: C1059",
+    "Invalid fixed calendar: C1060",
+    "Invalid fixed calendar: C1061",
+    "Invalid fixed calendar: C1062",
+    "Invalid fixed calendar: C1063",
+    "Invalid fixed calendar: C1064",
+    "Invalid fixed calendar: C1065",
+    "Invalid fixed calendar: C1066",
+    "Invalid fixed calendar: C1068",
+    "Invalid fixed calendar: C1070",
+    "Invalid fixed calendar: C1071",
+    "Invalid fixed calendar: C1072",
+    "Invalid fixed calendar: C1073",
+    "Invalid fixed calendar: C1074",
+    "Invalid fixed calendar: C1075",
+    "Invalid fixed calendar: C1077",
+    "Invalid fixed calendar: C1078",
+    "Invalid fixed calendar: C1079",
+    "Invalid fixed calendar: C1080",
+    "Invalid fixed calendar: C1081",
+    "Invalid fixed calendar: C1083",
+    "Invalid fixed calendar: C1084",
+    "Invalid fixed calendar: C1086",
+    "Invalid fixed calendar: C1088",
+    "Invalid fixed calendar: C1090",
+    "Invalid fixed calendar: C1091",
+    "Invalid fixed calendar: C1094",
+    "Invalid fixed calendar: C1097",
+    "Invalid fixed calendar: C1108",
+    "Invalid fixed calendar: C1109",
+    "Invalid fixed calendar: C1111",
+    "Invalid fixed calendar: C1112",
+    "Invalid fixed calendar: C1113",
+    "Invalid fixed calendar: C1114",
+    "Invalid fixed calendar: C1115",
+    "Invalid fixed calendar: C1116",
+    "Invalid fixed calendar: C1117",
+    "Invalid fixed calendar: C1118",
+    "Invalid fixed calendar: C1119",
+    "Invalid fixed calendar: C1120",
+    "Invalid fixed calendar: C1121",
+    "Invalid fixed calendar: C1122",
+    "Invalid fixed calendar: C1123",
+    "Invalid fixed calendar: C1124",
+    "Invalid fixed calendar: C1125",
+    "Invalid fixed calendar: C1126",
+    "Invalid fixed calendar: C1127",
+    "Invalid fixed calendar: C1128",
+    "Invalid fixed calendar: C1129",
+    "Invalid fixed calendar: C1130",
+    "Invalid fixed calendar: C1131",
+    "Invalid fixed calendar: C1132",
+    "Invalid fixed calendar: C1133",
+    "Invalid fixed calendar: C1134",
+    "Invalid fixed calendar: C1135",
+    "Invalid fixed calendar: C1136",
+    "Invalid fixed calendar: C1137",
+    "Invalid fixed calendar: C1138",
+    "Invalid fixed calendar: C1139",
+    "Invalid fixed calendar: C1140",
+    "Invalid fixed calendar: C1141",
+    "Invalid fixed calendar: C1142",
+    "Invalid fixed calendar: C1143",
+    "Invalid fixed calendar: C1144",
+    "Invalid fixed calendar: C1145",
+    "Invalid fixed calendar: C1146",
+    "Invalid fixed calendar: C1147",
+    "Invalid fixed calendar: C1148",
+    "Invalid fixed calendar: C1149",
+    "Invalid fixed calendar: C1150",
+    "Invalid fixed calendar: C1151",
+    "Invalid fixed calendar: C1152",
+    "Invalid fixed calendar: C1153",
+    "Invalid fixed calendar: C1154",
+    "Invalid fixed calendar: C1155",
+    "Invalid fixed calendar: C1156",
+    "Invalid fixed calendar: C1157",
+    "Invalid fixed calendar: C1158",
+    "Invalid fixed calendar: C1159",
+    "Invalid fixed calendar: C1160",
+    "Invalid fixed calendar: C1161",
+    "Invalid fixed calendar: C1162",
+    "Invalid fixed calendar: C1163",
+    "Invalid fixed calendar: C1165",
+    "Invalid fixed calendar: C1166",
+    "Invalid fixed calendar: C1167",
+    "Invalid fixed calendar: C1168",
+    "Invalid fixed calendar: C1169",
+    "Invalid fixed calendar: C1170",
+    "Invalid fixed calendar: C1171",
+    "Invalid fixed calendar: C1172",
+    "Invalid fixed calendar: C1173",
+    "Invalid fixed calendar: C1174",
+    "Invalid fixed calendar: C1175",
+    "Invalid fixed calendar: C1176",
+    "Invalid fixed calendar: C1177",
+    "Invalid fixed calendar: C1178",
+    "Invalid fixed calendar: C1179",
+    "Invalid fixed calendar: C1180",
+    "Invalid fixed calendar: C1181",
+    "Invalid fixed calendar: C1182",
+    "Invalid fixed calendar: C1183",
+    "Invalid fixed calendar: C1184",
+    "Invalid fixed calendar: C1185",
+    "Invalid fixed calendar: C1186",
+    "Invalid fixed calendar: C1187",
+    "Invalid fixed calendar: C1188",
+    "Invalid fixed calendar: C1189",
+    "Invalid fixed calendar: C1190",
+    "Invalid fixed calendar: C1191",
+    "Invalid fixed calendar: C1192",
+    "Invalid fixed calendar: C1195",
+    "Invalid fixed calendar: C1196",
+    "Invalid fixed calendar: C1197",
+    "Invalid fixed calendar: C1198",
+    "Invalid fixed calendar: C1199",
+    "Invalid fixed calendar: C1200",
+    "Invalid fixed calendar: C1201",
+    "Invalid fixed calendar: C1202",
+    "Invalid fixed calendar: C1203",
+    "Invalid fixed calendar: C1204",
+    "Invalid fixed calendar: C1205",
+    "Invalid fixed calendar: C1206",
+    "Invalid fixed calendar: C1207",
+    "Invalid fixed calendar: C1208",
+    "Invalid fixed calendar: C1209",
+    "Invalid fixed calendar: C1210",
+    "Invalid fixed calendar: C1211",
+    "Invalid fixed calendar: C1212",
+    "Invalid fixed calendar: C1213",
+    "Invalid fixed calendar: C1214",
+    "Invalid fixed calendar: C1215",
+    "Invalid fixed calendar: C1216",
+    "Invalid fixed calendar: C1217",
+    "Invalid fixed calendar: C1218",
+    "Invalid fixed calendar: C1219",
+    "Invalid fixed calendar: C1220",
+    "Invalid fixed calendar: C1223",
+    "Invalid fixed calendar: C1224",
+    "Invalid fixed calendar: C1225",
+    "Invalid fixed calendar: C1226",
+    "Invalid fixed calendar: C1227",
+    "Invalid fixed calendar: C1228",
+    "Invalid fixed calendar: C1229",
+    "Invalid fixed calendar: C1230",
+    "Invalid fixed calendar: C1231",
+    "Invalid fixed calendar: C1233",
+    "Invalid fixed calendar: C1234",
+    "Invalid fixed calendar: C1239",
+    "Invalid fixed calendar: C1240",
+    "Invalid fixed calendar: C1241",
+    "Invalid fixed calendar: C1242",
+    "Invalid fixed calendar: C1243",
+    "Invalid fixed calendar: C1244",
+    "Invalid fixed calendar: C1245",
+    "Invalid fixed calendar: C1246",
+    "Invalid fixed calendar: C1247",
+    "Invalid fixed calendar: C1248",
+    "Invalid fixed calendar: C1249",
+    "Invalid fixed calendar: C1250",
+    "Invalid fixed calendar: C1251",
+    "Invalid fixed calendar: C1252",
+    "Invalid fixed calendar: C1253",
+    "Invalid fixed calendar: C1254",
+    "Invalid fixed calendar: C1255",
+    "Invalid fixed calendar: C1256",
+    "Invalid fixed calendar: C1264",
+    "Invalid fixed calendar: C1265",
+    "Invalid fixed calendar: C1269",
+    "Invalid fixed calendar: C1301",
+    "Invalid fixed calendar: C1303",
+    "Invalid fixed calendar: C1306",
+    "Invalid fixed calendar: C1308",
+    "Invalid fixed calendar: C1309",
+    "Invalid fixed calendar: C1310",
+    "Invalid fixed calendar: C1314",
+    "Invalid fixed calendar: C1317",
+    "Invalid fixed calendar: C1318",
+    "Invalid fixed calendar: C1322",
+    "Invalid fixed calendar: C1326",
+    "Invalid fixed calendar: C1327",
+    "Invalid fixed calendar: C1328",
+    "Invalid fixed calendar: C1329",
+    "Invalid fixed calendar: C1330",
+    "Invalid fixed calendar: C1331",
+    "Invalid fixed calendar: C1333",
+    "Invalid fixed calendar: C1334",
+    "Invalid fixed calendar: C1335",
+    "Invalid fixed calendar: C1336",
+    "Invalid fixed calendar: C1337",
+    "Invalid fixed calendar: C1338",
+    "Invalid fixed calendar: C1339",
+    "Invalid fixed calendar: C1340",
+    "Invalid fixed calendar: C1341",
+    "Invalid fixed calendar: C1342",
+    "Invalid fixed calendar: C1343",
+    "Invalid fixed calendar: C1344",
+    "Invalid fixed calendar: C1346",
+    "Invalid fixed calendar: C1347",
+    "Invalid fixed calendar: C1348",
+    "Invalid fixed calendar: C1349",
+    "Invalid fixed calendar: C1350",
+    "Invalid fixed calendar: C1351",
+    "Invalid fixed calendar: C1352",
+    "Invalid fixed calendar: C1353",
+    "Invalid fixed calendar: C1356",
+    "Invalid fixed calendar: C1357",
+    "Invalid fixed calendar: C1359",
+    "Invalid fixed calendar: C1360",
+    "Invalid fixed calendar: C1365",
+    "Invalid fixed calendar: C1367",
+    "Invalid fixed calendar: C1368",
+    "Invalid fixed calendar: C1369",
+    "Invalid fixed calendar: C1370",
+    "Invalid fixed calendar: C1371",
+    "Invalid fixed calendar: C1385",
+    "Invalid fixed calendar: C1386",
+    "Invalid fixed calendar: C1389",
+    "Invalid fixed calendar: C1391",
+    "Invalid fixed calendar: C1396",
+    "Invalid fixed calendar: C1401",
+    "Invalid fixed calendar: C1405",
+    "Invalid fixed calendar: C1406"
+   ],
+   "warnings": [],
+   "summary": {}
+  }
+ },
+ {
+  "name": "strict_student_rule",
+  "dataset": "data/fall-cs.json.gz",
+  "edits": [
+   {
+    "path": [
+     "constraints",
+     "external_student_overlap_is_hard"
+    ],
+    "value": true
+   }
+  ],
+  "expected": {
+   "status": "passed_with_warnings",
+   "errors": [],
+   "warnings": [
+    {
+     "code": "LOCAL_INFEASIBILITY",
+     "weekly_session_count": 630,
+     "meaning": "No local placement against fixed background; global completeness is impossible under this model."
+    },
+    {
+     "code": "SYNTHETIC_ROOM_TYPES_AND_LABS",
+     "meaning": "Source candidate rooms are modeled as lecture rooms; independent synthetic labs are added."
+    },
+    {
+     "code": "MISSING_SOURCE_INSTRUCTORS",
+     "classes": 143,
+     "meaning": "Unique synthetic instructors add no unknown shared-teacher conflicts."
+    },
+    {
+     "code": "SYNTHETIC_CALENDAR",
+     "meaning": "All target and external classes repeat for the synthetic calendar; source dates masks are provenance only."
+    },
+    {
+     "code": "ADAPTED_STUDENT_RULE",
+     "external_student_overlap_is_hard": true,
+     "meaning": "Known student groups cannot overlap among CS targets; external-student conflicts are hard only in the strict variant. Original student-conflict score and re-sectioning are not reproduced."
+    },
+    {
+     "code": "GLOBAL_FEASIBILITY_NOT_PROVEN",
+     "meaning": "Local checks do not jointly assign target classes or certify a complete timetable."
+    }
+   ],
+   "summary": {
+    "target_classes": 174,
+    "source_course_offerings": 44,
+    "recurring_sessions": 223,
+    "weeks": 15,
+    "weekly_sessions": 3345,
+    "lab_required_weekly_sessions": 536,
+    "lab_required_minutes": 48240,
+    "mixed_recurring_sessions": 134,
+    "lecture_only_recurring_sessions": 89,
+    "source_schedulable_lecture_rooms": 13,
+    "synthetic_computer_labs": 4,
+    "background_only_room_records": 84,
+    "committed_classes": 810,
+    "synthetic_instructor_classes": 143,
+    "student_roster_groups": 1918,
+    "known_students_in_target_rosters": 2002,
+    "classes_without_known_enrollment": 15,
+    "classes_without_locally_complete_time_option": 37,
+    "weekly_sessions_without_any_local_placement": 630
+   },
+   "lab_required_meetings_per_week": {
+    "1": 37,
+    "2": 31,
+    "3": 38,
+    "4": 40,
+    "5": 30,
+    "6": 30,
+    "7": 45,
+    "8": 36,
+    "9": 39,
+    "10": 32,
+    "11": 28,
+    "12": 40,
+    "13": 33,
+    "14": 37,
+    "15": 40
+   },
+   "local_feasibility": {
+    "scope": "Against external room/instructor reservations, conditional external student rule, room windows, capacity/type and fixed SAME_TIME only; other targets not jointly scheduled.",
+    "complete_time_option_counts": {
+     "C1417": 1,
+     "C1418": 2,
+     "C1419": 1,
+     "C1420": 1,
+     "C1421": 2,
+     "C1422": 2,
+     "C1423": 1,
+     "C1424": 2,
+     "C1425": 2,
+     "C1426": 1,
+     "C1427": 2,
+     "C1428": 2,
+     "C1429": 2,
+     "C1430": 2,
+     "C1431": 0,
+     "C1432": 2,
+     "C1433": 2,
+     "C1434": 0,
+     "C1435": 0,
+     "C1436": 1,
+     "C1437": 2,
+     "C1438": 2,
+     "C1439": 0,
+     "C1440": 1,
+     "C1441": 0,
+     "C1442": 0,
+     "C1443": 38,
+     "C1444": 20,
+     "C1445": 20,
+     "C1446": 1,
+     "C1447": 0,
+     "C1448": 0,
+     "C1449": 1,
+     "C1450": 1,
+     "C1451": 1,
+     "C1452": 2,
+     "C1453": 1,
+     "C1454": 1,
+     "C1455": 1,
+     "C1456": 2,
+     "C1457": 0,
+     "C1458": 2,
+     "C1459": 3,
+     "C1460": 5,
+     "C1461": 3,
+     "C1462": 3,
+     "C1463": 3,
+     "C1464": 3,
+     "C1465": 3,
+     "C1466": 4,
+     "C1467": 0,
+     "C1468": 0,
+     "C1469": 2,
+     "C1470": 0,
+     "C1471": 0,
+     "C1472": 0,
+     "C1473": 0,
+     "C1474": 1,
+     "C1475": 2,
+     "C1476": 3,
+     "C1477": 3,
+     "C1478": 3,
+     "C1479": 4,
+     "C1480": 3,
+     "C1481": 3,
+     "C1482": 3,
+     "C1483": 4,
+     "C1484": 0,
+     "C1485": 2,
+     "C1486": 0,
+     "C1487": 0,
+     "C1488": 2,
+     "C1489": 0,
+     "C1490": 0,
+     "C1491": 4,
+     "C1492": 0,
+     "C1493": 0,
+     "C1494": 0,
+     "C1495": 2,
+     "C1496": 4,
+     "C1497": 3,
+     "C1498": 3,
+     "C1499": 2,
+     "C1500": 2,
+     "C1501": 2,
+     "C1502": 2,
+     "C1503": 2,
+     "C1504": 3,
+     "C1505": 2,
+     "C1506": 3,
+     "C1507": 3,
+     "C1508": 2,
+     "C1509": 3,
+     "C1510": 3,
+     "C1511": 2,
+     "C1512": 3,
+     "C1513": 1,
+     "C1514": 2,
+     "C1515": 0,
+     "C1516": 2,
+     "C1517": 0,
+     "C1518": 2,
+     "C1519": 2,
+     "C1520": 0,
+     "C1521": 2,
+     "C1522": 0,
+     "C1523": 0,
+     "C1524": 2,
+     "C1525": 2,
+     "C1526": 2,
+     "C1527": 2,
+     "C1528": 2,
+     "C1529": 0,
+     "C1530": 0,
+     "C1531": 0,
+     "C1532": 2,
+     "C1533": 2,
+     "C1534": 2,
+     "C1535": 0,
+     "C1536": 1,
+     "C1537": 1,
+     "C1538": 0,
+     "C1539": 1,
+     "C1540": 1,
+     "C1541": 2,
+     "C1542": 1,
+     "C1543": 2,
+     "C1544": 0,
+     "C1545": 1,
+     "C1546": 4,
+     "C1547": 4,
+     "C1548": 4,
+     "C1549": 2,
+     "C1550": 5,
+     "C1551": 3,
+     "C1552": 3,
+     "C1553": 5,
+     "C1554": 3,
+     "C1555": 1,
+     "C1556": 1,
+     "C1557": 5,
+     "C1558": 2,
+     "C1559": 7,
+     "C1560": 0,
+     "C1561": 4,
+     "C1562": 0,
+     "C1563": 3,
+     "C1564": 6,
+     "C1565": 2,
+     "C1566": 1,
+     "C1567": 3,
+     "C1568": 4,
+     "C1569": 7,
+     "C1570": 45,
+     "C1571": 5,
+     "C1572": 0,
+     "C1573": 7,
+     "C1574": 6,
+     "C1575": 6,
+     "C1576": 7,
+     "C1577": 6,
+     "C1578": 7,
+     "C1579": 20,
+     "C1580": 20,
+     "C1581": 6,
+     "C1582": 7,
+     "C1583": 6,
+     "C1584": 7,
+     "C1585": 7,
+     "C1586": 7,
+     "C1587": 7,
+     "C1588": 7,
+     "C1589": 7,
+     "C1590": 15
+    },
+    "classes_without_complete_time_option": [
+     "C1431",
+     "C1434",
+     "C1435",
+     "C1439",
+     "C1441",
+     "C1442",
+     "C1447",
+     "C1448",
+     "C1457",
+     "C1467",
+     "C1468",
+     "C1470",
+     "C1471",
+     "C1472",
+     "C1473",
+     "C1484",
+     "C1486",
+     "C1487",
+     "C1489",
+     "C1490",
+     "C1492",
+     "C1493",
+     "C1494",
+     "C1515",
+     "C1517",
+     "C1520",
+     "C1522",
+     "C1523",
+     "C1529",
+     "C1530",
+     "C1531",
+     "C1535",
+     "C1538",
+     "C1544",
+     "C1560",
+     "C1562",
+     "C1572"
+    ],
+    "weekly_sessions_without_any_placement": [
+     {
+      "session_id": "C1431-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1431-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1434-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1435-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1439-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1441-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1442-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1447-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1448-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1457-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1467-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1468-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1470-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1471-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1472-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1473-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1484-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1486-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1487-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1489-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1490-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1492-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1493-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 1
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 2
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 3
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 4
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 5
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 6
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 7
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 8
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 9
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 10
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 11
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 12
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 13
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 14
+     },
+     {
+      "session_id": "C1493-M2",
+      "week": 15
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 1
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 2
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 3
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 4
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 5
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 6
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 7
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 8
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 9
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 10
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 11
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 12
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 13
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 14
+     },
+     {
+      "session_id": "C1493-M3",
+      "week": 15
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1494-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1515-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1517-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1520-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1522-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1523-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1529-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1530-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1531-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1535-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 1
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 2
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 3
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 4
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 5
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 6
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 7
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 8
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 9
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 10
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 11
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 12
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 13
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 14
+     },
+     {
+      "session_id": "C1535-M2",
+      "week": 15
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1538-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 1
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 2
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 3
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 4
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 5
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 6
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 7
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 8
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 9
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 10
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 11
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 12
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 13
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 14
+     },
+     {
+      "session_id": "C1538-M2",
+      "week": 15
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1544-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 1
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 2
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 3
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 4
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 5
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 6
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 7
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 8
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 9
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 10
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 11
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 12
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 13
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 14
+     },
+     {
+      "session_id": "C1560-M2",
+      "week": 15
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 1
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 2
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 3
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 4
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 5
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 6
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 7
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 8
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 9
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 10
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 11
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 12
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 13
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 14
+     },
+     {
+      "session_id": "C1562-M3",
+      "week": 15
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 1
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 2
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 3
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 4
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 5
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 6
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 7
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 8
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 9
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 10
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 11
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 12
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 13
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 14
+     },
+     {
+      "session_id": "C1572-M1",
+      "week": 15
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 1
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 2
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 3
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 4
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 5
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 6
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 7
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 8
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 9
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 10
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 11
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 12
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 13
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 14
+     },
+     {
+      "session_id": "C1572-M2",
+      "week": 15
+     }
+    ]
+   }
+  }
+ }
+]

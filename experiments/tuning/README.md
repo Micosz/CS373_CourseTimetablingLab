@@ -3,7 +3,7 @@
 รันเมื่อ 2026-11-04 ตาม [docs/protocol.md](../../docs/protocol.md) ข้อ 5 ด้วยคำสั่งเดียว:
 
 ```sh
-python3 python/tune.py --output experiments/tuning --workers 18
+python3 engine/tune.py --output experiments/tuning --workers 18
 ```
 
 | | |
