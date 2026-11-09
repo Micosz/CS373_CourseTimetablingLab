@@ -1,187 +1,209 @@
-# Timetable Lab · ห้องทดลองจัดตารางเรียน
+<div align="center">
 
-เว็บทดลอง **Greedy, random-restart Hill Climbing, Simulated Annealing และ Genetic Algorithm** บน Fall CS ที่ดัดแปลงให้มีความต้องการ Computer Lab รายสัปดาห์ มีตัวตรวจคำตอบร่วมกัน เก็บผลรายรันและตารางเรียนจริง พร้อมส่งออกหลักฐานสำหรับรายงาน
+# 🗓️ Timetable Lab
 
-**เปิดใช้งาน:** https://micosz.github.io/course-timetabling-lab/ เเละที่ https://cs373presentation.vercel.app/
+**ห้องทดลองเทียบ 4 อัลกอริทึมจัดตารางเรียน ที่บางสัปดาห์ต้องใช้ห้อง Computer Lab**
 
-## เริ่มใช้เว็บ
+เปิดในเบราว์เซอร์แล้วกดรันได้เลย ไม่ต้องติดตั้งอะไร
+ดูได้ทันทีว่าวิธีไหนจัดตารางได้ครบกว่า และเปลืองห้อง Lab น้อยกว่า
 
-คนที่เพิ่งเปิดเว็บครั้งแรกอ่าน [คู่มือเริ่มใช้ 3 ขั้น](docs/quick-start.md) ก่อน ในกล่อง **กำหนดการรัน** มีปุ่มชุดค่าสำเร็จรูป **ลองเร็ว** และ **ตามการทดลองสุดท้าย** ที่กรอกทุกช่องจากพารามิเตอร์ที่จูนแล้ว (`experiments/tuning/selected-parameters.json`)
+[![เปิดเว็บ](https://img.shields.io/badge/live_demo-GitHub_Pages-2ea44f?style=flat-square&logo=github)](https://micosz.github.io/course-timetabling-lab/)
+[![สไลด์](https://img.shields.io/badge/slides-Vercel-000000?style=flat-square&logo=vercel)](https://cs373presentation.vercel.app/)
+[![Engine checks](https://img.shields.io/github/actions/workflow/status/Micosz/CS373_CourseTimetablingLab/checks.yml?style=flat-square&label=tests)](https://github.com/Micosz/CS373_CourseTimetablingLab/actions/workflows/checks.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
+![Python 3.9+](https://img.shields.io/badge/Python-3.9+-3776ab?style=flat-square&logo=python&logoColor=white)
+![.NET 8](https://img.shields.io/badge/.NET-8-512bd4?style=flat-square&logo=dotnet&logoColor=white)
 
-1. เปิดเว็บ รอชื่อ **Fall CS · Weekly Labs v1** พร้อม 174 คลาส / 3,345 คาบรายสัปดาห์
-2. เลือกวิธีที่ต้องการเปรียบเทียบ ตั้งชื่อการทดลอง งบประเมินคำตอบ เวลาสูงสุด seed เริ่มต้น และจำนวนรัน
-3. กด **เริ่มการทดลอง** การเปิดครั้งแรกต้องดาวน์โหลด Python runtime จาก jsDelivr ใช้เวลาเพิ่มตามเครือข่าย
-4. ดูผลเปรียบเทียบ ผลทุกรัน กราฟ best-so-far และส่วน **ตรวจตารางที่ได้** ของรันที่เลือก ซึ่งมีสามมุมมอง (ใช้ได้กับรันจากประวัติ รันที่นำเข้า และทั้งโหมด weekly/fixed):
-   - **ตารางรายสัปดาห์**: ทุกคาบของสัปดาห์ที่เลือก และรายการคาบที่ยังจัดไม่ได้
-   - **Heatmap การใช้ Lab**: แถวเป็นห้อง Lab คอลัมน์เป็นสัปดาห์ ตัวเลขคือชั่วโมงจำเป็น `+ไม่จำเป็น` ผลรวมชั่วโมงไม่จำเป็นต้องเท่ากับ `unnecessary_lab_hours` ของรันนั้น (หน้าเว็บแสดง ✓ เมื่อตรง)
-   - **ห้องของแต่ละคลาส**: ค้นหา/เลือกคลาส เห็นห้องของทั้ง 15 สัปดาห์ต่อคาบประจำ เน้นสัปดาห์ที่เปลี่ยนห้อง สัปดาห์ที่ต้องใช้ Lab และการใช้ Lab โดยไม่จำเป็น ผลรวมการเปลี่ยนห้องของทุกคลาสเท่ากับ `room_changes`
-   - นับแบบเดียวกับ `engine/solution_validator.py`: ชั่วโมง Lab ไม่จำเป็น = `duration_minutes` ของคาบที่อยู่ใน Computer Lab ในสัปดาห์ที่ไม่อยู่ใน `lab_weeks`; เปลี่ยนห้อง = ห้องต่างจากสัปดาห์ก่อนหน้าที่จัดได้ของคาบเดียวกัน
-5. ดาวน์โหลด **CSV** สำหรับวิเคราะห์ (ผลแต่ละรัน, ตาราง **ตามห้อง** หรือ **ตามคลาส** ซึ่งรวมสัปดาห์ที่ยังจัดไม่ได้ด้วย; ทุกไฟล์เป็น UTF-8 มี BOM จึงเปิดภาษาไทยใน Excel ได้) และ **ชุดผล JSON** สำหรับสำรอง/ย้ายเครื่อง/นำเข้ากลับเว็บ JSON รวมข้อมูล โค้ดที่ใช้จริง พารามิเตอร์ trace คำตอบ และผลตรวจ การนำเข้ารับทั้ง `.json` และ `.json.gz` (เช่นไฟล์ใน `experiments/`) โดยไม่ต้องรัน Python
+<img src="docs/img/quick-start-3.jpg" width="720" alt="หน้าผลของ Timetable Lab: ตารางเปรียบเทียบ 4 วิธี กราฟ และปุ่มดาวน์โหลด">
 
-ค่าเริ่มต้น 50 evaluations × 3 seeds เป็นค่าเริ่มใช้งาน ไม่ใช่งบสุดท้ายที่ผ่านการปรับแต่งแล้ว เมื่อต้องการเก็บผลจริง ให้กำหนดงบและพารามิเตอร์ก่อน แล้วใช้ repeated seeds ชุดเดียวกันทุกวิธี เช่น 30 seeds หากเครื่องและเวลารองรับ ไม่ควรสรุปผู้ชนะจากรันเดียวหรือจากผลตรวจระบบ
+▶️ **[เปิดใช้เว็บ](https://micosz.github.io/course-timetabling-lab/)** · 📊 **[ดูสไลด์นำเสนอ](https://cs373presentation.vercel.app/)** · 🚀 **[คู่มือเริ่มใช้ 3 ขั้น](docs/quick-start.md)**
 
-ผลบันทึกอัตโนมัติใน **IndexedDB ของเบราว์เซอร์และ origin ปัจจุบัน** หลังแต่ละรัน เปิดย้อนหลังในแท็บประวัติได้ การล้างข้อมูลเว็บ เปลี่ยนเบราว์เซอร์ ใช้โหมดส่วนตัว หรือเปลี่ยนจาก localhost เป็น GitHub Pages จะไม่ใช้ประวัติชุดเดียวกัน จึงควรดาวน์โหลด JSON ทุกชุดที่สำคัญ ผลไม่ได้อัปโหลดขึ้น GitHub อัตโนมัติ เว็บไม่ใส่ผลทดลองตัวอย่างปลอมไว้ล่วงหน้า
+</div>
 
-## ข้อมูลและขอบเขต
+## โปรเจกต์นี้คืออะไร
 
-- แหล่งต้นฉบับ: [UniTime university course timetabling datasets](https://www.unitime.org/uct_datasets.php), Purdue Fall 2007 CS (`pu-fal07-cs`)
-- ข้อมูลที่ใช้เป็น **adapted synthetic benchmark** ไม่ใช่ข้อมูลจริงของมหาวิทยาลัยไทย และใช้คะแนนคนละแบบกับ benchmark ต้นฉบับ
-- 174 คลาส, 223 recurring sessions, 15 สัปดาห์ รวม 3,345 weekly sessions
-- ห้องบรรยาย 13 ห้อง + Computer Lab จำลอง 4 ห้อง (61, 36, 30, 26 ที่นั่ง)
-- 134 recurring sessions กำหนดให้ใช้ Lab คนละ 4 สัปดาห์ รวม 536 weekly lab sessions / 804 ชั่วโมง
-- Seed สร้างข้อมูล `20261027` แยกจาก seed ค้นหาคำตอบ
-- ผู้สอนที่ไม่มีในต้นฉบับ 143 คลาสใช้ synthetic instructor แยกคลาส เป็นสมมติฐาน ไม่ได้อนุมานว่าผู้สอนจริงไม่ซ้ำกัน
-- ล็อก background classes 810 คลาสเพื่อรักษาการใช้ห้อง ผู้สอน และ explicit distribution rules
-- กรณีหลักใช้ student non-overlap ระหว่าง target CS classes ส่วนความชนกับนักศึกษาของ background ไม่ถือเป็นข้อห้ามทั่วไป (`external_student_overlap_is_hard=false`); explicit source non-overlap rules ยังคงบังคับ
-- ใช้เฉพาะกรณีหลัก ยังไม่เพิ่มกรณีห้อง Lab ขาดแคลน
-- ไม่คิดเวลาเดินระหว่างห้อง ไม่ตีความ source room preferences เป็น hard constraint เพิ่มเอง และไม่ใช้คะแนน preference ดั้งเดิมเป็นคะแนนโครงงาน
+วิชาคอมพิวเตอร์หลายวิชาต้องใช้ห้อง Computer Lab **แค่บางสัปดาห์** เช่น 4 จาก 15 สัปดาห์ ที่เหลือเรียนในห้องบรรยายธรรมดาได้
+ถ้าจองห้อง Lab ไว้ทั้งเทอม ห้อง Lab ก็จะว่างเปล่าเกือบทั้งเทอม แต่วิชาอื่นใช้ไม่ได้
 
-รายละเอียดใน [assumptions.json](data/assumptions.json), [FORMAT.txt](data/FORMAT.txt), [START_HERE.txt](data/START_HERE.txt), [conversion_audit.json](data/conversion_audit.json) และ [provenance.json](data/provenance.json)
+Timetable Lab ลองให้ **วันและเวลาเรียนคงที่ทั้งเทอม แต่ห้องเปลี่ยนได้ตามสัปดาห์** แล้วให้ 4 อัลกอริทึมแข่งกันจัดตาราง
+บนข้อมูลเดียวกัน งบเท่ากัน และใช้ตัวตรวจคำตอบตัวเดียวกัน
 
-Dataset JSON SHA-256: `c92918faeb82b4d5c9f702e0629fe5e8d48bcc1a1286c0b21d514a9021973968`
+หลักการทำงานแบบสั้น ๆ:
 
-## วิธีแทนคำตอบและวิธีค้นหา
+1. อัลกอริทึมเลือก **ลำดับคลาส** ว่าจะจัดคลาสไหนก่อน และ **ช่วงเวลาที่อยากลองก่อน** ของแต่ละคลาส
+2. ตัวจัดตาราง (decoder) จัดทีละคลาสตามลำดับนั้น ใส่ห้องทีละสัปดาห์โดยไม่ละเมิดข้อห้าม ถ้าใส่ไม่ได้จะเว้นคาบนั้นไว้
+3. ตัวตรวจอิสระนับคะแนนจากตารางที่ได้ แล้วอัลกอริทึมเอาคะแนนไปปรับลำดับรอบถัดไป วนจนหมดงบ
 
-ทั้งสี่วิธีใช้ **indirect encoding และ constructive decoder เดียวกัน**: คำตอบค้นหาเป็นลำดับความสำคัญของคลาสและ preferred source time option ของแต่ละคลาส Decoder ทดลองตัวเลือกวัน/เวลาที่ต้นฉบับอนุญาต เลือก recurring day/time/duration ชุดเดียวตลอดภาค แต่เปลี่ยนห้องได้ตามสัปดาห์ (โหมด `weekly` ค่าเริ่มต้น; โหมด `fixed` ดูหัวข้อถัดไป)
+คำที่จะเจอบ่อยในหน้านี้:
 
-Decoder รักษาข้อห้ามระหว่างจัด หากไม่มีตำแหน่งที่ผ่าน จะเว้น weekly session นั้นและคิดเป็น unassigned คำตอบจึงอาจเป็น **feasible partial timetable**: ไม่มีข้อห้ามที่ละเมิด แต่ยังมีคาบตกค้าง ไม่ควรเรียกว่าจัดได้ครบจนกว่า unassigned=0
+- **คาบรายสัปดาห์ (weekly session)** คาบเรียนหนึ่งคาบในหนึ่งสัปดาห์ ข้อมูลนี้มีทั้งหมด 3,345 คาบ (174 คลาส × 15 สัปดาห์)
+- **คาบที่ยังจัดไม่ได้** คาบที่หาห้องหรือเวลาที่ไม่ชนไม่ได้ ยิ่งน้อยยิ่งดี และสำคัญที่สุด
+- **Lab ไม่จำเป็น** ชั่วโมงที่คาบไปใช้ห้อง Lab ในสัปดาห์ที่ไม่ได้ต้องใช้ Lab (กันห้องไว้โดยไม่ได้ใช้ประโยชน์)
+- **เปลี่ยนห้อง** จำนวนครั้งที่คาบเดียวกันย้ายห้องจากสัปดาห์ก่อน
+- **งบ (evaluation)** จำนวนครั้งที่ให้จัดตารางเต็มทั้งเทอมแล้วคิดคะแนน ทุกวิธีได้งบเท่ากัน
+- **seed** ตัวเลขตั้งต้นของการสุ่ม ใช้ seed เดิมจะได้ผลเดิม
+- **โหมดห้อง** `weekly` ห้องเปลี่ยนได้รายสัปดาห์ (ค่าเริ่มต้น) · `fixed` คาบหนึ่งจองห้องเดียวทั้งเทอม (ไว้เทียบ)
 
-- **Greedy:** เริ่มจากคลาสที่มี static placements และ time options น้อยก่อน แล้วใช้ conflict degree เป็นตัวตัดสินร่วม ประเมินครั้งเดียวแล้วจบ เป็น deterministic baseline
-- **HC:** สลับลำดับคลาสและเปลี่ยน preferred time option ยอมรับเฉพาะคำตอบที่ดีขึ้น เริ่มใหม่แบบสุ่มเมื่อไม่ดีขึ้นครบ patience คำตอบสุดท้ายเป็น best-so-far
-- **SA:** ใช้เพื่อนบ้านแบบเดียวกับ HC แต่ยอมรับคำตอบแย่ลงด้วยความน่าจะเป็นตามอุณหภูมิ ใช้ calibration ไม่เกิน 8 evaluations เพื่อประมาณ initial temperature จาก uphill delta แล้วค่อยลดอุณหภูมิ
-- **GA:** ประชากรของ priority/time-preference genomes, tournament selection, ordered crossover ของ permutation, ผสม time preference รายคลาส, mutation แบบเดียวกับ HC และ elitism ใช้ decoder ร่วมซ่อมข้อจำกัดเชิงการจัดห้อง
+4 วิธีที่แข่งกัน:
 
-ค่าเริ่มต้น: HC patience=20; SA initial acceptance=.8, cooling=.97; GA population=12, tournament=3, elites=1, crossover=.9, mutation=.3
+| วิธี | ทำงานยังไง |
+|---|---|
+| **Greedy** | จัดคลาสที่มีทางเลือกน้อยที่สุดก่อน จัดรอบเดียวจบ ใช้เป็นเส้นฐาน |
+| **Hill Climbing (HC)** | สุ่มแก้ทีละนิด ถ้าดีขึ้นก็รับ ถ้าติดนานเกินไปก็สุ่มเริ่มใหม่ |
+| **Simulated Annealing (SA)** | เหมือน HC แต่บางครั้งยอมรับคำตอบที่แย่ลง เพื่อหนีจุดที่ติดอยู่ ยิ่งรันนานยิ่งยอมน้อยลง |
+| **Genetic Algorithm (GA)** | เก็บคำตอบไว้เป็นประชากร คัดตัวดีมาผสมกันและกลายพันธุ์ไปเรื่อย ๆ |
 
-นี่คือการเปรียบเทียบวิธีค้นหาบน representation และ decoder นี้ ไม่ใช่การพิสูจน์ว่า implementation นี้แทนทุกวิธีแก้ course timetabling หรือค้นหาตารางทุกแบบได้ Neighborhood เปลี่ยน priority/time preference ไม่ได้ย้ายห้องรายสัปดาห์โดยตรง จึงมีข้อจำกัดของ search space
+## ผลที่ได้
 
-ที่มาของแต่ละการตัดสินใจเทียบกับงานวิจัยที่อ้างอิง และเหตุผลที่เทียบตัวเลขตรงกับ paper ไม่ได้: [docs/research-comparison.md](docs/research-comparison.md)
+การทดลองสุดท้าย: 4 วิธี × 30 seed × 2 โหมดห้อง งบ 500 ครั้งต่อรัน รวม 240 รัน **ผ่านตัวตรวจอิสระครบทุกรัน**
 
-## โหมดจัดห้อง: รายสัปดาห์ (weekly) กับ ห้องคงที่ (fixed)
+- ✅ **HC, SA และ GA จัดครบทุกคาบใน 30/30 seed** ส่วน Greedy ขาด 20 คาบทุก seed
+- 🥇 **GA ดีที่สุดในภาพรวม** ใช้ Lab ไม่จำเป็นเฉลี่ย 57.7 ชม. ต่อเทอม เทียบกับ HC 64.9 และ SA 76.2 ชม.
+  GA ดีกว่า SA อย่างมีนัยสำคัญ แต่ **GA กับ HC ยังแยกกันไม่ได้ทางสถิติ**
+- 🏫 **ห้องคงที่ (fixed) แย่กว่าทุกวิธีทุก seed** Lab ถูกกันไว้โดยไม่ได้ใช้เพิ่มราว 1,800–1,950 ชม. ต่อเทอม
+  และยังจัดไม่ได้ 150–390 คาบ เพราะ Lab 4 ห้องไม่พอให้จองทั้งเทอม
+- 🔁 **เปลี่ยนห้องราว 831 ครั้งต่อเทอม** ห่างจากค่าต่ำสุดที่เป็นไปได้ (783 ครั้ง) แค่ 1.06 เท่า ส่วนใหญ่จึงเลี่ยงไม่ได้
+- 🧪 **ถ้า Lab เหลือ 3 ห้อง** โหมดห้องรายสัปดาห์ยังจัดครบทุกคาบ ส่วนโหมดห้องคงที่จัดไม่ครบตั้งแต่มี Lab 4 ห้องแล้ว
 
-เพื่อวัดว่าการเปลี่ยนห้องตามกิจกรรมรายสัปดาห์ประหยัด Lab จริงหรือไม่ มีโหมดเปรียบเทียบที่ใช้ genome, decoder, ตัวตรวจ และ metric ชุดเดียวกัน ต่างกันเฉพาะกติกาเลือกห้อง
+ตัวเลข สถิติ และกราฟทั้งหมดอยู่ใน [experiments/final/analysis/report.md](experiments/final/analysis/report.md)
+ผลทุกชุด (จูนพารามิเตอร์ งบ Lab ขาดแคลน ความเร็ว engine) สรุปไว้ใน [experiments/INDEX.md](experiments/INDEX.md)
 
-- **`weekly` (ค่าเริ่มต้น):** วันเวลาคงที่ทั้งเทอม ห้องเปลี่ยนได้รายสัปดาห์ จึงใช้ Lab เฉพาะสัปดาห์ที่ต้องใช้ได้
-- **`fixed`:** แต่ละ recurring session จองห้องเดียวทุกสัปดาห์ที่จัดได้ ถ้ามีสัปดาห์ใดต้องใช้ Lab ห้องนั้นต้องเป็น Computer Lab ทั้งเทอม Decoder เลือกห้องที่จัดได้มากสัปดาห์ที่สุดก่อน ถ้าห้องนั้นไม่ว่างบางสัปดาห์ สัปดาห์นั้นนับเป็น unassigned แทนการย้ายห้อง
-- ตัวตรวจอิสระรับโหมดจาก config ของรัน (ไม่เชื่อค่าที่คำตอบประกาศเอง) ในโหมด `fixed` จะเพิ่มข้อห้าม `FIXED_ROOM_CHANGED` (คาบเดียวกันใช้มากกว่าหนึ่งห้อง) และ `FIXED_ROOM_NOT_LAB` (คาบที่มีสัปดาห์ Lab แต่จองห้องที่ไม่ใช่ Lab) และ `ROOM_MODE` เมื่อโหมดที่คำตอบประกาศไม่ตรงกับที่ตรวจ
-- รายงาน metric เดียวกันทั้งสองโหมด: คาบที่ยังจัดไม่ได้ / ชั่วโมง Lab ที่ไม่จำเป็น / จำนวนครั้งเปลี่ยนห้อง (โหมด fixed เป็น 0 เสมอ) ทุกรันบันทึก `room_mode`
-- เว็บ: เลือก **โหมดจัดห้อง** ในขั้น "กำหนดการรัน" หนึ่งการทดลองใช้หนึ่งโหมด รันอีกครั้งด้วย seed เดิมเพื่อเทียบ ไฟล์ JSON จาก CLI ที่มีทั้งสองโหมดนำเข้าเว็บได้และแยกแถวสรุปตามโหมด
-- CLI: `--room-modes weekly fixed` รันทั้งสองโหมดบน seed ชุดเดียวกันใน batch เดียว แล้วใช้ `python3 engine/compare_modes.py <experiment.json>` สร้างตารางเทียบแบบจับคู่ (fixed − weekly ต่อ seed)
+> ผลทั้งหมดนี้มาจากชุดข้อมูลดัดแปลงชุดเดียว ใช้บอกว่าวิธีไหนดีกว่าบนโจทย์นี้ ไม่ได้บอกว่าดีกว่าในทุกโจทย์จัดตาราง
 
-ผลดิบและตารางสรุปอยู่ใน [experiments/fixed-room](experiments/fixed-room/README.md)
+## จุดเด่น
 
-## ข้อห้ามและเป้าหมายร่วม
+- 🌐 **เปิดในเบราว์เซอร์ได้เลย** Python ทั้ง engine รันในเบราว์เซอร์ผ่าน Pyodide ไม่มี server ไม่มีการส่งข้อมูลออกไปไหน
+- ⚖️ **เทียบอย่างยุติธรรม** ทุกวิธีเริ่มจากคำตอบตั้งต้นเดียวกัน ใช้งบเท่ากัน และใช้ข้อมูล ข้อห้าม และตัวนับคะแนนชุดเดียวกัน
+- 🔍 **ตัวตรวจคำตอบอิสระ** ตรวจตารางจากข้อมูลดิบใหม่ทุกครั้ง ไม่เชื่อคะแนนที่อัลกอริทึมรายงานมาเอง
+- 🗺️ **ดูตารางที่ได้ 3 มุมมอง** ตารางรายสัปดาห์, heatmap การใช้ Lab และห้องของแต่ละคลาสทั้ง 15 สัปดาห์
+- 💾 **ส่งออกหลักฐานได้** CSV เปิดใน Excel ได้ (ภาษาไทยไม่เพี้ยน) และชุดผล JSON ที่นำเข้ากลับเว็บหรือส่งให้คนอื่นตรวจได้
+- ✍️ **เขียนอัลกอริทึมของตัวเองได้** วางโค้ด Python ในแท็บโค้ด แล้วแข่งกับ 4 วิธีภายใต้กติกาเดียวกัน
+- ⚡ **engine C# เร็วกว่าราว 75–99 เท่า** ได้ผลตรงกับ Python ทุกบิต ใช้รันการทดลองชุดใหญ่
+- 🎮 **แอปเดสก์ท็อป Godot** ดูห้องเปลี่ยนไปทีละสัปดาห์แบบภาพเคลื่อนไหว และเทียบ weekly กับ fixed ข้างกัน
 
-`solution_validator.py` ตรวจจากข้อมูลดิบอิสระจาก bitmask/cache ของตัวค้นหา:
+## เลือกวิธีใช้
 
-- อ้างอิงคลาส/คาบ/ห้อง/สัปดาห์และ source time option ถูกต้อง ไม่ซ้ำ session-week
-- วันเวลาและระยะเวลาของ recurring session คงที่ตาม option ที่เลือก
-- ห้องใน domain ที่อนุญาต ความจุพอ ประเภท Lab ถูกต้อง และเปิดให้ใช้เต็มช่วงเวลา
-- ห้อง ผู้สอน นักศึกษา และ explicit non-overlap groups ไม่ชนกัน รวม background ตาม policy ของข้อมูล
-- SAME_TIME ใช้การครอบช่วงเวลาของคาบสั้นในคาบยาวตามข้อมูล ไม่ได้แปลว่าต้องเริ่มเวลาเดียวกันเสมอ
+ถ้าไม่แน่ใจ ให้เริ่มจากแบบแรก เพราะไม่ต้องลงอะไรเลย
 
-Source constraint ID บางรายการซ้ำกัน (ID 90 ของ SAME_STUDENTS หลายกลุ่ม) จึงใช้แต่ละ array entry เป็น constraint คนละตัว ไม่รวมเป็นกลุ่มใหญ่ตาม ID
+| อยากทำอะไร | ใช้แบบไหน | ต้องมีอะไร |
+|---|---|---|
+| ลองเล่น เทียบ 4 วิธี ดูตารางที่ได้ | **[เว็บ](https://micosz.github.io/course-timetabling-lab/)** | Chrome, Edge หรือ Firefox รุ่นใหม่ + อินเทอร์เน็ต |
+| รันการทดลองหลาย seed บนเครื่อง | **Python CLI** (`engine/cli.py`, `engine/batch.py`) | Python 3.9+ ไม่ต้องลง package เพิ่ม |
+| รันชุดใหญ่ให้เร็ว | **C# engine** ([dotnet/README.md](dotnet/README.md)) | .NET 8 SDK |
+| ดูห้องเปลี่ยนรายสัปดาห์แบบภาพเคลื่อนไหว | **แอป Godot** ([apps/godot/README.md](apps/godot/README.md)) | Godot 4.7 .NET |
+| นำเสนองาน | **[สไลด์](https://cs373presentation.vercel.app/)** ([apps/slides/](apps/slides/README.md)) | เบราว์เซอร์ |
 
-เป้าหมายเทียบแบบ **lexicographic** ตามลำดับ:
+## เริ่มใช้งาน
 
-1. `unassigned_weekly_sessions` น้อยที่สุด
-2. เมื่อข้อแรกเท่ากัน ลด `unnecessary_lab_minutes` (สัปดาห์ที่ไม่ต้องใช้ Lab แต่ไปใช้ห้อง Lab)
-3. เมื่อสองข้อแรกเท่ากัน ลด `room_changes` ระหว่างสัปดาห์ที่จัดได้ของ recurring session เดียวกัน (ข้ามสัปดาห์ที่ยังจัดไม่ได้)
+### ใช้เว็บ (3 ขั้น)
 
-SA ใช้ scalar energy ที่รักษาลำดับนี้อย่างเคร่งครัด: `Wc=1`, `Wm=Cmax+1`, `Wu=(Mmax+1)*Wm`; `Cmax` คือเพดาน room changes และ `Mmax` คือเวลารวมทุก weekly session ทั้งคู่คำนวณจาก dataset ปัจจุบัน ไม่ใช่น้ำหนักสุ่มที่ปรับเพื่อให้วิธีใดชนะ
+1. เปิด **https://micosz.github.io/course-timetabling-lab/** แล้วรอจนขึ้นชื่อ **Fall CS · Weekly Labs v1**
+   (ครั้งแรกต้องโหลด Python ในเบราว์เซอร์ ราว 10–30 วินาที)
+2. ในกล่อง **กำหนดการรัน** กดปุ่ม **ลองเร็ว** ระบบจะกรอกค่าที่จูนแล้วให้ทุกช่อง แล้วกด **▶ เริ่มการทดลอง** (ราว 1 นาที)
+3. ดูตารางเปรียบเทียบ กราฟ และส่วน **ตรวจตารางที่ได้** แล้วกดดาวน์โหลด CSV หรือชุดผล JSON
 
-## ความเท่าเทียมและการอ่านผล
+วิธีอ่านผล: วิธีที่ดีกว่าคือวิธีที่มี **คาบที่ยังจัดไม่ได้** น้อยกว่า ถ้าเท่ากันดู **Lab ไม่จำเป็น** แล้วจึงดู **เปลี่ยนห้อง**
+คู่มือพร้อมภาพประกอบอยู่ใน [docs/quick-start.md](docs/quick-start.md)
 
-- ทุกวิธีได้ initial genome เดียวกัน งบเดียวกัน ข้อมูล/ข้อจำกัด/คะแนน/validator เดียวกัน
-- นับหนึ่ง evaluation เมื่อ decode และคิดคะแนน candidate เต็มชุดสำเร็จ รวม initialization, SA calibration และ GA initial population; บันทึก attempted evaluations แยกเมื่อถูกตัดกลางทาง
-- Greedy ใช้เพียงหนึ่ง evaluation เพราะไม่มี search loop การรันหลาย seed ให้ผลเดิม ไม่ควรตีความเป็น independent stochastic samples
-- หยุดเมื่อครบงบหรือเวลาก่อน คำตอบแรกอนุญาตให้ decode จบเพื่อให้มี baseline แม้เกิน cap เล็กน้อย หลังจากนั้นตรวจ deadline ระหว่างคลาส มี worker watchdog อีกชั้นสำหรับโค้ดที่ไม่คืนการควบคุม
-- preprocessing/โหลด runtime แยกจาก search time; final independent validation time บันทึกแยก Runtime ขึ้นกับเครื่อง เบราว์เซอร์ tab throttling และ runtime ไม่ใช้เทียบข้ามเครื่องตรง ๆ
-- หาก time limit ตัดก่อนงบเท่ากัน ต้องรายงาน evaluations ที่ใช้จริง ควรเพิ่ม cap เมื่อต้องการเทียบด้วย fixed evaluation budget
-- วิธีถูกรันเรียงตาม seed แล้วตามวิธี ไม่สลับลำดับแบบสุ่ม จึงอาจมีผลของ warm-up/สภาวะเครื่องต่อเวลา
-- มีสถานะ completed / evaluation_budget / time_limit / invalid_solution / error / worker_timeout / cancelled เก็บแถวที่ล้มเหลวด้วย ไม่แทนผลที่ไม่มีด้วยศูนย์
-- เฉพาะคำตอบที่ตรวจผ่านและไม่ error จึงเข้าตารางสรุปแยกตามวิธี Summary เรียง median unassigned → median lab minutes → median room changes เป็น descriptive summary ไม่ใช่ statistical test หรือคำตอบจริงหนึ่งตาราง ค่า Lab แสดง mean ± sample SD
-- กราฟแสดง best-so-far ตาม lexicographic comparator; ค่า Lab หรือ room changes อาจเพิ่มเมื่อ unassigned ลดลงได้
-- เว็บยังไม่ได้ทำ significance tests, parameter tuning อัตโนมัติ หรือแบ่ง held-out test ให้อัตโนมัติ หากปรับพารามิเตอร์จาก seed ใดแล้ว อย่าใช้ชุดเดียวกันสรุป final test โดยไม่ระบุ
+### รันเว็บบนเครื่องตัวเอง
 
-## เพิ่มโค้ด Python
+ไม่มีขั้นตอน build และไม่มี backend เสิร์ฟไฟล์จาก root ของโปรเจกต์:
 
-แท็บโค้ด Python รับไฟล์ `.py` หรือตัวแก้ไข แล้วกำหนด:
-
-```python
-def solve(problem, context, parameters):
-    while True:
-        context.check()
-        context.evaluate(problem.random_genome(context.rng))
-```
-
-`context.initial` ใช้งบไปหนึ่งครั้งแล้ว ใช้ `context.rng` เพื่อทำซ้ำตาม seed และเรียก `context.evaluate(genome)` เพื่อให้ทุก candidate นับงบ เมื่อ budget/time exception เกิด runner คืน best-so-far หากคืนค่าเอง ให้คืน `Candidate` หรือ solution object ตาม schema ใน `solution_validator.py`
-
-ใช้โค้ดที่ไว้ใจได้ โค้ดรันใน Python worker ของหน้าเว็บ ซึ่งไม่ใช่กลไกแยกสิทธิ์สำหรับโปรแกรมที่เป็นอันตราย Custom code สามารถใช้สิทธิ์เครือข่าย/worker ของเว็บหรือหลีกเลี่ยงวิธีนับงบได้ ผู้ทดลองต้องตรวจโค้ดก่อนใช้เป็นหลักฐานเปรียบเทียบ Final audit ใช้ snapshot ของ input ก่อนส่งให้ custom code แต่ไม่ได้ป้องกัน custom code แก้ runtime ทั้งระบบ
-
-## รันบนเครื่องและทดสอบ
-
-ไม่มี frontend build และไม่มี backend:
-
-```sh
+```bash
 python3 -m http.server 8766 --bind 127.0.0.1
 ```
 
-รันจาก root ของโครงการ แล้วเปิด `http://127.0.0.1:8766/apps/web/` (หน้า root จะ redirect ไปให้เอง) เว็บโหลด `data/`, `engine/` และ `experiments/` ด้วย path สัมพัทธ์ จึงต้องเสิร์ฟจาก root ไม่ใช่จาก `apps/web/` อย่าเปิด `index.html` แบบ file:// เพราะ worker/fetch ต้องใช้ HTTP(S) ต้องใช้อินเทอร์เน็ตโหลด [Pyodide 314.0.7](https://pyodide.org/en/stable/usage/webworker.html) ผ่าน jsDelivr; ไม่มี service worker หรือการรับประกัน offline
+แล้วเปิด `http://127.0.0.1:8766/apps/web/` (อย่าเปิด `index.html` ตรง ๆ แบบ `file://` เพราะเว็บต้องโหลดไฟล์ผ่าน HTTP)
 
-Native Python 3.9+ ใช้ engine เดียวกัน ไม่ต้องลง package เพิ่ม:
+### รันด้วย Python CLI
 
-```sh
+ใช้ engine ตัวเดียวกับเว็บ ไม่ต้องลง package เพิ่ม:
+
+```bash
 python3 engine/cli.py --budget 50 --seconds 60 --seed 42 --repeats 3 --output results
+```
+
+เทียบโหมดห้อง weekly กับ fixed บน seed ชุดเดียวกัน:
+
+```bash
 python3 engine/cli.py --room-modes weekly fixed --budget 50 --seconds 600 --seed 1001 --repeats 30 --output results
+```
+
+รันการทดลองชุดใหญ่หลาย process พร้อมกัน (หยุดกลางทางได้ รันคำสั่งเดิมซ้ำจะทำต่อจากที่ค้างไว้):
+
+```bash
+python3 engine/batch.py run --methods greedy hc sa ga --room-modes weekly --seeds 1001-1030 --budget 500 --seconds 3600 --output results/final --workers 8
+```
+
+รันเทสต์:
+
+```bash
 python3 -m unittest discover -s engine/tests -v
 ```
 
-CLI เก็บ JSON หลังทุกรันและ CSV ตอนจบ JSON นำเข้ากลับเว็บได้ Seed เดียวกันจะทำซ้ำได้เมื่อใช้ dataset/code/parameters/runtime เดียวกันและไม่ถูกตัดด้วยเวลาระหว่างทาง การเปลี่ยน Python เวอร์ชันอาจทำให้ลำดับสุ่มต่างกัน
+ไฟล์ JSON ที่ CLI สร้างนำเข้ากลับเว็บได้ กติกาการทดลองสุดท้าย (seed สำหรับจูนและทดสอบ งบ และสถิติ) อยู่ใน [docs/protocol.md](docs/protocol.md)
 
-การทดลองชุดใหญ่ใช้ `engine/batch.py` ซึ่งรันหลาย process พร้อมกัน เก็บผลทีละรันใน `<output>/runs/` และถ้าหยุดกลางทาง ให้รันคำสั่งเดิมซ้ำเพื่อทำต่อโดยข้ามรันที่เสร็จแล้ว (ไม่ยอมใช้ผลเก่าถ้า dataset, โค้ด engine หรือการตั้งค่าไม่ตรงกัน) เมื่อครบจะรวมเป็น `experiment.json.gz` (gunzip แล้วนำเข้าเว็บได้) กับ `experiment.csv` กติกาการทดลองสุดท้าย (seed จูน/ทดสอบ งบ และสถิติ) อยู่ใน [docs/protocol.md](docs/protocol.md)
+## ข้อมูลที่ใช้
 
-```sh
-python3 engine/batch.py run --methods greedy hc sa ga --room-modes weekly --seeds 1001-1030 \
-  --budget 500 --seconds 3600 --output results/final --workers 8
+- ต้นฉบับคือชุดข้อมูล Purdue Fall 2007 CS (`pu-fal07-cs`) จาก [UniTime](https://www.unitime.org/uct_datasets.php)
+- เป็น **ข้อมูลดัดแปลง** ไม่ใช่ตารางจริงของมหาวิทยาลัยไทย: เพิ่ม Computer Lab จำลอง 4 ห้อง (61, 36, 30, 26 ที่นั่ง)
+  และสุ่มให้ 134 คาบประจำต้องใช้ Lab คนละ 4 สัปดาห์ (รวม 804 ชั่วโมง)
+- 174 คลาส · ห้องบรรยาย 13 ห้อง · 15 สัปดาห์ · 3,345 คาบรายสัปดาห์
+- สมมติฐานทุกข้อบันทึกไว้ใน [data/assumptions.json](data/assumptions.json) และสร้างชุดข้อมูลซ้ำได้ด้วย `dataset_tools/rebuild.py`
+
+## ควรรู้ก่อนใช้
+
+- **ผลเก็บในเบราว์เซอร์เครื่องนี้เท่านั้น** ถ้าล้างข้อมูลเว็บ เปลี่ยนเบราว์เซอร์ หรือใช้โหมดส่วนตัว ประวัติจะหาย ผลไหนสำคัญให้ดาวน์โหลดชุดผล JSON เก็บไว้
+- **ค่าเริ่มต้นของเว็บยังไม่ใช่ค่าที่จูนแล้ว** ถ้าจะเก็บผลจริงให้กดปุ่ม **ลองเร็ว** หรือ **ตามการทดลองสุดท้าย** และรันหลาย seed (เช่น 30) อย่าสรุปผู้ชนะจากรันเดียว
+- **ตารางอาจยังไม่ครบ** ทุกตารางที่ได้ไม่ละเมิดข้อห้าม แต่อาจมีคาบที่ยังจัดไม่ได้ จะเรียกว่าจัดครบได้ก็ต่อเมื่อคาบที่ยังจัดไม่ได้เป็น 0
+- **เวลาที่ใช้ขึ้นกับเครื่อง** ใช้เทียบข้ามเครื่องตรง ๆ ไม่ได้ จึงวัดความยุติธรรมด้วยจำนวนครั้งที่ประเมินคำตอบแทนเวลา
+- **โค้ดที่เพิ่มเองไม่ได้ถูกแยกสิทธิ์** ใส่เฉพาะโค้ดที่ไว้ใจได้ และควรตรวจโค้ดก่อนใช้เป็นหลักฐาน
+- **นี่คือห้องทดลองเพื่อการศึกษา** ไม่ใช่ระบบจัดตารางที่สถาบันใช้งานจริง
+
+## เอกสาร
+
+| หน้า | มีอะไร |
+|---|---|
+| 🚀 [เริ่มใช้ 3 ขั้น](docs/quick-start.md) | ใช้เว็บครั้งแรก พร้อมภาพประกอบ |
+| 🔧 [รายละเอียดเชิงเทคนิค](docs/technical.md) | วิธีแทนคำตอบ ข้อห้ามและเป้าหมาย ความเท่าเทียม การเพิ่มโค้ด Python การสร้างชุดข้อมูลซ้ำ |
+| 📏 [กติกาการทดลอง](docs/protocol.md) | seed สำหรับจูนและทดสอบ งบ และสถิติที่ใช้ |
+| 📈 [ผลทดลองทั้งหมด](experiments/INDEX.md) | ทุกชุดการทดลองพร้อมข้อสรุปและไฟล์ผลดิบ |
+| 📚 [เทียบกับงานวิจัย](docs/research-comparison.md) | การตัดสินใจแต่ละข้อมาจากงานไหน และต่างกันตรงไหน |
+| 🗂️ [แผนที่ repository](docs/INDEX.md) | ทุกโฟลเดอร์และไฟล์สำคัญมีหน้าที่อะไร |
+| ⚡ [C# engine](dotnet/README.md) | engine ที่เร็วกว่าและได้ผลตรงกับ Python |
+| 🎮 [แอป Godot](apps/godot/README.md) (อังกฤษ) | แผนที่ห้องรายสัปดาห์ รันสด และเทียบ weekly/fixed |
+
+## โครงสร้าง repo
+
+```
+apps/web/        เว็บห้องทดลอง
+apps/slides/     สไลด์นำเสนอ (deploy บน Vercel)
+apps/godot/      แอปเดสก์ท็อป Godot (C#)
+engine/          Python engine: ตัวจัดตาราง 4 วิธี ตัวตรวจ CLI และ batch runner
+dotnet/          engine เดียวกันใน C# + CLI "timetabling" + parity tests
+data/            ชุดข้อมูลดัดแปลง สมมติฐาน และที่มาของข้อมูล
+dataset_tools/   สคริปต์สร้าง data/ ซ้ำ
+experiments/     ผลดิบของทุกการทดลอง (JSON.gz + CSV + สรุป)
+docs/            คู่มือ กติกา เอกสารเทคนิค และการเทียบงานวิจัย
 ```
 
-## สร้าง adapted dataset ซ้ำ
+## แก้ปัญหา
 
-มี converter และ config เดิมใน `dataset_tools/` สร้างลงโฟลเดอร์ใหม่และตรวจ SHA-256 ให้ตรงกับไฟล์ที่เว็บใช้:
+| อาการ | วิธีแก้ |
+|---|---|
+| เว็บค้างที่ขั้นโหลด Python | ต้องใช้อินเทอร์เน็ตโหลด Pyodide จาก jsDelivr ครั้งแรกอาจใช้ 10–30 วินาที ถ้าเครือข่ายบล็อก jsDelivr ให้ลองเครือข่ายอื่น |
+| เปิด `index.html` แล้วหน้าว่างหรือโหลดข้อมูลไม่ได้ | อย่าเปิดแบบ `file://` ให้รัน `python3 -m http.server` จาก root ของโปรเจกต์ แล้วเปิดผ่าน `http://127.0.0.1:8766/apps/web/` |
+| ประวัติการรันหายไป | ประวัติผูกกับเบราว์เซอร์และที่อยู่เว็บ (localhost กับ GitHub Pages คนละชุดกัน) นำเข้าไฟล์ JSON ที่ดาวน์โหลดไว้ได้ในแท็บประวัติ |
+| รันในเว็บนานมาก | ลดงบหรือจำนวน seed ถ้าจะรันชุดใหญ่ ใช้ `engine/batch.py` หรือ C# engine แทน |
+| seed เดิมแต่ผลไม่ตรง | ผลจะตรงกันเมื่อใช้ชุดข้อมูล โค้ด พารามิเตอร์ และเวอร์ชัน Python เดียวกัน และรันไม่ถูกตัดด้วยเวลาสูงสุดกลางทาง |
 
-```sh
-python3 dataset_tools/rebuild.py --output results/rebuilt-dataset
-```
+## เครดิต
 
-คำสั่งนี้ดาวน์โหลด source ZIP จาก UniTime ตาม URL ที่ตรึงไว้ หากมี XML อยู่แล้วใช้ `--source-xml /path/to/pu-fal07-cs.xml` ได้ ไม่แก้ XML ต้นฉบับและไม่เขียนทับ output ที่มีอยู่ `data/START_HERE.txt` เป็นบันทึกจากแพ็กเกจ conversion เดิม คำสั่งในเอกสารนั้นอ้างถึงโครงสร้างแพ็กเกจเดิม ให้ใช้คำสั่งข้างบนใน repo นี้
+- ชุดข้อมูลต้นฉบับ: Purdue Fall 2007 CS จาก [UniTime](https://www.unitime.org/uct_datasets.php)
+- [Pyodide](https://pyodide.org/) ทำให้ Python รันในเบราว์เซอร์ได้
+- แนวคิดของแต่ละวิธีมาจากงานวิจัยที่สรุปไว้ใน [docs/research-comparison.md](docs/research-comparison.md)
 
-## โครงสร้างและการเผยแพร่
+## สัญญาอนุญาต
 
-แผนที่ไฟล์ทั้งหมดอยู่ใน [docs/INDEX.md](docs/INDEX.md) และผลทดลองทุกชุดสรุปไว้ใน [experiments/INDEX.md](experiments/INDEX.md)
-
-```
-apps/web/        เว็บห้องทดลอง (index.html, app.mjs, worker.mjs, storage.mjs, styles.css)
-apps/slides/     สไลด์นำเสนอ Final (+ progress/ สไลด์ความคืบหน้า) deploy บน Vercel
-apps/godot/      แอปเดสก์ท็อป Godot (C#): แผนที่ห้องรายสัปดาห์, รันสด, เทียบ weekly/fixed
-engine/          Python engine (ต้นฉบับอ้างอิงและ runtime ของเว็บ), CLI, batch runner, การวิเคราะห์
-engine/tests/    contract/regression tests
-dotnet/          C# engine ที่ให้ผลตรงกับ Python ทุกบิต + CLI "timetabling" (เร็วกว่าราว 24 เท่า) + parity tests
-data/            ชุดข้อมูลดัดแปลง, assumptions, provenance, variants/
-dataset_tools/   converter และ config ที่ใช้สร้าง data/ ซ้ำ
-experiments/     ผลดิบที่ commit ไว้เป็นหลักฐาน (JSON.gz + CSV + summary)
-docs/            คู่มือ, protocol, research comparison, QA
-index.html       redirect ไป apps/web/ เพื่อให้ URL ของ GitHub Pages เดิมใช้ได้
-```
-
-- `engine/lab_core.py`, `algorithms.py`: shared decoder/search methods
-- `engine/input_validation.py`, `solution_validator.py`: input และ output checks คนละหน้าที่
-- `engine/runner.py`, `cli.py`: reproducible runner และ native command line
-- `engine/compare_modes.py`: ตารางเทียบ weekly / fixed แบบจับคู่จาก JSON ผลดิบ
-- `dotnet/`: engine เดียวกันใน C# รายละเอียดและคำสั่งอยู่ใน [dotnet/README.md](dotnet/README.md); แอป Godot อยู่ใน [apps/godot/README.md](apps/godot/README.md)
-
-`dataset_tools/` อยู่ที่ root ตั้งใจ: `config.json` อ้าง XML ต้นทางแบบ path สัมพัทธ์ และ config นี้ถูกบันทึกลงในชุดข้อมูล การย้ายจะทำให้ SHA-256 ของชุดข้อมูลที่สร้างซ้ำไม่ตรงกับ `data/provenance.json`
-
-Deploy GitHub Pages จาก `main` ที่ `/ (root)` ได้โดยตรง (root `index.html` redirect ไป `apps/web/`) มี `.nojekyll` ไม่ต้องเปิดเผย credentials หรือใช้ server เว็บเป็น local research workbench ไม่ใช่ระบบจัดตารางใช้งานจริงของสถาบัน
-
-ดู [NOTICE](NOTICE) สำหรับสิทธิ์แยกระหว่างโค้ดกับข้อมูลต้นทาง
+โค้ดและเอกสารของโปรเจกต์ใช้ [MIT](LICENSE) ส่วนข้อมูลต้นฉบับจาก UniTime/Purdue ยังเป็นสิทธิ์ของผู้ให้ข้อมูลเดิม
+รายละเอียดสิทธิ์ที่แยกกันระหว่างโค้ดกับข้อมูล และเครื่องมือที่ใช้พัฒนา อยู่ใน [NOTICE](NOTICE)
