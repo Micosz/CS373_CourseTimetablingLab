@@ -48,6 +48,24 @@
 | วัดผล / ความยุติธรรม | ITC2007, Lemos (2019), Bellio (2016) | lexicographic 3 ชั้น, งบนับ decoder evaluations, ตัวตรวจอิสระ |
 | ส่วนของเราเอง | — | Lab รายสัปดาห์, โหมด weekly กับ fixed, ข้อมูลดัดแปลง |
 
+## งานใหม่ที่เกี่ยวข้อง (2023–2026)
+
+ค้นเพิ่มเมื่อ 9 พ.ย. 2026 เพื่อหางานใหม่ที่ใกล้กับโจทย์ของเรา งานในส่วนนี้ **ไม่ได้เป็นที่มาของการออกแบบ** ใน `engine/` (ออกแบบเสร็จก่อนเจองานเหล่านี้) ใช้เป็นงานเปรียบเทียบตอนอภิปรายผล และเป็นทางต่อยอด
+
+| งาน | สิ่งที่งานนั้นทำ | เกี่ยวกับเราอย่างไร |
+|---|---|---|
+| Müller, Rudová & Müllerová (2025) | อธิบายการแข่งขัน ITC2019: 30 instance จริงจาก UniTime รวม student sectioning เข้ากับการจัดเวลาและห้อง | ข้อมูลมาจาก UniTime สายเดียวกับ `pu-fal07-cs` และตัวเลือกเวลาของแต่ละคลาสใน ITC2019 ระบุสัปดาห์ที่เรียนได้ จึงใกล้การจัดห้องราย 15 สัปดาห์ของเรามากกว่า ITC2007 ถ้าจะทดสอบกับ benchmark มาตรฐานในอนาคต ITC2019 ควรเป็นตัวเลือกแรก |
+| Sylejmani, Gashi & Ymeri (2023) | SA สองเฟสบน ITC2019 (หาคำตอบ feasible ก่อน แล้วค่อยปรับคุณภาพ) ใช้การลงโทษช่วยออกจาก infeasible; Müller et al. (2025) รายงานว่าผลดีเป็นอันดับ 4 ของ benchmark | SA ของเราไม่ต้องมีเฟสหา feasible เพราะ decoder ไม่ละเมิด hard constraint เลย แต่ใช้จำนวนคาบที่ยังจัดไม่ได้เป็นชั้นแรกของ lexicographic แทน |
+| Abdipoor et al. (2025) | ใช้ Distance to Feasibility นำทาง metaheuristic พื้นฐานบน ITC2019 ทั้ง 30 instance พบว่าวิธีที่เน้นขุดหาคำตอบใกล้ตัว (exploitative) ลดระยะห่างจาก feasible ได้ดีกว่า แต่ติด local optima ง่ายกว่าวิธีที่สำรวจกว้าง | เทียบได้กับชั้นแรก `unassigned_weekly_sessions` ของเรา ใช้อ้างประกอบตอนอภิปรายผล HC เทียบกับ SA/GA |
+| Davison, Kheiri & Zografos (2025) | binary program หลายวัตถุประสงค์ แต่ละคลาสสอนแบบในห้อง ออนไลน์ หรือผสมได้ แก้แบบ lexicographic ทดลองกับข้อมูล benchmark | การเลือกรูปแบบการสอนคล้ายกับการที่คาบต้องการห้องต่างประเภท แต่ผูกกับคลาส ไม่ได้ผูกกับสัปดาห์แบบของเรา และใช้ lexicographic เหมือนเรา |
+| Ozkan, Ulucan, Dirik & Atici (2025) | integer program ตัวเดียวที่รวม multi-section course, room stability และความชอบของผู้สอน ใช้กับ business school จริง (PDF อยู่ที่ `papers/4.University course timetabling with multi‑section courses.pdf`) | room stability ตรงกับเมตริก `room_changes` และโหมด fixed ของเรา |
+| Cornei & Breabăn (2026) | GA แบบ multi-modal ที่ใช้ graph neural network เป็น operator ปรับคำตอบ ได้คุณภาพและเวลาดีกว่า GA หรือ GNN อย่างเดียวอย่างมีนัยสำคัญ ทดลองกับ staff rostering | ทางต่อยอดของ GA ของเรา |
+| Elhüseyni (2026) | MILP สองวัตถุประสงค์ (ลดการชน กับทำให้ตารางผู้สอนแน่น) มีเงื่อนไขให้คาบทฤษฎีมาก่อนคาบปฏิบัติ ข้อมูลจริงลดการชนได้ 13.33% | อีกแบบหนึ่งของการจำลองข้อกำหนดภาคปฏิบัติ |
+| Sharma & Sharma (2026), SCHEDBench | โจทย์จัดตารางภาษาธรรมชาติ 1,132 ข้อ (มี curriculum timetabling) ทดสอบ LLM 13 ตัว พบว่าผลไม่คงที่เมื่อเรียบเรียงโจทย์ใหม่ และการสลับลำดับ constraint มีผลมากที่สุด | สนับสนุนการมีตัวตรวจคำตอบอิสระ (`engine/solution_validator.py`) ถ้าในอนาคตจะใช้ LLM ช่วยจัดหรืออธิบายตาราง |
+| Vasileiou & Yeoh (2025), TRACE-CS | ระบบจัดตารางเรียนที่อธิบายเหตุผลได้ โดยใช้ตรรกะร่วมกับ LLM | ทางต่อยอดเรื่องการอธิบายว่าทำไมบางคาบจัดไม่ได้ |
+
+**ผลต่อข้อสรุป "ส่วนที่เป็นของเราเอง":** งานชุดนี้ไม่มีงานไหนกำหนดประเภทห้องที่ต้องใช้ต่างกันตามสัปดาห์ ที่ใกล้ที่สุดคือ ITC2019 (กำหนดสัปดาห์ที่เรียนได้ แต่ประเภทห้องไม่เปลี่ยนตามสัปดาห์) และ Davison et al. (เลือกรูปแบบการสอนต่อคลาส) ข้อสรุปเดิมจึงยังใช้ได้ แต่การค้นครั้งนี้ไม่ได้ครบถ้วน (ไม่ได้ไล่ proceedings ของ PATAT ทั้งหมด)
+
 ## เอกสารอ้างอิง
 
 - Bellio, R., Ceschia, S., Di Gaspero, L., Schaerf, A., & Urli, T. (2016). Feature-based tuning of simulated annealing applied to the curriculum-based course timetabling problem. *Computers & Operations Research, 65*, 83–92. https://doi.org/10.1016/j.cor.2015.07.002 (preprint: arXiv:1409.7186)
@@ -59,4 +77,18 @@
 - Goldberg, D. E., & Deb, K. (1991). A comparative analysis of selection schemes used in genetic algorithms. *Foundations of Genetic Algorithms*, 69–93. https://doi.org/10.1016/B978-0-08-050684-5.50008-2
 - UniTime. University course timetabling datasets, Purdue Fall 2007 CS (`pu-fal07-cs`). https://www.unitime.org/uct_datasets.php
 
+งานใหม่ที่เกี่ยวข้อง:
+
+- Abdipoor, S., Li, M., Goh, S. L., Yaakob, R., Hao, L., & Abdullah, S. (2025). Distance to Feasibility: Performance assessment of baseline metaheuristics on university course timetabling with student sectioning. *2025 IEEE 13th Conference on Systems, Process & Control (ICSPC)*, 49–54. https://doi.org/10.1109/ICSPC68261.2025.11325835
+- Cornei, L.-M., & Breabăn, M.-E. (2026). Enhancing genetic algorithms with graph neural networks: A timetabling case study. *EvoApplications 2026* (accepted). arXiv:2602.08619. https://arxiv.org/abs/2602.08619
+- Davison, M., Kheiri, A., & Zografos, K. G. (2025). Modelling and solving the university course timetabling problem with hybrid teaching considerations. *Journal of Scheduling, 28*(2), 195–215. https://doi.org/10.1007/s10951-024-00817-w
+- Elhüseyni, M. (2026). Course timetabling under conflict and lecturer preferences using bi-objective optimization model. arXiv:2607.03901. https://arxiv.org/abs/2607.03901
+- Müller, T., Rudová, H., & Müllerová, Z. (2025). Real-world university course timetabling at the International Timetabling Competition 2019. *Journal of Scheduling, 28*(2), 247–267. https://doi.org/10.1007/s10951-023-00801-w
+- Ozkan, A., Ulucan, A., Dirik, C., & Atici, K. B. (2025). University course timetabling with multi-section courses, room stability and lecturer preferences: An application in a business school. *Computational Management Science, 22*(1), Article 3. https://doi.org/10.1007/s10287-025-00529-2
+- Sharma, S. S., & Sharma, A. (2026). SCHEDBench: A benchmark for evaluating LLM constraint faithfulness in natural-language combinatorial scheduling. arXiv:2608.00991. https://arxiv.org/abs/2608.00991
+- Sylejmani, K., Gashi, E., & Ymeri, A. (2023). Simulated annealing with penalization for university course timetabling. *Journal of Scheduling, 26*(5), 497–517. https://doi.org/10.1007/s10951-022-00747-5
+- Vasileiou, S. L., & Yeoh, W. (2025). TRACE-CS: A hybrid logic–LLM system for explainable course scheduling. *Proceedings of the 22nd International Conference on Principles of Knowledge Representation and Reasoning (KR 2025)*, 653–658. https://doi.org/10.24963/kr.2025/63
+
 **หมายเหตุแหล่งที่ตรวจ:** ตรวจ DOI ชื่อเรื่อง ผู้แต่ง และแหล่งตีพิมพ์ของ Bellio, Lemos, Müller และ Goldberg & Deb กับ Crossref; รายละเอียดวิธีของ Bellio มาจาก preprint บน arXiv; ของ Lemos มาจาก abstract (OpenAlex); ของ Müller มาจากเอกสาร "ITC2007: Solver Description" ที่ส่งเข้าการแข่งขัน (ไม่ได้อ่านฉบับเต็มใน Annals of OR ซึ่งต้องสมัครสมาชิก); ของ ITC2007 มาจากหน้า Problem Model / Timetable Evaluation และ technical report; ของ Xiao มาจากหน้า CORE Scholar; Davis (1985) ถูกอ้างเป็นที่มาของ order crossover โดยแหล่งทุติยภูมิ เราไม่ได้อ่านต้นฉบับเต็ม
+
+**หมายเหตุแหล่งที่ตรวจ (งานใหม่ที่เกี่ยวข้อง):** ตรวจ DOI ชื่อเรื่อง ผู้แต่ง และแหล่งตีพิมพ์ของ Abdipoor, Davison, Müller (2025), Ozkan, Sylejmani และ Vasileiou กับ Crossref; ของ Cornei, Elhüseyni และ Sharma ตรวจจากหน้า abstract บน arXiv; รายละเอียดวิธีของ Müller (2025) มาจาก abstract ใน Crossref; ของ Davison อ่านจากฉบับ author copy เฉพาะส่วนทบทวนวรรณกรรมและ contributions; ของ Abdipoor, Sylejmani และ Ozkan มาจาก abstract ที่แสดงในผลค้นหา (อันดับ 4 ของ Sylejmani มาจากข้อความใน Müller et al., 2025); ของ Vasileiou มีแค่ชื่อเรื่องและข้อมูล proceedings ยังไม่ได้อ่านเนื้อหา; เรื่องที่ ITC2019 ระบุสัปดาห์ในตัวเลือกเวลามาจากรูปแบบข้อมูลของการแข่งขัน ยังไม่ได้ตรวจกับบทความฉบับเต็ม
