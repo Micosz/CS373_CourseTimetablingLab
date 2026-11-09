@@ -7,8 +7,8 @@
 เปิดในเบราว์เซอร์แล้วกดรันได้เลย ไม่ต้องติดตั้งอะไร
 ดูได้ทันทีว่าวิธีไหนจัดตารางได้ครบกว่า และเปลืองห้อง Lab น้อยกว่า
 
-[![เปิดเว็บ](https://img.shields.io/badge/เปิดเว็บ-GitHub_Pages-2ea44f?style=flat-square&logo=github)](https://micosz.github.io/course-timetabling-lab/)
-[![สไลด์](https://img.shields.io/badge/สไลด์นำเสนอ-Vercel-000000?style=flat-square&logo=vercel)](https://cs373presentation.vercel.app/)
+[![เปิดเว็บ](https://img.shields.io/badge/live_demo-GitHub_Pages-2ea44f?style=flat-square&logo=github)](https://micosz.github.io/course-timetabling-lab/)
+[![สไลด์](https://img.shields.io/badge/slides-Vercel-000000?style=flat-square&logo=vercel)](https://cs373presentation.vercel.app/)
 [![Engine checks](https://img.shields.io/github/actions/workflow/status/Micosz/CS373_CourseTimetablingLab/checks.yml?style=flat-square&label=tests)](https://github.com/Micosz/CS373_CourseTimetablingLab/actions/workflows/checks.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 ![Python 3.9+](https://img.shields.io/badge/Python-3.9+-3776ab?style=flat-square&logo=python&logoColor=white)
