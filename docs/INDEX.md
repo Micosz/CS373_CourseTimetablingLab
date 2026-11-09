@@ -6,6 +6,7 @@
 |---|---|
 | ใช้เว็บครั้งแรก | [quick-start.md](quick-start.md) |
 | ภาพรวมโครงงาน และวิธีรันบนเครื่อง | [../README.md](../README.md) |
+| รายละเอียดเชิงเทคนิค (วิธีแทนคำตอบ ข้อห้าม ความเท่าเทียม โค้ด Python) | [technical.md](technical.md) |
 | ดูผลทดลองทั้งหมด | [../experiments/INDEX.md](../experiments/INDEX.md) |
 | กติกาการทดลอง (seed, งบ, สถิติ) | [protocol.md](protocol.md) |
 | ทำไมออกแบบแบบนี้ เทียบกับงานวิจัย | [research-comparison.md](research-comparison.md) |
