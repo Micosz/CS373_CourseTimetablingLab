@@ -1,0 +1,29 @@
+{
+ "random (ชุดหลัก)": {
+  "friedman_p": 2.6463206092422107e-05,
+  "mean_ranks": {
+   "greedy": 4.0,
+   "hc": 1.5,
+   "sa": 2.8,
+   "ga": 1.7
+  }
+ },
+ "consecutive": {
+  "friedman_p": 0.00012894259630383219,
+  "mean_ranks": {
+   "greedy": 4.0,
+   "hc": 2.15,
+   "sa": 2.35,
+   "ga": 1.5
+  }
+ },
+ "alternate": {
+  "friedman_p": 0.00022170353657160417,
+  "mean_ranks": {
+   "greedy": 4.0,
+   "hc": 1.8,
+   "sa": 2.4,
+   "ga": 1.8
+  }
+ }
+}
