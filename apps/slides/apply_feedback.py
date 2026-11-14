@@ -248,6 +248,189 @@ def edit_tuning(by):
         'GA ยังดีกว่า SA อย่างมีนัยสำคัญที่ p เท่ากับ 0.003 ข้อสรุปจึงไม่เปลี่ยน '
         'ที่ SA ดีสุดเมื่อแทบไม่ยอมรับคำตอบที่แย่ลง แปลว่าที่งบนี้ SA ทำงานใกล้กับ hill climbing')
 
+
+# --- #30: Lab data is synthetic ------------------------------------------------
+def edit_data(by):
+    s = by['data']
+    s['html'] = replace_once(s['html'],
+        'Computer Lab จำลอง 4 ห้อง</h3>\n      <p style="font-family:\'IBM Plex Sans Thai\', Tahoma, sans-serif; font-size:26px; line-height:1.5; color:#4d4d4d">134 คาบประจำใช้ Lab คนละ 4 สัปดาห์&nbsp;</p>',
+        'Lab และสัปดาห์ Lab สร้างขึ้นเอง</h3>\n      '
+        + p('ต้นฉบับไม่มี Lab · เพิ่ม Lab จำลอง 4 ห้อง (61/36/30/26 ที่นั่ง) · สุ่ม 60% ของคาบประจำ (134 คาบ) ให้ใช้ Lab 4 จาก 15 สัปดาห์ · seed 20261027', 24))
+    s['html'] = replace_once(s['html'], 'top:495px; left:128px; width:1664px; height:252px;', 'top:495px; left:128px; width:1664px; height:290px;')
+    s['html'] = s['html'].split('\n<p data-extra="patterns"')[0] + (
+        f'\n<p data-extra="patterns" style="position:absolute; top:830px; left:128px; width:1664px; {SANS}; font-size:26px; line-height:1.5; color:{GREY}">'
+        '60% และ 4 สัปดาห์เป็นค่าที่ตั้งเอง ไม่ใช่ข้อมูลสำรวจ · ลองสัปดาห์ Lab แบบ<b style="color:#171717">ติดกัน</b>และ<b style="color:#171717">เว้นสัปดาห์</b>แล้ว '
+        'ข้อสรุปและลำดับวิธีไม่เปลี่ยน เปลี่ยนแค่จำนวนครั้งที่ย้ายห้อง<br>'
+        f'<span style="font-size:22px; color:{MUTED}">ที่มา / data/assumptions.json (A10), dataset_tools/config.json, experiments/lab-week-patterns</span></p>')
+    s['note'] = s['note'].split(' ขอย้ำว่าข้อมูล Lab')[0] + (
+        ' ขอย้ำว่าข้อมูล Lab ไม่ได้มาจากต้นฉบับ เราสร้างขึ้นเอง ต้นฉบับไม่มี Computer Lab และไม่มีความต้องการ Lab รายสัปดาห์ '
+        'เราสุ่ม 60 เปอร์เซ็นต์ของคาบประจำให้ต้องใช้ Lab และแต่ละคาบสุ่มสี่สัปดาห์จากสิบห้า ด้วย seed 20261027 ซึ่งแยกจาก seed ของอัลกอริทึม '
+        'ตัวเลข 60 เปอร์เซ็นต์และสี่สัปดาห์เป็นค่าที่ตั้งเอง ไม่ได้มาจากการสำรวจวิชาจริง '
+        'เพราะวิชาจริงมักมีรูปแบบ เราจึงลองอีกสองแบบ คือ Lab สี่สัปดาห์ติดกัน และเว้นสัปดาห์ ข้อสรุปหลักและลำดับวิธีไม่เปลี่ยน '
+        'สิ่งที่เปลี่ยนคือจำนวนครั้งที่ต้องย้ายห้อง แบบติดกันย้ายราว 270 ครั้ง แบบสุ่มราว 830 ครั้ง และแบบเว้นสัปดาห์ราว 1,080 ครั้ง')
+
+
+def edit_result_titles(by):
+    for sid, old, new in (('main', 'GA ใช้ Lab โดยไม่จำเป็นน้อยที่สุด', 'งบ 500: GA ใช้ Lab โดยไม่จำเป็นน้อยที่สุด'),
+                          ('stats', 'GA ดีที่สุด', 'งบ 500: GA ดีที่สุด แต่ยังแยกจาก HC ไม่ได้')):
+        s = by[sid]
+        s['html'] = replace_once(s['html'], f'>{old}</h2>', f'>{new}</h2>')
+        s['title'] = new
+    s = by['stats']
+    s['note'] = s['note'].split(' ข้อสรุปนี้เป็นของงบ 500')[0] + (
+        ' ข้อสรุปนี้เป็นของงบ 500 ซึ่งเป็นงบหลักตาม protocol อีกสองหน้าเราจะเห็นว่าถ้าให้งบมากขึ้น ผู้ชนะเปลี่ยน')
+
+
+# --- #33: run until the results settle -----------------------------------------
+def edit_budget(by):
+    summary = json.loads((ROOT / 'experiments/convergence/summary.json').read_text(encoding='utf-8'))
+    levels = summary['levels']
+    mean = {m: {int(k): v for k, v in summary['methods'][m]['mean_lab_hours'].items()} for m in ('hc', 'sa', 'ga')}
+    x0, x1, w, h, y_max = 60, 1180, 1240, 380, 150
+    lx = lambda b: x0 + (math.log10(b) - math.log10(levels[0])) / (math.log10(levels[-1]) - math.log10(levels[0])) * (x1 - x0)
+    sy = lambda v: 360 - v / y_max * 340
+    style = {'hc': ('#4d4d4d', 4, ''), 'sa': ('#8f8f8f', 4, ' stroke-dasharray="12 8"'), 'ga': (BLUE, 6, '')}
+    lines = [f'<line x1="0" y1="{sy(v):.1f}" x2="{w}" y2="{sy(v):.1f}" stroke="{"#d4d4d4" if v == 0 else "#efefef"}" stroke-width="2"/>'
+             for v in (0, 50, 100, 150)]
+    lines.append(f'<line x1="{lx(500):.1f}" y1="10" x2="{lx(500):.1f}" y2="360" stroke="#d4d4d4" stroke-width="2" stroke-dasharray="6 6"/>')
+    for m in ('hc', 'sa', 'ga'):
+        color, width, dash = style[m]
+        pts = ' '.join(f'{lx(b):.1f},{sy(mean[m][b]):.1f}' for b in levels)
+        lines.append(f'<polyline points="{pts}" fill="none" stroke="{color}" stroke-width="{width}"{dash}/>')
+        lines.append(''.join(f'<circle cx="{lx(b):.1f}" cy="{sy(mean[m][b]):.1f}" r="{8 if m == "ga" else 6}" fill="{color}"/>' for b in levels))
+    svg = (f'<svg class="reveal-x" xmlns="http://www.w3.org/2000/svg" aria-label="กราฟเส้น Lab ไม่จำเป็นเฉลี่ยของ HC SA GA ตามงบ 50 ถึง 50,000 '
+           f'แกนนอนแบบ log ที่งบ 500 GA ต่ำสุด ตั้งแต่งบ 2,000 SA ต่ำสุด" viewBox="0 0 {w} 380" '
+           f'style="position:absolute; top:50px; left:100px; width:{w}px; height:380px">\n' + '\n'.join(lines) + '\n</svg>')
+    ticks = ''.join(f'<p style="position:absolute; top:{sy(v) + 32:.0f}px; left:0; width:80px; {MONO}; font-size:24px; text-align:right; color:{MUTED}">{v}</p>'
+                    for v in (0, 50, 100, 150))
+    xt = ''.join(f'<p style="position:absolute; top:442px; left:{100 + lx(b) - 60:.0f}px; width:120px; {MONO}; font-size:22px; text-align:center; '
+                 f'color:{INK if b == 500 else MUTED}{"; font-weight:600" if b == 500 else ""}">{b:,}</p>' for b in levels)
+    end = {'sa': (f'SA {mean["sa"][50000]:.1f} ชม.', '#8f8f8f', ''), 'ga': (f'GA {mean["ga"][50000]:.1f} ชม.', BLUE, '; font-weight:600'),
+           'hc': (f'HC {mean["hc"][50000]:.1f} ชม.', '#4d4d4d', '')}
+    labels = ''.join(f'<p style="position:absolute; top:{top}px; left:1360px; width:220px; {SANS}; font-size:24px; color:{c}{x}">{t}</p>'
+                     for top, (t, c, x) in zip((330, 366, 402), (end['hc'], end['ga'], end['sa'])))
+    tests = {(t['a'], t['b']): t for t in summary['tests_at_50000']}
+    html = (
+        f'<h2 style="position:absolute; top:112px; left:128px; width:1664px; {H2}">ผู้ชนะขึ้นกับงบ: งบ 500 GA ดีสุด ตั้งแต่ 2,000 SA ดีสุด</h2>\n'
+        '<div style="position:absolute; top:250px; left:128px; width:1664px; height:560px">'
+        f'<p style="position:absolute; top:0; left:0; width:600px; {SANS}; font-size:26px; color:{GREY}">Lab ไม่จำเป็นเฉลี่ย (ชม.) · seed 1001–1010</p>'
+        + svg + ticks + xt
+        + f'<p style="position:absolute; top:486px; left:100px; width:{w}px; {SANS}; font-size:24px; text-align:center; color:{GREY}">'
+          'งบการค้นหาต่อรัน (จำนวนครั้งที่ประเมินคำตอบ, แกน log) · เส้นประ = งบ 500 ของการทดลองหลัก</p>'
+        + labels + '</div>\n'
+        f'<p style="position:absolute; top:850px; left:128px; width:1664px; {SANS}; font-size:26px; line-height:1.5; color:{GREY}">'
+        f'ที่งบ 50,000 SA เหลือ 0 ชม. ใน 8 จาก 10 seed ดีกว่า GA และ HC อย่างมีนัยสำคัญ (p ปรับ Holm {tests[("ga", "sa")]["p_holm"]:.3f} และ {tests[("hc", "sa")]["p_holm"]:.3f}) '
+        'GA กับ HC ยังแยกกันไม่ได้ · ยังไม่นิ่งสนิท แต่ดีขึ้นช้ามาก<br>'
+        f'<span style="font-size:22px; color:{MUTED}">รันละราว 3 นาทีด้วย C# · พารามิเตอร์จูนที่งบ 500 · ที่มา / experiments/convergence, experiments/budget</span></p>')
+    by['budget'].update({'title': 'ผู้ชนะขึ้นกับงบ: งบ 500 GA ดีสุด ตั้งแต่ 2,000 SA ดีสุด', 'html': html, 'note': (
+        'อาจารย์แนะนำให้รันจนผลนิ่ง ไม่ใช่หยุดที่งบตายตัว เราจึงรันต่อจนถึง 50,000 evaluations บน seed 1001 ถึง 1010 ด้วย engine C# รันละราวสามนาที '
+        'เพราะไม่มีวิธีไหนใช้งบในการวางแผนการค้นหา รันยาวรันเดียวจึงบอกผลของทุกงบที่เล็กกว่าได้ และเราตรวจแล้วว่าตรงกับรันงบ 500 และ 1000 ที่เก็บไว้ทุกคู่ '
+        'ผลคือผู้ชนะขึ้นกับงบ ที่งบ 500 ถึง 1000 GA ดีที่สุดเหมือนผลหลัก แต่ตั้งแต่งบ 2,000 SA ดีที่สุด '
+        f'ที่งบ 50,000 SA เหลือ Lab ไม่จำเป็นเฉลี่ย {mean["sa"][50000]:.1f} ชั่วโมง เป็นศูนย์ใน 8 จาก 10 seed GA {mean["ga"][50000]:.1f} และ HC {mean["hc"][50000]:.1f} '
+        'SA ดีกว่าทั้งสองอย่างมีนัยสำคัญ ส่วน GA กับ HC ยังแยกกันไม่ได้ทุกงบ และ SA เปลี่ยนห้องแค่ 786 ครั้ง ใกล้ค่าต่ำสุด 783 '
+        'คำอธิบายที่เป็นไปได้คือ SA ที่จูนไว้ลดอุณหภูมิเร็ว หลังจากนั้นยอมรับคำตอบที่เท่าเดิมได้ จึงเดินบนที่ราบไปเรื่อย ๆ ส่วน HC เริ่มใหม่แบบสุ่มเมื่อติด '
+        'เรื่องนิ่งหรือยัง เกณฑ์ไม่ดีขึ้นเลยในหนึ่งหมื่นครั้งใช้ไม่ได้ เพราะหลายรันหยุดนิ่งนานแล้วกลับดีขึ้นอีก '
+        'จาก 20,000 ไป 50,000 ยังลดได้อีกสามถึงหกชั่วโมง จึงยังไม่นิ่งสนิท แต่ดีขึ้นช้ามากแล้ว '
+        'ข้อควรระวังคือพารามิเตอร์ทุกวิธีจูนที่งบ 500 ถ้าจะใช้งบใหญ่จริงควรจูนใหม่')})
+
+
+def edit_limits(by, slides):
+    s = by['limits']
+    n = next(i for i, x in enumerate(slides, 1) if x['id'] == 'limits')
+    def card(title, body):
+        return (f'<div style="display:flex; flex-direction:column; gap:10px; padding:32px 36px; {CARD}">'
+                f'<h3 style="{SANS}; font-size:34px; font-weight:600; line-height:1.3; color:{INK}">{title}</h3>{p(body)}</div>')
+    s['html'] = (
+        '<div style="display:flex; flex-direction:column; gap:12px">\n'
+        f'    <div style="display:flex; flex-direction:row; gap:16px; align-items:center"><p style="{MONO}; font-size:24px; color:{BLUE}">{n}</p>'
+        f'<p style="{SANS}; font-size:24px; color:{MUTED}">ข้อจำกัด</p></div>\n'
+        f'    <h2 style="{H2}">ข้อจำกัดของการศึกษา</h2>\n  </div>\n'
+        '  <div style="display:grid; gap:28px; grid-template-columns:1fr 1fr">'
+        + card('ข้อมูลดัดแปลงชุดเดียว', 'Lab และสัปดาห์ Lab สร้างขึ้นเอง ลองแบบติดกันและเว้นสัปดาห์แล้วข้อสรุปเดิม แต่ยังไม่มีข้อมูลวิชาจริง และไม่มีตารางที่คนจัดจริงมาเทียบ')
+        + card('พารามิเตอร์จูนที่งบ 500', 'จูน SA เพิ่มหลังเห็นผลแล้ว ผลที่งบ 500 ไม่เปลี่ยน แต่ลำดับวิธีขึ้นกับงบ ถ้าใช้งบใหญ่ควรจูนใหม่ที่งบนั้น')
+        + card('ยังไม่นิ่งสนิทที่งบ 50,000', 'ดีขึ้นช้ามากแล้ว และ SA เข้าใกล้ 0 · การศึกษางบใหญ่ใช้ 10 seed')
+        + card('Search space และผลด้านคน', 'ไม่มี move ที่ย้ายห้องโดยตรง · ยังไม่ได้วัดผลของการย้ายห้องต่อนักศึกษา เช่น เดินไกลหรือสับสน')
+        + '</div>\n'
+        f'  <p style="position:absolute; bottom:64px; left:128px; width:1664px; {SANS}; font-size:24px; color:{MUTED}">'
+        'ที่มา / README ของ experiments/lab-week-patterns, sa-extended-tuning, convergence และ lab-scarcity</p>')
+    s['note'] = ('ข้อจำกัดสำคัญมีสี่ข้อ ข้อแรก ผลทั้งหมดมาจากข้อมูลดัดแปลงชุดเดียว และข้อมูล Lab เราสร้างขึ้นเอง '
+                 'เราลองรูปแบบสัปดาห์ Lab แบบติดกันและเว้นสัปดาห์แล้วข้อสรุปไม่เปลี่ยน แต่ยังไม่มีข้อมูลวิชาจริง และไม่มีตารางที่คนจัดจริงมาเทียบ '
+                 'ข้อสอง พารามิเตอร์ทุกวิธีจูนที่งบ 500 เราจูน SA เพิ่มแล้วผลที่งบ 500 ไม่เปลี่ยน แต่เมื่อให้งบมากขึ้นลำดับวิธีเปลี่ยน จึงควรจูนใหม่ถ้าจะใช้งบใหญ่ '
+                 'ข้อสาม ที่งบ 50,000 ยังไม่นิ่งสนิท แต่ดีขึ้นช้ามากแล้ว และการศึกษางบใหญ่ใช้แค่ 10 seed '
+                 'ข้อสี่ การค้นหาไม่มี move ที่ย้ายห้องโดยตรง และเรายังไม่ได้วัดผลของการย้ายห้องต่อนักศึกษา')
+
+
+def edit_conclude(by):
+    s = by['conclude']
+    def card(n, title, body):
+        return (f'<div style="display:flex; flex-direction:column; gap:12px; flex:1; padding:36px; {CARD}">'
+                f'<p style="{GEIST}; font-size:40px; font-weight:600; color:{BLUE}">{n}</p>'
+                f'<h3 style="{SANS}; font-size:32px; font-weight:600; line-height:1.3; color:{INK}">{title}</h3>{p(body, 24)}</div>')
+    s['html'] = (
+        f'<h2 style="position:absolute; top:112px; left:128px; width:1664px; {H2}">สรุปผลการศึกษา</h2>\n'
+        '<div style="position:absolute; top:260px; left:128px; width:1664px; display:flex; flex-direction:row; gap:28px">'
+        + card('1', 'ห้องรายสัปดาห์ประหยัด Lab ได้หนึ่งห้อง',
+               'จัดครบทุกคาบ ห้องคงที่ใช้ Lab ไม่จำเป็นเพิ่ม 1,801–1,949 ชม. ต่อเทอมและยังจัดไม่ครบ เหลือ Lab 3 ห้องก็ยังจัดครบ ข้อสรุปเดิมแม้สัปดาห์ Lab ติดกันหรือเว้นสัปดาห์')
+        + card('2', 'วิธีที่ดีที่สุดขึ้นกับงบ',
+               'งบ 500: GA ≈ HC ดีกว่า SA และ Greedy · ตั้งแต่งบ 2,000: SA ดีที่สุด ที่งบ 50,000 เหลือ Lab ไม่จำเป็น 2.0 ชม. (0 ใน 8/10 seed)')
+        + card('3', 'ราคาคือการย้ายห้อง',
+               'ราว 1.06 เท่าของค่าต่ำสุดที่ข้อมูลบังคับ (831 เทียบ 783 ครั้ง) ที่งบ 50,000 SA ย้าย 786 ครั้ง ราคาขึ้นกับรูปแบบสัปดาห์ Lab ของวิชาจริง')
+        + '</div>\n'
+        f'<p style="position:absolute; top:800px; left:128px; width:1664px; {SANS}; font-size:26px; line-height:1.5; color:{GREY}">'
+        '<b style="color:#171717">งานต่อยอด</b> ทดลองกับข้อมูลวิชาจริง · จูนพารามิเตอร์ที่งบใหญ่ · เพิ่ม move ที่ย้ายห้องโดยตรง · วัดผลของการย้ายห้องต่อนักศึกษา</p>')
+    s['note'] = ('สรุปสามข้อ หนึ่ง ห้องรายสัปดาห์ลด Lab ที่ไม่จำเป็นได้ชัดเจน ห้องคงที่ใช้ Lab ไม่จำเป็นเพิ่มขึ้นเฉลี่ย 1,801 ถึง 1,949 ชั่วโมงต่อเทอมและยังจัดไม่ครบ '
+                 'ขณะที่ห้องรายสัปดาห์จัดครบแม้เหลือ Lab 3 ห้อง คือประหยัด Lab ได้หนึ่งห้องเต็ม และข้อสรุปนี้ไม่เปลี่ยนเมื่อสัปดาห์ Lab ติดกันหรือเว้นสัปดาห์ '
+                 'สอง วิธีที่ดีที่สุดขึ้นกับงบ ที่งบ 500 GA ดีที่สุดโดยรวม ดีกว่า SA อย่างมีนัยสำคัญ แต่ยังแยกจาก HC ไม่ได้ '
+                 'เมื่อให้งบตั้งแต่ 2,000 ขึ้นไป SA ดีที่สุด และที่งบ 50,000 แทบไม่เหลือ Lab ที่ไม่จำเป็น '
+                 'สาม สิ่งที่แลกมาคือการเปลี่ยนห้อง ซึ่งอยู่ที่ราว 1.06 เท่าของค่าต่ำสุดที่ข้อมูลบังคับ และขึ้นกับรูปแบบสัปดาห์ Lab ของวิชาจริง '
+                 'งานต่อยอดคือทดลองกับข้อมูลวิชาจริง จูนพารามิเตอร์ที่งบใหญ่ เพิ่ม move ที่ย้ายห้องโดยตรง และวัดผลของการย้ายห้องต่อนักศึกษา ขอบคุณครับ')
+
+
+# --- #35: recent references -----------------------------------------------------
+RECENT_REFS = [
+    ('https://doi.org/10.5772/intechopen.1017804', 'Cavalcante et al. (2026)',
+     'A Mathematical Model for Class Scheduling: A Case Study with the Federal University of Maranhão. IntechOpen.',
+     'คนจัดเอง 23 ห้อง · Greedy 20 · ILP 13 · ใช้ Lab จำลองเหมือนเรา'),
+    ('https://doi.org/10.1016/j.cor.2026.107659', 'Raviv (2026)',
+     'The lecture-hall quadratic assignment problem. Computers &amp; Operations Research, 196, 107659.',
+     'ย้ายห้องระหว่างเทอมต้นทุนต่ำ แต่ย้ายเวลากระทบนักศึกษา'),
+    ('https://doi.org/10.3390/a18030158', 'Han &amp; Wang (2025)',
+     'Gradual Optimization of University Course Scheduling Problem Using Genetic Algorithm and Dynamic Programming. Algorithms, 18(3), 158.',
+     'จัดห้องรายสัปดาห์ แต่ประเภทห้องผูกกับวิชา ไม่เปลี่ยนตามสัปดาห์'),
+    ('https://www.sciencedirect.com/journal/procedia-computer-science/vol/278', 'Antunes-Batista et al. (2026)',
+     'Multiobjective Optimization Approaches for Room Allocation in University Course Timetabling. Procedia Computer Science, 278, 663–670.',
+     'นับการเปลี่ยนห้องของวิชาเดียวกันเป็นเป้าหมาย คล้าย room changes'),
+    ('https://doi.org/10.1007/s10287-025-00529-2', 'Ozkan et al. (2025)',
+     'University course timetabling with multi-section courses, room stability and lecturer preferences. Computational Management Science, 22(1), 3.',
+     'room stability ตรงกับโหมดห้องคงที่'),
+    ('https://doi.org/10.1007/s10951-023-00801-w', 'Müller, Rudová &amp; Müllerová (2025)',
+     'Real-world university course timetabling at the International Timetabling Competition 2019. Journal of Scheduling, 28(2), 247–267.',
+     'ข้อมูล UniTime สายเดียวกับ pu-fal07-cs'),
+]
+
+
+def recent_refs_slide():
+    cards = []
+    for url, who, ref, why in RECENT_REFS:
+        cards.append(
+            '    <div style="display:flex; flex-direction:column; gap:6px; padding:18px 0 0; border-top:1px solid #eaeaea">\n'
+            f'      <p style="{GEIST}; font-size:28px; font-weight:600; color:#171717"><a href="{url}">{who}</a></p>\n'
+            f'      <p style="{SANS}; font-size:22px; line-height:1.4; color:#4d4d4d">{ref}</p>\n'
+            f'      <p style="{SANS}; font-size:22px; line-height:1.4; color:{BLUE}">{why}</p>\n'
+            '    </div>')
+    html = (f'<h2 style="position:absolute; top:112px; left:128px; width:1664px; {H2}">เอกสารอ้างอิง: งานใหม่ 2025–2026</h2>\n'
+            '  <div style="position:absolute; top:232px; left:128px; width:1664px; display:grid; '
+            'grid-template-columns:1fr 1fr; column-gap:56px; row-gap:32px">\n' + '\n'.join(cards) + '\n  </div>')
+    note = ('หน้านี้เป็นงานใหม่ปี 2025 ถึง 2026 ที่เพิ่มตามข้อเสนอแนะว่าเอกสารอ้างอิงเก่า '
+            'งานที่ใกล้เราที่สุดคือ Cavalcante และคณะ ที่มหาวิทยาลัย Maranhão ประเทศบราซิล ซึ่งเทียบแผนที่คนจัดเองกับ Greedy และ ILP บนข้อมูลชุดเดียวกัน '
+            'คนจัดเองใช้ 23 ห้อง Greedy ใช้ 20 ห้อง ILP ใช้ 13 ห้อง และเขาก็เพิ่ม Lab จำลองเข้าไปเหมือนเรา พบว่าจำนวน Lab ที่ใช้พร้อมกันคือข้อจำกัดหลัก '
+            'งานของ Raviv ปี 2026 ให้เหตุผลที่ตรงกับการออกแบบของเรา คือการย้ายห้องระหว่างเทอมมีต้นทุนต่ำ แต่การย้ายเวลาเรียนกระทบนักศึกษา '
+            'เราจึงล็อกเวลาไว้ทั้งเทอม และให้เปลี่ยนได้แค่ห้อง '
+            'Han และ Wang ปี 2025 จัดห้องเป็นรายสัปดาห์เหมือนกัน แต่ประเภทห้องที่ต้องใช้ผูกกับวิชา ไม่เปลี่ยนตามสัปดาห์ '
+            'ส่วน Antunes-Batista และ Ozkan มองการเปลี่ยนห้องเป็นต้นทุนที่ต้องลด ตรงกับเมตริกการเปลี่ยนห้องของเรา '
+            'สิ่งที่เรายังไม่เจอในงานเหล่านี้คือการให้คาบเดียวกันต้องใช้ห้องต่างประเภทในแต่ละสัปดาห์ แต่เราค้นยังไม่ครบทุกแหล่ง')
+    return {'id': 'refs-recent', 'title': 'เอกสารอ้างอิง: งานใหม่ 2025–2026', 'style': 'background:#ffffff', 'html': html, 'note': note}
+
 # --- write ---------------------------------------------------------------------
 def write(slides):
     payload = json.dumps(slides, ensure_ascii=False)
@@ -276,13 +459,16 @@ def main():
     check_perweek()
     by['perweek']['html'], by['perweek']['note'] = perweek_slide()
     by['perweek']['title'] = 'Lab ห้องเดียว: ล็อกทั้งเทอมได้ 1 คลาส แบ่งรายสัปดาห์ได้ 4 คลาส'
+    insert_after(slides, 'refs', recent_refs_slide())
+    by = {s['id']: s for s in slides}
     for extra in EXTRA_EDITS:
         extra(by)
+    edit_limits(by, slides)
     write(slides)
     print(len(slides), 'slides')
 
 
-EXTRA_EDITS = [edit_problem, edit_main, edit_tuning]
+EXTRA_EDITS = [edit_problem, edit_main, edit_tuning, edit_data, edit_result_titles, edit_budget, edit_conclude]
 
 if __name__ == '__main__':
     main()
