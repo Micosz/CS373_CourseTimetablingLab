@@ -1,6 +1,6 @@
 # CS373 Final Presentation · ผลงานขั้นสุดท้าย
 
-เว็บสไลด์ภาษาไทย 17 หน้า ประมาณ 12–15 นาที พร้อมบทพูดทุกหน้า ไม่มี dependency หรือขั้นตอน build
+เว็บสไลด์ภาษาไทย 20 หน้า ประมาณ 12–15 นาที พร้อมบทพูดทุกหน้า ไม่มี dependency หรือขั้นตอน build
 
 หน้าตาออกแบบใน Claude Design ก่อน (ร่าง: https://claude.ai/artifact/BJz1B7PSfyayMF1YzGFWRE) แล้วนำ HTML ของแต่ละหน้ามาใช้ตรง ๆ แต่ละหน้าเป็นผืน 1920×1080 ที่จัดวางด้วย inline style และย่อขยายให้พอดีหน้าต่าง
 ภาษาภาพ: พื้นขาว ตัวอักษร `#171717` น้ำเงิน `#0a72ef` และแดง `#d92d20`/`#ff5b4f` (ใช้สีทึบ แยกกันด้วยความสว่างและป้ายกำกับ ไม่ใช้สีอ่อน) ฟอนต์ Geist, Geist Mono และ IBM Plex Sans Thai จาก Google Fonts
@@ -9,22 +9,27 @@
 | หน้า | เนื้อหา | ที่มาของตัวเลข |
 |---|---|---|
 | 1 | ปก | – |
-| 2 | ห้องคงที่ทำให้ Lab ถูกจองทั้งเทอม (ตัวอย่างสมมติ) | – |
-| 3 | สิ่งที่ทำเพิ่มจากข้อเสนอแนะ: 4 วิธี, 240 รัน, C# ~75 เท่า | `experiments/final/`, `experiments/engine-speed/` |
-| 4 | ข้อมูล: 174 คลาส, 3,345 คาบรายสัปดาห์, Lab จำลอง 4 ห้อง | `README.md` ของ repository |
-| 5 | ตัวแทนคำตอบร่วม + 4 อัลกอริทึม | `README.md` ของ repository |
-| 6 | กติกาการทดลอง: seed จูน/ทดสอบ, งบ 500, สถิติ, 240/240 | `docs/protocol.md`, `experiments/final/README.md` |
-| 7 | ผลการจูน | `experiments/tuning/README.md`, `summary.md` |
-| 8 | ผลหลัก (dot plot 30 seed): GA 57.7 · HC 64.9 · SA 76.2 · Greedy 124.0 ชม. | `experiments/final/experiment.csv`, `analysis/report.md` |
-| 9 | สถิติ: Friedman χ² = 63.12, GA ดีกว่า SA 26/30, GA กับ HC p = 0.188 | `experiments/final/analysis/report.md` |
-| 10 | ตัวอย่าง A, B, C: ห้องคงที่ล็อก Lab ทั้งเทอม | ตัวอย่างสมมติ (บทพูดอ้าง 804 / 2,211 ชม. จาก `data/fall-cs.json.gz` และ 11 วิชาที่ไม่ได้ห้องจาก GA seed 1001 ใน `experiments/final/experiment.json.gz`) |
-| 11 | เปลี่ยนห้อง: LB 783 ครั้ง, GA/HC 831, SA 835 | `experiments/final/analysis/report.md` |
-| 12 | Lab ขาดแคลน 4/3/2 ห้อง: คาบที่ไม่มีห้อง 0/0/17.7 เทียบ 159/482/896 | `experiments/lab-scarcity/scarcity-summary.csv` |
-| 13 | งบ 50/200/500/1000 | `experiments/budget/budget-summary.csv` |
-| 14 | Engine C#: 30 นาที → 20 วินาที, ผลตรงกัน 240/240 | `experiments/final/manifest.json`, `experiments/engine-speed/` |
-| 15 | ข้อจำกัด | README ของ tuning, budget, lab-scarcity |
-| 16 | สรุป | ตัวเลขจากหน้า 8–14 |
-| 17 | เอกสารอ้างอิง | – |
+| 2 | ห้องคงที่ทำให้ Lab ถูกจองทั้งเทอม (ตัวอย่างสมมติ) + คำถามวิจัย | – |
+| 3 | **ใหม่ (#27)** ตัดสินใจสองชั้น: เวลาคงที่ทั้งเทอม → ห้องรายสัปดาห์ | `experiments/lab-hours-breakdown/` |
+| 4 | สิ่งที่ทำเพิ่มจากข้อเสนอแนะ: 4 วิธี, 240 รัน, C# ~75 เท่า | `experiments/final/`, `experiments/engine-speed/` |
+| 5 | ข้อมูล: 174 คลาส, 3,345 คาบรายสัปดาห์ · Lab และสัปดาห์ Lab สร้างขึ้นเอง (#30) | `data/assumptions.json`, `dataset_tools/config.json`, `experiments/lab-week-patterns/` |
+| 6 | **ใหม่ (#29, #31)** เป้าหมายและข้อห้าม + นิยามและตัวอย่าง Lab ไม่จำเป็น | `data/FORMAT.txt`, `engine/solution_validator.py` |
+| 7 | ตัวแทนคำตอบร่วม + 4 อัลกอริทึม | `README.md` ของ repository |
+| 8 | กติกาการทดลอง: seed จูน/ทดสอบ, งบ 500, สถิติ, 240/240 | `docs/protocol.md`, `experiments/final/README.md` |
+| 9 | ผลการจูน + จูน SA เพิ่มหลังเห็นผล (#32) | `experiments/tuning/`, `experiments/sa-extended-tuning/` |
+| 10 | งบ 500: dot plot 30 seed GA 57.7 · HC 64.9 · SA 76.2 · Greedy 124.0 ชม. + Greedy คืออะไร (#28) | `experiments/final/analysis/report.md` |
+| 11 | งบ 500: Friedman χ² = 63.12, GA ดีกว่า SA 26/30, GA กับ HC p = 0.188 | `experiments/final/analysis/report.md` |
+| 12 | **สร้างใหม่ (#34)** Lab ห้องเดียว: 4 คลาสใช้ SIM-LAB-04 อังคาร 11:30 ร่วมกัน (ผลจริง GA seed 1001) เทียบล็อกห้อง (สมมติ) | `experiments/final/experiment.json.gz` (ตรวจใน `apply_feedback.py`) |
+| 13 | เปลี่ยนห้อง: LB 783 ครั้ง, GA/HC 831, SA 835 | `experiments/final/analysis/report.md` |
+| 14 | Lab ขาดแคลน 4/3/2 ห้อง: คาบที่ไม่มีห้อง 0/0/17.7 เทียบ 159/482/896 | `experiments/lab-scarcity/scarcity-summary.csv` |
+| 15 | **สร้างใหม่ (#33)** งบ 50 ถึง 50,000: งบ 500 GA ดีสุด ตั้งแต่ 2,000 SA ดีสุด | `experiments/convergence/summary.json` |
+| 16 | Engine C#: 30 นาที → 20 วินาที, ผลตรงกัน 240/240 | `experiments/final/manifest.json`, `experiments/engine-speed/` |
+| 17 | ข้อจำกัด (ปรับตามผลใหม่) | README ของ lab-week-patterns, sa-extended-tuning, convergence, lab-scarcity |
+| 18 | สรุป 3 ข้อ (ปรับตามผลใหม่) | ตัวเลขจากหน้า 9–15 |
+| 19 | เอกสารอ้างอิง | – |
+| 20 | **ใหม่ (#35)** เอกสารอ้างอิง: งานใหม่ 2025–2026 | `docs/research-comparison.md` |
+
+หน้าที่เป็นตัวหนาและการแก้ข้อความในหน้า 2, 5, 9, 10, 11, 17, 18 ทำหลังได้ feedback (issue #26) โดย `apply_feedback.py` ไม่ได้อยู่ในร่าง Claude Design
 
 ## ไฟล์
 
@@ -34,15 +39,16 @@
 - `style.css`: ค่าเริ่มต้นของผืนสไลด์ (div = flex column, ระยะขอบข้อความ 0) และแถบควบคุม
 - `progress/`: สไลด์ความคืบหน้า 4 พ.ย. เก็บไว้เป็นประวัติ ไม่แก้
 
+- `apply_feedback.py`: แก้หน้าตาม feedback (issue #26–#35) ทับบนผลของ `port_design.py` รันซ้ำได้โดยผลเหมือนเดิม **ต้องรันทุกครั้งหลัง `port_design.py`**: `python3 apps/slides/apply_feedback.py`
 - `port_design.py`: สร้าง 3 ไฟล์ข้างบนจากร่างใน Claude Design (ไฟล์ `project/deck.json` และ `project/slides/*.html` ที่ดาวน์โหลดมา) พร้อมแปะ class สำหรับอนิเมชัน: `python apps/slides/port_design.py <โฟลเดอร์ project ของร่าง> apps/slides`
 
-ทั้ง 3 ที่ (`slides.json`, บรรทัดแรกของ `deck.js`, `speaker-notes.md`) ต้องตรงกัน ทางที่ปลอดภัยคือแก้ในร่าง Claude Design แล้วรัน `port_design.py` ใหม่
+ทั้ง 3 ที่ (`slides.json`, บรรทัดแรกของ `deck.js`, `speaker-notes.md`) ต้องตรงกัน ทางที่ปลอดภัยคือแก้ในร่าง Claude Design แล้วรัน `port_design.py` ตามด้วย `apply_feedback.py`
 
 ## อนิเมชัน
 
 - เปลี่ยนหน้า: หน้าเดิมจางออก หน้าใหม่เลื่อนขึ้นเล็กน้อย (ย้อนกลับเลื่อนลง)
-- หน้า 11 → 12: ซูมเข้าจุดเล็ก ๆ ที่ป้าย "LB" ซึ่งกลายเป็นหน้า 12 (ตั้งค่าใน `ZOOMS` ของ `deck.js`)
-- กราฟ: แท่งพุ่งขึ้น (หน้า 11, 12) แท่งยืดออก (หน้า 9, 14) จุดเด้งขึ้นทีละจุด (หน้า 8) กราฟเส้นวาดจากซ้ายไปขวา (หน้า 13) ช่องตารางสัปดาห์ทยอยขึ้น (หน้า 2, 10) เล่นใหม่ทุกครั้งที่เข้าหน้า
+- หน้า 13 → 14: ซูมเข้าจุดเล็ก ๆ ที่ป้าย "LB" ซึ่งกลายเป็นหน้า 14 (ตั้งค่าใน `ZOOMS` ของ `deck.js`)
+- กราฟ: แท่งพุ่งขึ้น (หน้า 13, 14) แท่งยืดออก (หน้า 11, 16) จุดเด้งขึ้นทีละจุด (หน้า 10) กราฟเส้นวาดจากซ้ายไปขวา (หน้า 15) ช่องตารางสัปดาห์ทยอยขึ้น (หน้า 2, 12) เล่นใหม่ทุกครั้งที่เข้าหน้า
 - เครื่องที่ตั้ง "ลดการเคลื่อนไหว" (prefers-reduced-motion) จะไม่มีอนิเมชันเลย
 
 ## เปิดใช้งาน
@@ -70,6 +76,7 @@
 
 - เปิดผ่าน `python -m http.server 8766` ที่ viewport 1600×960 เดินครบ 17 หน้า ไม่มี console error ทุกหน้าแสดงตรงกับร่างใน Claude Design
 - ยังไม่ได้ตรวจบน Vercel จริง
+- 14 พ.ย. 2026: หลังแก้ตาม feedback เปิด `index.html` ตรง ๆ ที่ 1600×960 ทุกหน้าที่แก้ (2, 3, 5, 6, 9–12, 15, 17, 18, 20) แสดงครบ ไม่ล้นผืน 1920×1080 ไม่มี page error
 
 ## เอกสารอ้างอิง
 

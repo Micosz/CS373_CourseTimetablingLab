@@ -1,0 +1,25 @@
+pattern,room_mode,algorithm,runs,mean_unassigned,mean_unnecessary_lab_hours,mean_room_changes
+random (ชุดหลัก),fixed,ga,10,159.0,2010.25,0.0
+random (ชุดหลัก),fixed,greedy,10,390.0,1925.0,0.0
+random (ชุดหลัก),fixed,hc,10,195.0,1978.35,0.0
+random (ชุดหลัก),fixed,sa,10,151.5,2025.65,0.0
+random (ชุดหลัก),weekly,ga,10,0.0,56.7,834.2
+random (ชุดหลัก),weekly,greedy,10,20.0,124.0,838.0
+random (ชุดหลัก),weekly,hc,10,0.0,59.95,826.7
+random (ชุดหลัก),weekly,sa,10,0.0,76.1,839.8
+consecutive,fixed,ga,10,159.0,2010.25,0.0
+consecutive,fixed,greedy,10,390.0,1925.0,0.0
+consecutive,fixed,hc,10,195.0,1978.35,0.0
+consecutive,fixed,sa,10,151.5,2025.65,0.0
+consecutive,weekly,ga,10,0.0,58.9,273.7
+consecutive,weekly,greedy,10,20.0,162.0,283.0
+consecutive,weekly,hc,10,0.0,73.1,274.4
+consecutive,weekly,sa,10,0.0,79.9,272.5
+alternate,fixed,ga,10,159.0,2010.25,0.0
+alternate,fixed,greedy,10,390.0,1925.0,0.0
+alternate,fixed,hc,10,195.0,1978.35,0.0
+alternate,fixed,sa,10,151.5,2025.65,0.0
+alternate,weekly,ga,10,0.0,66.4,1079.3
+alternate,weekly,greedy,10,2.0,140.0,1102.0
+alternate,weekly,hc,10,0.0,61.3,1070.3
+alternate,weekly,sa,10,0.0,75.3,1082.6
