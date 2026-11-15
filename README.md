@@ -7,7 +7,7 @@
 เปิดในเบราว์เซอร์แล้วกดรันได้เลย ไม่ต้องติดตั้งอะไร
 ดูได้ทันทีว่าวิธีไหนจัดตารางได้ครบกว่า และเปลืองห้อง Lab น้อยกว่า
 
-[![เปิดเว็บ](https://img.shields.io/badge/live_demo-GitHub_Pages-2ea44f?style=flat-square&logo=github)](https://micosz.github.io/course-timetabling-lab/)
+[![เปิดเว็บ](https://img.shields.io/badge/live_demo-GitHub_Pages-2ea44f?style=flat-square&logo=github)](https://micosz.github.io/CS373_CourseTimetablingLab/)
 [![สไลด์](https://img.shields.io/badge/slides-Vercel-000000?style=flat-square&logo=vercel)](https://cs373presentation.vercel.app/)
 [![Engine checks](https://img.shields.io/github/actions/workflow/status/Micosz/CS373_CourseTimetablingLab/checks.yml?style=flat-square&label=tests)](https://github.com/Micosz/CS373_CourseTimetablingLab/actions/workflows/checks.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
@@ -16,7 +16,7 @@
 
 <img src="docs/img/quick-start-3.jpg" width="720" alt="หน้าผลของ Timetable Lab: ตารางเปรียบเทียบ 4 วิธี กราฟ และปุ่มดาวน์โหลด">
 
-▶️ **[เปิดใช้เว็บ](https://micosz.github.io/course-timetabling-lab/)** · 📊 **[ดูสไลด์นำเสนอ](https://cs373presentation.vercel.app/)** · 🚀 **[คู่มือเริ่มใช้ 3 ขั้น](docs/quick-start.md)**
+▶️ **[เปิดใช้เว็บ](https://micosz.github.io/CS373_CourseTimetablingLab/)** · 📊 **[ดูสไลด์นำเสนอ](https://cs373presentation.vercel.app/)** · 🚀 **[คู่มือเริ่มใช้ 3 ขั้น](docs/quick-start.md)**
 
 </div>
 
@@ -65,11 +65,14 @@ Timetable Lab ลองให้ **วันและเวลาเรียน
   และยังจัดไม่ได้ 150–390 คาบ เพราะ Lab 4 ห้องไม่พอให้จองทั้งเทอม
 - 🔁 **เปลี่ยนห้องราว 831 ครั้งต่อเทอม** ห่างจากค่าต่ำสุดที่เป็นไปได้ (783 ครั้ง) แค่ 1.06 เท่า ส่วนใหญ่จึงเลี่ยงไม่ได้
 - 🧪 **ถ้า Lab เหลือ 3 ห้อง** โหมดห้องรายสัปดาห์ยังจัดครบทุกคาบ ส่วนโหมดห้องคงที่จัดไม่ครบตั้งแต่มี Lab 4 ห้องแล้ว
+- 🔎 **Lab ไม่จำเป็นที่เหลือมาจากการเลือกเวลา** ไม่มีครั้งไหนที่คาบนั่ง Lab ทั้งที่มีห้องบรรยายว่าง ทุกครั้งห้องบรรยายถูกคลาสอื่นใช้อยู่ ([lab-hours-breakdown](experiments/lab-hours-breakdown/README.md))
+- 📅 **สัปดาห์ Lab ติดกันหรือเว้นสัปดาห์ ข้อสรุปเดิม** ที่เปลี่ยนคือจำนวนครั้งย้ายห้อง (ราว 274 ถึง 1,080 ครั้งต่อเทอม) ([lab-week-patterns](experiments/lab-week-patterns/README.md))
 
 ตัวเลข สถิติ และกราฟทั้งหมดอยู่ใน [experiments/final/analysis/report.md](experiments/final/analysis/report.md)
 ผลทุกชุด (จูนพารามิเตอร์ งบและการรันจนผลนิ่ง Lab ขาดแคลน รูปแบบสัปดาห์ Lab ความเร็ว engine) สรุปไว้ใน [experiments/INDEX.md](experiments/INDEX.md)
 
-> ผลทั้งหมดนี้มาจากชุดข้อมูลดัดแปลงชุดเดียว ใช้บอกว่าวิธีไหนดีกว่าบนโจทย์นี้ ไม่ได้บอกว่าดีกว่าในทุกโจทย์จัดตาราง
+> **ข้อจำกัด** ผลทั้งหมดมาจากชุดข้อมูลดัดแปลงชุดเดียว และข้อมูล Lab สร้างขึ้นเอง ใช้บอกว่าวิธีไหนดีกว่าบนโจทย์นี้ ไม่ได้บอกว่าดีกว่าในทุกโจทย์จัดตาราง
+> พารามิเตอร์ทุกวิธีจูนที่งบ 500 · ไม่มีตารางที่คนจัดจริงมาเทียบ (Greedy เป็นตัวแทนการจัดตามกฎง่าย ๆ เท่านั้น) · ยังไม่ได้วัดผลของการย้ายห้องต่อนักศึกษา
 
 ## จุดเด่น
 
@@ -88,7 +91,7 @@ Timetable Lab ลองให้ **วันและเวลาเรียน
 
 | อยากทำอะไร | ใช้แบบไหน | ต้องมีอะไร |
 |---|---|---|
-| ลองเล่น เทียบ 4 วิธี ดูตารางที่ได้ | **[เว็บ](https://micosz.github.io/course-timetabling-lab/)** | Chrome, Edge หรือ Firefox รุ่นใหม่ + อินเทอร์เน็ต |
+| ลองเล่น เทียบ 4 วิธี ดูตารางที่ได้ | **[เว็บ](https://micosz.github.io/CS373_CourseTimetablingLab/)** | Chrome, Edge หรือ Firefox รุ่นใหม่ + อินเทอร์เน็ต |
 | รันการทดลองหลาย seed บนเครื่อง | **Python CLI** (`engine/cli.py`, `engine/batch.py`) | Python 3.9+ ไม่ต้องลง package เพิ่ม |
 | รันชุดใหญ่ให้เร็ว | **C# engine** ([dotnet/README.md](dotnet/README.md)) | .NET 8 SDK |
 | ดูห้องเปลี่ยนรายสัปดาห์แบบภาพเคลื่อนไหว | **แอป Godot** ([apps/godot/README.md](apps/godot/README.md)) | Godot 4.7 .NET |
@@ -98,7 +101,7 @@ Timetable Lab ลองให้ **วันและเวลาเรียน
 
 ### ใช้เว็บ (3 ขั้น)
 
-1. เปิด **https://micosz.github.io/course-timetabling-lab/** แล้วรอจนขึ้นชื่อ **Fall CS · Weekly Labs v1**
+1. เปิด **https://micosz.github.io/CS373_CourseTimetablingLab/** แล้วรอจนขึ้นชื่อ **Fall CS · Weekly Labs v1**
    (ครั้งแรกต้องโหลด Python ในเบราว์เซอร์ ราว 10–30 วินาที)
 2. ในกล่อง **กำหนดการรัน** กดปุ่ม **ลองเร็ว** ระบบจะกรอกค่าที่จูนแล้วให้ทุกช่อง แล้วกด **▶ เริ่มการทดลอง** (ราว 1 นาที)
 3. ดูตารางเปรียบเทียบ กราฟ และส่วน **ตรวจตารางที่ได้** แล้วกดดาวน์โหลด CSV หรือชุดผล JSON
@@ -147,8 +150,9 @@ python3 -m unittest discover -s engine/tests -v
 ## ข้อมูลที่ใช้
 
 - ต้นฉบับคือชุดข้อมูล Purdue Fall 2007 CS (`pu-fal07-cs`) จาก [UniTime](https://www.unitime.org/uct_datasets.php)
-- เป็น **ข้อมูลดัดแปลง** ไม่ใช่ตารางจริงของมหาวิทยาลัยไทย: เพิ่ม Computer Lab จำลอง 4 ห้อง (61, 36, 30, 26 ที่นั่ง)
-  และสุ่มให้ 134 คาบประจำต้องใช้ Lab คนละ 4 สัปดาห์ (รวม 804 ชั่วโมง)
+- เป็น **ข้อมูลดัดแปลง** ไม่ใช่ตารางจริงของมหาวิทยาลัยไทย ต้นฉบับไม่มีห้อง Lab และไม่มีความต้องการ Lab รายสัปดาห์
+- **ส่วนที่สร้างขึ้นเอง:** Computer Lab จำลอง 4 ห้อง (61, 36, 30, 26 ที่นั่ง) และสุ่ม 60% ของคาบประจำ (134 คาบ) ให้ต้องใช้ Lab คนละ 4 จาก 15 สัปดาห์ (รวม 804 ชั่วโมง) ด้วย seed `20261027`
+  ตัวเลข 60% และ 4 สัปดาห์ตั้งเอง ไม่ได้มาจากการสำรวจวิชาจริง ([assumption A10](data/assumptions.json), [config](dataset_tools/config.json))
 - 174 คลาส · ห้องบรรยาย 13 ห้อง · 15 สัปดาห์ · 3,345 คาบรายสัปดาห์
 - สมมติฐานทุกข้อบันทึกไว้ใน [data/assumptions.json](data/assumptions.json) และสร้างชุดข้อมูลซ้ำได้ด้วย `dataset_tools/rebuild.py`
 
