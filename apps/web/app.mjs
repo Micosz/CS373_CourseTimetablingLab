@@ -277,7 +277,7 @@ let tunedCache=null;
 async function tunedParameters(){if(!tunedCache)tunedCache=fetch('../../experiments/tuning/selected-parameters.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).catch(()=>null);return tunedCache;}
 function presetValues(tuned){const p=tuned||{},hc=p.hc||{},sa=p.sa||{},ga=p.ga||{};return{'hc-patience':hc.restart_patience,'sa-acceptance':sa.initial_acceptance,'sa-cooling':sa.cooling_rate,'ga-population':ga.population_size,'ga-tournament':ga.tournament_size,'ga-elites':ga.elites,'ga-crossover':ga.crossover_rate,'ga-mutation':ga.mutation_rate};}
 async function applyPreset(name){
-  const note=$('preset-note');let values={...PRESET_DEFAULTS},message='กลับเป็นค่าเริ่มต้นของเว็บ (พารามิเตอร์ยังไม่จูน)';
+  const note=$('preset-note');let values={...PRESET_DEFAULTS},message='กลับเป็นค่าเริ่มต้นของเว็บ: พารามิเตอร์ที่จูนแล้ว งบ 50 × 3 seed (1001–1003) สำหรับลองดูผลเร็ว ๆ';
   if(name!=='default'){
     const tuned=await tunedParameters();
     if(!tuned){note.textContent='โหลดไฟล์พารามิเตอร์ที่จูนแล้วไม่ได้ (experiments/tuning/selected-parameters.json) จึงไม่เปลี่ยนค่า';return;}

@@ -107,8 +107,8 @@ def svg(means):
         parts.append(f'<text x="{x:.1f}" y="{bottom + 40}" text-anchor="middle" font-size="20" fill="#666">{b:,}</text>')
     for m in METHODS:
         pts = ' '.join(f'{log_x(b, left, right):.1f},{sy(means[m][b]):.1f}' for b in LEVELS)
-        parts.append(f'<polyline points="{pts}" fill="none" stroke="{COLOR[m]}" stroke-width="{6 if m == "ga" else 4}"'
-                     f'{" stroke-dasharray=\"12 8\"" if m == "sa" else ""}/>')
+        dash = ' stroke-dasharray="12 8"' if m == 'sa' else ''
+        parts.append(f'<polyline points="{pts}" fill="none" stroke="{COLOR[m]}" stroke-width="{6 if m == "ga" else 4}"{dash}/>')
     parts.append('</svg>')
     return '\n'.join(parts)
 

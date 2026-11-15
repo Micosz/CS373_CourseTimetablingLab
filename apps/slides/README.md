@@ -1,6 +1,6 @@
 # CS373 Final Presentation · ผลงานขั้นสุดท้าย
 
-เว็บสไลด์ภาษาไทย 20 หน้า ประมาณ 12–15 นาที พร้อมบทพูดทุกหน้า ไม่มี dependency หรือขั้นตอน build
+เว็บสไลด์ภาษาไทย 20 หน้า บทพูดราว 10–12 นาที (เผื่อเวลาเปลี่ยนหน้าและคำถามให้จบใน 15 นาที) พร้อมบทพูดทุกหน้า ไม่มี dependency หรือขั้นตอน build
 
 หน้าตาออกแบบใน Claude Design ก่อน (ร่าง: https://claude.ai/artifact/BJz1B7PSfyayMF1YzGFWRE) แล้วนำ HTML ของแต่ละหน้ามาใช้ตรง ๆ แต่ละหน้าเป็นผืน 1920×1080 ที่จัดวางด้วย inline style และย่อขยายให้พอดีหน้าต่าง
 ภาษาภาพ: พื้นขาว ตัวอักษร `#171717` น้ำเงิน `#0a72ef` และแดง `#d92d20`/`#ff5b4f` (ใช้สีทึบ แยกกันด้วยความสว่างและป้ายกำกับ ไม่ใช้สีอ่อน) ฟอนต์ Geist, Geist Mono และ IBM Plex Sans Thai จาก Google Fonts
@@ -39,7 +39,7 @@
 - `style.css`: ค่าเริ่มต้นของผืนสไลด์ (div = flex column, ระยะขอบข้อความ 0) และแถบควบคุม
 - `progress/`: สไลด์ความคืบหน้า 4 พ.ย. เก็บไว้เป็นประวัติ ไม่แก้
 
-- `apply_feedback.py`: แก้หน้าตาม feedback (issue #26–#35) ทับบนผลของ `port_design.py` รันซ้ำได้โดยผลเหมือนเดิม **ต้องรันทุกครั้งหลัง `port_design.py`**: `python3 apps/slides/apply_feedback.py`
+- `apply_feedback.py`: แก้หน้าตาม feedback (issue #26–#35) ทับบนผลของ `port_design.py` รันซ้ำได้โดยผลเหมือนเดิม **ต้องรันทุกครั้งหลัง `port_design.py`**: `python3 apps/slides/apply_feedback.py` บทพูดที่ใช้จริงอยู่ใน `NOTES` ท้ายไฟล์ สคริปต์จะหยุดถ้าบทพูดรวมเกิน `NOTES_LIMIT` (8,300 ตัวอักษร ≈ 15 นาที)
 - `port_design.py`: สร้าง 3 ไฟล์ข้างบนจากร่างใน Claude Design (ไฟล์ `project/deck.json` และ `project/slides/*.html` ที่ดาวน์โหลดมา) พร้อมแปะ class สำหรับอนิเมชัน: `python apps/slides/port_design.py <โฟลเดอร์ project ของร่าง> apps/slides`
 
 ทั้ง 3 ที่ (`slides.json`, บรรทัดแรกของ `deck.js`, `speaker-notes.md`) ต้องตรงกัน ทางที่ปลอดภัยคือแก้ในร่าง Claude Design แล้วรัน `port_design.py` ตามด้วย `apply_feedback.py`
