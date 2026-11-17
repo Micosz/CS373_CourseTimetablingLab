@@ -7,7 +7,7 @@ const sourceSnapshot={};
 
 async function initialize() {
   if (runtime) return runtime;
-  self.postMessage({type:'phase',message:'กำลังโหลด Python runtime…'});
+  self.postMessage({type:'phase',message:'กำลังโหลด Python…'});
   const {loadPyodide} = await import(`${PYODIDE_URL}pyodide.mjs`);
   const py = await loadPyodide({indexURL:PYODIDE_URL});
   let stdoutCount = 0;
@@ -32,11 +32,11 @@ self.onmessage = async ({data:request}) => {
   try {
     const py = await initialize();
     if (type==='prepare') {
-      self.postMessage({type:'phase',message:'ตรวจข้อมูลและเตรียมข้อจำกัดร่วมกัน…'});
+      self.postMessage({type:'phase',message:'กำลังตรวจข้อมูลและเตรียมข้อจำกัด…'});
       py.globals.set('_lab_dataset_text',request.datasetText);
       py.runPython('_lab_problem, _lab_meta = runner.prepare(_lab_dataset_text)');
       const meta = JSON.parse(py.runPython('runner.json.dumps(_lab_meta)'));
-      if (meta.dataset_sha256!==request.datasetHash) throw new Error('Dataset hash ไม่ตรงกับข้อมูลที่ส่งเข้า runtime');
+      if (meta.dataset_sha256!==request.datasetHash) throw new Error('ชุดข้อมูลที่ส่งให้ Python ไม่ตรงกับ hash ที่บันทึกไว้');
       preparedHash=request.datasetHash;
       self.postMessage({id,result:{...meta,pyodide_version:PYODIDE_VERSION,code_snapshot:sourceSnapshot}});
     } else if (type==='run') {
