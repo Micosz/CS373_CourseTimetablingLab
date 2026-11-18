@@ -11,6 +11,7 @@
 | กติกาการทดลอง (seed, งบ, สถิติ) | [protocol.md](protocol.md) |
 | ทำไมออกแบบแบบนี้ เทียบกับงานวิจัย | [research-comparison.md](research-comparison.md) |
 | ดูสไลด์นำเสนอ | [../apps/slides/](../apps/slides/README.md) |
+| อ่านเล่มรายงาน | [report/](report/README.md) ([PDF](report/CS373-report.pdf)) |
 | ข้อมูลนำเข้าและสมมติฐาน | [../data/START_HERE.txt](../data/START_HERE.txt) |
 
 ## โฟลเดอร์
