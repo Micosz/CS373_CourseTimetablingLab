@@ -9,6 +9,14 @@
       "finished_at": "2026-11-18T12:21:06.367179+00:00",
       "wall_seconds": 7.820668669000014,
       "failures": []
+    },
+    {
+      "started_at": "2026-11-18T12:21:13.064482+00:00",
+      "runs": 210,
+      "workers": 4,
+      "finished_at": "2026-11-18T14:17:55.745982+00:00",
+      "wall_seconds": 7002.681505011,
+      "failures": []
     }
   ],
   "dataset": "data/fall-cs.json.gz",
@@ -17,6 +25,6 @@
   "python": "3.13.18",
   "platform": "linux",
   "cpu_count": 4,
-  "total_runs": 70,
-  "wall_seconds_total": 7.820668669000014
+  "total_runs": 280,
+  "wall_seconds_total": 7010.50217368
 }
