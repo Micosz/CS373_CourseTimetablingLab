@@ -4,5 +4,3 @@ __pycache__/
 results/
 .env
 .env.*
-# per-run files of an unfinished batch (engine/batch.py merges and removes them)
-experiments/*/runs/

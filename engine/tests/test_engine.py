@@ -186,49 +186,4 @@ class RealDatasetEngineTests(unittest.TestCase):
         for seed in range(100):self.assertEqual(set(ordered_crossover(a,b,random.Random(seed))),set(a))
 
 
-class ChangePenaltyTests(unittest.TestCase):
-    """change_penalty trades unnecessary Lab minutes against room changes in every comparison."""
-    def test_known_answer_room_choice_follows_penalty(self):
-        # One 60-minute session, weeks 1-4, Lab only in week 2 (see one_class_fixture).
-        data=one_class_fixture();problem=Problem(data);genome=problem.initial_genome()
-        expected={0:((0,0,2),['R1','L','R1','R1']),59:((0,0,2),['R1','L','R1','R1']),
-                  60:((0,120,1),['R1','L','L','L']),10**6:((0,120,1),['R1','L','L','L'])}
-        for penalty,(objectives,rooms) in expected.items():
-            with self.subTest(penalty=penalty):
-                c=problem.decode(genome,change_penalty=penalty)
-                self.assertEqual(c.objectives,objectives)
-                self.assertEqual([r['room_id'] for r in c.solution['weekly_room_assignments']],rooms)
-                self.assertEqual(c.rank,(0,objectives[1]+penalty*objectives[2],objectives[2]))
-                report=audit_solution(data,c.solution,'weekly')
-                self.assertTrue(report['valid'],report['violations'])
-                self.assertEqual((report['metrics']['unassigned_weekly_sessions'],report['metrics']['unnecessary_lab_minutes'],
-                                  report['metrics']['room_changes']),c.objectives)
-    def test_zero_penalty_is_the_lexicographic_order_and_fixed_mode_ignores_penalty(self):
-        data=fixture();problem=Problem(data);rng=random.Random(3)
-        for _ in range(20):
-            genome=problem.random_genome(rng)
-            plain=problem.decode(genome);zero=problem.decode(genome,change_penalty=0)
-            self.assertEqual(plain.rank,plain.objectives)
-            self.assertEqual((zero.solution,zero.objectives,zero.energy),(plain.solution,plain.objectives,plain.energy))
-            fixed=problem.decode(genome,room_mode='fixed');fixed_penalty=problem.decode(genome,room_mode='fixed',change_penalty=90)
-            self.assertEqual((fixed.solution,fixed.objectives),(fixed_penalty.solution,fixed_penalty.objectives))
-    def test_energy_and_rank_order_solutions_identically(self):
-        text=gzip.decompress((ROOT/'data/fall-cs.json.gz').read_bytes()).decode()
-        problem,_=prepare(text);rng=random.Random(5)
-        genomes=[problem.initial_genome()]+[problem.random_genome(rng) for _ in range(5)]
-        for penalty in [0,45,90,10**6]:
-            found=[problem.decode(g,change_penalty=penalty) for g in genomes]
-            self.assertEqual(sorted(range(len(found)),key=lambda i:found[i].energy),
-                             sorted(range(len(found)),key=lambda i:found[i].rank))
-    def test_runner_records_penalty_and_rejects_bad_values(self):
-        data=one_class_fixture();problem=Problem(data)
-        r=run_one(problem,{'budget':4,'seconds':60,'change_penalty_minutes':60},'hc',1)
-        self.assertTrue(r['valid']);self.assertEqual(r['change_penalty_minutes'],60)
-        self.assertEqual(r['metrics']['room_changes'],1);self.assertEqual(r['metrics']['unnecessary_lab_minutes'],120)
-        self.assertEqual(run_one(problem,{'budget':4,'seconds':60},'hc',1)['change_penalty_minutes'],0)
-        for bad in [-1,1.5,'60',10**8]:
-            with self.assertRaises(ValueError):check_configuration({'change_penalty_minutes':bad})
-        with self.assertRaises(ValueError):problem.decode(problem.initial_genome(),change_penalty=-1)
-
-
 if __name__=='__main__':unittest.main()

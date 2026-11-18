@@ -72,8 +72,6 @@ def job_fingerprint(job, dataset_sha, engine_sha):
     """Everything that determines a run's result; a stored run is reused only if this matches."""
     keep = {k: job[k] for k in ('config_id', 'room_mode', 'algorithm', 'seed', 'budget', 'seconds')}
     keep['parameters'] = job['parameters'].get(job['algorithm'], {})
-    if job.get('change_penalty_minutes', 0):
-        keep['change_penalty_minutes'] = job['change_penalty_minutes']
     keep['dataset_sha256'] = dataset_sha
     keep['engine_sha256'] = engine_sha
     return hashlib.sha256(json.dumps(keep, sort_keys=True).encode()).hexdigest()
@@ -106,7 +104,7 @@ def execute(job, dataset_path, target, fingerprint, slim):
     from runner import run_one
     problem, meta = _problem(dataset_path)
     config = {'budget': job['budget'], 'seconds': job['seconds'], 'room_mode': job['room_mode'],
-              'parameters': job['parameters'], 'change_penalty_minutes': job.get('change_penalty_minutes', 0)}
+              'parameters': job['parameters']}
     started = now()
     result = run_one(problem, config, job['algorithm'], job['seed'], meta)
     result.update({'config_id': job['config_id'], 'fingerprint': fingerprint, 'started_at': started,
@@ -151,8 +149,7 @@ def run_jobs(jobs, output, dataset=DEFAULT_DATASET, workers=None, slim=False, na
     pending = []
     for job in jobs:
         check_configuration({'budget': job['budget'], 'seconds': job['seconds'], 'room_mode': job['room_mode'],
-                             'parameters': job['parameters'],
-                             'change_penalty_minutes': job.get('change_penalty_minutes', 0)})
+                             'parameters': job['parameters']})
         fingerprint = job_fingerprint(job, dataset_sha, engine_sha)
         target = runs_dir / (job_key(job) + '.json')
         if target.exists():
@@ -258,9 +255,9 @@ def merge(output, dataset=DEFAULT_DATASET, name=None, keep_runs=False):
     return output / 'experiment.json.gz'
 
 
-def build_jobs(methods, room_modes, seeds, budget, seconds, parameters, config_id='main', change_penalty_minutes=0):
+def build_jobs(methods, room_modes, seeds, budget, seconds, parameters, config_id='main'):
     return [{'config_id': config_id, 'algorithm': method, 'room_mode': mode, 'seed': seed, 'budget': budget,
-             'seconds': seconds, 'parameters': parameters, 'change_penalty_minutes': change_penalty_minutes}
+             'seconds': seconds, 'parameters': parameters}
             for mode in room_modes for seed in seeds for method in methods]
 
 
