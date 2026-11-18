@@ -89,12 +89,16 @@
 - Davis, L. (1985). Applying adaptive algorithms to epistatic domains. *Proceedings of IJCAI-85*, 162–164. https://www.ijcai.org/proceedings/1985/29
 - Goldberg, D. E., & Deb, K. (1991). A comparative analysis of selection schemes used in genetic algorithms. *Foundations of Genetic Algorithms*, 69–93. https://doi.org/10.1016/B978-0-08-050684-5.50008-2
 - UniTime. University course timetabling datasets, Purdue Fall 2007 CS (`pu-fal07-cs`). https://www.unitime.org/uct_datasets.php
+- Beyrouthy, C., Burke, E. K., Landa-Silva, D., McCollum, B., McMullan, P., & Parkes, A. J. (2009). Towards improving the utilization of university teaching space. *Journal of the Operational Research Society, 60*(1), 130–143. https://doi.org/10.1057/palgrave.jors.2602523
+- Demšar, J. (2006). Statistical comparisons of classifiers over multiple data sets. *Journal of Machine Learning Research, 7*, 1–30.
+- Holm, S. (1979). A simple sequentially rejective multiple test procedure. *Scandinavian Journal of Statistics, 6*(2), 65–70.
 
 งานใหม่ที่เกี่ยวข้อง:
 
 - Antunes-Batista, B., Atta, S., Basto-Fernandes, V., Yevseyeva, I., & Emmerich, M. (2026). Multiobjective optimization approaches for room allocation in university course timetabling. *Procedia Computer Science, 278*, 663–670. (CENTERIS 2025)
 - Cavalcante, J. L. S., Clímaco, F. G. N., & Chagas, F. (2026). A mathematical model for class scheduling: A case study with the Federal University of Maranhão. In *Numerical Modeling – Integrated Approaches for Complex Systems*. IntechOpen. https://doi.org/10.5772/intechopen.1017804
 - Han, X., & Wang, D. (2025). Gradual optimization of university course scheduling problem using genetic algorithm and dynamic programming. *Algorithms, 18*(3), 158. https://doi.org/10.3390/a18030158
+- Li, J., Zhao, W., & Xue, M. (2026). An empirical study on assessing classroom space utilization efficiency in higher education institutions: Indicators, methodological advances, and a comprehensive analytical framework. A case study of the Zhengxin Building at Harbin Institute of Technology. *Buildings, 16*(10), 1929. https://doi.org/10.3390/buildings16101929 (ตรวจกับ Crossref และ Semantic Scholar เมื่อ 19 พ.ย. 2026 อ่านได้แค่บทคัดย่อ: ตาราง 2,943 วิชา ภาคฤดูใบไม้ผลิ 2023 อัตราการใช้ห้องรวม 20–50% ใช้แทนตัวเลข 20–40% ของ Beyrouthy และคณะในสไลด์ ส่วนข้อที่ว่าข้อจำกัดของตารางเป็นสาเหตุยังอ้าง Beyrouthy และคณะ)
 - Raviv, T. (2026). The lecture-hall quadratic assignment problem. *Computers & Operations Research, 196*, 107659. https://doi.org/10.1016/j.cor.2026.107659
 - Abdipoor, S., Li, M., Goh, S. L., Yaakob, R., Hao, L., & Abdullah, S. (2025). Distance to Feasibility: Performance assessment of baseline metaheuristics on university course timetabling with student sectioning. *2025 IEEE 13th Conference on Systems, Process & Control (ICSPC)*, 49–54. https://doi.org/10.1109/ICSPC68261.2025.11325835
 - Cornei, L.-M., & Breabăn, M.-E. (2026). Enhancing genetic algorithms with graph neural networks: A timetabling case study. *EvoApplications 2026* (accepted). arXiv:2602.08619. https://arxiv.org/abs/2602.08619
