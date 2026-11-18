@@ -9,15 +9,6 @@ Two room policies share the decoder, genome and scoring:
   use a different room each week, so Lab rooms are taken only in Lab weeks.
 - ``fixed``: a recurring session books one room for every assigned week. A
   session with any Lab week must book a computer Lab for the whole term.
-
-``change_penalty`` (minutes, default 0) sets how the two soft objectives are
-traded: every room change counts as that many minutes of unnecessary Lab use.
-The room choice, the time-option choice and the comparison of whole solutions
-all minimise ``lab_minutes + change_penalty * room_changes`` and break ties by
-fewer room changes; unassigned sessions always come first. 0 is the original
-lexicographic order (unassigned, Lab minutes, room changes) and reproduces
-earlier results exactly; a value above ``max_lab_minutes`` puts room changes
-before Lab minutes.
 """
 import random
 import time
@@ -56,12 +47,6 @@ class Candidate:
     solution: dict
     objectives: tuple
     energy: int
-    # Comparison key under the run's change_penalty; equals ``objectives`` when the penalty is 0.
-    rank: tuple = None
-
-    def __post_init__(self):
-        if self.rank is None:
-            self.rank = tuple(self.objectives)
 
 
 class Problem:
@@ -208,11 +193,9 @@ class Problem:
                 records.extend((sid, week, rid, mask) for week, mask in weeks)
         return records, local_lab
 
-    def decode(self, genome, deadline=None, room_mode='weekly', change_penalty=0):
+    def decode(self, genome, deadline=None, room_mode='weekly'):
         if room_mode not in ROOM_MODES:
             raise ValueError('room_mode must be one of ' + ', '.join(ROOM_MODES))
-        if type(change_penalty) is not int or change_penalty < 0:
-            raise ValueError('change_penalty must be a non-negative integer (minutes per room change)')
         fixed = room_mode == 'fixed'
         order = tuple(genome['order'])
         if len(order) != len(self.class_ids) or set(order) != set(self.class_ids):
@@ -259,17 +242,16 @@ class Problem:
                     choices = [rid for rid in allowed if not (room_busy[rid] & mask)]
                     if not choices:
                         continue
-                    def room_key(r):
-                        lab = int(not need_lab and self.rooms[r]['kind'] == 'computer_lab')
-                        change = int(sid in previous and previous[sid] != r)
-                        return (duration * lab + change_penalty * change, change, self.rooms[r]['capacity'], r)
-                    rid = min(choices, key=room_key)
+                    rid = min(choices, key=lambda r: (
+                        int(not need_lab and self.rooms[r]['kind'] == 'computer_lab'),
+                        int(sid in previous and previous[sid] != r),
+                        self.rooms[r]['capacity'], r))
                     local_lab += duration * int(not need_lab and self.rooms[rid]['kind'] == 'computer_lab')
                     local_changes += int(sid in previous and previous[sid] != rid)
                     previous[sid] = rid
                     records.append((sid, week, rid, mask))
                     used_mask |= mask
-                key = (-len(records), local_lab + change_penalty * local_changes, local_changes, local_lab)
+                key = (-len(records), local_lab, local_changes)
                 if best_local is None or key < best_local[0]:
                     best_local = (key, option, records, used_mask)
             if best_local is None or not best_local[2]:
@@ -282,28 +264,23 @@ class Problem:
                 room_busy[rid] |= mask
                 assignments.append({'session_id': sid, 'week': week, 'room_id': rid})
             assigned += len(records)
-            lab_minutes += key[3]
+            lab_minutes += key[1]
             changes += key[2]
         objectives = (self.total_weekly - assigned, lab_minutes, changes)
-        # One scalar and one tuple that order solutions identically (unassigned first, then the traded cost).
-        cost = lab_minutes + change_penalty * changes
-        unassigned_weight = (self.max_lab_minutes + change_penalty * self.max_changes + 1) * self.minute_weight
-        energy = objectives[0] * unassigned_weight + cost * self.minute_weight + changes
-        rank = (objectives[0], cost, changes)
+        energy = objectives[0] * self.unassigned_weight + objectives[1] * self.minute_weight + objectives[2]
         solution = {'dataset_id': self.data['dataset_id'], 'room_mode': room_mode,
                     'class_time_options': {cid: selected[cid]['id'] if selected.get(cid) else None for cid in self.class_ids},
                     'weekly_room_assignments': assignments}
         saved_genome = {'order': tuple(order), 'time_preferences': dict(preferences)}
-        return Candidate(saved_genome, solution, objectives, energy, rank)
+        return Candidate(saved_genome, solution, objectives, energy)
 
 
 class SearchContext:
-    def __init__(self, problem, seed, budget, seconds, emit=None, room_mode='weekly', change_penalty=0):
+    def __init__(self, problem, seed, budget, seconds, emit=None, room_mode='weekly'):
         if room_mode not in ROOM_MODES:
             raise ValueError('room_mode must be one of ' + ', '.join(ROOM_MODES))
         self.problem = problem
         self.room_mode = room_mode
-        self.change_penalty = change_penalty
         self.seed = seed
         self.rng = random.Random(seed)
         self.budget = int(budget)
@@ -327,10 +304,9 @@ class SearchContext:
     def evaluate(self, genome):
         self.check()
         self.attempted_evaluations += 1
-        candidate = self.problem.decode(genome, self.deadline if self.best is not None else None, self.room_mode,
-                                        self.change_penalty)
+        candidate = self.problem.decode(genome, self.deadline if self.best is not None else None, self.room_mode)
         self.evaluations += 1
-        improved = self.best is None or candidate.rank < self.best.rank
+        improved = self.best is None or candidate.objectives < self.best.objectives
         if improved:
             self.best = candidate
         elapsed = time.perf_counter() - self.started
