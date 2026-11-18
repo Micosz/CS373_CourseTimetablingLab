@@ -12,6 +12,7 @@ monitor mascot. Every slide is a title plus a short list, a small table or a
 few big numbers. All numbers are the ones on the main deck (see ../README.md
 for the experiment file behind each).
 """
+import gzip
 import json
 import re
 from pathlib import Path
@@ -187,6 +188,49 @@ def ref(who, what, why=''):
 
 # --- slides ----------------------------------------------------------------------
 LAB, WASTE, ROOM = ('ใช้ Lab', 'lab'), ('นั่งเปล่า', 'waste'), ('ห้องปกติ', 'room')
+def panel(title, items, hot=False):
+    """A box with a heading and a short list; the yellow one marks what this project made up."""
+    return (f'<div style="flex:1;border:5px solid {INK};border-radius:28px;padding:26px 32px;gap:8px;'
+            f'background:{YELLOW if hot else "#FFFFFF"}"><h3 style="font-size:40px;font-weight:700;line-height:1.25">{title}</h3>'
+            f'{ul(items, 30)}</div>')
+
+
+def lab_need(path):
+    """Read a dataset. Per course (largest first) and week: 0 = no Lab, 1 = some sessions, 2 = every session needs a Lab."""
+    data = json.loads(gzip.decompress((MAIN.parents[1] / path).read_bytes()))
+    course = {c['id']: c['course_id'] for c in data['classes']}
+    weeks = sorted(data['calendar']['week_ids'])
+    total, need, minutes = {}, {}, dict.fromkeys(weeks, 0)
+    for s in data['recurring_sessions']:
+        c = course[s['class_id']]
+        total[c] = total.get(c, 0) + 1
+        for w in s['lab_weeks']:
+            need.setdefault(c, dict.fromkeys(weeks, 0))[w] += 1
+            minutes[w] += s['duration_minutes']
+    order = sorted(total, key=lambda c: (-total[c], c))
+    rows = [[0 if not need.get(c, {}).get(w) else 2 if need[c][w] == total[c] else 1 for w in weeks] for c in order]
+    return rows, len(need), len(order), round(min(minutes.values()) / 60), round(max(minutes.values()) / 60)
+
+
+NEED_FILL = {0: '#EEEEEE', 1: YELLOW, 2: INK}
+
+
+def need_chart(title, path):
+    """One row per course, one cell per week, drawn from the dataset file itself."""
+    rows, used, courses, low, high = lab_need(path)
+    cells = ''.join(f'<rect x="{x * 37}" y="{y * 11}" width="34" height="9" rx="2" fill="{NEED_FILL[v]}"/>'
+                    for y, row in enumerate(rows) for x, v in enumerate(row))
+    return (f'<div style="gap:6px;width:560px"><p style="font-size:36px;font-weight:700;line-height:1.3">{title}</p>'
+            f'<p style="font-size:27px;line-height:1.4;color:{GREY}"><b>{used} จาก {courses} วิชา</b> ใช้ Lab / {low} ถึง {high} ชม. ต่อสัปดาห์</p>'
+            f'<svg viewBox="0 0 555 {len(rows) * 11}" width="555" height="{len(rows) * 11}" style="margin-top:8px">{cells}</svg>'
+            f'<p style="font-size:22px;line-height:1.4;color:{GREY}">สัปดาห์ 1 → 15</p></div>')
+
+
+def key(value, text):
+    return (f'<div style="flex-direction:row;gap:14px;align-items:center"><span style="flex:none;width:44px;height:22px;'
+            f'border-radius:5px;background:{NEED_FILL[value]}"></span><p style="font-size:27px;line-height:1.35">{text}</p></div>')
+
+
 SLIDES = {
     'cover': ('ระบบจัดตารางเรียนและจัดสรรห้องเรียน ภายใต้ความต้องการใช้ Lab รายสัปดาห์',
               f'<div style="flex-direction:row;align-items:center;gap:40px;flex:1">'
@@ -216,13 +260,16 @@ SLIDES = {
               f'{big("240 รัน", "ทดลองครบทั้งห้องคงที่และห้องรายสัปดาห์")}'
               f'{big("~75 เท่า", "เขียน engine ใหม่เป็น C# ผลตรงกับ Python ทุกรัน")}</div>'
               + two('', buddy('ทำการบ้าน<br>มาแล้ว!', wave=True, scale=0.72, size=36))),
-    'data': ('ข้อมูล|ชุดข้อมูลที่ใช้ในการทดลอง',
-             two(f'<div style="flex-direction:row;gap:48px">{big("174", "คลาสจาก Purdue Fall 2007 CS (UniTime)")}'
-                 f'{big("3,345", "คาบรายสัปดาห์ที่ต้องจัด (223 คาบ × 15 สัปดาห์)")}</div>'
-                 + ul(['ต้นฉบับไม่มี Lab เราเพิ่ม Lab จำลอง 4 ห้องเอง',
-                       'สุ่ม 60% ของคาบให้ใช้ Lab 4 จาก 15 สัปดาห์ (ตัวเลขตั้งเอง)',
-                       'ลองสัปดาห์ Lab แบบติดกันและเว้นสัปดาห์แล้ว ข้อสรุปไม่เปลี่ยน'], 30),
-                 buddy('Lab จำลองนะ<br>ไม่ใช่ของจริง', 'wow', scale=0.8, size=34))),
+    'data': ('ข้อมูล|อะไรเป็นข้อมูลจริง อะไรที่เราสมมติ',
+             '<div style="flex-direction:row;gap:40px;align-items:stretch">'
+             + panel('ข้อมูลจริง จาก Purdue Fall 2007 CS',
+                     ['44 วิชา 174 คลาส 223 คาบต่อสัปดาห์', 'เวลาเรียนที่แต่ละคลาสเลือกได้', 'ห้องบรรยาย 13 ห้อง ความจุ และห้องที่แต่ละคลาสใช้ได้',
+                      'กลุ่มนักศึกษาที่ห้ามเรียนชนกัน', 'คลาสนอกภาค 810 คลาสที่ล็อกห้องและเวลาไว้'])
+             + panel('ที่เราสมมติ',
+                     ['Lab 4 ห้อง จุ 61, 36, 30 และ 26 ที่นั่ง', 'วิชาไหนใช้ Lab และใช้สัปดาห์ไหน', 'เทอม 15 สัปดาห์ที่เหมือนกันทุกสัปดาห์',
+                      'ผู้สอนของ 143 คลาสที่ต้นฉบับไม่ระบุ', '<b>อาจารย์บอกสัปดาห์ Lab ได้ก่อนเปิดเทอม</b>'], hot=True)
+             + '</div>'
+             + small('รวม 3,345 คาบรายสัปดาห์ที่ต้องจัด (223 คาบ * 15 สัปดาห์) / จำนวนนักศึกษาใช้ค่าจำกัดที่นั่งของคลาส')),
     'objective': ('เป้าหมาย|ฟังก์ชันเป้าหมายและข้อจำกัดของปัญหา',
                   two(ul(['<b>คาบที่ยังจัดไม่ได้</b> ต้องน้อยที่สุดก่อน', '<b>ชั่วโมง Lab ไม่จำเป็น</b> นั่ง Lab ในสัปดาห์ที่ไม่ได้ใช้',
                           '<b>จำนวนครั้งที่เปลี่ยนห้อง</b> ห้องต่างจากสัปดาห์ก่อน'], 32, 'ol')
@@ -303,14 +350,32 @@ SLIDES = {
                two(ul(['<b>ข้อมูลดัดแปลงชุดเดียว</b> Lab สร้างขึ้นเอง และไม่มีตารางที่คนจัดจริงมาเทียบ',
                        '<b>พารามิเตอร์จูนที่งบ 500</b> ถ้าใช้งบใหญ่ควรจูนใหม่',
                        '<b>ยังไม่นิ่งสนิทที่งบ 50,000</b> และการศึกษางบใหญ่ใช้ 10 seed',
-                       '<b>ยังไม่ได้วัดผลด้านคน</b> เช่น เดินไกลหรือสับสนจากการย้ายห้อง'], 32),
+                       '<b>ยังไม่ได้วัดผลด้านคน</b> เช่น เดินไกลหรือสับสนจากการย้ายห้อง',
+                       '<b>ขอบเขต 6 ถึง 8 สัปดาห์เป็นของงบ 500</b> และสุ่มเลือกวิชาที่ใช้ Lab ครั้งเดียว'], 29),
                    buddy('ยังไม่เพอร์เฟกต์<br>นะ', 'sad', scale=0.8, size=34))),
     'conclude': ('สรุป|สรุปผลการศึกษา',
                  two(ul(['<b>ห้องรายสัปดาห์ประหยัด Lab ได้หนึ่งห้อง</b> ลด Lab ไม่จำเป็น 1,801–1,949 ชม. ต่อเทอม และจัดครบแม้เหลือ Lab 3 ห้อง',
                          '<b>วิธีที่ดีที่สุดขึ้นกับงบ</b> งบ 500 GA ≈ HC ตั้งแต่งบ 2,000 SA ดีที่สุด',
-                         '<b>ย้ายห้องเท่าที่จำเป็น</b> 831 ครั้ง ใกล้ค่าที่ข้อมูลกำหนด 783 ครั้ง (1.06 เท่า)'], 32, 'ol')
+                         '<b>ย้ายห้องเท่าที่จำเป็น</b> 831 ครั้ง ใกล้ค่าที่ข้อมูลกำหนด 783 ครั้ง (1.06 เท่า)',
+                         '<b>แนวคิดนี้มีขอบเขต</b> จัดครบเมื่อวิชาใช้ Lab ถึง 4 สัปดาห์ เริ่มไม่ครบที่ 6 ถึง 8 และยิ่ง Lab ตึงการค้นหายิ่งจำเป็น'], 28, 'ol')
                      + small('งานต่อยอด: ข้อมูลวิชาจริง · จูนที่งบใหญ่ · move ที่ย้ายห้องโดยตรง · วัดผลของการย้ายห้องต่อนักศึกษา'),
                      buddy('ขอบคุณครับ!', wave=True, scale=0.9, size=44))),
+    'coursedata': ('ข้อมูลชุดที่สอง|กำหนดความต้องการ Lab เป็นรายวิชา',
+                   '<div style="flex-direction:row;gap:56px;align-items:flex-start">'
+                   + need_chart('ชุดหลัก: สุ่มทีละคาบ', 'data/fall-cs.json.gz')
+                   + need_chart('ชุดที่สอง: สุ่มทีละวิชา', 'data/variants/fall-cs-course-labs-w04.json.gz')
+                   + '<div style="flex:1;gap:16px">' + key(2, 'ทุกคาบของวิชาใช้ Lab สัปดาห์นั้น') + key(1, 'ใช้ Lab แค่บางคาบของวิชา')
+                   + key(0, 'ไม่ใช้ Lab')
+                   + small('แต่ละแถวคือหนึ่งวิชา แต่ละช่องคือหนึ่งสัปดาห์ / ภาพนี้ทั้งสองชุดใช้ Lab 4 จาก 15 สัปดาห์ '
+                           '/ ชุดที่สองยังทดลองตั้งแต่ 1 ถึง 15 สัปดาห์')
+                   + buddy('วิชาเดียวกัน<br>เข้า Lab พร้อมกัน', scale=0.5, stars=False, size=30) + '</div></div>'),
+    'labweeks': ('ขอบเขต|เมื่อวิชาใช้ Lab มากขึ้นจาก 1 ถึง 15 สัปดาห์',
+                 two(table(['สัปดาห์ Lab ต่อวิชา', 'Greedy', 'วิธีค้นหา', 'รันที่จัดครบ'],
+                           [['1 ถึง 2', '0', '<b>0</b>', '10 จาก 10'], ['4', '3', '<b>0</b>', '10 จาก 10'], ['6', '13', '<b>0.1</b>', '8 ถึง 9'],
+                            ['8', '71', '<b>2.1</b>', '1 ถึง 2'], ['12', '197', '<b>39.8</b>', '0'], ['15', '420', '<b>87</b>', '0']], 30)
+                     + small('ตัวเลข = คาบที่ไม่มีห้องเรียน เฉลี่ย 10 seed งบ 500 / วิธีค้นหา = ค่าดีที่สุดในสามวิธี (HC, SA, GA)')
+                     + ul(['จัดครบทุกรันถึง 4 สัปดาห์ เริ่มไม่ครบที่ 6 ถึง 8 สัปดาห์', 'ยิ่ง Lab ตึง ช่องว่างกับ Greedy ยิ่งกว้าง'], 30),
+                     buddy('ยิ่งยาก<br>ยิ่งต้องค้นหา', 'wow', scale=0.8, size=34))),
     'refs': ('เอกสารอ้างอิง',
              '<div style="gap:20px">'
              + ref('Lemos et al. (2019)', 'Room usage optimization in timetabling: A case study at Universidade de Lisboa. Operations Research Perspectives, 6, 100092.')
@@ -337,21 +402,53 @@ NOTE_EDITS = {
     'main': [('แต่ละจุดคือหนึ่ง seed GA เฉลี่ย', 'แต่ละแท่งคือค่าเฉลี่ยของ 30 seed GA เฉลี่ย'),
              ('จุดของ GA กับ HC ซ้อนกันมาก', 'GA กับ HC ใกล้กันมาก')],
     'changes': [('ราคาของห้องรายสัปดาห์คือการเปลี่ยนห้อง', 'ห้องรายสัปดาห์ต้องมีการเปลี่ยนห้องเมื่อถึงสัปดาห์ Lab')],
-    'conclude': [('สาม ราคาคือการย้ายห้อง ราว', 'สาม การย้ายห้องเกิดเท่าที่จำเป็น ราว')],
+    'conclude': [('สาม ราคาคือการย้ายห้อง ราว', 'สาม การย้ายห้องเกิดเท่าที่จำเป็น ราว'), ('สรุปสามข้อ', 'สรุปสี่ข้อ'),
+                 (' งานต่อยอดคือ', ' สี่ แนวคิดนี้มีขอบเขต วิธีค้นหาจัดครบเมื่อวิชาใช้ Lab ไม่เกินราว 4 ถึง 6 สัปดาห์ '
+                                   'และยิ่ง Lab ตึง การค้นหายิ่งจำเป็นกว่าการจัดตามกฎ งานต่อยอดคือ')],
+    'limits': [('ข้อจำกัดมีสี่ข้อ', 'ข้อจำกัดมีห้าข้อ'),
+               ('และยังไม่ได้วัดผลของการย้ายห้องต่อนักศึกษา', 'ยังไม่ได้วัดผลของการย้ายห้องต่อนักศึกษา '
+                                                         'และขอบเขต 6 ถึง 8 สัปดาห์เป็นของงบ 500 กับการสุ่มเลือกวิชาครั้งเดียว')],
     'perweek': [('ทุกช่องสีน้ำเงินคือสัปดาห์ที่ต้องใช้ Lab จริง', 'ทุกช่องสีเหลืองคือสัปดาห์ที่ต้องใช้ Lab จริง'),
                 ('ไม่มีช่องแดงเลย', 'ไม่มีช่องนั่งเปล่าเลย')],
+}
+
+# Slides only this version has: {id: (id of the main-deck slide it follows, speaker note)}.
+# Numbers come from experiments/course-level-labs/README.md.
+EXTRA = {
+    'coursedata': ('data', 'ภาพนี้เทียบข้อมูลตั้งต้นสองชุด แต่ละแถวคือหนึ่งวิชา แต่ละช่องคือหนึ่งสัปดาห์ ภาพซ้ายคือชุดหลักที่สุ่มความต้องการ Lab ทีละคาบ '
+                           'ช่องสีเหลืองคือวิชาที่ใช้ Lab แค่บางคาบ จะเห็นว่ากระจายเต็มตาราง 42 จาก 44 วิชาใช้ Lab '
+                           'และความต้องการ Lab เกือบเท่ากันทุกสัปดาห์ Lab 4 ห้องจึงเหลือเฟือ ภาพขวาคือชุดที่สองที่กำหนด Lab เป็นรายวิชา '
+                           'ช่องสีเข้มคือทุกคลาสของวิชาเข้า Lab สัปดาห์เดียวกัน เหลือ 30 จาก 44 วิชาที่ใช้ Lab และมีสัปดาห์ที่ Lab แน่นกับสัปดาห์ที่ Lab โล่ง '
+                           'นอกจากนี้เราไม่ใช้ค่า 4 สัปดาห์ค่าเดียว แต่ทดลองตั้งแต่ 1 ถึง 15 สัปดาห์ อย่างอื่นเหมือนชุดหลักทุกอย่าง'),
+    'labweeks': ('scarcity', 'นี่คือผลบนชุดที่สอง 640 รัน ผ่านตัวตรวจทุกรัน เมื่อวิชาใช้ Lab ไม่เกิน 4 สัปดาห์ วิธีค้นหาทั้งสามจัดครบทุกรัน '
+                             'ที่ 6 สัปดาห์ยังจัดครบ 8 ถึง 9 จาก 10 รัน ที่ 8 สัปดาห์เหลือ 1 ถึง 2 รัน และตั้งแต่ 10 สัปดาห์ไม่มีรันไหนจัดครบ '
+                             'ขอบเขตของแนวคิดนี้ที่งบ 500 จึงอยู่ราว 6 ถึง 8 สัปดาห์ สิ่งที่น่าสนใจคือช่องว่างกับ Greedy ที่ 12 สัปดาห์ '
+                             'Greedy ขาด 197 คาบ ส่วนวิธีค้นหาขาดราว 40 คาบ ยิ่ง Lab ตึง การค้นหายิ่งจำเป็น '
+                             'และที่ 15 สัปดาห์ ห้องรายสัปดาห์กับห้องคงที่ให้ผลเท่ากันทุกรัน ซึ่งยืนยันว่าระบบทำงานถูกต้อง'),
+}
+
+# Notes replaced whole because this version's slide says something the main deck's slide does not.
+NOTE_OVERRIDE = {
+    'data': 'ข้อมูลตารางสอนเป็นของจริงจาก Purdue ปี 2007 มี 44 วิชา 174 คลาส รวม 3,345 คาบรายสัปดาห์ ของจริงคือเวลาที่แต่ละคลาสเลือกได้ '
+            'ห้องบรรยาย 13 ห้อง กลุ่มนักศึกษาที่ห้ามเรียนชนกัน และคลาสนอกภาคที่ล็อกห้องไว้ ส่วนที่เราสมมติมีห้าอย่าง Lab 4 ห้อง '
+            'วิชาไหนใช้ Lab สัปดาห์ไหน ปฏิทิน 15 สัปดาห์ที่เหมือนกันทุกสัปดาห์ ผู้สอนของคลาสที่ต้นฉบับไม่ระบุ '
+            'และข้อสมมติที่สำคัญที่สุดคืออาจารย์บอกสัปดาห์ Lab ได้ตั้งแต่ก่อนเปิดเทอมและไม่เปลี่ยนกลางเทอม '
+            'ข้อมูล Lab ทั้งหมดจึงไม่ได้มาจากการสำรวจวิชาจริง เราลองสัปดาห์ Lab แบบติดกันและแบบเว้นสัปดาห์แล้ว ข้อสรุปไม่เปลี่ยน',
 }
 
 
 def main():
     source = json.loads((MAIN / 'slides.json').read_text(encoding='utf-8'))
     missing = [s['id'] for s in source if s['id'] not in SLIDES]
-    if missing or len(source) != len(SLIDES):
+    if missing or len(source) + len(EXTRA) != len(SLIDES):
         raise SystemExit(f'Slide ids differ from the main deck: {missing}')
+    source = [x for s in source for x in [s] + [{'id': k, 'note': note} for k, (after, note) in EXTRA.items() if after == s['id']]]
+    if len(source) != len(SLIDES):
+        raise SystemExit('An EXTRA slide follows an id the main deck does not have')
     slides = []
     for number, s in enumerate(source, 1):
         title, body = SLIDES[s['id']]
-        note = s['note']
+        note = NOTE_OVERRIDE.get(s['id'], s['note'])
         for old, new in NOTE_EDITS.get(s['id'], []):
             if old not in note:
                 raise SystemExit(f'Note of {s["id"]} no longer contains: {old}')

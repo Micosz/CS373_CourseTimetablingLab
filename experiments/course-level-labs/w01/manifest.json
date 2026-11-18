@@ -1,0 +1,23 @@
+{
+  "name": "Course-level Labs: 01 Lab weeks",
+  "created_at": "2026-11-18T15:28:48.329000+00:00",
+  "sessions": [
+    {
+      "started_at": "2026-11-18T15:28:48.331656+00:00",
+      "runs": 80,
+      "workers": 4,
+      "finished_at": "2026-11-18T15:29:03.439416+00:00",
+      "wall_seconds": 15.1077563,
+      "failures": []
+    }
+  ],
+  "dataset": "data/variants/fall-cs-course-labs-w01.json.gz",
+  "dataset_sha256": "879eaab040f24f567afad2d047a6397a13ee8fdab026648025bd00ec5a77ec6f",
+  "engine": "dotnet",
+  "engine_sha256": "e9222d735e2332c6220122760a91fc730e5aa89874a246a4b24ebaa5194c7db1",
+  "dotnet": "8.0.31",
+  "platform": "win32",
+  "cpu_count": 28,
+  "total_runs": 80,
+  "wall_seconds_total": 15.1077563
+}
