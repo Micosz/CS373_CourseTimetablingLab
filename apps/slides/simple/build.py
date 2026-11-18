@@ -20,7 +20,7 @@ HERE = Path(__file__).resolve().parent
 MAIN = HERE.parent
 INK, YELLOW, GREY = '#222222', '#FFD13F', '#555555'
 SRIRACHA = "font-family:'Sriracha','Mali',cursive"
-PAD = 'padding:100px 140px 130px;gap:36px'
+PAD = 'padding:64px 140px 130px;gap:36px'
 
 
 # --- doodles -------------------------------------------------------------------
@@ -136,7 +136,11 @@ def strip(rows, legend=''):
 
 # --- layouts ---------------------------------------------------------------------
 def h2(text):
-    return f'<h2 style="font-size:60px;font-weight:700;line-height:1.25;color:{INK}">{text}</h2>'
+    """Big word for what the slide is about, with the full topic as a smaller line under it."""
+    head, _, detail = text.partition('|')
+    line = f'<p style="font-size:34px;line-height:1.35;color:{GREY}">{detail}</p>' if detail else ''
+    return (f'<div style="gap:2px"><h2 style="font-size:64px;font-weight:700;line-height:1.2;color:{INK}">{head}</h2>'
+            f'{line}</div>')
 
 
 def ul(items, size=32, tag='ul'):
@@ -192,14 +196,14 @@ SLIDES = {
               f'<p style="font-size:30px;line-height:1.5;color:{GREY}">CS373 · นำเสนอผลงานขั้นสุดท้าย<br>'
               f'github.com/Micosz/CS373_CourseTimetablingLab</p></div>'
               f'{buddy("สวัสดี!", wave=True, scale=1.25, size=56)}</div>'),
-    'problem': ('ปัญหา: การจองห้อง Lab แบบคงที่ตลอดภาคการศึกษา',
+    'problem': ('ปัญหา|การจองห้อง Lab แบบคงที่ตลอดภาคการศึกษา',
                 strip([('ห้องคงที่', [WASTE, WASTE, WASTE, LAB, WASTE, WASTE, WASTE, LAB]),
                        ('รายสัปดาห์', [ROOM, ROOM, ROOM, LAB, ROOM, ROOM, ROOM, LAB])],
                       'ตัวอย่างสมมติ: วิชาที่ต้องใช้ Lab แค่สัปดาห์ 4 และ 8 · ช่องขีดเส้น = นั่งใน Lab โดยไม่ได้ใช้')
                 + two(ul(['ห้องรายสัปดาห์ลด Lab ไม่จำเป็นได้เท่าไร', 'ต้องแลกกับการย้ายห้องกี่ครั้ง ประหยัด Lab ได้กี่ห้อง',
                           'วิธีค้นหาแบบไหนดีที่สุดเมื่อได้งบเท่ากัน'], 32, 'ol'),
-                      buddy('จองทิ้งไว้<br>ทำไมอะ', 'sad', scale=0.5, stars=False, size=32))),
-    'approach': ('แนวทาง: เวลาเรียนคงที่ และจัดสรรห้องรายสัปดาห์',
+                      buddy('จองทิ้งไว้<br>ทำไมอะ', 'sad', scale=0.42, stars=False, size=32))),
+    'approach': ('แนวทาง|เวลาเรียนคงที่ และจัดสรรห้องรายสัปดาห์',
                  f'<div style="flex-direction:row;gap:28px;align-items:stretch">'
                  f'{box("1 · เวลา", "เลือกวันและเวลาหนึ่งชุด ใช้ทั้ง 15 สัปดาห์")}{ARROW}'
                  f'{box("2 · ห้อง", "เลือกใหม่ได้ทุกสัปดาห์ สัปดาห์ Lab อยู่ Lab สัปดาห์อื่นอยู่ห้องบรรยาย", True)}</div>'
@@ -207,19 +211,19 @@ SLIDES = {
                            'Lab ไม่จำเป็นที่ยังเหลือ เกิดตอนห้องบรรยายเต็มทุกครั้ง',
                            'อัลกอริทึมค้นหาลำดับคลาสกับเวลา ส่วนห้อง decoder เป็นคนเลือก'], 30),
                        buddy('เวลาไม่ย้าย<br>ย้ายแค่ห้อง', scale=0.7, stars=False, size=34))),
-    'since': ('การปรับปรุงตามข้อเสนอแนะ',
+    'since': ('ข้อเสนอแนะ|สิ่งที่ปรับปรุงตามข้อเสนอแนะของอาจารย์',
               f'<div style="flex-direction:row;gap:48px">{big("4 วิธี", "Greedy, Hill Climbing, Simulated Annealing, Genetic Algorithm")}'
               f'{big("240 รัน", "ทดลองครบทั้งห้องคงที่และห้องรายสัปดาห์")}'
               f'{big("~75 เท่า", "เขียน engine ใหม่เป็น C# ผลตรงกับ Python ทุกรัน")}</div>'
-              + two('', buddy('ทำการบ้าน<br>มาแล้ว!', wave=True, scale=0.8, size=36))),
-    'data': ('ชุดข้อมูลที่ใช้ในการทดลอง',
+              + two('', buddy('ทำการบ้าน<br>มาแล้ว!', wave=True, scale=0.72, size=36))),
+    'data': ('ข้อมูล|ชุดข้อมูลที่ใช้ในการทดลอง',
              two(f'<div style="flex-direction:row;gap:48px">{big("174", "คลาสจาก Purdue Fall 2007 CS (UniTime)")}'
                  f'{big("3,345", "คาบรายสัปดาห์ที่ต้องจัด (223 คาบ × 15 สัปดาห์)")}</div>'
                  + ul(['ต้นฉบับไม่มี Lab เราเพิ่ม Lab จำลอง 4 ห้องเอง',
                        'สุ่ม 60% ของคาบให้ใช้ Lab 4 จาก 15 สัปดาห์ (ตัวเลขตั้งเอง)',
                        'ลองสัปดาห์ Lab แบบติดกันและเว้นสัปดาห์แล้ว ข้อสรุปไม่เปลี่ยน'], 30),
                  buddy('Lab จำลองนะ<br>ไม่ใช่ของจริง', 'wow', scale=0.8, size=34))),
-    'objective': ('ฟังก์ชันเป้าหมายและข้อจำกัด',
+    'objective': ('เป้าหมาย|ฟังก์ชันเป้าหมายและข้อจำกัดของปัญหา',
                   two(ul(['<b>คาบที่ยังจัดไม่ได้</b> ต้องน้อยที่สุดก่อน', '<b>ชั่วโมง Lab ไม่จำเป็น</b> นั่ง Lab ในสัปดาห์ที่ไม่ได้ใช้',
                           '<b>จำนวนครั้งที่เปลี่ยนห้อง</b> ห้องต่างจากสัปดาห์ก่อน'], 32, 'ol')
                       + f'<p style="font-size:30px;line-height:1.5">ตัวอย่าง: คาบ 1.5 ชม. ใช้ Lab 4 สัปดาห์ → ห้องคงที่เสีย '
@@ -227,7 +231,7 @@ SLIDES = {
                       + ul(['ห้อง ผู้สอน กลุ่มนักศึกษา ห้ามชนเวลากัน', 'ห้องต้องจุพอ และสัปดาห์ Lab ต้องอยู่ใน Lab',
                             'ห้ามชนกับคลาสพื้นหลัง 810 คลาส', 'จัดไม่ได้ก็เว้นไว้ ไม่ยอมละเมิด'], 28),
                       buddy('ห้ามชนกัน<br>เด็ดขาด', hat=True, scale=0.8, size=36))),
-    'method': ('การแทนคำตอบและอัลกอริทึมที่เปรียบเทียบ',
+    'method': ('วิธีการ|การแทนคำตอบและอัลกอริทึมที่เปรียบเทียบ',
                f'<div style="flex-direction:row;gap:20px;align-items:stretch">'
                f'{box("ตัวแทนคำตอบ", "ลำดับคลาส และเวลาที่ลองก่อน")}{ARROW}'
                f'{box("ตัวจัดตาราง", "คงเวลาทั้งเทอม เลือกห้องรายสัปดาห์", True)}{ARROW}'
@@ -237,12 +241,12 @@ SLIDES = {
                         ['Hill Climbing', 'รับเมื่อดีขึ้น เริ่มใหม่แบบสุ่มเมื่อติด'],
                         ['Simulated Annealing', 'ยอมรับคำตอบแย่ลงได้ตามอุณหภูมิ'],
                         ['Genetic Algorithm', 'มีประชากร ผสมคำตอบ เก็บตัวดีที่สุด']], 30, ['30%', None])),
-    'protocol': ('ระเบียบวิธีการทดลอง',
+    'protocol': ('การทดลอง|ระเบียบวิธีการทดลอง',
                  two(ul(['จูนบน seed 1–10 ทดสอบจริงบน seed 1001–1030', 'ทุกวิธีได้งบเท่ากัน 500 ครั้งต่อรัน',
                          'กำหนดสถิติก่อนรัน: Friedman แล้ว Wilcoxon จับคู่ ปรับ Holm', 'ระดับนัยสำคัญ α = 0.05'], 32)
                      + f'<div style="flex-direction:row;gap:48px">{big("240/240", "รันผ่านตัวตรวจอิสระ (4 วิธี × 30 seed × 2 โหมดห้อง)")}</div>',
                      buddy('ตั้งกติกา<br>ก่อนเล่น', scale=0.8, size=36))),
-    'tuning': ('ผลการปรับค่าพารามิเตอร์',
+    'tuning': ('พารามิเตอร์|ผลการปรับค่าพารามิเตอร์ของแต่ละวิธี',
                table(['วิธี', 'ค่าที่เลือก', 'Lab ไม่จำเป็นเฉลี่ย (ชม.)'],
                      [['Hill Climbing', 'restart patience 50', '72.7 → 71.1'],
                       ['Simulated Annealing', 'acceptance 0.2 / cooling 0.9', '68.9 → 58.4'],
@@ -250,18 +254,18 @@ SLIDES = {
                + two(ul(['ค่าของ SA อยู่มุม grid จึงจูนเพิ่มอีก 20 ชุดหลังเห็นผล',
                          'ดีขึ้นบน seed จูน (58.4 → 54.9) แต่ไม่ดีขึ้นบน seed ทดสอบ (76.2 → 77.5)',
                          'GA ยังดีกว่า SA (p = 0.003) ผลหลักจึงใช้ค่าเดิม'], 30),
-                     buddy('จูนเพิ่มแล้ว<br>ผลเหมือนเดิม', scale=0.45, stars=False, size=30))),
-    'main': ('ผลการทดลองหลัก: ชั่วโมง Lab ที่ไม่จำเป็น',
+                     buddy('จูนเพิ่มแล้ว<br>ผลเหมือนเดิม', scale=0.4, stars=False, size=30))),
+    'main': ('ผลการทดลอง|ชั่วโมง Lab ที่ไม่จำเป็น ที่งบ 500',
              two(ul(['งบ 500: GA ใช้ Lab โดยไม่จำเป็นน้อยที่สุด', 'HC, SA, GA จัดครบทุกคาบทั้ง 30 seed', 'Greedy ยังขาด 20 คาบทุก seed',
                      'Greedy คือการจัดตามกฎง่าย ๆ รอบเดียว ไม่ใช่ตัวแทนคนจัดจริง', 'GA กับ HC ใกล้กันมาก'], 30),
                  bars([('GA', 57.7, '57.7', True), ('HC', 64.9, '64.9', False), ('SA', 76.2, '76.2', False),
                        ('Greedy', 124.0, '124.0', False)], 700, 520, 'Lab ไม่จำเป็นเฉลี่ย (ชม.) · 30 seed · ยิ่งเตี้ยยิ่งดี'), 40)),
-    'stats': ('การทดสอบทางสถิติของผลการทดลองหลัก',
+    'stats': ('สถิติ|การทดสอบทางสถิติของผลการทดลองหลัก',
               two(table(['วิธี', 'อันดับเฉลี่ย (น้อย = ดี)'], [['GA', '1.53'], ['HC', '1.93'], ['SA', '2.53'], ['Greedy', '4.00']], 32)
                   + ul(['Friedman χ² = 63.12, p &lt; 0.001: สี่วิธีต่างกันจริง', 'GA ดีกว่า SA ใน 26/30 seed (p &lt; 0.001)',
                         'GA กับ HC ยังแยกไม่ได้: GA ชนะ 18/30 seed (p = 0.188)'], 30),
                   buddy('ชนะ แต่ยัง<br>ไม่ขาด', 'wow', scale=0.8, size=36))),
-    'perweek': ('ตัวอย่างการใช้ห้อง Lab ร่วมกันรายสัปดาห์',
+    'perweek': ('ตัวอย่าง|การใช้ห้อง Lab ร่วมกันรายสัปดาห์',
                 strip([('ถ้าล็อกห้อง<br>(สมมติ)', [('A', 'lab' if w in (1, 4, 9, 10) else 'waste') for w in range(1, 16)]),
                        ('รายสัปดาห์<br>(ผลจริง)', [(c, 'lab' if c != 'ว่าง' else 'empty') for c in
                                                    ['A', 'B', 'B', 'C', 'D', 'D', 'B', 'B', 'A', 'A', 'C', 'C', 'ว่าง', 'C', 'D']])],
@@ -270,18 +274,18 @@ SLIDES = {
                           'รายสัปดาห์: ใช้ 14 จาก 15 สัปดาห์ ไม่มีช่องนั่งเปล่าเลย',
                           'ต้นเหตุไม่ใช่ Lab น้อย แต่คือการล็อก Lab ไว้ทั้งเทอม'], 30),
                       buddy('ผลัดกัน<br>ใช้สิ', wave=True, scale=0.55, stars=False, size=32))),
-    'changes': ('จำนวนครั้งของการเปลี่ยนห้อง',
+    'changes': ('การเปลี่ยนห้อง|จำนวนครั้งของการเปลี่ยนห้องต่อภาคการศึกษา',
                 two(ul(['เปลี่ยนราว 830 ครั้งต่อเทอม', 'ข้อมูลบังคับให้เปลี่ยนอย่างน้อย 783 ครั้ง',
                         'เราอยู่ที่ 1.06 เท่าของค่าต่ำสุด', 'ห้องคงที่ไม่ต้องเปลี่ยนเลย แต่ Lab ถูกครองเปล่าเกือบ 2,000 ชม.'], 30),
                     bars([('ต่ำสุด', 783, '783', True), ('GA', 831, '831', False), ('HC', 831, '831', False), ('SA', 835, '835', False)],
                          700, 520, 'จำนวนครั้งที่เปลี่ยนห้องต่อเทอม (เฉลี่ย 30 seed)'), 40)),
-    'scarcity': ('ผลของจำนวนห้อง Lab ที่มีให้ใช้',
+    'scarcity': ('จำนวนห้อง Lab|ผลเมื่อจำนวนห้อง Lab ลดลง',
                  two(table(['จำนวน Lab', 'ห้องรายสัปดาห์', 'ห้องคงที่'],
                            [['4 ห้อง (กรณีหลัก)', '<b>0</b>', '159'], ['3 ห้อง', '<b>0</b>', '482'], ['2 ห้อง', '17.7', '896']], 34)
                      + small('ตัวเลข = คาบที่ไม่มีห้องเรียน (เฉลี่ย 10 seed, GA) ยิ่งน้อยยิ่งดี')
                      + ul(['ห้องคงที่จัดไม่ครบตั้งแต่มี Lab 4 ห้อง', 'ห้องรายสัปดาห์ประหยัด Lab ได้หนึ่งห้องเต็ม'], 32),
                      buddy('ประหยัดได้<br>1 ห้อง!', wave=True, scale=0.8, size=38))),
-    'budget': ('ผลของงบประมาณการค้นหา',
+    'budget': ('งบการค้นหา|ผลของงบประมาณการค้นหาต่อคุณภาพคำตอบ',
                two(table(['งบต่อรัน', 'HC', 'SA', 'GA'],
                          [['500', '60.0', '76.1', '<b>56.7</b>'], ['2,000', '35.0', '<b>26.5</b>', '30.1'],
                           ['50,000', '9.8', '<b>2.0</b>', '8.7']], 34)
@@ -290,18 +294,18 @@ SLIDES = {
                          'งบ 50,000: SA ไม่มี Lab ไม่จำเป็นเลยใน 8/10 seed',
                          'ย้ายห้อง 785–786 ครั้ง เทียบค่าต่ำสุด 783 (ห่าง ≤ 0.4%)'], 30),
                    buddy('ให้เวลาหน่อย<br>SA แซงเลย', 'wow', scale=0.8, size=34))),
-    'csharp': ('ประสิทธิภาพของ engine ภาษา C#',
+    'csharp': ('ประสิทธิภาพ|engine ภาษา C# เทียบกับ Python',
                two(ul(['240 รัน: Python ราว 30 นาที → C# ราว 20 วินาที', 'ผลตรงกับ Python ทั้ง 240/240 รัน',
                        'ใช้ตัวสุ่ม MT19937 และลำดับการตัดสินเดียวกัน', 'CI ตรวจซ้ำทั้ง Ubuntu และ Windows'], 30),
                    bars([('Python', 1812, '30 นาที', False), ('C#', 60, '20 วินาที', True)], 520, 520,
                         'เวลาของการทดลองหลัก 240 รัน'), 40)),
-    'limits': ('ข้อจำกัดของการศึกษา',
+    'limits': ('ข้อจำกัด|ข้อจำกัดของการศึกษา',
                two(ul(['<b>ข้อมูลดัดแปลงชุดเดียว</b> Lab สร้างขึ้นเอง และไม่มีตารางที่คนจัดจริงมาเทียบ',
                        '<b>พารามิเตอร์จูนที่งบ 500</b> ถ้าใช้งบใหญ่ควรจูนใหม่',
                        '<b>ยังไม่นิ่งสนิทที่งบ 50,000</b> และการศึกษางบใหญ่ใช้ 10 seed',
                        '<b>ยังไม่ได้วัดผลด้านคน</b> เช่น เดินไกลหรือสับสนจากการย้ายห้อง'], 32),
                    buddy('ยังไม่เพอร์เฟกต์<br>นะ', 'sad', scale=0.8, size=34))),
-    'conclude': ('สรุปผลการศึกษา',
+    'conclude': ('สรุป|สรุปผลการศึกษา',
                  two(ul(['<b>ห้องรายสัปดาห์ประหยัด Lab ได้หนึ่งห้อง</b> ลด Lab ไม่จำเป็น 1,801–1,949 ชม. ต่อเทอม และจัดครบแม้เหลือ Lab 3 ห้อง',
                          '<b>วิธีที่ดีที่สุดขึ้นกับงบ</b> งบ 500 GA ≈ HC ตั้งแต่งบ 2,000 SA ดีที่สุด',
                          '<b>ราคาคือการย้ายห้อง</b> ราว 1.06 เท่าของค่าต่ำสุดที่ข้อมูลบังคับ (831 เทียบ 783 ครั้ง)'], 32, 'ol')
@@ -315,7 +319,7 @@ SLIDES = {
              + ref('Xiao (2021)', 'The Course Scheduling Problem with Room Considerations. Doctoral dissertation, Wright State University.')
              + ref('ITC2007', 'Curriculum-based Course Timetabling: The Problem Model. Queen’s University Belfast.')
              + ref('UniTime', 'University course timetabling datasets, Purdue Fall 2007 CS (pu-fal07-cs).') + '</div>'),
-    'refs-recent': ('เอกสารอ้างอิง: งานใหม่ 2025–2026',
+    'refs-recent': ('เอกสารอ้างอิง|งานใหม่ 2025–2026',
                     '<div style="gap:14px">'
                     + ref('Cavalcante et al. (2026)', 'A Mathematical Model for Class Scheduling: A Case Study with the Federal University of Maranhão. IntechOpen.', 'คนจัดเอง 23 ห้อง · Greedy 20 · ILP 13 · ใช้ Lab จำลองเหมือนเรา')
                     + ref('Raviv (2026)', 'The lecture-hall quadratic assignment problem. Computers &amp; Operations Research, 196, 107659.', 'ย้ายห้องระหว่างเทอมต้นทุนต่ำ แต่ย้ายเวลากระทบนักศึกษา')
@@ -354,7 +358,7 @@ def main():
         html = (body if cover else h2(title) + body) + (
             '' if cover else f'<p style="position:absolute;right:140px;bottom:56px;width:120px;font-size:24px;'
                              f'color:#777777;text-align:right">{number}</p>')
-        slides.append({'id': s['id'], 'title': title, 'style': f'background:#FFFFFF;{PAD}', 'html': html, 'note': note})
+        slides.append({'id': s['id'], 'title': title.replace('|', ': '), 'style': f'background:#FFFFFF;{PAD}', 'html': html, 'note': note})
     controller = (MAIN / 'deck.js').read_text(encoding='utf-8').split('\n', 1)[1]
     controller, swapped = re.subn(r'const ZOOMS = \[.*?\];', 'const ZOOMS = [];', controller, count=1)
     if swapped != 1:
