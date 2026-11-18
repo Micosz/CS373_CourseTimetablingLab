@@ -25,8 +25,8 @@
 | [`engine/tests/`](../engine/tests/) | contract/regression tests (`python -m unittest discover -s engine/tests`) |
 | [`dotnet/`](../dotnet/README.md) | engine เดียวกันใน C# ให้ผลตรงกับ Python ทุกบิต, CLI `timetabling` (run / batch) และ parity tests |
 | [`data/`](../data/) | `fall-cs.json.gz` (ชุดข้อมูลหลัก), `provenance.json` (SHA-256), `assumptions.json`, `conversion_audit.json`, `FORMAT.txt`, `variants/` (ชุดข้อมูลที่มี Lab 3 และ 2 ห้อง และสัปดาห์ Lab แบบติดกัน / เว้นสัปดาห์) |
-| [`dataset_tools/`](../dataset_tools/) | converter และ config ที่ใช้สร้าง `data/` ซ้ำ รวมถึง `make_lab_variants.py` (Lab ขาดแคลน) และ `make_pattern_variants.py` (รูปแบบสัปดาห์ Lab) |
-| [`experiments/`](../experiments/INDEX.md) | ผลดิบและสรุปของทุกการทดลอง: `final/` (ผลหลัก), `tuning/`, `sa-extended-tuning/`, `budget/`, `convergence/`, `lab-scarcity/`, `lab-week-patterns/`, `lab-hours-breakdown/`, `fixed-room/`, `engine-speed/` |
+| [`dataset_tools/`](../dataset_tools/) | converter และ config ที่ใช้สร้าง `data/` ซ้ำ รวมถึง `make_lab_variants.py` (Lab ขาดแคลน) `make_pattern_variants.py` (รูปแบบสัปดาห์ Lab) และ `make_course_lab_variants.py` (Lab รายวิชา 1 ถึง 15 สัปดาห์) |
+| [`experiments/`](../experiments/INDEX.md) | ผลดิบและสรุปของทุกการทดลอง: `final/` (ผลหลัก), `tuning/`, `sa-extended-tuning/`, `budget/`, `convergence/`, `lab-scarcity/`, `lab-week-patterns/`, `course-level-labs/`, `lab-hours-breakdown/`, `fixed-room/`, `engine-speed/` |
 | [`docs/`](.) | เอกสารในหน้านี้, `QA.md` (บันทึกการตรวจ), `img/` (ภาพประกอบคู่มือ และ `img/redesign/` ภาพก่อน/หลังปรับหน้าตา) |
 | `index.html` (root) | redirect ไป `apps/web/` เพื่อให้ URL ของ GitHub Pages เดิมใช้ได้ |
 
