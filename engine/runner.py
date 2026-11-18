@@ -37,6 +37,9 @@ def check_configuration(config):
         raise ValueError('Time limit must be 1..3600 seconds per run')
     if config.get('room_mode','weekly') not in ROOM_MODES:
         raise ValueError('Room mode must be weekly or fixed')
+    penalty = config.get('change_penalty_minutes',0)
+    if type(penalty) is not int or not 0 <= penalty <= 10**7:
+        raise ValueError('Change penalty must be an integer number of minutes from 0 to 10000000')
     params = config.get('parameters',{})
     hc, sa, ga = params.get('hc',{}), params.get('sa',{}), params.get('ga',{})
     if not 1 <= int(hc.get('restart_patience',20)) <= 10000:
@@ -64,7 +67,9 @@ def run_one(problem, config, method, seed, dataset_meta=None, custom_source='', 
     # Snapshot before an editable plugin sees the model; its result is audited against this copy.
     protected_data = json.loads(json.dumps(problem.data)) if method=='custom' else problem.data
     room_mode = config.get('room_mode','weekly')
-    context = SearchContext(problem, seed, config.get('budget',100), config.get('seconds',60), progress, room_mode)
+    change_penalty = config.get('change_penalty_minutes',0)
+    context = SearchContext(problem, seed, config.get('budget',100), config.get('seconds',60), progress, room_mode,
+                            change_penalty)
     status, returned, failure = 'completed', None, None
     started = time.perf_counter()
     try:
@@ -102,7 +107,7 @@ def run_one(problem, config, method, seed, dataset_meta=None, custom_source='', 
             status = 'error'
             failure = {'message':'Search score disagrees with independent solution validator'}
     return {
-        'algorithm':method,'room_mode':room_mode,'seed':seed,'status':status,'valid':checked['valid'] and status!='error',
+        'algorithm':method,'room_mode':room_mode,'change_penalty_minutes':change_penalty,'seed':seed,'status':status,'valid':checked['valid'] and status!='error',
         'metrics':checked['metrics'],'validation':checked,'solution':solution,
         'evaluations':context.evaluations,'attempted_evaluations':context.attempted_evaluations,
         'budget':context.budget,'time_limit_seconds':config.get('seconds',60),

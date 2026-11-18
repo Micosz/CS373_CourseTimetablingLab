@@ -1,0 +1,30 @@
+{
+  "name": "Room-change penalty study (weekly, seeds 1001-1010, budget 500)",
+  "created_at": "2026-11-18T12:20:58.546479+00:00",
+  "sessions": [
+    {
+      "started_at": "2026-11-18T12:20:58.546521+00:00",
+      "runs": 70,
+      "workers": 4,
+      "finished_at": "2026-11-18T12:21:06.367179+00:00",
+      "wall_seconds": 7.820668669000014,
+      "failures": []
+    },
+    {
+      "started_at": "2026-11-18T12:21:13.064482+00:00",
+      "runs": 210,
+      "workers": 4,
+      "finished_at": "2026-11-18T14:17:55.745982+00:00",
+      "wall_seconds": 7002.681505011,
+      "failures": []
+    }
+  ],
+  "dataset": "data/fall-cs.json.gz",
+  "dataset_sha256": "c92918faeb82b4d5c9f702e0629fe5e8d48bcc1a1286c0b21d514a9021973968",
+  "engine_sha256": "37fe38177a23a4ea1e3c2fff3bfdf535fea2859e28c17b1abc8d9b9ba66856e7",
+  "python": "3.13.18",
+  "platform": "linux",
+  "cpu_count": 4,
+  "total_runs": 280,
+  "wall_seconds_total": 7010.50217368
+}

@@ -90,3 +90,13 @@
 ## Deploy
 
 ดู `DEPLOY.md` (Vercel Root Directory = `apps/slides`, ไม่มี build command)
+
+## ชุดเรียบง่าย (`simple/`)
+
+สไลด์ 20 หน้าชุดเดียวกันในหน้าตาแบบวาดมือ: พื้นขาว ฟอนต์ Mali เส้นหมึกดำ สีเหลืองสีเดียว และตัวการ์ตูนจอคอมพิวเตอร์ แต่ละหน้าเหลือแค่หัวข้อกับรายการสั้น ๆ ตารางเล็ก หรือกราฟแท่ง ชุดหลักข้างบนไม่ถูกแก้
+
+- เปิด `simple/index.html` หรือ http://localhost:8766/apps/slides/simple/
+- `simple/build.py` เก็บเนื้อหาทุกหน้า และสร้าง `slides.json`, `deck.js`, `speaker-notes.md` ของชุดนี้: `python3 apps/slides/simple/build.py`
+- ลำดับหน้า id และบทพูดมาจาก `slides.json` ของชุดหลัก บทพูดแก้เฉพาะคำที่ชี้ไปที่ภาพซึ่งชุดนี้วาดต่างออกไป (`NOTE_EDITS`) ถ้าแก้ชุดหลักต้องรัน `build.py` ใหม่
+- ตัวเลขทุกตัวเหมือนชุดหลัก หน้า 15 (งบ) แสดงเป็นตารางจาก `experiments/convergence/summary.csv` แทนกราฟเส้น
+- ตัวควบคุมสไลด์ใช้ของชุดหลัก (`../deck.js`, `../style.css`) ส่วนที่ต่างอยู่ใน `simple/simple.css`

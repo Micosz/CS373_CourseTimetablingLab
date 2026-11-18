@@ -1,0 +1,12 @@
+/* Simple hand-drawn deck: overrides on top of ../style.css. */
+:root { --fg: #222222; --blue: #222222; }
+.slide, .slide p, .slide li, .slide td, .slide th { font-family: 'Mali', 'Noto Sans Thai', Tahoma, sans-serif; }
+.slide { color: #222222; }
+.slide ul, .slide ol { margin: 0; padding-left: 1.3em; }
+.slide li { padding-left: 0.2em; }
+.slide li::marker { font-weight: 700; }
+.slide th, .slide td { border-bottom: 3px solid #222222; padding: 0.4em 0.6em; }
+.slide th { color: #222222; font-weight: 700; border-bottom-width: 5px; }
+.slide tr:last-child td { border-bottom: 0; }
+.slide b { font-weight: 700; }
+.slide .grow-y { transform-box: fill-box; }
