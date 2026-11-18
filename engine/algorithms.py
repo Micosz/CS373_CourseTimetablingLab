@@ -1,4 +1,8 @@
-"""Four methods on the same priority/time-preference genome and shared decoder."""
+"""Four methods on the same priority/time-preference genome and shared decoder.
+
+Solutions are compared by ``Candidate.rank`` (HC, GA) or ``Candidate.energy`` (SA); both follow the
+run's change_penalty and order solutions the same way (see lab_core.py).
+"""
 import math
 import statistics
 
@@ -18,7 +22,7 @@ def hill_climbing(problem, context, parameters):
             idle = 0
         else:
             proposal = context.evaluate(problem.mutate(current.genome, context.rng))
-            if proposal.objectives < current.objectives:
+            if proposal.rank < current.rank:
                 current, idle = proposal, 0
             else:
                 idle += 1
@@ -71,11 +75,11 @@ def genetic_algorithm(problem, context, parameters):
         population.append(context.evaluate(problem.random_genome(context.rng)))
 
     def parent():
-        return min((context.rng.choice(population) for _ in range(tournament_size)), key=lambda c: c.objectives)
+        return min((context.rng.choice(population) for _ in range(tournament_size)), key=lambda c: c.rank)
 
     while True:
         context.check()
-        following = sorted(population, key=lambda c: c.objectives)[:elites]
+        following = sorted(population, key=lambda c: c.rank)[:elites]
         while len(following) < size:
             p1, p2 = parent(), parent()
             if context.rng.random() < crossover_rate:
