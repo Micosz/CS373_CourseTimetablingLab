@@ -1,5 +1,7 @@
 # Verification record
 
+Entries dated before 2026-11-19 refer to the previous dataset (Weekly Labs v1) and to the web app that still ran Python in the browser; their numbers do not describe the current dataset or results.
+
 Checked 2026-10-27. These are implementation checks, not final comparative research results.
 
 - 12 automated Python tests pass on the actual adapted Fall CS input and small code fixtures.

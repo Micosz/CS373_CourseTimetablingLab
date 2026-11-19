@@ -1,16 +1,16 @@
 {
   "hc": {
-    "restart_patience": 50
+    "restart_patience": 200
   },
   "sa": {
-    "initial_acceptance": 0.2,
-    "cooling_rate": 0.9
+    "initial_acceptance": 0.8,
+    "cooling_rate": 0.97
   },
   "ga": {
-    "population_size": 35,
-    "mutation_rate": 0.66,
-    "crossover_rate": 0.64,
-    "tournament_size": 5,
+    "population_size": 12,
+    "mutation_rate": 0.86,
+    "crossover_rate": 0.85,
+    "tournament_size": 4,
     "elites": 3
   },
   "_selection": {
@@ -31,9 +31,9 @@
     "room_mode": "weekly",
     "criterion": "lexicographic order of mean (unassigned, unnecessary Lab minutes, room changes); ties keep the default",
     "chosen_config_ids": {
-      "hc": "hc-p50",
-      "sa": "sa-a0.2-c0.9",
-      "ga": "ga-11"
+      "hc": "hc-p200",
+      "sa": "sa-a0.8-c0.97",
+      "ga": "ga-15"
     }
   }
 }

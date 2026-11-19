@@ -5,8 +5,7 @@
 None of the methods uses its budget to schedule the search (SA's calibration only differs below
 9 evaluations), so the best-so-far trace of one long run gives the result the same seed would have
 reached with any smaller budget. This script reads the budget-50,000 runs, checks that claim against
-the stored budget-500 (experiments/final) and budget-1000 (experiments/budget) runs of the same
-seeds, and writes:
+the stored budget-500 runs of the same seeds (experiments/final), and writes:
 
 - ``convergence.csv``: best-so-far per run at each budget level
 - ``summary.csv`` / ``summary.json``: means per method and budget, convergence points, and the
@@ -69,10 +68,9 @@ def converged_at(trace, budget, window):
 
 
 def check_prefix(runs):
-    """Prefix of the long run == stored shorter runs (Python engine) on the same seeds."""
+    """Prefix of the long run == stored shorter runs on the same seeds."""
     checked = 0
-    for path, budget in ((ROOT / 'experiments/final/experiment.json.gz', 500),
-                         (ROOT / 'experiments/budget/experiment.json.gz', 1000)):
+    for path, budget in ((ROOT / 'experiments/final/experiment.json.gz', 500),):
         stored = {(r['algorithm'], r['seed']): r for r in load_runs(path)
                   if r['room_mode'] == 'weekly' and r['budget'] == budget and r['algorithm'] in METHODS}
         for r in runs:
@@ -95,11 +93,11 @@ def log_x(budget, x0, x1):
 
 def svg(means):
     w, h, left, right, top, bottom = 1100, 420, 70, 1070, 20, 360
-    y_max = 150
+    y_max = max(50, -(-max(v for m in METHODS for v in means[m].values()) // 50) * 50)
     sy = lambda v: bottom - v / y_max * (bottom - top)
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" role="img" '
              'aria-label="Lab ไม่จำเป็นเฉลี่ยของ HC SA GA ตามงบ 50 ถึง 50,000 evaluations แกนนอนแบบ log">']
-    for v in (0, 50, 100, 150):
+    for v in range(0, int(y_max) + 1, 50):
         parts.append(f'<line x1="{left}" y1="{sy(v):.1f}" x2="{right}" y2="{sy(v):.1f}" stroke="#efefef" stroke-width="2"/>'
                      f'<text x="{left - 12}" y="{sy(v) + 8:.1f}" text-anchor="end" font-size="22" fill="#666">{v}</text>')
     for b in LEVELS:

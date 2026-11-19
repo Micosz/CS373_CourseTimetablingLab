@@ -513,7 +513,7 @@ public partial class Main : Control
         openLiveInMap.Disabled = true;
         var form = Ui.VBox(10,
             Ui.Text("ค้นหาสด · Live search", 16, Palette.TealDark, bold: true),
-            Ui.Text("รัน engine C# บนเธรดพื้นหลังด้วย SearchContext + Algorithms (ผลเหมือน Python ทุกบิต)", 12, Palette.InkSoft, wrap: true),
+            Ui.Text("รัน engine C# บนเธรดพื้นหลังด้วย SearchContext + Algorithms (engine เดียวกับที่ใช้รันผลการทดลอง)", 12, Palette.InkSoft, wrap: true),
             Row("วิธี method", liveMethod), Row("seed", liveSeed), Row("budget", liveBudget), Row("โหมดห้อง", liveMode),
             Ui.HBox(8, Ui.Expand(runButton), Ui.Expand(cancelButton)),
             liveProgress, liveStatus, liveParams, openLiveInMap);

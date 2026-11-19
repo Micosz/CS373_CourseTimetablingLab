@@ -1,4 +1,4 @@
-Input contract: pu-fal07-cs-weekly-lab-v1, schema_version 1.0
+Input contract: pu-fal07-cs-weekly-lab-v2, schema_version 1.0
 
 Main input is dataset.json (UTF-8 JSON).
 The adapter uses Python 3.9+ standard library only. There is no pre-existing solver
@@ -101,7 +101,7 @@ objectives (lexicographic minimization, only among solutions passing hard checks
 
 Suggested solution JSON (solution_template.json initially leaves all targets unassigned)
   {
-    "dataset_id": "pu-fal07-cs-weekly-lab-v1",
+    "dataset_id": "pu-fal07-cs-weekly-lab-v2",
     "class_time_options": {"C1417": "C1417-T000", "C1418": null, "...": null},
     "weekly_room_assignments": [
       {"session_id": "C1417-M1", "week": 1, "room_id": "R94"}

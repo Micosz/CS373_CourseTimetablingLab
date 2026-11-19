@@ -5,13 +5,14 @@ on:
   workflow_dispatch:
     inputs:
       full_parity:
-        description: Also replay all 240 runs of experiments/final with the C# engine
+        description: Also re-run all 240 runs of experiments/final with the C# engine and require the committed results
         type: boolean
         default: false
 permissions:
   contents: read
 jobs:
   python:
+    # Analysis and dataset tooling only (engine/analyze.py, dataset variants); no solver is tested here.
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,9 +22,12 @@ jobs:
       - run: python -m unittest discover -s engine/tests -v
 
   dotnet:
-    # The C# engine must reproduce the Python engine exactly; the parity tests compare
-    # against CPython vectors and the committed experiment results. Linux and Windows
-    # use different C math libraries, so both run.
+    # The C# engine is the only solver in the repository and produced every committed result.
+    # The fast tests check its RNG against CPython vectors and its validators against fixtures made
+    # with engine/solution_validator.py and engine/input_validation.py; the slow job checks that the
+    # committed results of experiments/final reproduce. Before the Python solver was removed, 16 runs
+    # of experiments/final were cross-checked against it by hand; that check is not part of CI.
+    # Linux and Windows use different C math libraries, so both run.
     strategy:
       fail-fast: false
       matrix:
@@ -36,6 +40,6 @@ jobs:
           dotnet-version: '8.0.x'
       - name: Fast tests (RNG, decoder, validators, runner, CLI, spot parity)
         run: dotnet test dotnet/Timetabling.sln --filter "Category!=Slow"
-      - name: Full 240-run parity
+      - name: Full 240-run reproduction of experiments/final
         if: github.event_name == 'workflow_dispatch' && inputs.full_parity
         run: dotnet test dotnet/Timetabling.sln --filter "Category=Slow"

@@ -1,21 +1,25 @@
 """Tune HC / SA / GA on the tuning seeds only (docs/protocol.md section 5). Standard library only.
 
-    python engine/tune.py --output experiments/tuning --workers 18
+    dotnet build -c Release dotnet/src/Timetabling.Cli
+    python engine/tune.py --output experiments/tuning --workers 10
 
-Runs every candidate setting on seeds 1-10 in weekly mode with the protocol
+Runs every candidate setting with the C# engine on seeds 1-10 in weekly mode with the protocol
 budget, picks the best setting per method by the lexicographic order of the
-mean (unassigned, unnecessary Lab minutes, room changes), and writes
+mean (unassigned, unnecessary Lab minutes, room changes), widens the search
+while a chosen value sits on the edge of what was tried (the edge rule), and writes
 ``selected-parameters.json`` (usable with ``--parameters``), a CSV of every
 setting and a Markdown summary. Re-running resumes from stored runs.
 """
 import argparse
 import csv
+import gzip
 import json
 import random
 import statistics
+import subprocess
 from pathlib import Path
 
-import batch
+ROOT = Path(__file__).resolve().parents[1]
 
 TUNING_SEEDS = list(range(1, 11))
 BUDGET = 500
@@ -27,22 +31,106 @@ DEFAULTS = {'hc': {'restart_patience': 20},
 LABELS = {'hc': 'Hill Climbing', 'sa': 'Simulated Annealing', 'ga': 'Genetic Algorithm'}
 
 
-def candidates():
-    """Every setting from the protocol, as (config_id, method, parameters)."""
-    out = [(f'hc-p{p}', 'hc', {'restart_patience': p}) for p in (5, 10, 20, 50, 100, 200, 500)]
-    out += [(f'sa-a{a}-c{c}', 'sa', {'initial_acceptance': a, 'cooling_rate': c})
-            for a in (0.2, 0.5, 0.8, 0.95) for c in (0.9, 0.97, 0.99, 0.995, 0.999)]
-    out.append(('ga-00', 'ga', dict(DEFAULTS['ga'])))
-    rng = random.Random(4)
-    while len(out) < 7 + 20 + 20:
-        pop = rng.randint(6, 40)
-        params = {'population_size': pop, 'mutation_rate': round(rng.uniform(0.1, 1.0), 2),
-                  'crossover_rate': round(rng.uniform(0.5, 1.0), 2),
+# Section 5 of the protocol: the values tried first, and the ladder each grid axis may be extended
+# along. A ladder ends where a further step has no meaning (restart_patience = budget never
+# restarts; initial_acceptance near 0 is hill climbing, near 1 a random walk).
+START = {'hc': {'restart_patience': (5, 10, 20, 50, 100, 200, 500)},
+         'sa': {'initial_acceptance': (0.01, 0.05, 0.2, 0.5, 0.8), 'cooling_rate': (0.8, 0.9, 0.97, 0.99)}}
+LADDERS = {'hc': {'restart_patience': (1, 2, 5, 10, 20, 50, 100, 200, 500)},
+           'sa': {'initial_acceptance': (0.001, 0.01, 0.05, 0.2, 0.5, 0.8, 0.95, 0.99),
+                  'cooling_rate': (0.6, 0.7, 0.8, 0.9, 0.97, 0.99, 0.995, 0.999)}}
+GA_RANGES = {'population_size': (6, 40), 'mutation_rate': (0.1, 1.0), 'crossover_rate': (0.5, 1.0)}
+GA_LIMITS = {'population_size': (4, 60), 'mutation_rate': (0.02, 1.0), 'crossover_rate': (0.3, 1.0)}
+GA_FIRST_SEED, GA_EXTRA = 4, 10
+
+
+def grid(method, values):
+    """Every combination of the axis values, as (config_id, method, parameters)."""
+    if method == 'hc':
+        return [(f'hc-p{p}', 'hc', {'restart_patience': p}) for p in values['restart_patience']]
+    return [(f'sa-a{a}-c{c}', 'sa', {'initial_acceptance': a, 'cooling_rate': c})
+            for a in values['initial_acceptance'] for c in values['cooling_rate']]
+
+
+def draw_ga(seed, ranges, count, existing):
+    """Random-search settings for GA, numbered after the existing ones."""
+    rng, out = random.Random(seed), []
+    while len(out) < count:
+        pop = rng.randint(*ranges['population_size'])
+        params = {'population_size': pop, 'mutation_rate': round(rng.uniform(*ranges['mutation_rate']), 2),
+                  'crossover_rate': round(rng.uniform(*ranges['crossover_rate']), 2),
                   'tournament_size': rng.randint(2, min(5, pop)), 'elites': rng.randint(1, 3)}
-        if any(p == params for _, m, p in out if m == 'ga'):
+        if params in existing or params in [p for _, _, p in out]:
             continue
-        out.append((f'ga-{len(out) - 27:02d}', 'ga', params))
+        out.append((f'ga-{len(existing) + len(out):02d}', 'ga', params))
     return out
+
+
+def candidates():
+    """The settings of the first round, as (config_id, method, parameters)."""
+    out = grid('hc', START['hc']) + grid('sa', START['sa'])
+    out.append(('ga-00', 'ga', dict(DEFAULTS['ga'])))
+    return out + draw_ga(GA_FIRST_SEED, GA_RANGES, 19, [DEFAULTS['ga']])
+
+
+def extensions(settings, chosen, ga_ranges):
+    """The edge rule: more settings when a chosen value sits on the edge of what was tried.
+
+    Grid methods: if the chosen value of an axis is the lowest or highest tried and the ladder has
+    a further step that way, that step is added, combined with every value tried on the other
+    axes. GA: if the chosen population size, mutation rate or crossover rate lies in the outer 10%
+    of its range and the range can still widen that way, the range is widened to its limit and
+    GA_EXTRA more settings are drawn (seed = previous seed + 1). Returns (new settings, ga_ranges).
+    """
+    tried = [params for _, _, params in settings]
+    new = []
+    for method in ('hc', 'sa'):
+        values = {axis: sorted({p[axis] for p in tried if axis in p}) for axis in LADDERS[method]}
+        grown = {axis: list(v) for axis, v in values.items()}
+        for axis, ladder in LADDERS[method].items():
+            at = ladder.index(chosen[method]['parameters'][axis])
+            if chosen[method]['parameters'][axis] == values[axis][0] and at > 0:
+                grown[axis].append(ladder[at - 1])
+            if chosen[method]['parameters'][axis] == values[axis][-1] and at < len(ladder) - 1:
+                grown[axis].append(ladder[at + 1])
+        new += [s for s in grid(method, {axis: sorted(v) for axis, v in grown.items()}) if s[2] not in tried]
+    widened = dict(ga_ranges)
+    for axis, (low, high) in ga_ranges.items():
+        value, margin = chosen['ga']['parameters'][axis], (high - low) / 10
+        if value <= low + margin and GA_LIMITS[axis][0] < low:
+            widened[axis] = (GA_LIMITS[axis][0], widened[axis][1])
+        if value >= high - margin and GA_LIMITS[axis][1] > high:
+            widened[axis] = (widened[axis][0], GA_LIMITS[axis][1])
+    if widened != ga_ranges:
+        ga_tried = [p for _, m, p in settings if m == 'ga']
+        rounds = (len(ga_tried) - 20) // GA_EXTRA
+        new += draw_ga(GA_FIRST_SEED + 1 + rounds, widened, GA_EXTRA, ga_tried)
+    return new, widened
+
+
+def run_dotnet(settings, output, workers):
+    """Run every setting with the C# engine, one folder per setting under ``configs/``.
+
+    The C# CLI takes one parameter file per call, so each setting is its own small batch. A folder
+    that already holds results is reused, which lets the edge rule add settings without rerunning.
+    """
+    cli = ['dotnet', 'run', '-c', 'Release', '--no-build', '--project',
+           str(ROOT / 'dotnet' / 'src' / 'Timetabling.Cli'), '--', 'batch', 'run']
+    seeds = f'{TUNING_SEEDS[0]}-{TUNING_SEEDS[-1]}'
+    results = []
+    for config_id, method, params in settings:
+        folder = Path(output) / 'configs' / config_id
+        if not (folder / 'experiment.json.gz').exists():
+            folder.mkdir(parents=True, exist_ok=True)
+            (folder / 'parameters.json').write_text(json.dumps({method: params}) + '\n', encoding='utf-8')
+            subprocess.run(cli + ['--methods', method, '--room-modes', 'weekly', '--seeds', seeds,
+                                  '--budget', str(BUDGET), '--seconds', str(SECONDS), '--slim',
+                                  '--parameters', str(folder / 'parameters.json'), '--name', config_id,
+                                  '--output', str(folder), '--workers', str(workers or len(TUNING_SEEDS))],
+                           check=True, stdout=subprocess.DEVNULL)
+        stored = json.loads(gzip.decompress((folder / 'experiment.json.gz').read_bytes()))['batch']['results']
+        results += [{**r, 'config_id': config_id} for r in stored]
+    return results
 
 
 def summarize(results, settings):
@@ -121,18 +209,20 @@ def write_outputs(output, rows, chosen):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('--output', type=Path, default=batch.ROOT / 'experiments' / 'tuning')
+    parser.add_argument('--output', type=Path, default=ROOT / 'experiments' / 'tuning')
     parser.add_argument('--workers', type=int, default=None)
     args = parser.parse_args()
-    settings = candidates()
-    jobs = [{'config_id': cid, 'algorithm': method, 'room_mode': 'weekly', 'seed': seed, 'budget': BUDGET,
-             'seconds': SECONDS, 'parameters': {method: params}}
-            for cid, method, params in settings for seed in TUNING_SEEDS]
-    results = batch.run_jobs(jobs, args.output, workers=args.workers, slim=True, name='Parameter tuning (seeds 1-10)')
-    rows = summarize(results, settings)
-    chosen = select(rows)
+    settings, ga_ranges = candidates(), dict(GA_RANGES)
+    run = lambda: run_dotnet(settings, args.output, args.workers)
+    while True:
+        rows = summarize(run(), settings)
+        chosen = select(rows)
+        extra, ga_ranges = extensions(settings, chosen, ga_ranges)
+        if not extra:
+            break
+        print('edge rule adds', [cid for cid, _, _ in extra])
+        settings += extra
     write_outputs(args.output, rows, chosen)
-    batch.merge(args.output, name='Parameter tuning (seeds 1-10)')
     for method in DEFAULTS:
         print(method, chosen[method]['config_id'], chosen[method]['parameters'])
 

@@ -1,23 +1,23 @@
 {
   "name": "Convergence study: budget 50000, issue #33",
-  "created_at": "2026-11-14T17:27:27.363604+00:00",
+  "created_at": "2026-11-19T16:09:29.523201+00:00",
   "sessions": [
     {
-      "started_at": "2026-11-14T17:27:27.369866+00:00",
+      "started_at": "2026-11-19T16:09:29.525823+00:00",
       "runs": 30,
-      "workers": 4,
-      "finished_at": "2026-11-14T17:53:55.423703+00:00",
-      "wall_seconds": 1588.0538201,
+      "workers": 24,
+      "finished_at": "2026-11-19T16:17:50.212763+00:00",
+      "wall_seconds": 500.6869493,
       "failures": []
     }
   ],
   "dataset": "data/fall-cs.json.gz",
-  "dataset_sha256": "c92918faeb82b4d5c9f702e0629fe5e8d48bcc1a1286c0b21d514a9021973968",
+  "dataset_sha256": "dcb93db81f2bd60f1ff53bdb8b6c20899c9642489336580a9b209aa74495ee61",
   "engine": "dotnet",
   "engine_sha256": "e9222d735e2332c6220122760a91fc730e5aa89874a246a4b24ebaa5194c7db1",
-  "dotnet": "8.0.34",
-  "platform": "linux",
-  "cpu_count": 4,
+  "dotnet": "8.0.31",
+  "platform": "win32",
+  "cpu_count": 28,
   "total_runs": 30,
-  "wall_seconds_total": 1588.0538201
+  "wall_seconds_total": 500.6869493
 }
