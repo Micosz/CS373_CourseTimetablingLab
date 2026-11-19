@@ -244,7 +244,7 @@ SLIDES = {
                 strip([('ห้องคงที่', [WASTE, WASTE, WASTE, LAB, WASTE, WASTE, WASTE, LAB]),
                        ('รายสัปดาห์', [ROOM, ROOM, ROOM, LAB, ROOM, ROOM, ROOM, LAB])],
                       'ตัวอย่างสมมติ: วิชาที่ต้องใช้ Lab แค่สัปดาห์ 4 และ 8 / ช่องขีดเส้น = นั่งใน Lab โดยไม่ได้ใช้')
-                + two(ul(['<b>งานวิจัยพบ</b> ห้องเรียนมหาวิทยาลัยถูกใช้จริงต่ำได้ถึง 20–40% และข้อจำกัดของการจัดตารางเป็นสาเหตุหนึ่ง (Beyrouthy et al., 2009)',
+                + two(ul(['<b>งานวิจัยพบ</b> ห้องเรียนมหาวิทยาลัยถูกใช้จริงแค่ราว 20–50% และข้อจำกัดของการจัดตารางเป็นสาเหตุหนึ่ง',
                           '<b>กรณีที่เราเลือกศึกษา</b> วิชาที่ใช้ Lab แค่บางสัปดาห์ แต่จองห้องเดียวทั้งเทอม',
                           '<b>โจทย์ที่ได้</b> ถ้าให้ห้องเปลี่ยนได้รายสัปดาห์ จะจัดได้ครบไหม ด้วยวิธีไหน และถึงขอบเขตไหน'], 28),
                       buddy('จองทิ้งไว้<br>ทำไมอะ', 'sad', scale=0.42, stars=False, size=32))),
@@ -415,7 +415,15 @@ SLIDES = {
              + ref('ITC2007', 'Curriculum-based Course Timetabling: The Problem Model. Queen’s University Belfast.')
              + ref('Even, Itai &amp; Shamir (1976)', 'On the complexity of timetable and multicommodity flow problems. SIAM Journal on Computing, 5(4), 691–703.')
              + ref('Beyrouthy et al. (2009)', 'Towards improving the utilization of university teaching space. Journal of the Operational Research Society, 60, 130–143.')
+             + ref('Li, Zhao &amp; Xue (2026)', 'An Empirical Study on Assessing Classroom Space Utilization Efficiency in Higher Education Institutions. Buildings, 16(10), 1929.')
              + ref('UniTime', 'University course timetabling datasets, Purdue Fall 2007 CS (pu-fal07-cs).') + '</div>'),
+    'refs-methods': ('เอกสารอ้างอิง|อัลกอริทึมและสถิติ',
+                     '<div style="gap:20px">'
+                     + ref('Davis (1985)', 'Applying adaptive algorithms to epistatic domains. Proceedings of IJCAI-85, 162–164.', 'order crossover ของ GA')
+                     + ref('Goldberg &amp; Deb (1991)', 'A comparative analysis of selection schemes used in genetic algorithms. Foundations of Genetic Algorithms, 69–93.', 'tournament selection ของ GA')
+                     + ref('Demšar (2006)', 'Statistical comparisons of classifiers over multiple data sets. Journal of Machine Learning Research, 7, 1–30.', 'Friedman แล้วเทียบรายคู่')
+                     + ref('Holm (1979)', 'A simple sequentially rejective multiple test procedure. Scandinavian Journal of Statistics, 6(2), 65–70.', 'ปรับค่า p เมื่อเทียบหลายคู่')
+                     + '</div>'),
     'refs-recent': ('เอกสารอ้างอิง|งานใหม่ 2025–2026',
                     '<div style="gap:14px">'
                     + ref('Cavalcante et al. (2026)', 'A Mathematical Model for Class Scheduling: A Case Study with the Federal University of Maranhão. IntechOpen.', 'คนจัดเอง 23 ห้อง · Greedy 20 · ILP 13 · ใช้ Lab จำลองเหมือนเรา')
@@ -466,7 +474,8 @@ EXTRA = {
                            'และความต้องการ Lab เกือบเท่ากันทุกสัปดาห์ Lab 4 ห้องจึงเหลือเฟือ ภาพขวาคือชุดที่สองที่กำหนด Lab เป็นรายวิชา '
                            'ช่องสีเข้มคือทุกคลาสของวิชาเข้า Lab สัปดาห์เดียวกัน เหลือ 30 จาก 44 วิชาที่ใช้ Lab และมีสัปดาห์ที่ Lab แน่นกับสัปดาห์ที่ Lab โล่ง '
                            'นอกจากนี้เราไม่ใช้ค่า 4 สัปดาห์ค่าเดียว แต่ทดลองตั้งแต่ 1 ถึง 15 สัปดาห์ อย่างอื่นเหมือนชุดหลักทุกอย่าง'),
-    'labweeks': ('scarcity', 'นี่คือผลบนชุดที่สอง 640 รัน ผ่านตัวตรวจทุกรัน เมื่อวิชาใช้ Lab ไม่เกิน 4 สัปดาห์ วิธีค้นหาทั้งสามจัดครบทุกรัน '
+    'refs-methods': ('refs', 'รายการอ้างอิงของอัลกอริทึมและสถิติที่ใช้ในงานนี้'),
+    'labweeks': ('scarcity','นี่คือผลบนชุดที่สอง 640 รัน ผ่านตัวตรวจทุกรัน เมื่อวิชาใช้ Lab ไม่เกิน 4 สัปดาห์ วิธีค้นหาทั้งสามจัดครบทุกรัน '
                              'ที่ 6 สัปดาห์ยังจัดครบ 8 ถึง 9 จาก 10 รัน ที่ 8 สัปดาห์เหลือ 1 ถึง 2 รัน และตั้งแต่ 10 สัปดาห์ไม่มีรันไหนจัดครบ '
                              'ขอบเขตของแนวคิดนี้ที่งบ 500 จึงอยู่ราว 6 ถึง 8 สัปดาห์ สิ่งที่น่าสนใจคือช่องว่างกับ Greedy ที่ 12 สัปดาห์ '
                              'Greedy ขาด 197 คาบ ส่วนวิธีค้นหาขาดราว 40 คาบ ยิ่ง Lab ตึง การค้นหายิ่งจำเป็น '
@@ -480,8 +489,9 @@ NOTE_OVERRIDE = {
              'สิ่งที่เพิ่มขึ้นคือ อาจารย์แนะนำให้ใช้หลายอัลกอริทึม เราจึงเทียบ 4 อัลกอริทึมบนตัวแทนคำตอบเดียวกันและงบเท่ากัน บนข้อมูลจริงของ Purdue ที่เพิ่ม Lab จำลอง '
              'ทดลองทั้งห้องคงที่และห้องรายสัปดาห์รวม 240 รัน และเขียน engine ใหม่เป็น C# ที่ให้ผลตรงกับ Python ทุกรันแต่เร็วกว่าราว 75 เท่า '
              'และเพราะห้องเปลี่ยนได้รายสัปดาห์ เราจึงนับจำนวนครั้งย้ายห้องเป็นเป้าหมายข้อที่สามด้วย',
-    'problem': 'งานวิจัยของ Beyrouthy และคณะ ปี 2009 รายงานว่าห้องเรียนของมหาวิทยาลัยไม่ได้ขาดแคลนอย่างที่คนเข้าใจ แต่ถูกใช้ไม่เต็ม '
-               'อัตราการใช้จริงต่ำได้ถึง 20 ถึง 40 เปอร์เซ็นต์ และข้อจำกัดของการจัดตารางเป็นสาเหตุหนึ่ง เราจึงเลือกศึกษากรณีหนึ่ง '
+    'problem': 'งานวิจัยปี 2026 ของ Li และคณะ วัดห้องเรียนจริงจากตารางสอน 2,943 วิชา พบว่าห้องถูกใช้จริงแค่ราว 20 ถึง 50 เปอร์เซ็นต์ '
+               'ห้องเรียนจึงไม่ได้ขาดแคลนอย่างที่คนเข้าใจ แต่ถูกใช้ไม่เต็ม และงานของ Beyrouthy และคณะ ปี 2009 ชี้ว่าข้อจำกัดของการจัดตารางเป็นสาเหตุหนึ่ง '
+               'เราจึงเลือกศึกษากรณีหนึ่ง '
                'คือวิชาที่ต้องใช้ Lab แค่บางสัปดาห์ ดูตัวอย่างสมมตินี้ วิชาหนึ่งต้องใช้ Lab แค่สัปดาห์ 4 และ 8 ถ้าจองห้องเดียวทั้งเทอม '
                'สัปดาห์ที่เป็นบรรยายจะนั่งอยู่ใน Lab โดยไม่ได้ใช้ ช่องที่ขีดเส้นคือชั่วโมงแบบนี้ ซึ่งเราเรียกว่าชั่วโมง Lab ที่ไม่จำเป็น '
                'ทางออกที่เห็นได้ทันทีคือให้ห้องเปลี่ยนได้รายสัปดาห์ โจทย์ของเราจึงเป็นว่า ถ้าทำแบบนั้นจะจัดได้ครบไหม ต้องใช้วิธีไหน และใช้ได้ถึงขอบเขตไหน',
@@ -495,7 +505,38 @@ NOTE_OVERRIDE = {
 }
 
 
+# Footnote at the bottom of a slide: which claim on it comes from which work (full entries on the reference slides).
+CITES = {
+    'problem': 'อัตราการใช้ห้อง 20–50% วัดจากตารางสอนจริง 2,943 วิชา: Li, Zhao &amp; Xue (2026) / '
+               'ข้อจำกัดของการจัดตารางเป็นสาเหตุ: Beyrouthy et al. (2009)',
+    'whyhard': 'ย้ายห้องระหว่างเทอมทำได้ง่าย แต่ย้ายเวลากระทบนักศึกษา: Raviv (2026)',
+    'approach': 'สูตรตั้งต้น: ITC2007 / จัดห้องรายสัปดาห์มีใน Han &amp; Wang (2025) แต่ประเภทห้องผูกกับวิชา / '
+                'ประเภทห้องที่เปลี่ยนตามสัปดาห์เป็นส่วนที่เราเพิ่มเอง',
+    'data': 'ข้อมูล: UniTime, Purdue Fall 2007 CS (pu-fal07-cs) / การเพิ่ม Lab จำลองมีในงานของ Cavalcante et al. (2026)',
+    'coursedata': 'ดัดแปลงจากข้อมูล UniTime pu-fal07-cs / ความต้องการ Lab สร้างเอง',
+    'objective': 'เทียบเป้าหมายแบบเรียงลำดับ: ITC2007, Lemos et al. (2019) / ชั่วโมง Lab ไม่จำเป็นเป็นเป้าหมายที่เราตั้งเอง',
+    'method': 'decoder, Greedy และ HC: Müller (2009) / SA: Bellio et al. (2016) / '
+              'GA: order crossover ของ Davis (1985), tournament selection ของ Goldberg &amp; Deb (1991)',
+    'protocol': 'ให้งบเท่ากันเพื่อเทียบอย่างยุติธรรม: Bellio et al. (2016) / Friedman แล้วเทียบรายคู่: Demšar (2006) / '
+                'ปรับค่า p: Holm (1979)',
+    'tuning': 'อุณหภูมิเริ่มต้นและอัตราลดของ SA: Bellio et al. (2016)',
+    'main': 'งานที่เทียบกับคนจัดจริงพบว่า Greedy ดีกว่าคนจัดเอง แต่แพ้วิธีค้นหา: Cavalcante et al. (2026)',
+    'stats': 'Friedman แล้วเทียบรายคู่: Demšar (2006) / ปรับค่า p: Holm (1979)',
+    'changes': 'งานอื่นนับการเปลี่ยนห้องเป็นต้นทุนที่ต้องลด: Ozkan et al. (2025), Antunes-Batista et al. (2026)',
+    'scarcity': 'จำนวน Lab ที่ใช้พร้อมกันเป็นข้อจำกัดหลักเช่นกัน: Cavalcante et al. (2026)',
+    'limits': 'ผลด้านคนวัดได้ เช่น ระยะเดินของนักศึกษา: Raviv (2026)',
+}
+
+
+def footnote(text):
+    return (f'<p style="position:absolute;left:140px;right:300px;bottom:50px;font-size:22px;line-height:1.4;'
+            f'color:#777777">ที่มา: {text}</p>')
+
+
 def main():
+    unknown = set(CITES) - set(SLIDES)
+    if unknown:
+        raise SystemExit(f'CITES names slides that do not exist: {sorted(unknown)}')
     source = json.loads((MAIN / 'slides.json').read_text(encoding='utf-8'))
     missing = [s['id'] for s in source if s['id'] not in SLIDES]
     if missing or len(source) + len(EXTRA) != len(SLIDES):
@@ -514,7 +555,7 @@ def main():
         cover = s['id'] == 'cover'
         html = (body if cover else h2(title) + body) + (
             '' if cover else f'<p style="position:absolute;right:140px;bottom:56px;width:120px;font-size:24px;'
-                             f'color:#777777;text-align:right">{number}</p>')
+                             f'color:#777777;text-align:right">{number}</p>') + (footnote(CITES[s['id']]) if s['id'] in CITES else '')
         slides.append({'id': s['id'], 'title': title.replace('|', ': '), 'style': f'background:#FFFFFF;{PAD}', 'html': html, 'note': note})
     controller = (MAIN / 'deck.js').read_text(encoding='utf-8').split('\n', 1)[1]
     controller, swapped = re.subn(r'const ZOOMS = \[.*?\];', 'const ZOOMS = [];', controller, count=1)
