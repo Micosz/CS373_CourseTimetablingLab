@@ -1,10 +1,12 @@
 # Room Map (Godot 4.7 .NET desktop app)
 
-This desktop app shows the weekly-vs-fixed room story one week at a time. In `weekly` mode a recurring session may change room by week, so it holds a computer Lab only in the weeks it needs one. In `fixed` mode it holds one room all term. The HTML app in `apps/web` stays the main tool. This app is a companion view built on the C# engine in `dotnet/src/Timetabling.Engine`, which it references as a project and never copies.
+This desktop app shows the weekly-vs-fixed room story one week at a time. In `weekly` mode a recurring session may change room by week, so it holds a computer Lab only in the weeks it needs one. In `fixed` mode it holds one room all term. The HTML app in `apps/web` is the results viewer. This app is a companion view built on the C# engine in `dotnet/src/Timetabling.Engine`, which it references as a project and never copies.
 
 | Room map | Live run | Compare |
 |---|---|---|
 | ![Room map](docs/room-map.png) | ![Live run](docs/live-run.png) | ![Compare](docs/compare.png) |
+
+The screenshots in `docs/` were made with the previous dataset, so the numbers visible in them differ from the current results.
 
 ## Views
 
@@ -54,7 +56,7 @@ dotnet build apps/godot/TimetablingRoomMap.csproj
 The smoke run exits 0 only if every check passes:
 
 - It loads the dataset and `experiments/final`.
-- It decodes Greedy in both modes. The totals must match all 30 stored seeds: weekly is 20 unassigned, 124 unnecessary Lab hours and 838 room changes; fixed is 390 unassigned, 1,925 h and 0 changes.
+- It decodes Greedy in both modes. The totals must match all 30 stored seeds: weekly is 14 unassigned, 242 unnecessary Lab hours and 654 room changes; fixed is 285 unassigned, 2,033 h and 0 changes.
 - It recomputes the totals of all 240 stored runs from their raw schedules.
 - It replays the first 10 evaluations of HC seed 1001, which must reproduce the stored trace.
 - It cancels a search through the token.

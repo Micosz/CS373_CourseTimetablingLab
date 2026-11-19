@@ -52,7 +52,7 @@ public static class SmokeTest
                 Check(stored.Count > 0 && same == stored.Count, $"greedy {mode}: matches experiments/final in {same}/{stored.Count} seeds");
             }
             var weeklyGreedy = exp.Find(RoomModes.Weekly, "greedy", exp.Seeds.First());
-            Check(weeklyGreedy?.Metrics?.Unassigned == 20, $"weekly greedy stored unassigned = {weeklyGreedy?.Metrics?.Unassigned} (expected 20)");
+            Check(weeklyGreedy?.Metrics?.Unassigned == 14, $"weekly greedy stored unassigned = {weeklyGreedy?.Metrics?.Unassigned} (expected 14)");
 
             var mismatched = exp.Runs.Where(r =>
             {

@@ -68,11 +68,54 @@ def meetings(time_element):
             for day, flag in enumerate(time_element.get('days')) if flag == '1']
 
 
+def plan_labs(config, classes, sessions, weeks):
+    """Assumption A10: decide Lab need per course, on the practice part of the course only.
+
+    The source XML gives the parts of a course (subparts) but not which part is practical work, so
+    the practice part is inferred from the meeting shape: of a course's parts, the one with the
+    longest meeting, then the fewest meetings a week, then the most sections, then the larger
+    subpart id. A course with a single part counts only when it meets once a week; a single part
+    meeting several times a week is a lecture course and never needs a Lab.
+
+    Courses with a practice part are shuffled with the dataset seed and taken in that order until
+    the Lab hours of the whole term are as close as possible to ``lab_hours_target``. Each chosen
+    course gets one random order of the teaching weeks; its first ``lab_weeks_per_lab_course``
+    weeks are the Lab weeks of every section of its practice part, so sections of one course always
+    share them. The full order is kept so that variants with more or fewer Lab weeks are nested.
+    """
+    duration = {s['class_id']: s['duration_minutes'] for s in sessions}
+    parts = defaultdict(lambda: defaultdict(list))
+    for c in classes:
+        parts[c['course_id']][c['source_subpart_id']].append(c)
+    practice, weekly_minutes = {}, {}
+    for course, subparts in parts.items():
+        shapes = {}
+        for subpart, members in subparts.items():
+            seen = {(duration[c['id']], len(c['session_ids'])) for c in members}
+            if len(seen) != 1:
+                raise ValueError(f'Sections of {course} part {subpart} differ in meeting shape')
+            minutes, meetings_per_week = next(iter(seen))
+            shapes[subpart] = (minutes, -meetings_per_week, len(members), int(subpart))
+        subpart = max(shapes, key=shapes.get)
+        if len(shapes) == 1 and shapes[subpart][1] != -1:
+            continue
+        practice[course] = subpart
+        weekly_minutes[course] = sum(duration[c['id']] * len(c['session_ids']) for c in subparts[subpart])
+    rng = random.Random(config['seed'])
+    order = sorted(practice)
+    rng.shuffle(order)
+    n, target = config['lab_weeks_per_lab_course'], config['lab_hours_target'] * 60
+    totals = [sum(weekly_minutes[c] for c in order[:k]) * n for k in range(len(order) + 1)]
+    count = min(range(len(totals)), key=lambda k: (abs(totals[k] - target), k))
+    return {'practice_subparts': {c: practice[c] for c in sorted(practice)},
+            'lab_courses': {c: rng.sample(weeks, len(weeks)) for c in sorted(order[:count])}}
+
+
 def convert(config, source):
-    if not 0 <= config['mixed_session_fraction'] <= 1:
-        raise ValueError('mixed_session_fraction must be in [0,1]')
-    if not 0 < config['lab_weeks_per_mixed_session'] < config['teaching_weeks']:
-        raise ValueError('Mixed sessions need both lab and non-lab weeks')
+    if config['lab_hours_target'] <= 0:
+        raise ValueError('lab_hours_target must be positive')
+    if not 0 < config['lab_weeks_per_lab_course'] < config['teaching_weeks']:
+        raise ValueError('Lab courses need both lab and non-lab weeks')
     if config['external_student_conflict_policy'] != 'record_only_department_scope':
         raise ValueError('Unknown external student policy')
     root = ET.parse(source).getroot()
@@ -210,15 +253,15 @@ def convert(config, source):
             'selected_shape': {'meetings_per_week': shape[0], 'duration_minutes': shape[1]},
             'weekly_contact_minutes_preserved': next(iter(weekly_minutes)),
         })
-    # Exactly rounded fraction, deterministic for the same source/configuration.
-    session_order = sorted(s['id'] for s in sessions)
-    rng = random.Random(config['seed'])
-    rng.shuffle(session_order)
-    mixed_count = int(len(sessions) * config['mixed_session_fraction'] + 0.5)
-    mixed_ids = set(session_order[:mixed_count])
+    course_of = {c['id']: c['course_id'] for c in classes}
+    lab_plan = plan_labs(config, classes, sessions, weeks)
+    practice_ids = {c['id'] for c in classes
+                    if lab_plan['practice_subparts'].get(c['course_id']) == c['source_subpart_id']}
     for session in sessions:
-        if session['id'] in mixed_ids:
-            session['lab_weeks'] = sorted(rng.sample(weeks, config['lab_weeks_per_mixed_session']))
+        order = lab_plan['lab_courses'].get(course_of[session['class_id']])
+        if order and session['class_id'] in practice_ids:
+            session['lab_weeks'] = sorted(order[:config['lab_weeks_per_lab_course']])
+    lab_sessions = [s for s in sessions if s['lab_weeks']]
 
     external_classes = []
     for c in external:
@@ -280,9 +323,15 @@ def convert(config, source):
         {'id': 'A09', 'field': 'external_classes', 'assumption': f"เก็บ committed classes ทั้งหมดเป็นการจองล็อก และใช้รูปแบบสัปดาห์เดิมซ้ำครบ {config['teaching_weeks']} สัปดาห์จำลอง",
          'enforced_in_main': 'ห้อง ผู้สอน และ explicit source distribution rules ที่เก็บไว้; student overlap กับภายนอกขึ้นกับ variant A07',
          'impact': 'อาจจำกัดเวลามากกว่าปฏิทินจริงของคลาสภายนอกบางคลาส; ไม่ใช่ผลพิสูจน์ว่าตารางทั้งหมดจัดครบได้'},
-        {'id': 'A10', 'field': 'recurring_sessions.lab_weeks', 'assumption': f"สุ่มเลือก {config['mixed_session_fraction']*100:g}% ของ recurring sessions (ปัดใกล้สุด) ให้ใช้ Lab {config['lab_weeks_per_mixed_session']} จาก {config['teaching_weeks']} สัปดาห์โดยไม่ซ้ำ ส่วนที่เหลือไม่ต้องใช้ Lab",
-         'seed': config['seed'], 'mixed_session_count': mixed_count, 'lecture_only_session_count': len(sessions)-mixed_count,
-         'impact': 'เป็นสถานการณ์ทดลอง ไม่ใช่พฤติกรรมการใช้ Lab ที่สำรวจจริง; seed นี้เป็น seed สร้างข้อมูล ไม่ใช่ seed ของอัลกอริทึม'},
+        {'id': 'A10', 'field': 'recurring_sessions.lab_weeks',
+         'assumption': f"กำหนดความต้องการ Lab เป็นรายวิชา และให้ตกที่คาบปฏิบัติของวิชาเท่านั้น: ทุกกลุ่มเรียนในคาบปฏิบัติของวิชาเดียวกันใช้ Lab {config['lab_weeks_per_lab_course']} จาก {config['teaching_weeks']} สัปดาห์ชุดเดียวกัน คาบอื่นไม่ต้องใช้ Lab",
+         'practice_part_rule': 'ต้นฉบับบอกส่วนของวิชา (subpart) แต่ไม่บอกว่าส่วนไหนเป็นคาบปฏิบัติ จึงอนุมานจากรูปแบบเวลา: ในวิชาที่มีหลายส่วน เลือกส่วนที่คาบยาวที่สุด ถ้าเท่ากันเลือกส่วนที่เรียนน้อยครั้งต่อสัปดาห์ แล้วส่วนที่มีกลุ่มมากกว่า แล้วรหัส subpart มากกว่า; วิชาส่วนเดียวนับเป็นคาบปฏิบัติเฉพาะเมื่อเรียนสัปดาห์ละครั้ง',
+         'selection': f"สับลำดับวิชาที่มีคาบปฏิบัติด้วย seed แล้วหยิบตามลำดับจนชั่วโมง Lab รวมทั้งเทอมใกล้ {config['lab_hours_target']} ชั่วโมงที่สุด; แต่ละวิชาได้ลำดับสุ่มของสัปดาห์หนึ่งชุด และใช้ {config['lab_weeks_per_lab_course']} สัปดาห์แรก",
+         'seed': config['seed'], 'courses_with_practice_part': len(lab_plan['practice_subparts']),
+         'lab_course_count': len(lab_plan['lab_courses']),
+         'mixed_session_count': len(lab_sessions), 'lecture_only_session_count': len(sessions) - len(lab_sessions),
+         'lab_hours_per_term': sum(s['duration_minutes'] * len(s['lab_weeks']) for s in lab_sessions) / 60,
+         'impact': 'เป็นสถานการณ์ทดลอง ไม่ใช่พฤติกรรมการใช้ Lab ที่สำรวจจริง; การระบุคาบปฏิบัติเป็นการอนุมานจากรูปแบบเวลา ไม่ใช่ข้อมูลจากต้นฉบับ; seed นี้เป็น seed สร้างข้อมูล ไม่ใช่ seed ของอัลกอริทึม'},
         {'id': 'A11', 'field': 'names_and_units', 'assumption': 'ใช้รหัส O*/C*/R*/T* แทนชื่อที่ต้นฉบับไม่ระบุ; คลาสลูกที่ไม่มี offering ใช้ offering จาก parent chain ของต้นฉบับ; แปลง source slot ละ 5 นาทีเป็นนาทีหลังเที่ยงคืน; วัน 0=จันทร์ ถึง 6=อาทิตย์; ช่วงเวลาเป็น [start,end)'},
         {'id': 'A12', 'field': 'objectives', 'assumption': 'แต่ละ meeting ใน pattern เป็น recurring session แยก; เลือกหนึ่ง time option ต่อคลาสร่วมกันทุกสัปดาห์ แต่กำหนดห้องแยก session/week ได้',
          'priority': ['unassigned_weekly_sessions', 'unnecessary_lab_minutes', 'room_changes'],
@@ -293,7 +342,7 @@ def convert(config, source):
         'benchmark_kind': 'adapted_synthetic_from_unitime_not_original_score',
         'source': {'url': config['source_url'], 'xml_path_relative_to_config': config['source_xml'],
                    'sha256': source_hash, 'root_attributes': dict(root.attrib)},
-        'generator': {'version': '1.0', 'seed': config['seed'], 'config': config},
+        'generator': {'version': '2.0', 'seed': config['seed'], 'config': config, 'lab_plan': lab_plan},
         'calendar': {'week_ids': weeks, 'day_names': ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
                      'time_unit': 'minute_after_midnight', 'interval_convention': '[start,end)',
                      'synthetic': True},

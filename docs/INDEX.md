@@ -4,29 +4,29 @@
 
 | อยากทำอะไร | เริ่มที่ |
 |---|---|
-| ใช้เว็บครั้งแรก | [quick-start.md](quick-start.md) |
-| ภาพรวมโครงงาน และวิธีรันบนเครื่อง | [../README.md](../README.md) |
-| รายละเอียดเชิงเทคนิค (วิธีแทนคำตอบ ข้อห้าม ความเท่าเทียม โค้ด Python) | [technical.md](technical.md) |
+| เปิดเว็บดูชุดข้อมูลและผลที่เก็บไว้ | [quick-start.md](quick-start.md) |
+| ภาพรวมโครงงาน และวิธีรันการทดลองบนเครื่อง | [../README.md](../README.md) |
+| รายละเอียดเชิงเทคนิค (วิธีแทนคำตอบ ข้อห้าม ความเท่าเทียม การสร้างชุดข้อมูลซ้ำ) | [technical.md](technical.md) |
 | ดูผลทดลองทั้งหมด | [../experiments/INDEX.md](../experiments/INDEX.md) |
 | กติกาการทดลอง (seed, งบ, สถิติ) | [protocol.md](protocol.md) |
 | ทำไมออกแบบแบบนี้ เทียบกับงานวิจัย | [research-comparison.md](research-comparison.md) |
 | ดูสไลด์นำเสนอ | [../apps/slides/](../apps/slides/README.md) |
-| อ่านเล่มรายงาน | [report/](report/README.md) ([PDF](report/CS373-report.pdf)) |
+| อ่านเล่มรายงาน | [report/](report/README.md) |
 | ข้อมูลนำเข้าและสมมติฐาน | [../data/START_HERE.txt](../data/START_HERE.txt) |
 
 ## โฟลเดอร์
 
 | Path | มีอะไร |
 |---|---|
-| [`apps/web/`](../apps/web/) | เว็บห้องทดลอง: `index.html` (หน้า UI), `app.mjs` (UI, plots, export, history), `worker.mjs` (Pyodide loader และ Python bridge), `storage.mjs` (IndexedDB), `styles.css` |
-| [`apps/slides/`](../apps/slides/README.md) | สไลด์ Final (`index.html`, `deck.js`, `slides.json`, `speaker-notes.md`), `apply_feedback.py` แก้สไลด์ตาม feedback ทับบนร่าง Claude Design (รันซ้ำหลัง `port_design.py`), `progress/` คือสไลด์ความคืบหน้า 4 พ.ย. และ [DEPLOY.md](../apps/slides/DEPLOY.md) คือวิธีตั้งค่า Vercel |
-| [`apps/godot/`](../apps/godot/README.md) | แอปเดสก์ท็อป Godot 4.7 (C#): แผนที่ห้องรายสัปดาห์, รันการค้นหาสด, เทียบ weekly/fixed ใช้ engine C# ตัวเดียวกับ CLI |
-| [`engine/`](../engine/) | Python engine ต้นฉบับอ้างอิง ใช้ทั้งเว็บและ CLI (ดูตารางด้านล่าง) |
-| [`engine/tests/`](../engine/tests/) | contract/regression tests (`python -m unittest discover -s engine/tests`) |
-| [`dotnet/`](../dotnet/README.md) | engine เดียวกันใน C# ให้ผลตรงกับ Python ทุกบิต, CLI `timetabling` (run / batch) และ parity tests |
-| [`data/`](../data/) | `fall-cs.json.gz` (ชุดข้อมูลหลัก), `provenance.json` (SHA-256), `assumptions.json`, `conversion_audit.json`, `FORMAT.txt`, `variants/` (ชุดข้อมูลที่มี Lab 3 และ 2 ห้อง และสัปดาห์ Lab แบบติดกัน / เว้นสัปดาห์) |
-| [`dataset_tools/`](../dataset_tools/) | converter และ config ที่ใช้สร้าง `data/` ซ้ำ รวมถึง `make_lab_variants.py` (Lab ขาดแคลน) `make_pattern_variants.py` (รูปแบบสัปดาห์ Lab) และ `make_course_lab_variants.py` (Lab รายวิชา 1 ถึง 15 สัปดาห์) |
-| [`experiments/`](../experiments/INDEX.md) | ผลดิบและสรุปของทุกการทดลอง: `final/` (ผลหลัก), `tuning/`, `sa-extended-tuning/`, `budget/`, `convergence/`, `lab-scarcity/`, `lab-week-patterns/`, `course-level-labs/`, `lab-hours-breakdown/`, `fixed-room/`, `engine-speed/` |
+| [`apps/web/`](../apps/web/) | เว็บดูผล ไม่รันอัลกอริทึมในเบราว์เซอร์: หน้าข้อมูล (ชุดหลักและชุดแปรจำนวนสัปดาห์ Lab), หน้าผลที่เก็บไว้ (เปิดไฟล์ผลจาก engine C# ใน `experiments/` เช่น final, งบ 50,000 และ lab-weeks หรือนำเข้า `experiment.json.gz`) และหน้าผลเปรียบเทียบ (ตาราง กราฟ และตารางเรียนที่ได้) ไฟล์: `index.html`, `app.mjs` (UI, plots, export), `storage.mjs` (IndexedDB), `styles.css` |
+| [`apps/slides/`](../apps/slides/README.md) | สไลด์นำเสนอ มี deck เดียว เปิดที่ `/` รายละเอียดไฟล์อยู่ใน README ของโฟลเดอร์ และ [DEPLOY.md](../apps/slides/DEPLOY.md) คือวิธีตั้งค่า Vercel |
+| [`apps/godot/`](../apps/godot/README.md) | แอปเดสก์ท็อป Godot 4.7 (C#): แผนที่ห้องรายสัปดาห์, รันการค้นหาสด, เทียบ weekly/fixed ใช้ engine C# ตัวเดียวกับ CLI (ภาพหน้าจอในโฟลเดอร์ถ่ายกับชุดข้อมูลก่อนหน้า) |
+| [`engine/`](../engine/) | เครื่องมือ Python เท่านั้น ไม่มีตัวแก้ปัญหา: วิเคราะห์ผล จูน และตัวตรวจ (ดูตารางด้านล่าง) |
+| [`engine/tests/`](../engine/tests/) | tests ของเครื่องมือวิเคราะห์และชุดข้อมูล 19 รายการ (`python -m unittest discover -s engine/tests`) |
+| [`dotnet/`](../dotnet/README.md) | engine C# ตัวแก้ปัญหาตัวเดียวของ repo ใช้ผลิตผลทดลองทั้งหมด, CLI `timetabling` (run / batch) และ tests ที่ตรวจว่าผลที่ commit ทำซ้ำได้ |
+| [`data/`](../data/) | `fall-cs.json.gz` (ชุดข้อมูลหลัก), `provenance.json` (SHA-256), `assumptions.json`, `conversion_audit.json`, `FORMAT.txt`, `variants/` (ชุดข้อมูลที่มี Lab 3 และ 2 ห้อง, สัปดาห์ Lab แบบติดกันหรือเว้นสัปดาห์ และวิชา Lab ใช้ Lab 1 ถึง 15 สัปดาห์) |
+| [`dataset_tools/`](../dataset_tools/) | converter และ config ที่ใช้สร้าง `data/` ซ้ำ รวมถึง `make_lab_variants.py` (Lab ขาดแคลน) `make_pattern_variants.py` (รูปแบบสัปดาห์ Lab) และ `make_lab_week_variants.py` (วิชา Lab ใช้ Lab 1 ถึง 15 สัปดาห์) |
+| [`experiments/`](../experiments/INDEX.md) | ผลดิบและสรุปของทุกการทดลอง: `final/` (ผลหลัก), `tuning/`, `convergence/`, `lab-weeks/`, `lab-scarcity/`, `lab-week-patterns/`, `lab-hours-breakdown/` |
 | [`docs/`](.) | เอกสารในหน้านี้, `QA.md` (บันทึกการตรวจ), `img/` (ภาพประกอบคู่มือ และ `img/redesign/` ภาพก่อน/หลังปรับหน้าตา) |
 | `index.html` (root) | redirect ไป `apps/web/` เพื่อให้ URL ของ GitHub Pages เดิมใช้ได้ |
 
@@ -34,16 +34,10 @@
 
 | ไฟล์ | หน้าที่ |
 |---|---|
-| `lab_core.py` | โมเดลปัญหา decoder และ context การค้นหา |
-| `algorithms.py` | Greedy, Hill Climbing, Simulated Annealing, Genetic Algorithm |
-| `input_validation.py` | ตรวจชุดข้อมูลนำเข้า |
-| `solution_validator.py` | ตัวตรวจคำตอบอิสระ (hard constraints และ metrics) |
-| `runner.py` | รันหนึ่งครั้งแบบทำซ้ำได้ (ใช้ทั้งในเว็บและ CLI) |
-| `cli.py` | command line สำหรับรันบนเครื่อง |
-| `batch.py` | รันชุดใหญ่หลาย process แบบทำต่อได้ |
-| `tune.py` | จูนพารามิเตอร์ |
-| `analyze.py` | สถิติและกราฟของการทดลองสุดท้าย |
-| `studies.py` | การศึกษาเรื่องงบ และเรื่อง Lab ขาดแคลน |
-| `compare_modes.py` | ตารางเทียบห้องรายสัปดาห์กับห้องคงที่ |
+| `analyze.py` | สถิติ ตาราง และกราฟของการทดลอง จากไฟล์ผล `experiment.json.gz` |
+| `tune.py` | จูนพารามิเตอร์ตาม protocol ข้อ 5 โดยสั่ง CLI ของ C# (ต้อง build ก่อน) |
+| `input_validation.py` | ตรวจชุดข้อมูลนำเข้า ใช้โดย `dataset_tools/` และตัวสร้าง fixture ของ tests C# |
+| `solution_validator.py` | ตัวตรวจคำตอบ (hard constraints และ metrics) ใช้โดยตัวสร้าง fixture `make_validator_cases.py` ของ tests C# |
+| `tests/test_analyze.py`, `tests/test_variants.py` | tests ของ `analyze.py` และของชุดข้อมูลกับชุดแปร |
 
-5 ไฟล์แรกในตาราง (`lab_core.py` ถึง `runner.py`) คือ engine ที่ถูกนำไปคิด `engine_sha256` ใน manifest ของผลทดลอง ถ้าแก้ไฟล์เหล่านี้ ผลเดิมจะไม่ถูกนำมาใช้ซ้ำโดยอัตโนมัติ
+ค่า `engine_sha256` ใน manifest ของผลทดลองคือ SHA-256 ของซอร์ส C# ทุกไฟล์ `*.cs` ในโฟลเดอร์ `dotnet/src/Timetabling.Engine/` (ฝังไว้ใน assembly ตอน build และเก็บสำเนาไว้ใน `code_snapshot` ของไฟล์ผล) ถ้าแก้ไฟล์เหล่านี้ ตัวรันจะไม่ยอมรวมผลเก่ากับผลใหม่

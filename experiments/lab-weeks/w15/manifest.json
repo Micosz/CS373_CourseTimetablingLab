@@ -1,0 +1,23 @@
+{
+  "name": "Lab weeks per Lab course: 15",
+  "created_at": "2026-11-19T16:08:34.351449+00:00",
+  "sessions": [
+    {
+      "started_at": "2026-11-19T16:08:34.354075+00:00",
+      "runs": 80,
+      "workers": 20,
+      "finished_at": "2026-11-19T16:08:40.098881+00:00",
+      "wall_seconds": 5.7448033,
+      "failures": []
+    }
+  ],
+  "dataset": "data/variants/fall-cs-labweeks-w15.json.gz",
+  "dataset_sha256": "37c113d71a211185e40e83c305789ab3b7954178f431d41e2e873a8b1e71325f",
+  "engine": "dotnet",
+  "engine_sha256": "e9222d735e2332c6220122760a91fc730e5aa89874a246a4b24ebaa5194c7db1",
+  "dotnet": "8.0.31",
+  "platform": "win32",
+  "cpu_count": 28,
+  "total_runs": 80,
+  "wall_seconds_total": 5.7448033
+}

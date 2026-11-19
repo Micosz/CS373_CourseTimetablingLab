@@ -12,10 +12,6 @@ IDs retained here are benchmark IDs. Synthetic lab rooms, weekly lab requirement
 calendar and missing-instructor placeholders are assumptions, not source facts.
 Detailed transformation provenance is in data/assumptions.json and provenance.json.
 
-Pyodide is loaded from jsDelivr at runtime, not vendored into this repository.
-It and the Python distribution retain their upstream licenses.
-https://github.com/pyodide/pyodide
-
 This app was implemented with assistance from OpenAI Codex. Method implementations,
 decoder choices, constraints and limits are documented for review; using these tools
 does not establish original research results or an institutional scheduling solution.

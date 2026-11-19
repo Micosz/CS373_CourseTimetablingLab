@@ -8,7 +8,7 @@
     {
      "session_id": "C1546-M1",
      "week": 1,
-     "room_id": "SIM-LAB-04"
+     "room_id": "R93"
     }
    ],
    "expected": {
@@ -26,12 +26,12 @@
     "violations_truncated": false,
     "metrics": {
      "room_mode": "weekly",
-     "unassigned_weekly_sessions": 20,
-     "assigned_weekly_sessions": 3325,
+     "unassigned_weekly_sessions": 14,
+     "assigned_weekly_sessions": 3331,
      "total_weekly_sessions": 3345,
-     "unnecessary_lab_minutes": 7440,
-     "unnecessary_lab_hours": 124.0,
-     "room_changes": 838,
+     "unnecessary_lab_minutes": 14520,
+     "unnecessary_lab_hours": 242.0,
+     "room_changes": 654,
      "hard_violations": 1
     }
    }
@@ -42,11 +42,11 @@
    "audit_mode": "weekly",
    "set_rows": [
     [
-     1,
+     0,
      {
       "session_id": "C1546-M1",
-      "week": 2,
-      "room_id": "R86"
+      "week": 1,
+      "room_id": "R87"
      }
     ]
    ],
@@ -58,19 +58,19 @@
       "code": "ROOM_DOMAIN",
       "detail": [
        "C1546-M1",
-       2
+       1
       ]
      }
     ],
     "violations_truncated": false,
     "metrics": {
      "room_mode": "weekly",
-     "unassigned_weekly_sessions": 20,
-     "assigned_weekly_sessions": 3325,
+     "unassigned_weekly_sessions": 14,
+     "assigned_weekly_sessions": 3331,
      "total_weekly_sessions": 3345,
-     "unnecessary_lab_minutes": 7440,
-     "unnecessary_lab_hours": 124.0,
-     "room_changes": 839,
+     "unnecessary_lab_minutes": 14520,
+     "unnecessary_lab_hours": 242.0,
+     "room_changes": 655,
      "hard_violations": 1
     }
    }
@@ -81,10 +81,10 @@
    "audit_mode": "weekly",
    "set_rows": [
     [
-     436,
+     435,
      {
       "session_id": "C1549-M1",
-      "week": 2,
+      "week": 1,
       "room_id": "R86"
      }
     ]
@@ -97,26 +97,26 @@
       "code": "ROOM_DOMAIN",
       "detail": [
        "C1549-M1",
-       2
+       1
       ]
      },
      {
       "code": "CAPACITY",
       "detail": [
        "C1549-M1",
-       2
+       1
       ]
      }
     ],
     "violations_truncated": false,
     "metrics": {
      "room_mode": "weekly",
-     "unassigned_weekly_sessions": 20,
-     "assigned_weekly_sessions": 3325,
+     "unassigned_weekly_sessions": 14,
+     "assigned_weekly_sessions": 3331,
      "total_weekly_sessions": 3345,
-     "unnecessary_lab_minutes": 7440,
-     "unnecessary_lab_hours": 124.0,
-     "room_changes": 839,
+     "unnecessary_lab_minutes": 14520,
+     "unnecessary_lab_hours": 242.0,
+     "room_changes": 655,
      "hard_violations": 2
     }
    }
@@ -127,10 +127,10 @@
    "audit_mode": "weekly",
    "set_rows": [
     [
-     1,
+     0,
      {
       "session_id": "C1546-M1",
-      "week": 2,
+      "week": 1,
       "room_id": "R1"
      }
     ]
@@ -143,18 +143,18 @@
       "code": "ROOM_DOMAIN",
       "detail": [
        "C1546-M1",
-       2
+       1
       ]
      },
      {
       "code": "ROOM_OVERLAP",
       "detail": {
        "resource": "R1",
-       "week": 2,
+       "week": 1,
        "day": 0,
        "events": [
-        "C1546-M1:2",
-        "EXT:C329:0:2"
+        "C1546-M1:1",
+        "EXT:C329:0:1"
        ]
       }
      }
@@ -162,12 +162,12 @@
     "violations_truncated": false,
     "metrics": {
      "room_mode": "weekly",
-     "unassigned_weekly_sessions": 20,
-     "assigned_weekly_sessions": 3325,
+     "unassigned_weekly_sessions": 14,
+     "assigned_weekly_sessions": 3331,
      "total_weekly_sessions": 3345,
-     "unnecessary_lab_minutes": 7440,
-     "unnecessary_lab_hours": 124.0,
-     "room_changes": 839,
+     "unnecessary_lab_minutes": 14520,
+     "unnecessary_lab_hours": 242.0,
+     "room_changes": 655,
      "hard_violations": 2
     }
    }
@@ -178,11 +178,11 @@
    "audit_mode": "fixed",
    "set_rows": [
     [
-     165,
+     90,
      {
-      "session_id": "C1510-M1",
+      "session_id": "C1504-M1",
       "week": 1,
-      "room_id": "R57"
+      "room_id": "SIM-LAB-02"
      }
     ]
    ],
@@ -193,10 +193,10 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1510-M1",
+       "session": "C1504-M1",
        "rooms": [
-        "R57",
-        "R63"
+        "R63",
+        "SIM-LAB-02"
        ]
       }
      }
@@ -204,11 +204,11 @@
     "violations_truncated": false,
     "metrics": {
      "room_mode": "fixed",
-     "unassigned_weekly_sessions": 390,
-     "assigned_weekly_sessions": 2955,
+     "unassigned_weekly_sessions": 285,
+     "assigned_weekly_sessions": 3060,
      "total_weekly_sessions": 3345,
-     "unnecessary_lab_minutes": 115500,
-     "unnecessary_lab_hours": 1925.0,
+     "unnecessary_lab_minutes": 122040,
+     "unnecessary_lab_hours": 2034.0,
      "room_changes": 1,
      "hard_violations": 1
     }
@@ -220,11 +220,11 @@
    "audit_mode": "fixed",
    "set_rows": [
     [
-     121,
+     0,
      {
-      "session_id": "C1506-M1",
-      "week": 2,
-      "room_id": "R57"
+      "session_id": "C1546-M1",
+      "week": 1,
+      "room_id": "R93"
      }
     ]
    ],
@@ -235,9 +235,9 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1506-M1",
+       "session": "C1546-M1",
        "rooms": [
-        "R57",
+        "R93",
         "SIM-LAB-04"
        ]
       }
@@ -245,9 +245,9 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1506-M1",
+       "session": "C1546-M1",
        "rooms": [
-        "R57",
+        "R93",
         "SIM-LAB-04"
        ]
       }
@@ -256,12 +256,12 @@
     "violations_truncated": false,
     "metrics": {
      "room_mode": "fixed",
-     "unassigned_weekly_sessions": 390,
-     "assigned_weekly_sessions": 2955,
+     "unassigned_weekly_sessions": 285,
+     "assigned_weekly_sessions": 3060,
      "total_weekly_sessions": 3345,
-     "unnecessary_lab_minutes": 115440,
-     "unnecessary_lab_hours": 1924.0,
-     "room_changes": 2,
+     "unnecessary_lab_minutes": 121920,
+     "unnecessary_lab_hours": 2032.0,
+     "room_changes": 1,
      "hard_violations": 2
     }
    }
@@ -278,7 +278,7 @@
     {
      "session_id": "NO_SUCH_SESSION",
      "week": 1,
-     "room_id": "SIM-LAB-04"
+     "room_id": "R93"
     },
     {
      "session_id": "C1546-M1",
@@ -288,7 +288,7 @@
     {
      "session_id": "C1546-M1",
      "week": 99,
-     "room_id": "SIM-LAB-04"
+     "room_id": "R93"
     }
    ],
    "set_fields": {
@@ -417,11 +417,11 @@
      },
      {
       "code": "ASSIGNMENT_REFERENCE",
-      "detail": 3325
+      "detail": 3331
      },
      {
       "code": "ASSIGNMENT_REFERENCE",
-      "detail": 3326
+      "detail": 3332
      },
      {
       "code": "INACTIVE_WEEK",
@@ -434,12 +434,12 @@
     "violations_truncated": false,
     "metrics": {
      "room_mode": "weekly",
-     "unassigned_weekly_sessions": 35,
-     "assigned_weekly_sessions": 3310,
+     "unassigned_weekly_sessions": 29,
+     "assigned_weekly_sessions": 3316,
      "total_weekly_sessions": 3345,
-     "unnecessary_lab_minutes": 7440,
-     "unnecessary_lab_hours": 124.0,
-     "room_changes": 831,
+     "unnecessary_lab_minutes": 14520,
+     "unnecessary_lab_hours": 242.0,
+     "room_changes": 648,
      "hard_violations": 21
     }
    }
@@ -564,12 +564,12 @@
     "violations_truncated": false,
     "metrics": {
      "room_mode": "weekly",
-     "unassigned_weekly_sessions": 35,
-     "assigned_weekly_sessions": 3310,
+     "unassigned_weekly_sessions": 29,
+     "assigned_weekly_sessions": 3316,
      "total_weekly_sessions": 3345,
-     "unnecessary_lab_minutes": 7440,
-     "unnecessary_lab_hours": 124.0,
-     "room_changes": 834,
+     "unnecessary_lab_minutes": 14520,
+     "unnecessary_lab_hours": 242.0,
+     "room_changes": 648,
      "hard_violations": 15
     }
    }
@@ -581,7 +581,7 @@
    "set_all_rooms": "SIM-LAB-01",
    "expected": {
     "valid": false,
-    "violation_count": 14245,
+    "violation_count": 13997,
     "violations": [
      {
       "code": "ROOM_OVERLAP",
@@ -627,7 +627,7 @@
        "day": 0,
        "events": [
         "C1497-M1:1",
-        "C1562-M1:1"
+        "C1561-M1:1"
        ]
       }
      },
@@ -639,7 +639,7 @@
        "day": 0,
        "events": [
         "C1503-M1:1",
-        "C1562-M1:1"
+        "C1561-M1:1"
        ]
       }
      },
@@ -651,7 +651,7 @@
        "day": 0,
        "events": [
         "C1507-M1:1",
-        "C1562-M1:1"
+        "C1561-M1:1"
        ]
       }
      },
@@ -663,7 +663,7 @@
        "day": 0,
        "events": [
         "C1497-M1:1",
-        "C1582-M1:1"
+        "C1566-M1:1"
        ]
       }
      },
@@ -675,7 +675,7 @@
        "day": 0,
        "events": [
         "C1503-M1:1",
-        "C1582-M1:1"
+        "C1566-M1:1"
        ]
       }
      },
@@ -687,7 +687,7 @@
        "day": 0,
        "events": [
         "C1507-M1:1",
-        "C1582-M1:1"
+        "C1566-M1:1"
        ]
       }
      },
@@ -698,8 +698,8 @@
        "week": 1,
        "day": 0,
        "events": [
-        "C1562-M1:1",
-        "C1582-M1:1"
+        "C1561-M1:1",
+        "C1566-M1:1"
        ]
       }
      },
@@ -747,7 +747,7 @@
        "day": 0,
        "events": [
         "C1499-M1:1",
-        "C1542-M1:1"
+        "C1581-M1:1"
        ]
       }
      },
@@ -759,7 +759,7 @@
        "day": 0,
        "events": [
         "C1504-M1:1",
-        "C1542-M1:1"
+        "C1581-M1:1"
        ]
       }
      },
@@ -771,7 +771,55 @@
        "day": 0,
        "events": [
         "C1508-M1:1",
-        "C1542-M1:1"
+        "C1581-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1499-M1:1",
+        "C1558-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1504-M1:1",
+        "C1558-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1508-M1:1",
+        "C1558-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1558-M1:1",
+        "C1581-M1:1"
        ]
       }
      },
@@ -818,138 +866,6 @@
        "week": 1,
        "day": 0,
        "events": [
-        "C1542-M1:1",
-        "C1565-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1501-M1:1",
-        "C1542-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1501-M1:1",
-        "C1565-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1542-M1:1",
-        "C1546-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1546-M1:1",
-        "C1565-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1501-M1:1",
-        "C1546-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1542-M1:1",
-        "C1559-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1559-M1:1",
-        "C1565-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1501-M1:1",
-        "C1559-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1546-M1:1",
-        "C1559-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1542-M1:1",
-        "C1581-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
         "C1565-M1:1",
         "C1581-M1:1"
        ]
@@ -962,8 +878,224 @@
        "week": 1,
        "day": 0,
        "events": [
-        "C1501-M1:1",
+        "C1558-M1:1",
+        "C1565-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1499-M1:1",
+        "C1579-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1504-M1:1",
+        "C1579-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1508-M1:1",
+        "C1579-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1579-M1:1",
         "C1581-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1558-M1:1",
+        "C1579-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1565-M1:1",
+        "C1579-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1501-M1:1",
+        "C1558-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1501-M1:1",
+        "C1565-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1501-M1:1",
+        "C1579-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1511-M1:1",
+        "C1558-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1511-M1:1",
+        "C1565-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1511-M1:1",
+        "C1579-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1501-M1:1",
+        "C1511-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1538-M1:1",
+        "C1558-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1538-M1:1",
+        "C1565-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1538-M1:1",
+        "C1579-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1501-M1:1",
+        "C1538-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1511-M1:1",
+        "C1538-M1:1"
        ]
       }
      },
@@ -975,7 +1107,7 @@
        "day": 0,
        "events": [
         "C1546-M1:1",
-        "C1581-M1:1"
+        "C1558-M1:1"
        ]
       }
      },
@@ -986,8 +1118,8 @@
        "week": 1,
        "day": 0,
        "events": [
-        "C1559-M1:1",
-        "C1581-M1:1"
+        "C1546-M1:1",
+        "C1565-M1:1"
        ]
       }
      },
@@ -998,8 +1130,8 @@
        "week": 1,
        "day": 0,
        "events": [
-        "C1511-M1:1",
-        "C1547-M1:1"
+        "C1546-M1:1",
+        "C1579-M1:1"
        ]
       }
      },
@@ -1010,20 +1142,8 @@
        "week": 1,
        "day": 0,
        "events": [
-        "C1511-M1:1",
-        "C1573-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1547-M1:1",
-        "C1573-M1:1"
+        "C1501-M1:1",
+        "C1546-M1:1"
        ]
       }
      },
@@ -1035,379 +1155,7 @@
        "day": 0,
        "events": [
         "C1511-M1:1",
-        "C1576-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1547-M1:1",
-        "C1576-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1573-M1:1",
-        "C1576-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1511-M1:1",
-        "C1553-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1547-M1:1",
-        "C1553-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1553-M1:1",
-        "C1573-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1553-M1:1",
-        "C1576-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1511-M1:1",
-        "C1557-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1547-M1:1",
-        "C1557-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1557-M1:1",
-        "C1573-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1557-M1:1",
-        "C1576-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1553-M1:1",
-        "C1557-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1548-M1:1",
-        "C1553-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1548-M1:1",
-        "C1557-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1553-M1:1",
-        "C1569-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1557-M1:1",
-        "C1569-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1548-M1:1",
-        "C1569-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1553-M1:1",
-        "C1583-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1557-M1:1",
-        "C1583-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1548-M1:1",
-        "C1583-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1569-M1:1",
-        "C1583-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1553-M1:1",
-        "C1585-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1557-M1:1",
-        "C1585-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1548-M1:1",
-        "C1585-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1569-M1:1",
-        "C1585-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1583-M1:1",
-        "C1585-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1553-M1:1",
-        "C1587-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1557-M1:1",
-        "C1587-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1548-M1:1",
-        "C1587-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1569-M1:1",
-        "C1587-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1583-M1:1",
-        "C1587-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1585-M1:1",
-        "C1587-M1:1"
+        "C1546-M1:1"
        ]
       }
      },
@@ -1419,7 +1167,67 @@
        "day": 0,
        "events": [
         "C1538-M1:1",
-        "C1578-M1:1"
+        "C1546-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1558-M1:1",
+        "C1582-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1565-M1:1",
+        "C1582-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1579-M1:1",
+        "C1582-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1501-M1:1",
+        "C1582-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1511-M1:1",
+        "C1582-M1:1"
        ]
       }
      },
@@ -1431,7 +1239,7 @@
        "day": 0,
        "events": [
         "C1538-M1:1",
-        "C1588-M1:1"
+        "C1582-M1:1"
        ]
       }
      },
@@ -1442,8 +1250,8 @@
        "week": 1,
        "day": 0,
        "events": [
-        "C1578-M1:1",
-        "C1588-M1:1"
+        "C1546-M1:1",
+        "C1582-M1:1"
        ]
       }
      },
@@ -1454,91 +1262,7 @@
        "week": 1,
        "day": 0,
        "events": [
-        "C1538-M1:1",
-        "C1567-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1567-M1:1",
-        "C1578-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1567-M1:1",
-        "C1588-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1556-M1:1",
-        "C1567-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1493-M1:1",
-        "C1572-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1560-M1:1",
-        "C1572-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1493-M1:1",
-        "C1560-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1572-M1:1",
+        "C1547-M1:1",
         "C1574-M1:1"
        ]
       }
@@ -1550,55 +1274,7 @@
        "week": 1,
        "day": 0,
        "events": [
-        "C1493-M1:1",
-        "C1574-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1560-M1:1",
-        "C1574-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1572-M1:1",
-        "C1584-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1493-M1:1",
-        "C1584-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1560-M1:1",
+        "C1547-M1:1",
         "C1584-M1:1"
        ]
       }
@@ -1622,32 +1298,8 @@
        "week": 1,
        "day": 0,
        "events": [
-        "C1572-M1:1",
-        "C1586-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1493-M1:1",
-        "C1586-M1:1"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 1,
-       "day": 0,
-       "events": [
-        "C1560-M1:1",
-        "C1586-M1:1"
+        "C1547-M1:1",
+        "C1585-M1:1"
        ]
       }
      },
@@ -1659,7 +1311,7 @@
        "day": 0,
        "events": [
         "C1574-M1:1",
-        "C1586-M1:1"
+        "C1585-M1:1"
        ]
       }
      },
@@ -1671,7 +1323,859 @@
        "day": 0,
        "events": [
         "C1584-M1:1",
+        "C1585-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
+        "C1547-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
+        "C1574-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
+        "C1584-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
+        "C1585-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1547-M1:1",
+        "C1553-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1553-M1:1",
+        "C1574-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1553-M1:1",
+        "C1584-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1553-M1:1",
+        "C1585-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
+        "C1553-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1547-M1:1",
+        "C1557-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1557-M1:1",
+        "C1574-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1557-M1:1",
+        "C1584-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1557-M1:1",
+        "C1585-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
+        "C1557-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1553-M1:1",
+        "C1557-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1547-M1:1",
+        "C1580-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1574-M1:1",
+        "C1580-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1580-M1:1",
+        "C1584-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1580-M1:1",
+        "C1585-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
+        "C1580-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1553-M1:1",
+        "C1580-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1557-M1:1",
+        "C1580-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
+        "C1548-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1548-M1:1",
+        "C1553-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1548-M1:1",
+        "C1557-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1548-M1:1",
+        "C1580-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
+        "C1569-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1553-M1:1",
+        "C1569-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1557-M1:1",
+        "C1569-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1569-M1:1",
+        "C1580-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1548-M1:1",
+        "C1569-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
+        "C1576-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1553-M1:1",
+        "C1576-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1557-M1:1",
+        "C1576-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1576-M1:1",
+        "C1580-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1548-M1:1",
+        "C1576-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1569-M1:1",
+        "C1576-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
         "C1586-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1553-M1:1",
+        "C1586-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1557-M1:1",
+        "C1586-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1580-M1:1",
+        "C1586-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1548-M1:1",
+        "C1586-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1569-M1:1",
+        "C1586-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1576-M1:1",
+        "C1586-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1494-M1:1",
+        "C1588-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1553-M1:1",
+        "C1588-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1557-M1:1",
+        "C1588-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1580-M1:1",
+        "C1588-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1548-M1:1",
+        "C1588-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1569-M1:1",
+        "C1588-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1576-M1:1",
+        "C1588-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1586-M1:1",
+        "C1588-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1559-M1:1",
+        "C1560-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1559-M1:1",
+        "C1583-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1560-M1:1",
+        "C1583-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1543-M1:1",
+        "C1559-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1543-M1:1",
+        "C1560-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1543-M1:1",
+        "C1583-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1496-M1:1",
+        "C1543-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1543-M1:1",
+        "C1556-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1496-M1:1",
+        "C1556-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1493-M1:1",
+        "C1562-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1493-M1:1",
+        "C1573-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1562-M1:1",
+        "C1573-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1493-M1:1",
+        "C1578-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1562-M1:1",
+        "C1578-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1573-M1:1",
+        "C1578-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1493-M1:1",
+        "C1587-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1562-M1:1",
+        "C1587-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1573-M1:1",
+        "C1587-M1:1"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 1,
+       "day": 0,
+       "events": [
+        "C1578-M1:1",
+        "C1587-M1:1"
        ]
       }
      },
@@ -1719,7 +2223,7 @@
        "day": 0,
        "events": [
         "C1497-M1:2",
-        "C1562-M1:2"
+        "C1561-M1:2"
        ]
       }
      },
@@ -1731,7 +2235,7 @@
        "day": 0,
        "events": [
         "C1503-M1:2",
-        "C1562-M1:2"
+        "C1561-M1:2"
        ]
       }
      },
@@ -1743,7 +2247,7 @@
        "day": 0,
        "events": [
         "C1507-M1:2",
-        "C1562-M1:2"
+        "C1561-M1:2"
        ]
       }
      },
@@ -1755,7 +2259,7 @@
        "day": 0,
        "events": [
         "C1497-M1:2",
-        "C1582-M1:2"
+        "C1566-M1:2"
        ]
       }
      },
@@ -1767,7 +2271,7 @@
        "day": 0,
        "events": [
         "C1503-M1:2",
-        "C1582-M1:2"
+        "C1566-M1:2"
        ]
       }
      },
@@ -1779,7 +2283,7 @@
        "day": 0,
        "events": [
         "C1507-M1:2",
-        "C1582-M1:2"
+        "C1566-M1:2"
        ]
       }
      },
@@ -1790,8 +2294,8 @@
        "week": 2,
        "day": 0,
        "events": [
-        "C1562-M1:2",
-        "C1582-M1:2"
+        "C1561-M1:2",
+        "C1566-M1:2"
        ]
       }
      },
@@ -1839,7 +2343,7 @@
        "day": 0,
        "events": [
         "C1499-M1:2",
-        "C1542-M1:2"
+        "C1581-M1:2"
        ]
       }
      },
@@ -1851,7 +2355,7 @@
        "day": 0,
        "events": [
         "C1504-M1:2",
-        "C1542-M1:2"
+        "C1581-M1:2"
        ]
       }
      },
@@ -1863,7 +2367,55 @@
        "day": 0,
        "events": [
         "C1508-M1:2",
-        "C1542-M1:2"
+        "C1581-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1499-M1:2",
+        "C1558-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1504-M1:2",
+        "C1558-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1508-M1:2",
+        "C1558-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1558-M1:2",
+        "C1581-M1:2"
        ]
       }
      },
@@ -1910,138 +2462,6 @@
        "week": 2,
        "day": 0,
        "events": [
-        "C1542-M1:2",
-        "C1565-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1501-M1:2",
-        "C1542-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1501-M1:2",
-        "C1565-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1542-M1:2",
-        "C1546-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1546-M1:2",
-        "C1565-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1501-M1:2",
-        "C1546-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1542-M1:2",
-        "C1559-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1559-M1:2",
-        "C1565-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1501-M1:2",
-        "C1559-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1546-M1:2",
-        "C1559-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1542-M1:2",
-        "C1581-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
         "C1565-M1:2",
         "C1581-M1:2"
        ]
@@ -2054,8 +2474,224 @@
        "week": 2,
        "day": 0,
        "events": [
-        "C1501-M1:2",
+        "C1558-M1:2",
+        "C1565-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1499-M1:2",
+        "C1579-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1504-M1:2",
+        "C1579-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1508-M1:2",
+        "C1579-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1579-M1:2",
         "C1581-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1558-M1:2",
+        "C1579-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1565-M1:2",
+        "C1579-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1501-M1:2",
+        "C1558-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1501-M1:2",
+        "C1565-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1501-M1:2",
+        "C1579-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1511-M1:2",
+        "C1558-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1511-M1:2",
+        "C1565-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1511-M1:2",
+        "C1579-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1501-M1:2",
+        "C1511-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1538-M1:2",
+        "C1558-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1538-M1:2",
+        "C1565-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1538-M1:2",
+        "C1579-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1501-M1:2",
+        "C1538-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1511-M1:2",
+        "C1538-M1:2"
        ]
       }
      },
@@ -2067,7 +2703,7 @@
        "day": 0,
        "events": [
         "C1546-M1:2",
-        "C1581-M1:2"
+        "C1558-M1:2"
        ]
       }
      },
@@ -2078,8 +2714,8 @@
        "week": 2,
        "day": 0,
        "events": [
-        "C1559-M1:2",
-        "C1581-M1:2"
+        "C1546-M1:2",
+        "C1565-M1:2"
        ]
       }
      },
@@ -2090,8 +2726,8 @@
        "week": 2,
        "day": 0,
        "events": [
-        "C1511-M1:2",
-        "C1547-M1:2"
+        "C1546-M1:2",
+        "C1579-M1:2"
        ]
       }
      },
@@ -2102,20 +2738,8 @@
        "week": 2,
        "day": 0,
        "events": [
-        "C1511-M1:2",
-        "C1573-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1547-M1:2",
-        "C1573-M1:2"
+        "C1501-M1:2",
+        "C1546-M1:2"
        ]
       }
      },
@@ -2127,379 +2751,7 @@
        "day": 0,
        "events": [
         "C1511-M1:2",
-        "C1576-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1547-M1:2",
-        "C1576-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1573-M1:2",
-        "C1576-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1511-M1:2",
-        "C1553-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1547-M1:2",
-        "C1553-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1553-M1:2",
-        "C1573-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1553-M1:2",
-        "C1576-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1511-M1:2",
-        "C1557-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1547-M1:2",
-        "C1557-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1557-M1:2",
-        "C1573-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1557-M1:2",
-        "C1576-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1553-M1:2",
-        "C1557-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1548-M1:2",
-        "C1553-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1548-M1:2",
-        "C1557-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1553-M1:2",
-        "C1569-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1557-M1:2",
-        "C1569-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1548-M1:2",
-        "C1569-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1553-M1:2",
-        "C1583-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1557-M1:2",
-        "C1583-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1548-M1:2",
-        "C1583-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1569-M1:2",
-        "C1583-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1553-M1:2",
-        "C1585-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1557-M1:2",
-        "C1585-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1548-M1:2",
-        "C1585-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1569-M1:2",
-        "C1585-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1583-M1:2",
-        "C1585-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1553-M1:2",
-        "C1587-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1557-M1:2",
-        "C1587-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1548-M1:2",
-        "C1587-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1569-M1:2",
-        "C1587-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1583-M1:2",
-        "C1587-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1585-M1:2",
-        "C1587-M1:2"
+        "C1546-M1:2"
        ]
       }
      },
@@ -2511,7 +2763,67 @@
        "day": 0,
        "events": [
         "C1538-M1:2",
-        "C1578-M1:2"
+        "C1546-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1558-M1:2",
+        "C1582-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1565-M1:2",
+        "C1582-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1579-M1:2",
+        "C1582-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1501-M1:2",
+        "C1582-M1:2"
+       ]
+      }
+     },
+     {
+      "code": "ROOM_OVERLAP",
+      "detail": {
+       "resource": "SIM-LAB-01",
+       "week": 2,
+       "day": 0,
+       "events": [
+        "C1511-M1:2",
+        "C1582-M1:2"
        ]
       }
      },
@@ -2523,7 +2835,7 @@
        "day": 0,
        "events": [
         "C1538-M1:2",
-        "C1588-M1:2"
+        "C1582-M1:2"
        ]
       }
      },
@@ -2534,8 +2846,8 @@
        "week": 2,
        "day": 0,
        "events": [
-        "C1578-M1:2",
-        "C1588-M1:2"
+        "C1546-M1:2",
+        "C1582-M1:2"
        ]
       }
      },
@@ -2546,91 +2858,7 @@
        "week": 2,
        "day": 0,
        "events": [
-        "C1538-M1:2",
-        "C1567-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1567-M1:2",
-        "C1578-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1567-M1:2",
-        "C1588-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1556-M1:2",
-        "C1567-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1493-M1:2",
-        "C1572-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1560-M1:2",
-        "C1572-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1493-M1:2",
-        "C1560-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1572-M1:2",
+        "C1547-M1:2",
         "C1574-M1:2"
        ]
       }
@@ -2642,55 +2870,7 @@
        "week": 2,
        "day": 0,
        "events": [
-        "C1493-M1:2",
-        "C1574-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1560-M1:2",
-        "C1574-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1572-M1:2",
-        "C1584-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1493-M1:2",
-        "C1584-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1560-M1:2",
+        "C1547-M1:2",
         "C1584-M1:2"
        ]
       }
@@ -2714,32 +2894,8 @@
        "week": 2,
        "day": 0,
        "events": [
-        "C1572-M1:2",
-        "C1586-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1493-M1:2",
-        "C1586-M1:2"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 2,
-       "day": 0,
-       "events": [
-        "C1560-M1:2",
-        "C1586-M1:2"
+        "C1547-M1:2",
+        "C1585-M1:2"
        ]
       }
      },
@@ -2751,7 +2907,7 @@
        "day": 0,
        "events": [
         "C1574-M1:2",
-        "C1586-M1:2"
+        "C1585-M1:2"
        ]
       }
      },
@@ -2763,7 +2919,7 @@
        "day": 0,
        "events": [
         "C1584-M1:2",
-        "C1586-M1:2"
+        "C1585-M1:2"
        ]
       }
      },
@@ -2771,11 +2927,11 @@
       "code": "ROOM_OVERLAP",
       "detail": {
        "resource": "SIM-LAB-01",
-       "week": 3,
+       "week": 2,
        "day": 0,
        "events": [
-        "C1497-M1:3",
-        "C1503-M1:3"
+        "C1494-M1:2",
+        "C1547-M1:2"
        ]
       }
      },
@@ -2783,11 +2939,11 @@
       "code": "ROOM_OVERLAP",
       "detail": {
        "resource": "SIM-LAB-01",
-       "week": 3,
+       "week": 2,
        "day": 0,
        "events": [
-        "C1497-M1:3",
-        "C1507-M1:3"
+        "C1494-M1:2",
+        "C1574-M1:2"
        ]
       }
      },
@@ -2795,11 +2951,11 @@
       "code": "ROOM_OVERLAP",
       "detail": {
        "resource": "SIM-LAB-01",
-       "week": 3,
+       "week": 2,
        "day": 0,
        "events": [
-        "C1503-M1:3",
-        "C1507-M1:3"
+        "C1494-M1:2",
+        "C1584-M1:2"
        ]
       }
      },
@@ -2807,11 +2963,11 @@
       "code": "ROOM_OVERLAP",
       "detail": {
        "resource": "SIM-LAB-01",
-       "week": 3,
+       "week": 2,
        "day": 0,
        "events": [
-        "C1497-M1:3",
-        "C1562-M1:3"
+        "C1494-M1:2",
+        "C1585-M1:2"
        ]
       }
      },
@@ -2819,167 +2975,11 @@
       "code": "ROOM_OVERLAP",
       "detail": {
        "resource": "SIM-LAB-01",
-       "week": 3,
+       "week": 2,
        "day": 0,
        "events": [
-        "C1503-M1:3",
-        "C1562-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1507-M1:3",
-        "C1562-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1497-M1:3",
-        "C1582-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1503-M1:3",
-        "C1582-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1507-M1:3",
-        "C1582-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1562-M1:3",
-        "C1582-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1499-M1:3",
-        "C1504-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1499-M1:3",
-        "C1508-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1504-M1:3",
-        "C1508-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1499-M1:3",
-        "C1542-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1504-M1:3",
-        "C1542-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1508-M1:3",
-        "C1542-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1499-M1:3",
-        "C1565-M1:3"
-       ]
-      }
-     },
-     {
-      "code": "ROOM_OVERLAP",
-      "detail": {
-       "resource": "SIM-LAB-01",
-       "week": 3,
-       "day": 0,
-       "events": [
-        "C1504-M1:3",
-        "C1565-M1:3"
+        "C1547-M1:2",
+        "C1553-M1:2"
        ]
       }
      }
@@ -2987,13 +2987,13 @@
     "violations_truncated": true,
     "metrics": {
      "room_mode": "weekly",
-     "unassigned_weekly_sessions": 20,
-     "assigned_weekly_sessions": 3325,
+     "unassigned_weekly_sessions": 14,
+     "assigned_weekly_sessions": 3331,
      "total_weekly_sessions": 3345,
-     "unnecessary_lab_minutes": 251400,
-     "unnecessary_lab_hours": 4190.0,
+     "unnecessary_lab_minutes": 251760,
+     "unnecessary_lab_hours": 4196.0,
      "room_changes": 0,
-     "hard_violations": 14245
+     "hard_violations": 13997
     }
    }
   },
@@ -3003,7 +3003,7 @@
    "audit_mode": "fixed",
    "expected": {
     "valid": false,
-    "violation_count": 278,
+    "violation_count": 224,
     "violations": [
      {
       "code": "ROOM_MODE",
@@ -3014,10 +3014,11 @@
       "detail": {
        "session": "C1417-M1",
        "rooms": [
-        "R95",
         "R96",
+        "SIM-LAB-01",
         "SIM-LAB-02",
-        "SIM-LAB-03"
+        "SIM-LAB-03",
+        "SIM-LAB-04"
        ]
       }
      },
@@ -3026,10 +3027,11 @@
       "detail": {
        "session": "C1417-M1",
        "rooms": [
-        "R95",
         "R96",
+        "SIM-LAB-01",
         "SIM-LAB-02",
-        "SIM-LAB-03"
+        "SIM-LAB-03",
+        "SIM-LAB-04"
        ]
       }
      },
@@ -3038,10 +3040,9 @@
       "detail": {
        "session": "C1418-M1",
        "rooms": [
-        "R94",
-        "R95",
-        "SIM-LAB-02",
-        "SIM-LAB-03"
+        "R96",
+        "SIM-LAB-03",
+        "SIM-LAB-04"
        ]
       }
      },
@@ -3050,7 +3051,96 @@
       "detail": {
        "session": "C1418-M1",
        "rooms": [
+        "R96",
+        "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1419-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1419-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1420-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1420-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1421-M1",
+       "rooms": [
         "R94",
+        "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1421-M1",
+       "rooms": [
+        "R94",
+        "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1422-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1422-M1",
+       "rooms": [
         "R95",
         "SIM-LAB-02",
         "SIM-LAB-03"
@@ -3060,34 +3150,10 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1420-M1",
+       "session": "C1423-M1",
        "rooms": [
-        "R94",
-        "SIM-LAB-02",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1420-M1",
-       "rooms": [
-        "R94",
-        "SIM-LAB-02",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1421-M1",
-       "rooms": [
-        "R95",
         "R96",
+        "SIM-LAB-01",
         "SIM-LAB-02"
        ]
       }
@@ -3095,10 +3161,10 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1421-M1",
+       "session": "C1423-M1",
        "rooms": [
-        "R95",
         "R96",
+        "SIM-LAB-01",
         "SIM-LAB-02"
        ]
       }
@@ -3106,7 +3172,7 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1422-M1",
+       "session": "C1424-M1",
        "rooms": [
         "R94",
         "SIM-LAB-03",
@@ -3117,7 +3183,7 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1422-M1",
+       "session": "C1424-M1",
        "rooms": [
         "R94",
         "SIM-LAB-03",
@@ -3130,8 +3196,9 @@
       "detail": {
        "session": "C1425-M1",
        "rooms": [
-        "R94",
-        "SIM-LAB-04"
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
        ]
       }
      },
@@ -3140,7 +3207,52 @@
       "detail": {
        "session": "C1425-M1",
        "rooms": [
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1426-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1426-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1427-M1",
+       "rooms": [
         "R94",
+        "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1427-M1",
+       "rooms": [
+        "R94",
+        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -3150,8 +3262,7 @@
       "detail": {
        "session": "C1428-M1",
        "rooms": [
-        "R94",
-        "R95",
+        "R96",
         "SIM-LAB-03",
         "SIM-LAB-04"
        ]
@@ -3162,8 +3273,7 @@
       "detail": {
        "session": "C1428-M1",
        "rooms": [
-        "R94",
-        "R95",
+        "R96",
         "SIM-LAB-03",
         "SIM-LAB-04"
        ]
@@ -3172,10 +3282,33 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
+       "session": "C1429-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1429-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
        "session": "C1430-M1",
        "rooms": [
-        "R94",
-        "SIM-LAB-04"
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
        ]
       }
      },
@@ -3184,8 +3317,9 @@
       "detail": {
        "session": "C1430-M1",
        "rooms": [
-        "R94",
-        "SIM-LAB-04"
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
        ]
       }
      },
@@ -3195,6 +3329,7 @@
        "session": "C1431-M1",
        "rooms": [
         "R94",
+        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -3205,6 +3340,7 @@
        "session": "C1431-M1",
        "rooms": [
         "R94",
+        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -3212,34 +3348,9 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1433-M1",
+       "session": "C1432-M1",
        "rooms": [
         "R95",
-        "R96",
-        "SIM-LAB-02",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1433-M1",
-       "rooms": [
-        "R95",
-        "R96",
-        "SIM-LAB-02",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1434-M1",
-       "rooms": [
-        "R96",
-        "SIM-LAB-01",
         "SIM-LAB-02",
         "SIM-LAB-03"
        ]
@@ -3248,10 +3359,9 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1434-M1",
+       "session": "C1432-M1",
        "rooms": [
-        "R96",
-        "SIM-LAB-01",
+        "R95",
         "SIM-LAB-02",
         "SIM-LAB-03"
        ]
@@ -3260,10 +3370,55 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1435-M1",
+       "session": "C1433-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1433-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1434-M1",
        "rooms": [
         "R94",
+        "SIM-LAB-03",
         "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1434-M1",
+       "rooms": [
+        "R94",
+        "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1435-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
        ]
       }
      },
@@ -3272,8 +3427,9 @@
       "detail": {
        "session": "C1435-M1",
        "rooms": [
-        "R94",
-        "SIM-LAB-04"
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
        ]
       }
      },
@@ -3284,8 +3440,7 @@
        "rooms": [
         "R96",
         "SIM-LAB-01",
-        "SIM-LAB-02",
-        "SIM-LAB-04"
+        "SIM-LAB-02"
        ]
       }
      },
@@ -3296,8 +3451,73 @@
        "rooms": [
         "R96",
         "SIM-LAB-01",
-        "SIM-LAB-02",
+        "SIM-LAB-02"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1437-M1",
+       "rooms": [
+        "R94",
+        "SIM-LAB-03",
         "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1437-M1",
+       "rooms": [
+        "R94",
+        "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1438-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1438-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1439-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1439-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
        ]
       }
      },
@@ -3306,7 +3526,7 @@
       "detail": {
        "session": "C1440-M1",
        "rooms": [
-        "R96",
+        "R94",
         "SIM-LAB-03",
         "SIM-LAB-04"
        ]
@@ -3317,7 +3537,7 @@
       "detail": {
        "session": "C1440-M1",
        "rooms": [
-        "R96",
+        "R94",
         "SIM-LAB-03",
         "SIM-LAB-04"
        ]
@@ -3326,40 +3546,44 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1443-M1",
+       "session": "C1441-M1",
        "rooms": [
-        "R57",
-        "SIM-LAB-01"
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
        ]
       }
      },
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1443-M1",
+       "session": "C1441-M1",
        "rooms": [
-        "R57",
-        "SIM-LAB-01"
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
        ]
       }
      },
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1443-M2",
+       "session": "C1442-M1",
        "rooms": [
-        "R57",
-        "SIM-LAB-01"
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
        ]
       }
      },
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1443-M2",
+       "session": "C1442-M1",
        "rooms": [
-        "R57",
-        "SIM-LAB-01"
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
        ]
       }
      },
@@ -3369,7 +3593,8 @@
        "session": "C1444-M1",
        "rooms": [
         "R97",
-        "SIM-LAB-02"
+        "SIM-LAB-01",
+        "SIM-LAB-03"
        ]
       }
      },
@@ -3379,7 +3604,8 @@
        "session": "C1444-M1",
        "rooms": [
         "R97",
-        "SIM-LAB-02"
+        "SIM-LAB-01",
+        "SIM-LAB-03"
        ]
       }
      },
@@ -3389,7 +3615,6 @@
        "session": "C1445-M1",
        "rooms": [
         "R97",
-        "SIM-LAB-01",
         "SIM-LAB-02",
         "SIM-LAB-03"
        ]
@@ -3401,8 +3626,27 @@
        "session": "C1445-M1",
        "rooms": [
         "R97",
-        "SIM-LAB-01",
         "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1446-M1",
+       "rooms": [
+        "R97",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1446-M1",
+       "rooms": [
+        "R97",
         "SIM-LAB-03"
        ]
       }
@@ -3413,7 +3657,6 @@
        "session": "C1447-M1",
        "rooms": [
         "R97",
-        "SIM-LAB-01",
         "SIM-LAB-02",
         "SIM-LAB-03"
        ]
@@ -3425,8 +3668,51 @@
        "session": "C1447-M1",
        "rooms": [
         "R97",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1448-M1",
+       "rooms": [
+        "R97",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1448-M1",
+       "rooms": [
+        "R97",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1449-M1",
+       "rooms": [
+        "R97",
         "SIM-LAB-01",
-        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1449-M1",
+       "rooms": [
+        "R97",
+        "SIM-LAB-01",
         "SIM-LAB-03"
        ]
       }
@@ -3437,7 +3723,7 @@
        "session": "C1450-M1",
        "rooms": [
         "R97",
-        "SIM-LAB-02",
+        "SIM-LAB-01",
         "SIM-LAB-03"
        ]
       }
@@ -3448,7 +3734,7 @@
        "session": "C1450-M1",
        "rooms": [
         "R97",
-        "SIM-LAB-02",
+        "SIM-LAB-01",
         "SIM-LAB-03"
        ]
       }
@@ -3459,7 +3745,7 @@
        "session": "C1451-M1",
        "rooms": [
         "R97",
-        "SIM-LAB-02",
+        "SIM-LAB-01",
         "SIM-LAB-03"
        ]
       }
@@ -3470,7 +3756,29 @@
        "session": "C1451-M1",
        "rooms": [
         "R97",
-        "SIM-LAB-02",
+        "SIM-LAB-01",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1452-M1",
+       "rooms": [
+        "R97",
+        "SIM-LAB-01",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1452-M1",
+       "rooms": [
+        "R97",
+        "SIM-LAB-01",
         "SIM-LAB-03"
        ]
       }
@@ -3481,6 +3789,7 @@
        "session": "C1453-M1",
        "rooms": [
         "R97",
+        "SIM-LAB-01",
         "SIM-LAB-03"
        ]
       }
@@ -3489,6 +3798,47 @@
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
        "session": "C1453-M1",
+       "rooms": [
+        "R97",
+        "SIM-LAB-01",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1454-M1",
+       "rooms": [
+        "R97",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1454-M1",
+       "rooms": [
+        "R97",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1455-M1",
+       "rooms": [
+        "R97",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1455-M1",
        "rooms": [
         "R97",
         "SIM-LAB-03"
@@ -3541,6 +3891,7 @@
        "session": "C1458-M1",
        "rooms": [
         "R97",
+        "SIM-LAB-01",
         "SIM-LAB-03"
        ]
       }
@@ -3551,6 +3902,7 @@
        "session": "C1458-M1",
        "rooms": [
         "R97",
+        "SIM-LAB-01",
         "SIM-LAB-03"
        ]
       }
@@ -3558,11 +3910,9 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1459-M1",
+       "session": "C1467-M1",
        "rooms": [
-        "R63",
-        "R64",
-        "SIM-LAB-03",
+        "R90",
         "SIM-LAB-04"
        ]
       }
@@ -3570,99 +3920,9 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1459-M1",
+       "session": "C1467-M1",
        "rooms": [
-        "R63",
-        "R64",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1461-M1",
-       "rooms": [
-        "R57",
-        "SIM-LAB-02",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1461-M1",
-       "rooms": [
-        "R57",
-        "SIM-LAB-02",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1462-M1",
-       "rooms": [
-        "R63",
-        "SIM-LAB-02",
-        "SIM-LAB-03"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1462-M1",
-       "rooms": [
-        "R63",
-        "SIM-LAB-02",
-        "SIM-LAB-03"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1463-M1",
-       "rooms": [
-        "R63",
-        "R64",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1463-M1",
-       "rooms": [
-        "R63",
-        "R64",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1465-M1",
-       "rooms": [
-        "R63",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1465-M1",
-       "rooms": [
-        "R63",
+        "R90",
         "SIM-LAB-04"
        ]
       }
@@ -3673,7 +3933,6 @@
        "session": "C1468-M1",
        "rooms": [
         "R90",
-        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -3684,7 +3943,46 @@
        "session": "C1468-M1",
        "rooms": [
         "R90",
-        "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1469-M1",
+       "rooms": [
+        "R90",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1469-M1",
+       "rooms": [
+        "R90",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1470-M1",
+       "rooms": [
+        "R90",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1470-M1",
+       "rooms": [
+        "R90",
         "SIM-LAB-04"
        ]
       }
@@ -3695,6 +3993,7 @@
        "session": "C1471-M1",
        "rooms": [
         "R90",
+        "SIM-LAB-01",
         "SIM-LAB-04"
        ]
       }
@@ -3703,6 +4002,27 @@
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
        "session": "C1471-M1",
+       "rooms": [
+        "R90",
+        "SIM-LAB-01",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1472-M1",
+       "rooms": [
+        "R90",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1472-M1",
        "rooms": [
         "R90",
         "SIM-LAB-04"
@@ -3732,10 +4052,9 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1476-M1",
+       "session": "C1474-M1",
        "rooms": [
-        "R64",
-        "SIM-LAB-03",
+        "R90",
         "SIM-LAB-04"
        ]
       }
@@ -3743,10 +4062,9 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1476-M1",
+       "session": "C1474-M1",
        "rooms": [
-        "R64",
-        "SIM-LAB-03",
+        "R90",
         "SIM-LAB-04"
        ]
       }
@@ -3754,10 +4072,9 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1477-M1",
+       "session": "C1484-M1",
        "rooms": [
-        "R63",
-        "SIM-LAB-03",
+        "R90",
         "SIM-LAB-04"
        ]
       }
@@ -3765,10 +4082,9 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1477-M1",
+       "session": "C1484-M1",
        "rooms": [
-        "R63",
-        "SIM-LAB-03",
+        "R90",
         "SIM-LAB-04"
        ]
       }
@@ -3776,11 +4092,9 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1479-M1",
+       "session": "C1485-M1",
        "rooms": [
-        "R57",
-        "R64",
-        "SIM-LAB-03",
+        "R90",
         "SIM-LAB-04"
        ]
       }
@@ -3788,63 +4102,9 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1479-M1",
+       "session": "C1485-M1",
        "rooms": [
-        "R57",
-        "R64",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1480-M1",
-       "rooms": [
-        "R63",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1480-M1",
-       "rooms": [
-        "R63",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1481-M1",
-       "rooms": [
-        "R63",
-        "R64"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1483-M1",
-       "rooms": [
-        "R63",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1483-M1",
-       "rooms": [
-        "R63",
+        "R90",
         "SIM-LAB-04"
        ]
       }
@@ -3855,7 +4115,7 @@
        "session": "C1486-M1",
        "rooms": [
         "R90",
-        "SIM-LAB-04"
+        "SIM-LAB-03"
        ]
       }
      },
@@ -3865,7 +4125,7 @@
        "session": "C1486-M1",
        "rooms": [
         "R90",
-        "SIM-LAB-04"
+        "SIM-LAB-03"
        ]
       }
      },
@@ -3903,6 +4163,26 @@
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
        "session": "C1488-M1",
+       "rooms": [
+        "R90",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1489-M1",
+       "rooms": [
+        "R90",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1489-M1",
        "rooms": [
         "R90",
         "SIM-LAB-04"
@@ -3952,40 +4232,20 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1493-M1",
+       "session": "C1492-M1",
        "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1493-M2",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1493-M3",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
+        "R90",
+        "SIM-LAB-04"
        ]
       }
      },
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1493-M3",
+       "session": "C1492-M1",
        "rooms": [
-        "R57",
-        "SIM-LAB-01"
+        "R90",
+        "SIM-LAB-04"
        ]
       }
      },
@@ -4012,10 +4272,30 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1498-M1",
+       "session": "C1495-M1",
        "rooms": [
-        "R57",
         "R63",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1495-M1",
+       "rooms": [
+        "R63",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1496-M1",
+       "rooms": [
         "R64",
         "SIM-LAB-03",
         "SIM-LAB-04"
@@ -4025,10 +4305,8 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1498-M1",
+       "session": "C1496-M1",
        "rooms": [
-        "R57",
-        "R63",
         "R64",
         "SIM-LAB-03",
         "SIM-LAB-04"
@@ -4038,9 +4316,12 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1499-M1",
+       "session": "C1498-M1",
        "rooms": [
         "R57",
+        "R63",
+        "R64",
+        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -4048,9 +4329,12 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1499-M1",
+       "session": "C1498-M1",
        "rooms": [
         "R57",
+        "R63",
+        "R64",
+        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -4061,16 +4345,9 @@
        "session": "C1500-M1",
        "rooms": [
         "R57",
-        "R64"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1501-M1",
-       "rooms": [
         "R63",
+        "R64",
+        "SIM-LAB-02",
         "SIM-LAB-04"
        ]
       }
@@ -4078,9 +4355,12 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1501-M1",
+       "session": "C1500-M1",
        "rooms": [
+        "R57",
         "R63",
+        "R64",
+        "SIM-LAB-02",
         "SIM-LAB-04"
        ]
       }
@@ -4101,26 +4381,6 @@
        "session": "C1502-M1",
        "rooms": [
         "R63",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1503-M1",
-       "rooms": [
-        "R64",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1503-M1",
-       "rooms": [
-        "R64",
         "SIM-LAB-04"
        ]
       }
@@ -4130,6 +4390,7 @@
       "detail": {
        "session": "C1505-M1",
        "rooms": [
+        "R63",
         "R64",
         "SIM-LAB-03",
         "SIM-LAB-04"
@@ -4141,6 +4402,7 @@
       "detail": {
        "session": "C1505-M1",
        "rooms": [
+        "R63",
         "R64",
         "SIM-LAB-03",
         "SIM-LAB-04"
@@ -4193,16 +4455,7 @@
        "session": "C1510-M1",
        "rooms": [
         "R63",
-        "R64"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1511-M1",
-       "rooms": [
-        "R63",
+        "R64",
         "SIM-LAB-03",
         "SIM-LAB-04"
        ]
@@ -4211,10 +4464,31 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1511-M1",
+       "session": "C1510-M1",
        "rooms": [
         "R63",
+        "R64",
         "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1513-M1",
+       "rooms": [
+        "R94",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1513-M1",
+       "rooms": [
+        "R94",
         "SIM-LAB-04"
        ]
       }
@@ -4225,7 +4499,7 @@
        "session": "C1514-M1",
        "rooms": [
         "R95",
-        "SIM-LAB-04"
+        "SIM-LAB-03"
        ]
       }
      },
@@ -4235,7 +4509,7 @@
        "session": "C1514-M1",
        "rooms": [
         "R95",
-        "SIM-LAB-04"
+        "SIM-LAB-03"
        ]
       }
      },
@@ -4245,8 +4519,7 @@
        "session": "C1515-M1",
        "rooms": [
         "R96",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
+        "SIM-LAB-02"
        ]
       }
      },
@@ -4256,8 +4529,7 @@
        "session": "C1515-M1",
        "rooms": [
         "R96",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
+        "SIM-LAB-02"
        ]
       }
      },
@@ -4288,9 +4560,9 @@
       "detail": {
        "session": "C1517-M1",
        "rooms": [
-        "R94",
+        "R95",
         "SIM-LAB-02",
-        "SIM-LAB-04"
+        "SIM-LAB-03"
        ]
       }
      },
@@ -4299,9 +4571,31 @@
       "detail": {
        "session": "C1517-M1",
        "rooms": [
-        "R94",
+        "R95",
         "SIM-LAB-02",
-        "SIM-LAB-04"
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1518-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1518-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
        ]
       }
      },
@@ -4311,8 +4605,6 @@
        "session": "C1519-M1",
        "rooms": [
         "R94",
-        "R96",
-        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -4323,16 +4615,54 @@
        "session": "C1519-M1",
        "rooms": [
         "R94",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1520-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1520-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1521-M1",
+       "rooms": [
         "R96",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
+        "SIM-LAB-02"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1521-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-02"
        ]
       }
      },
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1520-M1",
+       "session": "C1522-M1",
        "rooms": [
         "R94",
         "SIM-LAB-04"
@@ -4342,31 +4672,9 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1520-M1",
+       "session": "C1522-M1",
        "rooms": [
         "R94",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1522-M1",
-       "rooms": [
-        "R95",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1522-M1",
-       "rooms": [
-        "R95",
-        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -4375,6 +4683,94 @@
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
        "session": "C1523-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1523-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1524-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-02"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1524-M1",
+       "rooms": [
+        "R96",
+        "SIM-LAB-02"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1525-M1",
+       "rooms": [
+        "R94",
+        "SIM-LAB-02",
+        "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1525-M1",
+       "rooms": [
+        "R94",
+        "SIM-LAB-02",
+        "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1526-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-01",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1526-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-01",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1527-M1",
        "rooms": [
         "R94",
         "SIM-LAB-02",
@@ -4385,52 +4781,10 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1523-M1",
+       "session": "C1527-M1",
        "rooms": [
         "R94",
         "SIM-LAB-02",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1526-M1",
-       "rooms": [
-        "R94",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1526-M1",
-       "rooms": [
-        "R94",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1527-M1",
-       "rooms": [
-        "R94",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1527-M1",
-       "rooms": [
-        "R94",
         "SIM-LAB-04"
        ]
       }
@@ -4440,7 +4794,8 @@
       "detail": {
        "session": "C1528-M1",
        "rooms": [
-        "R94",
+        "R95",
+        "SIM-LAB-01",
         "SIM-LAB-03"
        ]
       }
@@ -4450,7 +4805,8 @@
       "detail": {
        "session": "C1528-M1",
        "rooms": [
-        "R94",
+        "R95",
+        "SIM-LAB-01",
         "SIM-LAB-03"
        ]
       }
@@ -4462,6 +4818,7 @@
        "rooms": [
         "R94",
         "SIM-LAB-02",
+        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -4473,6 +4830,7 @@
        "rooms": [
         "R94",
         "SIM-LAB-02",
+        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -4482,10 +4840,10 @@
       "detail": {
        "session": "C1530-M1",
        "rooms": [
-        "R94",
-        "R96",
+        "R95",
+        "SIM-LAB-01",
         "SIM-LAB-02",
-        "SIM-LAB-04"
+        "SIM-LAB-03"
        ]
       }
      },
@@ -4494,63 +4852,65 @@
       "detail": {
        "session": "C1530-M1",
        "rooms": [
+        "R95",
+        "SIM-LAB-01",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1531-M1",
+       "rooms": [
         "R94",
+        "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1531-M1",
+       "rooms": [
+        "R94",
+        "SIM-LAB-03",
+        "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1532-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1532-M1",
+       "rooms": [
+        "R95",
+        "SIM-LAB-02",
+        "SIM-LAB-03"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1533-M1",
+       "rooms": [
         "R96",
-        "SIM-LAB-02",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1531-M1",
-       "rooms": [
-        "R95",
+        "SIM-LAB-01",
         "SIM-LAB-02"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1531-M1",
-       "rooms": [
-        "R95",
-        "SIM-LAB-02"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1532-M1",
-       "rooms": [
-        "R94",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1532-M1",
-       "rooms": [
-        "R94",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1533-M1",
-       "rooms": [
-        "R95",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
        ]
       }
      },
@@ -4559,9 +4919,9 @@
       "detail": {
        "session": "C1533-M1",
        "rooms": [
-        "R95",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
+        "R96",
+        "SIM-LAB-01",
+        "SIM-LAB-02"
        ]
       }
      },
@@ -4571,8 +4931,7 @@
        "session": "C1534-M1",
        "rooms": [
         "R94",
-        "R95",
-        "SIM-LAB-02",
+        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -4583,89 +4942,8 @@
        "session": "C1534-M1",
        "rooms": [
         "R94",
-        "R95",
-        "SIM-LAB-02",
+        "SIM-LAB-03",
         "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1535-M2",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1535-M2",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1536-M1",
-       "rooms": [
-        "R87",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1536-M1",
-       "rooms": [
-        "R87",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1538-M1",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1538-M1",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1538-M3",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1538-M3",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
        ]
       }
      },
@@ -4675,7 +4953,8 @@
        "session": "C1539-M1",
        "rooms": [
         "R89",
-        "SIM-LAB-03"
+        "SIM-LAB-03",
+        "SIM-LAB-04"
        ]
       }
      },
@@ -4685,7 +4964,8 @@
        "session": "C1539-M1",
        "rooms": [
         "R89",
-        "SIM-LAB-03"
+        "SIM-LAB-03",
+        "SIM-LAB-04"
        ]
       }
      },
@@ -4695,7 +4975,8 @@
        "session": "C1540-M1",
        "rooms": [
         "R89",
-        "SIM-LAB-03"
+        "SIM-LAB-03",
+        "SIM-LAB-04"
        ]
       }
      },
@@ -4705,7 +4986,8 @@
        "session": "C1540-M1",
        "rooms": [
         "R89",
-        "SIM-LAB-03"
+        "SIM-LAB-03",
+        "SIM-LAB-04"
        ]
       }
      },
@@ -4715,6 +4997,7 @@
        "session": "C1541-M1",
        "rooms": [
         "R89",
+        "SIM-LAB-03",
         "SIM-LAB-04"
        ]
       }
@@ -4725,7 +5008,28 @@
        "session": "C1541-M1",
        "rooms": [
         "R89",
+        "SIM-LAB-03",
         "SIM-LAB-04"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_CHANGED",
+      "detail": {
+       "session": "C1542-M1",
+       "rooms": [
+        "R87",
+        "SIM-LAB-02"
+       ]
+      }
+     },
+     {
+      "code": "FIXED_ROOM_NOT_LAB",
+      "detail": {
+       "session": "C1542-M1",
+       "rooms": [
+        "R87",
+        "SIM-LAB-02"
        ]
       }
      },
@@ -4752,22 +5056,20 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1545-M2",
+       "session": "C1544-M1",
        "rooms": [
-        "R63",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
+        "R87",
+        "SIM-LAB-03"
        ]
       }
      },
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1545-M2",
+       "session": "C1544-M1",
        "rooms": [
-        "R63",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
+        "R87",
+        "SIM-LAB-03"
        ]
       }
      },
@@ -4814,50 +5116,9 @@
      {
       "code": "FIXED_ROOM_CHANGED",
       "detail": {
-       "session": "C1549-M1",
+       "session": "C1548-M1",
        "rooms": [
-        "R63",
-        "SIM-LAB-02"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1549-M1",
-       "rooms": [
-        "R63",
-        "SIM-LAB-02"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1549-M2",
-       "rooms": [
-        "R63",
-        "SIM-LAB-02"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1549-M2",
-       "rooms": [
-        "R63",
-        "SIM-LAB-02"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1551-M1",
-       "rooms": [
-        "R91",
-        "SIM-LAB-03",
+        "R93",
         "SIM-LAB-04"
        ]
       }
@@ -4865,73 +5126,10 @@
      {
       "code": "FIXED_ROOM_NOT_LAB",
       "detail": {
-       "session": "C1551-M1",
+       "session": "C1548-M1",
        "rooms": [
-        "R91",
-        "SIM-LAB-03",
+        "R93",
         "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1552-M1",
-       "rooms": [
-        "R91",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1552-M1",
-       "rooms": [
-        "R91",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1555-M1",
-       "rooms": [
-        "R91",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1555-M1",
-       "rooms": [
-        "R91",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1556-M2",
-       "rooms": [
-        "R63",
-        "SIM-LAB-02"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1556-M2",
-       "rooms": [
-        "R63",
-        "SIM-LAB-02"
        ]
       }
      },
@@ -4941,185 +5139,6 @@
        "session": "C1557-M1",
        "rooms": [
         "R87",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1557-M1",
-       "rooms": [
-        "R87",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1559-M2",
-       "rooms": [
-        "R57",
-        "R63"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1559-M3",
-       "rooms": [
-        "R57",
-        "R63"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1560-M1",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1560-M1",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1560-M2",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1560-M2",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1560-M3",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1560-M3",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1561-M1",
-       "rooms": [
-        "R97",
-        "SIM-LAB-01",
-        "SIM-LAB-02",
-        "SIM-LAB-03"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1561-M1",
-       "rooms": [
-        "R97",
-        "SIM-LAB-01",
-        "SIM-LAB-02",
-        "SIM-LAB-03"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1562-M2",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1562-M3",
-       "rooms": [
-        "R57",
-        "SIM-LAB-01"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1564-M1",
-       "rooms": [
-        "R89",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1564-M1",
-       "rooms": [
-        "R89",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_CHANGED",
-      "detail": {
-       "session": "C1565-M1",
-       "rooms": [
-        "R89",
-        "SIM-LAB-03",
-        "SIM-LAB-04"
-       ]
-      }
-     },
-     {
-      "code": "FIXED_ROOM_NOT_LAB",
-      "detail": {
-       "session": "C1565-M1",
-       "rooms": [
-        "R89",
         "SIM-LAB-03",
         "SIM-LAB-04"
        ]
@@ -5129,13 +5148,13 @@
     "violations_truncated": true,
     "metrics": {
      "room_mode": "fixed",
-     "unassigned_weekly_sessions": 20,
-     "assigned_weekly_sessions": 3325,
+     "unassigned_weekly_sessions": 14,
+     "assigned_weekly_sessions": 3331,
      "total_weekly_sessions": 3345,
-     "unnecessary_lab_minutes": 7440,
-     "unnecessary_lab_hours": 124.0,
-     "room_changes": 838,
-     "hard_violations": 278
+     "unnecessary_lab_minutes": 14520,
+     "unnecessary_lab_hours": 242.0,
+     "room_changes": 654,
+     "hard_violations": 224
     }
    }
   },
@@ -5159,12 +5178,12 @@
     "violations_truncated": false,
     "metrics": {
      "room_mode": "nightly",
-     "unassigned_weekly_sessions": 20,
-     "assigned_weekly_sessions": 3325,
+     "unassigned_weekly_sessions": 14,
+     "assigned_weekly_sessions": 3331,
      "total_weekly_sessions": 3345,
-     "unnecessary_lab_minutes": 7440,
-     "unnecessary_lab_hours": 124.0,
-     "room_changes": 838,
+     "unnecessary_lab_minutes": 14520,
+     "unnecessary_lab_hours": 242.0,
+     "room_changes": 654,
      "hard_violations": 2
     }
    }

@@ -2,8 +2,8 @@
 
     python engine/analyze.py experiments/final/experiment.json.gz --output experiments/final/analysis
 
-Reads one or more experiment files (``.json`` or ``.json.gz`` from cli.py,
-batch.py or the web), and writes:
+Reads one or more experiment files (``.json`` or ``.json.gz`` written by the C#
+CLI in dotnet/, or exported from the web app), and writes:
 
 - ``runs.csv``: one row per run with room_changes next to room_change_lower_bound (#10)
 - ``summary.csv`` / ``summary.json``: mean / median / std / best / worst of every
@@ -742,7 +742,7 @@ def report(rows, tests, modes, changes, charts):
             lines.append(f"| {v['room_mode']} | {LONG[v['algorithm']]} | {d['mean']:,.1f} ({d['best']}–{d['worst']}) | "
                          f"{ratio['mean']:.2f}× | {v['changes_above_own_kind_switches']['mean']:,.1f} | "
                          f"{v['unnecessary_lab_hours']['mean']:,.1f} |")
-        lines += ['', 'จำนวนคลาส (174 คลาส) ตามจำนวนครั้งที่เปลี่ยนห้องทั้งเทอม (ค่าเฉลี่ยต่อรัน):', '',
+        lines += ['', 'จำนวนคลาส ตามจำนวนครั้งที่เปลี่ยนห้องทั้งเทอม (ค่าเฉลี่ยต่อรัน):', '',
                   '| | ' + ' | '.join(name for name, _ in BUCKETS) + ' |', '|---|' + '---:|' * len(BUCKETS),
                   '| lower bound ของข้อมูล | ' + ' | '.join(str(changes['lower_bound_class_buckets'][n]) for n, _ in BUCKETS) + ' |']
         for v in changes['methods'].values():
@@ -756,7 +756,7 @@ def report(rows, tests, modes, changes, charts):
             extra = statistics.fmean(v['changes_above_own_kind_switches']['mean'] for v in weekly)
             text = (f"**สรุปสำหรับสไลด์:** ตัวเลขเปลี่ยนห้องราว {statistics.fmean(v['room_changes']['mean'] for v in weekly):,.0f} "
                     f"ครั้งต่อเทอมดูเยอะ แต่ส่วนใหญ่หลีกเลี่ยงไม่ได้ ข้อมูลนี้บังคับให้เปลี่ยนอย่างน้อย {bound:,} ครั้ง "
-                    f"เพราะ 134 คาบต้องสลับเข้าออก Lab ตามสัปดาห์ คำตอบของ HC/SA/GA อยู่ที่ {lo:.2f}–{hi:.2f} เท่าของค่าต่ำสุดนี้ "
+                    f"เพราะคาบที่ใช้ Lab บางสัปดาห์ต้องสลับเข้าออก Lab ตามสัปดาห์ คำตอบของ HC/SA/GA อยู่ที่ {lo:.2f}–{hi:.2f} เท่าของค่าต่ำสุดนี้ "
                     f"และเปลี่ยนเกินจากการสลับประเภทห้องที่ตารางนั้นบังคับเองเฉลี่ยเพียง {extra:,.0f} ครั้ง")
             if fixed:
                 lab_w = statistics.fmean(v['unnecessary_lab_hours']['mean'] for v in weekly)

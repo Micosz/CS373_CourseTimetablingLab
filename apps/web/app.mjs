@@ -16,8 +16,8 @@ const STATUS={completed:'เสร็จ',evaluation_budget:'ใช้งบค�
 const DAYS=['จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์','อาทิตย์'];
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num=(value,digits=0)=>Number.isFinite(value)?value.toLocaleString('en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits}):'—';
-const state={dataset:null,datasetText:'',datasetHash:'',datasetLabel:'',batch:null,worker:null,pending:new Map(),nextId:1,
-  running:false,cancelled:false,preparedHash:null,preparedMeta:null,storageFailed:false,currentProgress:[],currentLogs:[]};
+const state={dataset:null,datasetText:'',datasetHash:'',datasetLabel:'',batch:null,
+  running:false,storageFailed:false};
 
 function banner(message,success=false){$('banner').textContent=message;$('banner').classList.remove('hidden');$('banner').classList.toggle('success',success);}
 function hideBanner(){$('banner').classList.add('hidden');}
@@ -39,8 +39,7 @@ async function setDataset(text,label,{keepBatch=false}={}){
   if(data.schema_version!=='1.0'||!data.calendar?.week_ids?.length)throw new Error('ต้องใช้ข้อมูลตาม schema_version 1.0 ของโครงงาน');
   if(!data.constraints||!data.objectives)throw new Error('ไม่พบกฎข้อจำกัดหรือวิธีคิดคะแนน');
   const hash=await sha(text);
-  state.dataset=data;state.datasetText=text;state.datasetHash=hash;state.datasetLabel=label;state.preparedHash=null;
-  disposeWorker();
+  state.dataset=data;state.datasetText=text;state.datasetHash=hash;state.datasetLabel=label;
   if(!keepBatch)state.batch=null;
   $('dataset-name').textContent=label;
   $('dataset-meta').textContent=`รหัส ${data.dataset_id} ผ่านการตรวจรูปแบบแล้ว`;
@@ -56,86 +55,18 @@ async function setDataset(text,label,{keepBatch=false}={}){
   details.insertBefore(note,details.querySelector('a'));
   const scope=document.createElement('p');scope.textContent=data.constraints.external_student_overlap_is_hard?'กรณีเข้มงวด: นับการเรียนชนกับตารางภายนอกเป็นข้อห้ามด้วย':'กรณีหลัก: นักศึกษาห้ามเรียนชนกันภายใน CS ส่วนคาบภายนอกล็อกห้อง ผู้สอน และกฎที่ระบุไว้ในข้อมูล';details.insertBefore(scope,details.querySelector('a'));
   const assumed=document.createElement('p');assumed.textContent=data.benchmark_kind==='adapted_synthetic_from_unitime_not_original_score'?'ดัดแปลงจากข้อมูล UniTime โดยจำลองปฏิทิน ประเภทห้อง ผู้สอนบางส่วน และสัปดาห์ที่ต้องใช้ Lab':'ตรวจที่มาและสมมติฐานในไฟล์ที่อัปโหลดก่อนสรุปผล';details.insertBefore(assumed,details.querySelector('a'));
-  $('run-button').disabled=false;$('run-status').textContent='พร้อมเริ่มการทดลอง';
   try{await storage.saveDataset({hash,text,label});}catch(error){storageWarning(error);}
   renderResults();
 }
 function storageWarning(error){if(!state.storageFailed)banner('บันทึกประวัติอัตโนมัติไม่สำเร็จ กรุณาดาวน์โหลดชุดผล JSON เก็บไว้: '+error.message);state.storageFailed=true;}
 async function persist(){if(!state.batch)return;try{await storage.saveExperiment(state.batch);}catch(error){storageWarning(error);}}
-async function defaultDataset(){const response=await fetch('../../data/fall-cs.json.gz');if(!response.ok)throw new Error('โหลด Fall CS ไม่สำเร็จ');const text=await unpack(await response.arrayBuffer());const metadata=await (await fetch('../../data/provenance.json')).json();if(await sha(text)!==metadata.dataset_sha256)throw new Error('ไฟล์ Fall CS ไม่ตรงกับ checksum ที่บันทึกไว้');await setDataset(text,'Fall CS Weekly Labs v1');}
+async function defaultDataset(){const response=await fetch('../../data/fall-cs.json.gz');if(!response.ok)throw new Error('โหลด Fall CS ไม่สำเร็จ');const text=await unpack(await response.arrayBuffer());const metadata=await (await fetch('../../data/provenance.json')).json();if(await sha(text)!==metadata.dataset_sha256)throw new Error('ไฟล์ Fall CS ไม่ตรงกับ checksum ที่บันทึกไว้');await setDataset(text,'Fall CS Weekly Labs v2');}
 $('dataset-upload').addEventListener('change',async event=>{try{const file=event.target.files[0];if(!file)return;if(file.size>12*1024*1024)throw new Error('ไฟล์อัปโหลดใหญ่เกิน 12 MB');const text=file.name.endsWith('.gz')?await unpack(await file.arrayBuffer()):await file.text();hideBanner();await setDataset(text,file.name);}catch(error){banner(error.message);}finally{event.target.value='';}});
 $('reset-dataset').addEventListener('click',()=>defaultDataset().catch(error=>banner(error.message)));
-// Built-in datasets: the main one and the course-level Lab variants (dataset_tools/make_course_lab_variants.py).
-$('dataset-pick').addEventListener('change',async event=>{const select=event.target,level=/-course-labs-(w\d\d)$/.exec(select.value)?.[1],label=select.selectedOptions[0].textContent;try{hideBanner();if(!level){await defaultDataset();return;}const response=await fetch(`../../data/variants/fall-cs-course-labs-${level}.json.gz`);if(!response.ok)throw new Error('โหลดชุดข้อมูลนี้ไม่สำเร็จ');await setDataset(await unpack(await response.arrayBuffer()),`Fall CS ${label}`);}catch(error){banner(error.message);select.value=[...select.options].some(o=>o.value===state.dataset?.dataset_id)?state.dataset.dataset_id:'';}});
+// Built-in datasets: the main one and the Lab-weeks variants (dataset_tools/make_lab_week_variants.py).
+$('dataset-pick').addEventListener('change',async event=>{const select=event.target,level=/-labweeks-(w\d\d)$/.exec(select.value)?.[1],label=select.selectedOptions[0].textContent;try{hideBanner();if(!level){await defaultDataset();return;}const response=await fetch(`../../data/variants/fall-cs-labweeks-${level}.json.gz`);if(!response.ok)throw new Error('โหลดชุดข้อมูลนี้ไม่สำเร็จ');await setDataset(await unpack(await response.arrayBuffer()),`Fall CS ${label}`);}catch(error){banner(error.message);select.value=[...select.options].some(o=>o.value===state.dataset?.dataset_id)?state.dataset.dataset_id:'';}});
 $('download-dataset').addEventListener('click',()=>{if(state.dataset)download(safeFilename(state.dataset.dataset_id)+'.json',state.datasetText);});
 
-function selectedMethods(){const result=[...document.querySelectorAll('input[name=algorithm]:checked')].map(x=>x.value);if($('include-custom').checked)result.push('custom');return result;}
-function queueSummary(){const count=Math.max(0,Number($('repeats').value)||0),methods=selectedMethods();$('queue-count').textContent=`${methods.length*count} รัน`;$('queue-description').innerHTML=[`${methods.length} วิธี วิธีละ ${num(count)} seed`,`งบ ${num(Number($('budget').value))} ครั้งต่อรัน`,ROOM_MODE[$('room-mode').value]].map(x=>`<span>${esc(x)}</span>`).join('');}
-document.querySelectorAll('input[name=algorithm],#include-custom,#repeats,#budget,#room-mode').forEach(el=>el.addEventListener('input',queueSummary));
-function number(id){const input=$(id);if(!input.checkValidity())throw new Error(`ตรวจค่าที่กรอก: ${input.closest('label')?.firstChild?.textContent||id}`);return Number(input.value);}
-function settings(){
-  const methods=selectedMethods();if(!methods.length)throw new Error('เลือกอัลกอริทึมอย่างน้อย 1 วิธี');
-  const start=number('start-seed'),repeats=number('repeats');if(start+repeats-1>4294967295)throw new Error('seed สุดท้ายต้องไม่เกิน 4,294,967,295');
-  const parameters={hc:{restart_patience:number('hc-patience')},sa:{initial_acceptance:number('sa-acceptance'),cooling_rate:number('sa-cooling')},ga:{population_size:number('ga-population'),tournament_size:number('ga-tournament'),elites:number('ga-elites'),crossover_rate:number('ga-crossover'),mutation_rate:number('ga-mutation')},custom:JSON.parse($('custom-parameters').value)};
-  if(parameters.custom===null||Array.isArray(parameters.custom)||typeof parameters.custom!=='object')throw new Error('พารามิเตอร์ของโค้ดต้องเป็น JSON object');
-  if(parameters.ga.elites>=parameters.ga.population_size||parameters.ga.tournament_size>parameters.ga.population_size)throw new Error('GA: จำนวน elite ต้องน้อยกว่าขนาดประชากร และขนาด tournament ต้องไม่เกินขนาดประชากร');
-  return {name:$('experiment-name').value.trim()||'Fall CS experiment',methods,seeds:Array.from({length:repeats},(_,i)=>start+i),budget:number('budget'),seconds:number('time-limit'),room_mode:$('room-mode').value==='fixed'?'fixed':'weekly',parameters};
-}
-function disposeWorker(){if(state.worker)state.worker.terminate();state.worker=null;state.preparedHash=null;for(const {reject,timer} of state.pending.values()){clearTimeout(timer);reject(new Error(state.cancelled?'cancelled':'Worker was restarted'));}state.pending.clear();}
-function ensureWorker(){
-  if(state.worker)return;
-  state.worker=new Worker(new URL('./worker.mjs',import.meta.url),{type:'module'});
-  state.worker.onmessage=({data})=>{
-    if(data.type==='phase'){$('progress-detail').textContent=data.message;return;}
-    if(data.type==='progress'){
-      state.currentProgress.push(data.payload);
-      $('live-metrics').textContent=`ประเมินแล้ว ${num(data.payload.evaluations)} จาก ${num(data.payload.budget)} ครั้ง\nดีที่สุดตอนนี้ จัดไม่ได้ ${num(data.payload.objectives[0])} คาบ และใช้ Lab โดยไม่จำเป็น ${num(data.payload.objectives[1]/60,1)} ชม.`;
-      return;
-    }
-    if(data.type==='stdout'||data.type==='stderr'){if(state.currentLogs.length<100)state.currentLogs.push(data.line);return;}
-    const pending=state.pending.get(data.id);if(!pending)return;clearTimeout(pending.timer);state.pending.delete(data.id);if(data.error)pending.reject(new Error(data.error));else pending.resolve(data.result);
-  };
-  state.worker.onerror=event=>{const message=event.message||'โหลด Python ไม่สำเร็จ กรุณาตรวจการเชื่อมต่ออินเทอร์เน็ต';for(const {reject,timer}of state.pending.values()){clearTimeout(timer);reject(new Error(message));}state.pending.clear();};
-}
-function rpc(type,payload,timeout){ensureWorker();const id=state.nextId++;return new Promise((resolve,reject)=>{const timer=setTimeout(()=>{state.pending.delete(id);const error=new Error(type==='run'?'worker_timeout':'โหลด Python หรือเตรียมข้อมูลนานเกินกำหนด กรุณาลองใหม่');reject(error);disposeWorker();},timeout);state.pending.set(id,{resolve,reject,timer});state.worker.postMessage({id,type,...payload});});}
-async function prepare(){if(state.preparedHash===state.datasetHash)return state.preparedMeta;const result=await rpc('prepare',{datasetText:state.datasetText,datasetHash:state.datasetHash},120000);state.preparedHash=state.datasetHash;state.preparedMeta=result;return result;}
-function lock(running){$('run-button').disabled=running||!state.dataset;$('stop-button').disabled=!running;for(const id of ['dataset-upload','reset-dataset','dataset-pick','include-custom','repeats','budget','time-limit','start-seed','experiment-name','room-mode'])$(id).disabled=running;document.querySelectorAll('input[name=algorithm]').forEach(el=>el.disabled=running);document.querySelector('[data-file-picker=dataset-upload]').disabled=running;document.querySelector('[data-file-picker=import-results]').disabled=running;}
-function failedRun(job,error,config){return {algorithm:job.algorithm,room_mode:config.room_mode||'weekly',seed:job.seed,status:error==='cancelled'?'cancelled':error==='worker_timeout'?'worker_timeout':'error',valid:false,metrics:null,validation:{valid:false,violation_count:null,violations:[]},solution:null,evaluations:state.currentProgress.at(-1)?.evaluations||0,budget:config.budget,time_limit_seconds:config.seconds,search_seconds:null,trace:state.currentProgress,error:{message:error},parameters:config.parameters[job.algorithm]||{},dataset_id:state.dataset.dataset_id,dataset_sha256:state.datasetHash,engine_version:'1.0.0'};}
-async function startExperiment(){
-  if(state.running)return;let config;
-  try{config=settings();}catch(error){banner(error.message);return;}
-  hideBanner();state.running=true;state.cancelled=false;lock(true);state.currentProgress=[];state.currentLogs=[];
-  const jobs=config.seeds.flatMap(seed=>config.methods.map(algorithm=>({algorithm,seed})));
-  state.batch={id:crypto.randomUUID(),name:config.name,created_at:new Date().toISOString(),status:'running',dataset_hash:state.datasetHash,dataset_id:state.dataset.dataset_id,dataset_label:state.datasetLabel,config,run_order:jobs,results:[],custom_source:config.methods.includes('custom')?$('custom-code').value:'',browser:{user_agent:navigator.userAgent,logical_processors:navigator.hardwareConcurrency||null},code_snapshot:{}};
-  await persist();$('run-progress').max=jobs.length;$('run-progress').value=0;$('run-fraction').textContent=`0 จาก ${jobs.length}`;$('run-status').textContent='กำลังเตรียมการทดลอง';$('live-metrics').textContent='';
-  try{
-    const meta=await prepare();if(state.cancelled)throw new Error('cancelled');
-    state.batch.preparation={...meta};delete state.batch.preparation.code_snapshot;state.batch.code_snapshot=meta.code_snapshot;state.batch.engine_sha256=await sha(JSON.stringify(meta.code_snapshot));
-    await persist();
-    for(let index=0;index<jobs.length;index++){
-      if(state.cancelled)break;const job=jobs[index];state.currentProgress=[];state.currentLogs=[];
-      $('run-status').textContent=`กำลังรัน ${LABELS[job.algorithm]} (seed ${job.seed})`;$('progress-detail').textContent=`รันที่ ${index+1} จาก ${jobs.length}\nเตรียมข้อมูลร่วม ${num(meta.preprocessing_seconds,2)} วินาที ไม่นับรวมในเวลาค้นหา`;
-      let result;
-      try{
-        const currentMeta=await prepare();if(await sha(JSON.stringify(currentMeta.code_snapshot))!==state.batch.engine_sha256)throw new Error('โค้ดของ engine เปลี่ยนระหว่างการทดลอง กรุณาเริ่มการทดลองใหม่');
-        result=await rpc('run',{algorithm:job.algorithm,seed:job.seed,config,datasetHash:state.datasetHash,customCode:state.batch.custom_source},(config.seconds+12)*1000);
-      }catch(error){result=failedRun(job,state.cancelled?'cancelled':error.message,config);disposeWorker();}
-      result.run_index=index;result.logs=state.currentLogs.slice();state.batch.results.push(result);
-      $('run-progress').value=index+1;$('run-fraction').textContent=`${index+1} จาก ${jobs.length}`;
-      await persist();renderResults();
-      if(job.algorithm==='custom')disposeWorker();
-    }
-    state.batch.status=state.cancelled?'cancelled':'completed';
-  }catch(error){state.batch.status=state.cancelled?'cancelled':'error';state.batch.error=error.message;if(!state.cancelled)banner(error.message);}
-  finally{
-    state.batch.finished_at=new Date().toISOString();state.running=false;lock(false);await persist();
-    $('run-status').textContent=state.cancelled?'หยุดแล้ว เก็บผลที่ได้ไว้แล้ว':state.batch.status==='error'?'การทดลองหยุดเพราะเกิดข้อผิดพลาด':state.storageFailed?'เสร็จแล้ว แต่บันทึกอัตโนมัติไม่ได้ กรุณาดาวน์โหลดผล':'เสร็จและบันทึกผลแล้ว';
-    $('progress-detail').textContent=`ได้ผล ${state.batch.results.length} จาก ${jobs.length} รัน ดาวน์โหลดเป็น CSV หรือชุดผล JSON ได้ในหน้าผลเปรียบเทียบ`;
-    renderResults();if(state.batch.results.length)view('results');
-  }
-}
-$('run-button').addEventListener('click',startExperiment);
-$('stop-button').addEventListener('click',()=>{state.cancelled=true;disposeWorker();$('run-status').textContent='กำลังหยุดและเก็บผลที่ได้';});
 
 function mean(values){return values.length?values.reduce((a,b)=>a+b,0)/values.length:NaN;}
 function median(values){if(!values.length)return NaN;const sorted=values.slice().sort((a,b)=>a-b);const m=Math.floor(sorted.length/2);return sorted.length%2?sorted[m]:(sorted[m-1]+sorted[m])/2;}
@@ -148,7 +79,7 @@ function renderResults(){
   for(const id of ['export-csv','export-json'])$(id).disabled=!results.length;
   if(!results.length)return;
   $('results-description').textContent=`${batch.name} (${results.length} จาก ${batch.run_order?.length||results.length} รัน)${batch.imported?' นำเข้าจากไฟล์ ไม่ได้รันใหม่':''}`;
-  $('result-meta').innerHTML=[`ชุดข้อมูล ${batch.dataset_id}`,batchModes(batch).map(m=>ROOM_MODE[m]||m).join(' และ '),`งบ ${num(batch.config.budget)} ครั้งต่อรัน`,`Python ${batch.preparation?.pyodide_version||'native'}`,`SHA ข้อมูล ${batch.dataset_hash.slice(0,12)}`,`SHA โค้ด ${(batch.engine_sha256||'').slice(0,12)}`].map(x=>`<span>${esc(x)}</span>`).join('');
+  $('result-meta').innerHTML=[`ชุดข้อมูล ${batch.dataset_id}`,batchModes(batch).map(m=>ROOM_MODE[m]||m).join(' และ '),`งบ ${num(batch.config.budget)} ครั้งต่อรัน`,batch.engine==='dotnet'?'engine C#':`engine Python ${batch.preparation?.pyodide_version||''}`.trim(),`SHA ข้อมูล ${batch.dataset_hash.slice(0,12)}`,`SHA โค้ด ${(batch.engine_sha256||'').slice(0,12)}`].map(x=>`<span>${esc(x)}</span>`).join('');
   const groups=[...new Set(results.map(r=>`${r.algorithm}\u0000${runMode(r,batch)}`))];
   const summaries=groups.map(group=>{const [algorithm,mode]=group.split('\u0000'),rows=results.filter(r=>r.algorithm===algorithm&&runMode(r,batch)===mode),valid=rows.filter(r=>r.valid&&r.metrics);return{algorithm,mode,rows,valid,key:[median(valid.map(r=>r.metrics.unassigned_weekly_sessions)),median(valid.map(r=>r.metrics.unnecessary_lab_minutes)),median(valid.map(r=>r.metrics.room_changes))]};});
   summaries.sort((a,b)=>{for(let i=0;i<3;i++){const x=Number.isFinite(a.key[i])?a.key[i]:Infinity,y=Number.isFinite(b.key[i])?b.key[i]:Infinity;if(x!==y)return x-y;}return 0;});
@@ -322,37 +253,9 @@ async function openPayload(payload,save=true){if(payload.format!=='timetable-lab
 if(typeof b.name!=='string'||typeof b.dataset_hash!=='string'||!Number.isFinite(Date.parse(b.created_at))||!Number.isInteger(b.config?.budget)||b.config.budget<1||b.config.budget>100000||!Array.isArray(b.config.methods)||!b.results.every(r=>r&&typeof r.algorithm==='string'&&Number.isInteger(r.seed)&&typeof r.status==='string'&&typeof r.valid==='boolean'&&Array.isArray(r.trace)&&(!r.valid||(r.metrics&&['unassigned_weekly_sessions','unnecessary_lab_minutes','unnecessary_lab_hours','room_changes'].every(k=>Number.isFinite(r.metrics[k])&&r.metrics[k]>=0)))&&(!r.solution||(typeof r.solution==='object'&&Array.isArray(r.solution.weekly_room_assignments)))))throw new Error('ข้อมูลตั้งค่าหรือผลรายรันในชุดผลไม่ครบ');
 if(await sha(payload.dataset_text)!==payload.batch.dataset_hash)throw new Error('ชุดข้อมูลในไฟล์ไม่ตรงกับผลที่นำเข้า (hash ต่างกัน)');await setDataset(payload.dataset_text,payload.batch.dataset_label||'Imported dataset',{keepBatch:true});state.batch={...payload.batch,id:crypto.randomUUID(),imported:true,imported_from:payload.batch.id};if(save)await persist();view('results');banner(save?'นำเข้าชุดผลแล้ว โดยไม่ได้รันอัลกอริทึมใหม่':'เปิดผลที่เก็บไว้ในโครงงานแล้ว โดยไม่ได้รันอัลกอริทึมใหม่',true);}
 // Results committed under experiments/: open them without running anything.
-const BUNDLED=[['ชุดหลัก 4 วิธี 30 seed สองโหมดห้อง (240 รัน)','final'],...['01','02','04','06','08','10','12','15'].map(w=>[`Lab รายวิชา ${Number(w)} จาก 15 สัปดาห์ (80 รัน)`,`course-level-labs/w${w}`])];
+const BUNDLED=[['ชุดหลัก 4 วิธี 30 seed สองโหมดห้อง (240 รัน)','final'],['งบ 50,000: HC, SA, GA อย่างละ 10 seed (30 รัน)','convergence/b50000'],...['01','02','04','06','08','10','12','15'].map(w=>[`วิชาที่มี Lab ใช้ ${Number(w)} จาก 15 สัปดาห์ (80 รัน)`,`lab-weeks/w${w}`])];
 $('bundled-list').innerHTML=BUNDLED.map(([label,path])=>`<button type="button" class="button secondary compact" data-path="${path}">${esc(label)}</button>`).join('');
 $('bundled-list').querySelectorAll('button').forEach(button=>button.addEventListener('click',async()=>{try{if(state.running)throw new Error('รอให้การทดลองปัจจุบันจบก่อนเปิดผล');button.disabled=true;hideBanner();const response=await fetch(`../../experiments/${button.dataset.path}/experiment.json.gz`);if(!response.ok)throw new Error('โหลดผลชุดนี้ไม่สำเร็จ');await openPayload(JSON.parse(await unpack(await response.arrayBuffer())),false);}catch(error){banner(error.message);}finally{button.disabled=false;}}));
 
-const CUSTOM_TEMPLATE=`# Example: random search using the shared decoder and evaluation budget.\n# context.initial has already used evaluation 1.\n\ndef solve(problem, context, parameters):\n    while True:\n        context.check()\n        genome = problem.random_genome(context.rng)\n        context.evaluate(genome)\n\n    # The runner returns context.best when the budget/time limit is reached.\n`;
-try{$('custom-code').value=localStorage.getItem('timetable-lab-custom-code')||CUSTOM_TEMPLATE;}catch{$('custom-code').value=CUSTOM_TEMPLATE;}
-$('save-code').addEventListener('click',()=>{try{if(!$('custom-code').value.trim())throw new Error('ยังไม่มีโค้ด');JSON.parse($('custom-parameters').value);localStorage.setItem('timetable-lab-custom-code',$('custom-code').value);$('include-custom').checked=true;queueSummary();$('code-status').textContent='เพิ่มโค้ดนี้เข้าการทดลองแล้ว';}catch(error){banner(error.message);}});
-$('code-upload').addEventListener('change',async event=>{try{const file=event.target.files[0];if(!file)return;if(file.size>200000)throw new Error('ไฟล์โค้ดใหญ่เกิน 200 KB');$('custom-code').value=await file.text();$('code-status').textContent='เปิดไฟล์แล้ว กด “ใช้โค้ดนี้ในการทดลอง” เพื่อเพิ่มเข้าการทดลอง';}catch(error){banner(error.message);}finally{event.target.value='';}});
-$('download-code').addEventListener('click',()=>download('custom_algorithm.py',$('custom-code').value,'text/x-python'));
-queueSummary();defaultDataset().catch(error=>{banner(error.message);$('dataset-name').textContent='โหลดข้อมูลไม่สำเร็จ';$('run-status').textContent='กรุณาลองโหลด Fall CS อีกครั้ง';});
+defaultDataset().catch(error=>{banner(error.message);$('dataset-name').textContent='โหลดข้อมูลไม่สำเร็จ';});
 
-// Presets (#12): fill every run setting from the tuned parameter file used by the final experiment.
-const PRESET_INPUTS=['experiment-name','room-mode','budget','time-limit','start-seed','repeats','hc-patience','sa-acceptance','sa-cooling','ga-population','ga-tournament','ga-elites','ga-crossover','ga-mutation'];
-const PRESET_DEFAULTS=Object.fromEntries(PRESET_INPUTS.map(id=>[id,$(id).tagName==='SELECT'?[...$(id).options].find(o=>o.defaultSelected)?.value:$(id).defaultValue]));
-let tunedCache=null;
-async function tunedParameters(){if(!tunedCache)tunedCache=fetch('../../experiments/tuning/selected-parameters.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).catch(()=>null);return tunedCache;}
-function presetValues(tuned){const p=tuned||{},hc=p.hc||{},sa=p.sa||{},ga=p.ga||{};return{'hc-patience':hc.restart_patience,'sa-acceptance':sa.initial_acceptance,'sa-cooling':sa.cooling_rate,'ga-population':ga.population_size,'ga-tournament':ga.tournament_size,'ga-elites':ga.elites,'ga-crossover':ga.crossover_rate,'ga-mutation':ga.mutation_rate};}
-async function applyPreset(name){
-  const note=$('preset-note');let values={...PRESET_DEFAULTS},message='กลับเป็นค่าเริ่มต้นของเว็บ: ใช้พารามิเตอร์ที่จูนแล้ว งบ 50 ครั้งต่อรัน วิธีละ 3 seed (1001–1003)';
-  if(name!=='default'){
-    const tuned=await tunedParameters();
-    if(!tuned){note.textContent='โหลดไฟล์พารามิเตอร์ที่จูนแล้วไม่ได้ (experiments/tuning/selected-parameters.json) จึงไม่เปลี่ยนค่า';return;}
-    Object.assign(values,presetValues(tuned),{'room-mode':'weekly','start-seed':'1001'});
-    if(name==='quick'){Object.assign(values,{'experiment-name':'Fall CS ลองเร็ว',budget:'30','time-limit':'120',repeats:'1'});message='ลองเร็ว: รันครบ 4 วิธี วิธีละ 1 seed (1001) งบ 30 ครั้งต่อรัน ใช้พารามิเตอร์ที่จูนแล้ว และใช้เวลาราว 1 นาทีหลังโหลด Python เสร็จ';}
-    else{Object.assign(values,{'experiment-name':'Fall CS ตามการทดลองสุดท้าย',budget:'500','time-limit':'3600',repeats:'30'});message='ตามการทดลองสุดท้าย: 4 วิธี seed 1001–1030 งบ 500 ครั้งต่อรัน ใช้พารามิเตอร์ที่จูนแล้ว ในเบราว์เซอร์จะใช้เวลาหลายชั่วโมง ถ้าต้องการทำซ้ำทั้งชุดแนะนำคำสั่ง python3 engine/batch.py ตาม README';}
-  }
-  for(const id of PRESET_INPUTS){if(values[id]!==undefined&&values[id]!==null)$(id).value=String(values[id]);}
-  document.querySelectorAll('input[name=algorithm]').forEach(x=>{x.checked=true;});$('include-custom').checked=false;
-  document.querySelectorAll('[data-preset]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.preset===name)));
-  queueSummary();
-  const invalid=PRESET_INPUTS.filter(id=>!$(id).checkValidity());
-  note.textContent=invalid.length?`ชุดค่านี้มีช่องที่ไม่ผ่านเกณฑ์ของฟอร์ม: ${invalid.join(', ')}`:message;
-}
-document.querySelectorAll('[data-preset]').forEach(b=>{b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>applyPreset(b.dataset.preset));});

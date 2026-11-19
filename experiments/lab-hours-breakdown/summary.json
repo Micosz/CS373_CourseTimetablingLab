@@ -1,42 +1,42 @@
 {
  "ga": {
-  "unnecessary_lab_hours": 57.733333333333334,
-  "type_lecture_only_hours": 27.366666666666667,
-  "type_mixed_hours": 30.366666666666667,
+  "unnecessary_lab_hours": 146.86666666666667,
+  "type_lecture_only_hours": 135.7,
+  "type_mixed_hours": 11.166666666666666,
   "cause_no_eligible_lecture_room_hours": 0.0,
-  "cause_no_free_lecture_room_hours": 57.733333333333334,
+  "cause_no_free_lecture_room_hours": 146.86666666666667,
   "cause_free_lecture_room_existed_hours": 0.0,
   "blocked_background_only_hours": 0.0,
-  "blocked_includes_target_sessions_hours": 57.733333333333334
+  "blocked_includes_target_sessions_hours": 146.86666666666667
  },
  "greedy": {
-  "unnecessary_lab_hours": 124.0,
-  "type_lecture_only_hours": 65.0,
-  "type_mixed_hours": 59.0,
+  "unnecessary_lab_hours": 242.0,
+  "type_lecture_only_hours": 226.0,
+  "type_mixed_hours": 16.0,
   "cause_no_eligible_lecture_room_hours": 0.0,
-  "cause_no_free_lecture_room_hours": 124.0,
+  "cause_no_free_lecture_room_hours": 242.0,
   "cause_free_lecture_room_existed_hours": 0.0,
   "blocked_background_only_hours": 0.0,
-  "blocked_includes_target_sessions_hours": 124.0
+  "blocked_includes_target_sessions_hours": 242.0
  },
  "hc": {
-  "unnecessary_lab_hours": 64.88333333333334,
-  "type_lecture_only_hours": 25.666666666666668,
-  "type_mixed_hours": 39.21666666666667,
+  "unnecessary_lab_hours": 169.4,
+  "type_lecture_only_hours": 163.9,
+  "type_mixed_hours": 5.5,
   "cause_no_eligible_lecture_room_hours": 0.0,
-  "cause_no_free_lecture_room_hours": 64.88333333333334,
+  "cause_no_free_lecture_room_hours": 169.4,
   "cause_free_lecture_room_existed_hours": 0.0,
   "blocked_background_only_hours": 0.0,
-  "blocked_includes_target_sessions_hours": 64.88333333333334
+  "blocked_includes_target_sessions_hours": 169.4
  },
  "sa": {
-  "unnecessary_lab_hours": 76.23333333333333,
-  "type_lecture_only_hours": 27.2,
-  "type_mixed_hours": 49.03333333333333,
+  "unnecessary_lab_hours": 145.8,
+  "type_lecture_only_hours": 140.56666666666666,
+  "type_mixed_hours": 5.233333333333333,
   "cause_no_eligible_lecture_room_hours": 0.0,
-  "cause_no_free_lecture_room_hours": 76.23333333333333,
+  "cause_no_free_lecture_room_hours": 145.8,
   "cause_free_lecture_room_existed_hours": 0.0,
   "blocked_background_only_hours": 0.0,
-  "blocked_includes_target_sessions_hours": 76.23333333333333
+  "blocked_includes_target_sessions_hours": 145.8
  }
 }
